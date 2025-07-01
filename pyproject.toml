@@ -1,0 +1,25 @@
+[project]
+name = "fault-agent-optimizer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastapi>=0.115.13",
+    "langchain>=0.3.26",
+    "langchain-community>=0.3.26",
+    "langchain-openai>=0.3.24",
+    "llama-index>=0.12.43",
+    "pyscipopt>=5.5.0",
+    "redis>=6.2.0",
+    "setuptools>=80.9.0",
+    "sqlalchemy>=2.0.41",
+    "uvicorn>=0.34.3",
+]
+[pip]
+index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+[tool.uv.pip]
+index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+[tool.uv]
+index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电网故障恢复优化助手</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chat-container {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        .agent-message {
+            background-color: #e9ecef;
+            color: #333;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #messageInput {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #sendButton {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #sendButton:hover {
+            background-color: #0056b3;
+        }
+        #sendButton:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .loading {
+            color: #6c757d;
+            font-style: italic;
+        }
+        .examples {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3ff;
+            border-radius: 5px;
+        }
+        .examples h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .example-item {
+            margin: 5px 0;
+            padding: 5px 10px;
+            background-color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        .example-item:hover {
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔌 电网故障恢复优化助手</h1>
+        
+        <div class="chat-container" id="chatContainer">
+            <div class="message agent-message">
+                您好！我是电网故障恢复优化助手。我可以帮助您：<br>
+                • 处理电网故障恢复优化<br>
+                • 修改优化配置<br>
+                • 回答相关技术问题<br><br>
+                请输入您的问题或指令。
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="messageInput" placeholder="请输入您的消息..." onkeypress="handleKeyPress(event)">
+            <button id="sendButton" onclick="sendMessage()">发送</button>
+        </div>
+        
+        <div class="examples">
+            <h3>💡 示例指令</h3>
+            <div class="example-item" onclick="setMessage('瓶窑变#1主变故障/newfaultactivated')">
+                瓶窑变#1主变故障/newfaultactivated
+            </div>
+            <div class="example-item" onclick="setMessage('Coal_B1机组无法启动')">
+                Coal_B1机组无法启动
+            </div>
+            <div class="example-item" onclick="setMessage('LineA1线路不可用')">
+                LineA1线路不可用
+            </div>
+            <div class="example-item" onclick="setMessage('Breaker_LineA1开关存在缺陷')">
+                Breaker_LineA1开关存在缺陷
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function setMessage(message) {
+            document.getElementById('messageInput').value = message;
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const button = document.getElementById('sendButton');
+            const chatContainer = document.getElementById('chatContainer');
+            
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // 显示用户消息
+            addMessage(message, 'user-message');
+            
+            // 清空输入框并禁用按钮
+            input.value = '';
+            button.disabled = true;
+            button.textContent = '处理中...';
+            
+            // 显示加载消息
+            const loadingId = addMessage('正在处理您的请求...', 'loading');
+            
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+                
+                const data = await response.json();
+                
+                // 移除加载消息
+                document.getElementById(loadingId).remove();
+                
+                if (data.success) {
+                    addMessage(data.response, 'agent-message');
+                } else {
+                    addMessage(`错误: ${data.error}`, 'error-message');
+                }
+                
+            } catch (error) {
+                // 移除加载消息
+                document.getElementById(loadingId).remove();
+                addMessage(`网络错误: ${error.message}`, 'error-message');
+            }
+            
+            // 恢复按钮
+            button.disabled = false;
+            button.textContent = '发送';
+            input.focus();
+        }
+        
+        function addMessage(text, className) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            const messageId = 'msg_' + Date.now();
+            messageDiv.id = messageId;
+            messageDiv.className = `message ${className}`;
+            messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return messageId;
+        }
+        
+        // 页面加载完成后聚焦输入框
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('messageInput').focus();
+        });
+    </script>
+</body>
+</html>

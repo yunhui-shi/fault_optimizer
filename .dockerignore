@@ -1,0 +1,35 @@
+# Ignore Git-related files and directories
+.git
+.gitignore
+
+# Ignore Python specific cache and build artifacts
+__pycache__/
+*.pyc
+*.pyd
+*.so # This will ignore all .so files that might be generated locally
+     # Important: If optimization_solver.so is generated locally, you might need to re-evaluate this.
+     # However, in a multi-stage build, the .so comes from the builder, not local.
+.Python
+.ipynb_checkpoints/
+.ipynb
+pip-log.txt
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Ignore common IDE and OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+# Ignore any local data or temporary directories that shouldn't be in the image
+data/
+tmp/
+temp/
+logs/
