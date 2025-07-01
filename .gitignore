@@ -10,3 +10,4 @@ wheels/
 *.db
 # Virtual environments
 .venv
+*.sh
