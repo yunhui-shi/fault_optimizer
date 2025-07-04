@@ -1,7 +1,9 @@
 # optimization_solver.py
 from pyscipopt import Model, quicksum
-from schema import ObjectiveType
+from schema import ObjectiveType, OptimizationInput
 from datetime import datetime, timedelta
+from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs
+import json
 
 def solve_dynamic_recovery_model(
     # --- 输入参数 ---
@@ -309,6 +311,97 @@ def solve_dynamic_recovery_model(
                 }
             for il in interruptible_loads: hourly_plan["shedding"][il] = round(model.getVal(P_shed[il, t]), 2)
             final_dispatch_plan.append(hourly_plan)
+        # 生成开关刀闸操作顺序
+        power_graph = build_power_system_graph(substation_nodes, switches)
+        operations = []
+        edges = {}
+        breakers_operate = {}
+        switches_operate = {}
+        for edge in list(power_graph.edges(data=True)):
+            edge_name = edge[2]['switch_name']
+            edges[edge_name] = edge
+            if edge[2]['switch_type'] == 'breaker':
+                # 无需操作
+                if final_switch_states[edge_name] == edge[2]['initial_state']:
+                    breakers_operate[edge_name] = 0
+                # 由分到合
+                elif final_switch_states[edge_name] == 1 and edge[2]['initial_state'] == 0:
+                    breakers_operate[edge_name] = 1
+                # 由合到分
+                elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
+                    breakers_operate[edge_name] = 2
+            elif edge[2]['switch_type'] == 'switch':
+                # 无需操作
+                if final_switch_states[edge_name] == edge[2]['initial_state']:
+                    switches_operate[edge_name] = 0
+                # 由分到合
+                elif final_switch_states[edge_name] == 1 and edge[2]['initial_state'] == 0:
+                    switches_operate[edge_name] = 1
+                # 由合到分
+                elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
+                    switches_operate[edge_name] = 2
+        # 先操作开关
+        for breaker_name, operate in breakers_operate.items():
+            if operate == 1:
+                # 找到需要分闸的开关，应与合闸开关两端的连通子图相连
+                close_conn_graph = edges[breaker_name][2]['connected_components']
+                open_breaker = "not_find"
+                for open_breaker_name, open_operate in breakers_operate.items():
+                    if open_operate == 2:
+                        open_conn_graph = edges[open_breaker_name][2]['connected_components']
+                        if open_conn_graph[0] in close_conn_graph or open_conn_graph[1] in close_conn_graph:
+                            open_breaker = open_breaker_name
+                    if open_breaker != "not_find":
+                        break
+                # 合闸操作，若找到与开关相连的需合闸的刀闸，则先合刀闸
+                # 获取与开关相连的所有边
+                u = edges[breaker_name][0]
+                v = edges[breaker_name][1]
+                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                for edge in connected_edges:
+                    if edge[2]['switch_type'] == 'switch':
+                        switch_name = edge[2]['switch_name']
+                        if switches_operate[switch_name] == 1:
+                            operations.append(f"{switch_name}【刀闸合闸】")
+                            print(f"1、{switch_name}【刀闸合闸】")
+                            switches_operate[switch_name] = 0
+                operations.append(f"{breaker_name}【开关合闸】")
+                print(f"1、{breaker_name}【开关合闸】")
+                breakers_operate[breaker_name] = 0
+                # 分闸开关操作
+                if open_breaker != "notfind":
+                    operations.append(f"{open_breaker}【开关分闸】")
+                    print(f"2、{open_breaker}【开关分闸】")
+                    breakers_operate[open_breaker] = 0
+                    # 若找到与开关相连的需分闸的刀闸，则分刀闸
+                    # 获取与开关相连的所有边
+                    u = edges[open_breaker][0]
+                    v = edges[open_breaker][1]
+                    connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                    for edge in connected_edges:
+                        if edge[2]['switch_type'] == 'switch':
+                            switch_name = edge[2]['switch_name']
+                            if switches_operate[switch_name] == 2:
+                                operations.append(f"{switch_name}【刀闸分闸】")
+                                print(f"2、{switch_name}【刀闸分闸】")
+                                switches_operate[switch_name] = 0
+        # 再操作剩余刀闸
+        for switch_name, operate in switches_operate.items():
+            if operate == 1:
+                operations.append(f"{switch_name}【刀闸合闸】")
+                print(f"3、{switch_name}【刀闸合闸】")
+                switches_operate[switch_name] = 0
+                # 找到需要分闸的刀闸，应与合闸刀闸相连
+                u = edges[switch_name][0]
+                v = edges[switch_name][1]
+                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                for edge in connected_edges:
+                    if edge[2]['switch_type'] == 'switch':
+                        switch_name = edge[2]['switch_name']
+                        if switches_operate[switch_name] == 2:
+                            operations.append(f"{switch_name}【刀闸分闸】")
+                            print(f"3、{switch_name}【刀闸分闸】")
+                            switches_operate[switch_name] = 0
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
@@ -324,9 +417,20 @@ def solve_dynamic_recovery_model(
                 "final_transformer_assignment": final_transformer_assignment,
                 "final_zone_status": final_zone_status,
                 "final_switch_states": final_switch_states,
+                "initial_sw_states": initial_sw_states,
+                "operations": operations,
                 "dispatch_plan": final_dispatch_plan
             }
         }
         return result
     else:
         return None
+
+if __name__ == "__main__":
+    # Load the JSON data (in this case, we'll use the provided dictionary)
+    with open("power_system_test.json", "r", encoding='utf-8') as f:
+        json_data = json.load(f)
+    input = OptimizationInput(**json_data)
+    params = input.model_dump()
+    result = solve_dynamic_recovery_model(**params)
+    print(result)
