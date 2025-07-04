@@ -340,7 +340,25 @@ def solve_dynamic_recovery_model(
                 # 由合到分
                 elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
                     switches_operate[edge_name] = 2
-        # 先操作开关
+        # 先进行双母线倒排操作
+        for close_switch_name, operate in switches_operate.items():
+            if operate == 1:
+                # 找到需要分闸的刀闸，应与合闸刀闸相连
+                u = edges[close_switch_name][0]
+                v = edges[close_switch_name][1]
+                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                for edge in connected_edges:
+                    if edge[2]['switch_type'] == 'switch':
+                        open_switch_name = edge[2]['switch_name']
+                        if switches_operate[open_switch_name] == 2:
+                            operations.append(f"{close_switch_name}【刀闸合闸】")
+                            print(f"1、{close_switch_name}【刀闸合闸】")
+                            switches_operate[close_switch_name] = 0
+                            operations.append(f"{open_switch_name}【刀闸分闸】")
+                            print(f"1、{open_switch_name}【刀闸分闸】")
+                            switches_operate[open_switch_name] = 0
+                            break
+        # 再操作开关及其刀闸
         for breaker_name, operate in breakers_operate.items():
             if operate == 1:
                 # 找到需要分闸的开关，应与合闸开关两端的连通子图相连
@@ -363,15 +381,15 @@ def solve_dynamic_recovery_model(
                         switch_name = edge[2]['switch_name']
                         if switches_operate[switch_name] == 1:
                             operations.append(f"{switch_name}【刀闸合闸】")
-                            print(f"1、{switch_name}【刀闸合闸】")
+                            print(f"2、{switch_name}【刀闸合闸】")
                             switches_operate[switch_name] = 0
                 operations.append(f"{breaker_name}【开关合闸】")
-                print(f"1、{breaker_name}【开关合闸】")
+                print(f"2、{breaker_name}【开关合闸】")
                 breakers_operate[breaker_name] = 0
                 # 分闸开关操作
                 if open_breaker != "notfind":
                     operations.append(f"{open_breaker}【开关分闸】")
-                    print(f"2、{open_breaker}【开关分闸】")
+                    print(f"3、{open_breaker}【开关分闸】")
                     breakers_operate[open_breaker] = 0
                     # 若找到与开关相连的需分闸的刀闸，则分刀闸
                     # 获取与开关相连的所有边
@@ -383,25 +401,8 @@ def solve_dynamic_recovery_model(
                             switch_name = edge[2]['switch_name']
                             if switches_operate[switch_name] == 2:
                                 operations.append(f"{switch_name}【刀闸分闸】")
-                                print(f"2、{switch_name}【刀闸分闸】")
+                                print(f"3、{switch_name}【刀闸分闸】")
                                 switches_operate[switch_name] = 0
-        # 再操作剩余刀闸
-        for switch_name, operate in switches_operate.items():
-            if operate == 1:
-                operations.append(f"{switch_name}【刀闸合闸】")
-                print(f"3、{switch_name}【刀闸合闸】")
-                switches_operate[switch_name] = 0
-                # 找到需要分闸的刀闸，应与合闸刀闸相连
-                u = edges[switch_name][0]
-                v = edges[switch_name][1]
-                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                for edge in connected_edges:
-                    if edge[2]['switch_type'] == 'switch':
-                        switch_name = edge[2]['switch_name']
-                        if switches_operate[switch_name] == 2:
-                            operations.append(f"{switch_name}【刀闸分闸】")
-                            print(f"3、{switch_name}【刀闸分闸】")
-                            switches_operate[switch_name] = 0
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
