@@ -2,7 +2,7 @@
 from pyscipopt import Model, quicksum
 from schema import ObjectiveType, OptimizationInput
 from datetime import datetime, timedelta
-from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs
+from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
 import json
 
 def solve_dynamic_recovery_model(
@@ -340,7 +340,7 @@ def solve_dynamic_recovery_model(
                 # 由合到分
                 elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
                     switches_operate[edge_name] = 2
-        # 先进行双母线倒排操作
+        # 进行初始状态母联开关闭合的双母线倒排操作
         for close_switch_name, operate in switches_operate.items():
             if operate == 1:
                 # 找到需要分闸的刀闸，应与合闸刀闸相连
@@ -351,14 +351,23 @@ def solve_dynamic_recovery_model(
                     if edge[2]['switch_type'] == 'switch':
                         open_switch_name = edge[2]['switch_name']
                         if switches_operate[open_switch_name] == 2:
-                            operations.append(f"{close_switch_name}【刀闸合闸】")
-                            print(f"1、{close_switch_name}【刀闸合闸】")
-                            switches_operate[close_switch_name] = 0
-                            operations.append(f"{open_switch_name}【刀闸分闸】")
-                            print(f"1、{open_switch_name}【刀闸分闸】")
-                            switches_operate[open_switch_name] = 0
-                            break
-        # 再操作开关及其刀闸
+                            # 判断母联开关是否闭合
+                            bus1 = u
+                            if is_bus(v):
+                                bus1 = v
+                            bus2 = edge[0]
+                            if is_bus(edge[1]):
+                                bus2 = edge[1]
+                            bus_connection = power_graph.get_edge_data(bus1, bus2)
+                            if not (bus_connection is None) and bus_connection['initial_state'] == 1:
+                                operations.append(f"{close_switch_name}【刀闸合闸】")
+                                print(f"1、{close_switch_name}【刀闸合闸】")
+                                switches_operate[close_switch_name] = 0
+                                operations.append(f"{open_switch_name}【刀闸分闸】")
+                                print(f"1、{open_switch_name}【刀闸分闸】")
+                                switches_operate[open_switch_name] = 0
+                                break
+        # 操作开关及其刀闸
         for breaker_name, operate in breakers_operate.items():
             if operate == 1:
                 # 找到需要分闸的开关，应与合闸开关两端的连通子图相连
@@ -403,6 +412,33 @@ def solve_dynamic_recovery_model(
                                 operations.append(f"{switch_name}【刀闸分闸】")
                                 print(f"3、{switch_name}【刀闸分闸】")
                                 switches_operate[switch_name] = 0
+        # 进行最终状态母联开关闭合的双母线倒排操作
+        for close_switch_name, operate in switches_operate.items():
+            if operate == 1:
+                # 找到需要分闸的刀闸，应与合闸刀闸相连
+                u = edges[close_switch_name][0]
+                v = edges[close_switch_name][1]
+                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                for edge in connected_edges:
+                    if edge[2]['switch_type'] == 'switch':
+                        open_switch_name = edge[2]['switch_name']
+                        if switches_operate[open_switch_name] == 2:
+                            # 判断母联开关是否闭合
+                            bus1 = u
+                            if is_bus(v):
+                                bus1 = v
+                            bus2 = edge[0]
+                            if is_bus(edge[1]):
+                                bus2 = edge[1]
+                            bus_connection = power_graph.get_edge_data(bus1, bus2)
+                            if not (bus_connection is None) and breakers_operate[bus_connection['switch_name']] == 1:
+                                operations.append(f"{close_switch_name}【刀闸合闸】")
+                                print(f"1、{close_switch_name}【刀闸合闸】")
+                                switches_operate[close_switch_name] = 0
+                                operations.append(f"{open_switch_name}【刀闸分闸】")
+                                print(f"1、{open_switch_name}【刀闸分闸】")
+                                switches_operate[open_switch_name] = 0
+                                break
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),

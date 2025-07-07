@@ -155,20 +155,27 @@ def get_connected_edges_with_attrs(G, u, v):
     connected_edges = []
     
     # 获取u节点的所有邻居边
-    if (not "bus" in u) and (not "母线" in u) and (not "正母" in u) and (not "副母" in u):
+    if not is_bus(u):
         for neighbor in G.neighbors(u):
             if neighbor != v:  # 排除当前边
                 edge_data = G.get_edge_data(u, neighbor)
                 connected_edges.append((u, neighbor, edge_data))
     
     # 获取v节点的所有邻居边
-    if (not "bus" in v) and (not "母线" in v) and (not "正母" in v) and (not "副母" in v):
+    if not is_bus(v):
         for neighbor in G.neighbors(v):
             if neighbor != u:  # 排除当前边
                 edge_data = G.get_edge_data(v, neighbor)
                 connected_edges.append((v, neighbor, edge_data))
     
     return connected_edges
+
+# 判断是否为母线节点
+def is_bus(u):
+    if (not "bus" in u) and (not "母线" in u) and (not "正母" in u) and (not "副母" in u):
+        return False
+    else:
+        return True
 
 def analyze_components(G):
     """分析并打印连通子图信息"""
