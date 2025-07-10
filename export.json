@@ -1,0 +1,896 @@
+{
+	"operating_units": {
+		"兰溪电厂4号机": {
+			"cost": 500,
+			"p_current": 390.2695,
+			"p_max": 660,
+			"p_min": 240,
+			"sensitivity": 1,
+			"zone": "双龙变供区"
+		},
+		"金华燃机#7机组 ": {
+			"cost": 500,
+			"p_current": 65.5869,
+			"p_max": 491,
+			"p_min": 0,
+			"sensitivity": 1,
+			"zone": "双龙变供区"
+		}
+	},
+	"backup_units": {
+		"金华燃机#6机组": {
+			"available": true,
+			"cost": 500,
+			"p_max": 55,
+			"p_min": 0,
+			"sensitivity": 1,
+			"startup_cost": 10000,
+			"zone": "双龙变供区"
+		},
+		"金华燃机#5机组": {
+			"available": true,
+			"cost": 500,
+			"p_max": 104,
+			"p_min": 86,
+			"sensitivity": 1,
+			"startup_cost": 10000,
+			"zone": "双龙变供区"
+		}
+	},
+	"horizon": 4,
+	"hydro_units": {
+	},
+	"interruptible_loads": {
+		"IL_A1": {
+			"cost": 30000,
+			"sensitivity": 1,
+			"shed_max": 100,
+			"zone": "双龙变供区"
+		}
+	},
+	"objective": "minimize_switch_operation",
+	"storage_units": {
+		"欣元储能站": {
+			"p_charge_max": 199.98,
+			"p_current": 0,
+			"p_discharge_max": 199.98,
+			"sensitivity": 1,
+			"soc_initial": 150,
+			"soc_max": 200,
+			"soc_min": 20,
+			"zone": "双龙变供区"
+		}
+	},
+	"substation_nodes": [
+		"温泉变.温欣24B6 线",
+		"温泉变.龙泉2399线",
+		"温泉变.龙温2390线",
+		"温泉变.温莹2U51线",
+		"温泉变.枫温24P5线",
+		"温泉变#1主变-220kV",
+		"温泉变#2主变-220kV",
+		"温泉变温泉变#3主变_220kV",
+		"温泉变220kV副母线",
+		"汤溪变.郊汤24C7线",
+		"汤溪变.郊溪24C6线",
+		"汤溪变.黄汤2397线",
+		"汤溪变.黄溪2396线",
+		"汤溪变.汤家24C8线",
+		"汤溪变.汤曹24C9线",
+		"汤溪变.汤南2361线",
+		"汤溪变.汤竹2362线",
+		"汤溪变#2主变-220kV",
+		"汤溪变#1主变-220kV",
+		"汤溪变220kV正母线",
+		"温泉变220kV正母线",
+		"汤溪变220kV副母线",
+		"lendnode温泉变.温欣24B6 线",
+		"lendnode温泉变.龙泉2399线",
+		"lendnode温泉变.龙温2390线",
+		"lendnode温泉变.温莹2U51线",
+		"lendnode温泉变.枫温24P5线",
+		"lendnode汤溪变.郊汤24C7线",
+		"lendnode汤溪变.郊溪24C6线",
+		"lendnode汤溪变.黄汤2397线",
+		"lendnode汤溪变.黄溪2396线",
+		"lendnode汤溪变.汤家24C8线",
+		"lendnode汤溪变.汤曹24C9线",
+		"lendnode汤溪变.汤南2361线",
+		"lendnode汤溪变.汤竹2362线",
+		"wdnode温泉变#1主变-220kV",
+		"wdnode温泉变#2主变-220kV",
+		"wdnode温泉变温泉变#3主变_220kV",
+		"wdnode汤溪变#2主变-220kV",
+		"wdnode汤溪变#1主变-220kV"
+	],
+	"switches": {
+		"温泉变温欣24B6线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变.温欣24B6 线",
+				"lendnode温泉变.温欣24B6 线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变龙泉2399开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变.龙泉2399线",
+				"lendnode温泉变.龙泉2399线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变龙温2390开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变.龙温2390线",
+				"lendnode温泉变.龙温2390线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变温莹2U51开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变.温莹2U51线",
+				"lendnode温泉变.温莹2U51线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变枫温24P5开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变.枫温24P5线",
+				"lendnode温泉变.枫温24P5线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变郊汤24C7线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.郊汤24C7线",
+				"lendnode汤溪变.郊汤24C7线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变郊溪24C6线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.郊溪24C6线",
+				"lendnode汤溪变.郊溪24C6线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变黄汤2397线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.黄汤2397线",
+				"lendnode汤溪变.黄汤2397线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变黄溪2396线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.黄溪2396线",
+				"lendnode汤溪变.黄溪2396线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变汤家24C8线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.汤家24C8线",
+				"lendnode汤溪变.汤家24C8线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变汤曹24C9线开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变.汤曹24C9线",
+				"lendnode汤溪变.汤曹24C9线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变汤南2361开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变.汤南2361线",
+				"lendnode汤溪变.汤南2361线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变汤竹2362开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变.汤竹2362线",
+				"lendnode汤溪变.汤竹2362线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变#1主变220kV开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变#1主变-220kV",
+				"wdnode温泉变#1主变-220kV"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变#2主变220kV开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变#2主变-220kV",
+				"wdnode温泉变#2主变-220kV"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变#3主变220kV开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变温泉变#3主变_220kV",
+				"wdnode温泉变温泉变#3主变_220kV"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变#2主变220kV开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变#2主变-220kV",
+				"wdnode汤溪变#2主变-220kV"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变#1主变220kV开关": {
+			"available": true,
+			"cost": 1,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变#1主变-220kV",
+				"wdnode汤溪变#1主变-220kV"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变220kV母联开关": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV副母线",
+				"温泉变220kV正母线"
+			],
+			"switch_type": "breaker"
+		},
+		"汤溪变220kV母联开关": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"汤溪变220kV副母线"
+			],
+			"switch_type": "breaker"
+		},
+		"温泉变温欣24B6线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV副母线",
+				"lendnode温泉变.温欣24B6 线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变温欣24B6线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV正母线",
+				"lendnode温泉变.温欣24B6 线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变龙泉2399副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV副母线",
+				"lendnode温泉变.龙泉2399线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变龙泉2399正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV正母线",
+				"lendnode温泉变.龙泉2399线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变龙温2390副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV副母线",
+				"lendnode温泉变.龙温2390线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变龙温2390正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV正母线",
+				"lendnode温泉变.龙温2390线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变温莹2U51正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV正母线",
+				"lendnode温泉变.温莹2U51线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变温莹2U51副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV副母线",
+				"lendnode温泉变.温莹2U51线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变枫温24P5副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV副母线",
+				"lendnode温泉变.枫温24P5线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变枫温24P5正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV正母线",
+				"lendnode温泉变.枫温24P5线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变郊汤24C7线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.郊汤24C7线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变郊汤24C7线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.郊汤24C7线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变郊溪24C6线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.郊溪24C6线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变郊溪24C6线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.郊溪24C6线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变黄汤2397线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.黄汤2397线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变黄汤2397线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.黄汤2397线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变黄溪2396线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.黄溪2396线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变黄溪2396线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.黄溪2396线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤家24C8线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.汤家24C8线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤家24C8线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.汤家24C8线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤曹24C9线正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.汤曹24C9线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤曹24C9线副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.汤曹24C9线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤南2361正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.汤南2361线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤南2361副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.汤南2361线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤竹2362副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"lendnode汤溪变.汤竹2362线"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变汤竹2362正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"lendnode汤溪变.汤竹2362线"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#1主变220kV副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV副母线",
+				"wdnode温泉变#1主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#2主变220kV副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV副母线",
+				"wdnode温泉变#2主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#3主变220kV副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV副母线",
+				"wdnode温泉变温泉变#3主变_220kV"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#2主变220kV正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"温泉变220kV正母线",
+				"wdnode温泉变#2主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#1主变220kV正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV正母线",
+				"wdnode温泉变#1主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"温泉变#3主变220kV正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"温泉变220kV正母线",
+				"wdnode温泉变温泉变#3主变_220kV"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变#2主变220kV正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"wdnode汤溪变#2主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变#1主变220kV正母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV正母线",
+				"wdnode汤溪变#1主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变#2主变220kV副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 1,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"wdnode汤溪变#2主变-220kV"
+			],
+			"switch_type": "switch"
+		},
+		"汤溪变#1主变220kV副母闸刀": {
+			"available": true,
+			"cost": 5,
+			"initial_state": 0,
+			"nodes": [
+				"汤溪变220kV副母线",
+				"wdnode汤溪变#1主变-220kV"
+			],
+			"switch_type": "switch"
+		}
+	},
+	"transformers": {
+		"温泉变#1主变-220kV": {
+			"conn_node": "温泉变#1主变-220kV",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				48.4234,
+				48.4234,
+				48.4234,
+				48.4234
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		},
+		"温泉变#2主变-220kV": {
+			"conn_node": "温泉变#2主变-220kV",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				47.7276,
+				47.7276,
+				47.7276,
+				47.7276
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		},
+		"汤溪变#2主变-220kV": {
+			"conn_node": "汤溪变#2主变-220kV",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				113.0913,
+				113.0913,
+				113.0913,
+				113.0913
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		},
+		"汤溪变#1主变-220kV": {
+			"conn_node": "汤溪变#1主变-220kV",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				-10.7811,
+				-10.7811,
+				-10.7811,
+				-10.7811
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		},
+		"温泉变温泉变#3主变_220kV": {
+			"conn_node": "温泉变温泉变#3主变_220kV",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				88.5266,
+				88.5266,
+				88.5266,
+				88.5266
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		},
+		"温泉变.温欣24B6 线": {
+			"conn_node": "温泉变.温欣24B6 线",
+			"cost": {
+				"双龙变供区": 100,
+				"万象变供区": 100,
+				"永康变供区": 100,
+				"夏金变供区": 100
+			},
+			"load": [
+				2.3906,
+				2.3906,
+				2.3906,
+				2.3906
+			],
+			"sensitivity": {
+				"双龙变供区": 1,
+				"万象变供区": 1,
+				"永康变供区": 1,
+				"夏金变供区": 1
+			}
+		}
+	},
+	"zone_lines": {
+		"温泉变.龙泉2399线": {
+			"available": true,
+			"conn_node": "温泉变.龙泉2399线",
+			"zone": "双龙变供区"
+		},
+		"温泉变.龙温2390线": {
+			"available": true,
+			"conn_node": "温泉变.龙温2390线",
+			"zone": "双龙变供区"
+		},
+		"温泉变.温莹2U51线": {
+			"available": true,
+			"conn_node": "温泉变.温莹2U51线",
+			"zone": "永康变供区"
+		},
+		"温泉变.枫温24P5线": {
+			"available": true,
+			"conn_node": "温泉变.枫温24P5线",
+			"zone": "万象变供区"
+		},
+		"汤溪变.郊汤24C7线": {
+			"available": true,
+			"conn_node": "汤溪变.郊汤24C7线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.郊溪24C6线": {
+			"available": true,
+			"conn_node": "汤溪变.郊溪24C6线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.黄汤2397线": {
+			"available": true,
+			"conn_node": "汤溪变.黄汤2397线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.黄溪2396线": {
+			"available": true,
+			"conn_node": "汤溪变.黄溪2396线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.汤家24C8线": {
+			"available": true,
+			"conn_node": "汤溪变.汤家24C8线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.汤曹24C9线": {
+			"available": true,
+			"conn_node": "汤溪变.汤曹24C9线",
+			"zone": "双龙变供区"
+		},
+		"汤溪变.汤南2361线": {
+			"available": true,
+			"conn_node": "汤溪变.汤南2361线",
+			"zone": "夏金变供区"
+		},
+		"汤溪变.汤竹2362线": {
+			"available": true,
+			"conn_node": "汤溪变.汤竹2362线",
+			"zone": "夏金变供区"
+		}
+	},
+	"zones": {
+		"永康变供区": {
+			"capacity": 3000,
+			"fixed_load": [
+				1300,
+				1350,
+				1400,
+				1450
+			]
+		},
+		"万象变供区": {
+			"capacity": 2500,
+			"fixed_load": [
+				1300,
+				1350,
+				1400,
+				1450
+			]
+		},
+		"夏金变供区": {
+			"capacity": 2000,
+			"fixed_load": [
+				1300,
+				1350,
+				1400,
+				1450
+			]
+		},
+		"双龙变供区": {
+			"capacity": 2250,
+			"fixed_load": [
+				1300,
+				1350,
+				1400,
+				1450
+			]
+		}
+	}
+}

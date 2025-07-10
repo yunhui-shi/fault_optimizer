@@ -439,6 +439,13 @@ def solve_dynamic_recovery_model(
                                 print(f"1、{open_switch_name}【刀闸分闸】")
                                 switches_operate[open_switch_name] = 0
                                 break
+        # 备用机组开机情况
+        backup_unit_commitment = ""
+        for g in backup_units:
+            for t in range(horizon):
+                if model.getVal(v_bak_startup[g,t]) == 1:
+                    backup_unit_commitment += f"{g}在时段{(datetime.now() + timedelta(hours=t)).strftime("%H:%M")}开机\n"
+                    break
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
@@ -449,14 +456,21 @@ def solve_dynamic_recovery_model(
                 "total_operations_count": op_count
             },
             "results": {
-                "time_slots": [f"{(datetime.now() + timedelta(hours=t)).strftime('%H:%M')}" for t in range(horizon)],
-                "switch_operations": switch_operations,
-                "final_transformer_assignment": final_transformer_assignment,
-                "final_zone_status": final_zone_status,
-                "final_switch_states": final_switch_states,
-                "initial_sw_states": initial_sw_states,
-                "operations": operations,
-                "dispatch_plan": final_dispatch_plan
+                "调度时段": [f"{(datetime.now() + timedelta(hours=t)).strftime('%H:%M')}" for t in range(horizon)],
+                "可用资源":{
+                    "在运机组": operating_units,
+                    "备用机组": backup_units,
+                    "储能": storage_units,
+                    "可中断负荷": interruptible_loads
+                },
+                "备用机组开机计划": backup_unit_commitment,
+                "机组出力计划": final_dispatch_plan,
+                "开关操作": switch_operations,
+                "变压器所属供区": final_transformer_assignment,
+                "供区供电裕度": final_zone_status,
+                "开关状态": final_switch_states,
+                "初始开关状态": initial_sw_states,
+                "开关操作顺序": operations,
             }
         }
         return result

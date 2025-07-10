@@ -13,7 +13,19 @@ import os
 import redis
 from dotenv import load_dotenv
 import logging
+import json
+import re
 load_dotenv(".env.example")
+# Get API keys and endpoints from environment variables
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_BASE = os.getenv("OPENAI_API_BASE") # Optional
+N1_ANALYSIS_URL = os.getenv("N1_ANALYSIS_URL", "http://127.0.0.1:9999/n1_analysis") # Default if not set
+FIND_CONTINGENCY_PLAN_URL = os.getenv("FIND_CONTINGENCY_PLAN_URL") # Needs to be set if not mocked
+FIND_OPERATION_PLAN_URL = os.getenv("FIND_OPERATION_PLAN_URL")
+GET_MODEL_URL  = os.getenv("GET_MODEL_URL")
+GET_BACKUP_LINE_URL = os.getenv("GET_BACKUP_LINE_URL")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set in the environment variables.")
 # 初始化数据库
 db = OptimizationDatabase()
 db.save_optimization_config(OptimizationInput.Config.json_schema_extra["example"])
@@ -121,6 +133,168 @@ def modify_optimization_config(query:str):
     db.execute_sql(clause)
     return "优化配置已更新, 请重新优化"
     
+def getAuxInfo(fault_device: str, device_type: str) -> str:
+    """该tool用于根据指定的初始故障，获取故障的相关辅助信息，例如线路基本信息和场站基本信息，附近的备用供电线路"""
+    try:
+        response = requests.get(GET_MODEL_URL, params={'name': fault_device,'type':device_type}, timeout=30).json()
+        response.update(
+            {"备用线路清单":
+            requests.get(GET_BACKUP_LINE_URL, params={'lineName': fault_device}, timeout=30).json()
+            }
+            )
+        return json.dumps(response)
+    except requests.exceptions.RequestException as e:
+        print(f"Error calling GET MODEL API: {e}")
+        return f"Error GET MODEL for '{fault_device}': {e}"
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON response from GET MODEL API for : {fault_device}")
+        return f"Error processing GET MODEL result for '{fault_device}': Invalid JSON response."
+
+def N1Analysis(fault_device: str, device_type: str) -> str:
+    """
+    该tool用于根据指定的初始故障，自动完成N-1安全分析并返回结构化的潮流变化和设备失电信息，便于后续业务处理和决策支持。
+Response JSON example:
+[
+    {
+        "预想故障": [
+            {
+                "设备名称": "浦州44K6线",
+                "设备类型": "交流线路"
+            }
+        ],
+        "校核结果": {
+            "负荷变化清单": [
+                {
+                    "负荷变化(MW)": "10.48",
+                    "设备名称": "严州变电所3号主变-500kV",
+                    "限值(MW)": "1000.00",
+                    "设备类型": "变压器绕组",
+                    "故障前负载(MW)": "51.39",
+                    "故障后负载率(%)": "4.09",
+                    "故障前负载率(%)": "5.14",
+                    "故障后负载(MW)": "40.91"
+                },
+                {
+                    "负荷变化(MW)": "10.48",
+                    "设备名称": "严州变电所3号主变-220kV",
+                    "限值(MW)": "1000.00",
+                    "设备类型": "变压器绕组",
+                    "故障前负载(MW)": "-51.39",
+                    "故障后负载率(%)": "-4.09",
+                    "故障前负载率(%)": "-5.14",
+                    "故障后负载(MW)": "-40.91"
+                },
+                {
+                    "负荷变化(MW)": "10.48",
+                    "设备名称": "严州变电所2号主变-高",
+                    "限值(MW)": "1000.00",
+                    "设备类型": "变压器绕组",
+                    "故障前负载(MW)": "51.39",
+                    "故障后负载率(%)": "4.09",
+                    "故障前负载率(%)": "5.14",
+                    "故障后负载(MW)": "40.91"
+                },
+                {
+                    "负荷变化(MW)": "10.48",
+                    "设备名称": "严州变电所2号主变-中",
+                    "限值(MW)": "1000.00",
+                    "设备类型": "变压器绕组",
+                    "故障前负载(MW)": "-51.39",
+                    "故障后负载率(%)": "-4.09",
+                    "故障前负载率(%)": "-5.14",
+                    "故障后负载(MW)": "-40.91"
+                },
+                {
+                    "负荷变化(MW)": "18.16",
+                    "设备名称": "后浦变220kV母联开关",
+                    "限值(MW)": "118751.16",
+                    "设备类型": "断路器",
+                    "故障前负载(MW)": "2.14",
+                    "故障后负载率(%)": "-0.01",
+                    "故障前负载率(%)": "0.00",
+                    "故障后负载(MW)": "-16.02"
+                }
+            ],
+            "失电设备清单": [
+                {
+                    "失电设备": "浙江杭州电网.后浦变/220kV.#2主变",
+                    "所属厂站": "浙江杭州电网.后浦变"
+                },
+                {
+                    "失电设备": "浙江杭州电网.后浦变/220kV.#1主变",
+                    "所属厂站": "浙江杭州电网.后浦变"
+                }
+            ]
+        }
+    }
+]
+
+    Args:
+        fault_device (str): The name of the faulted device. (REQUIRED)
+        device_type (str): The type of the faulted device. 限定为：线路、母线、主变。(REQUIRED)
+    """
+    print(f"Attempting N-1 analysis for: {fault_device} using {N1_ANALYSIS_URL}")
+    if not N1_ANALYSIS_URL:
+        print(f"Using mocked N-1 analysis for '{fault_device}'.")
+        return f"Mocked N-1 analysis result for '{fault_device}': Component is critical under N-1 conditions."
+    else:
+        try:
+            response = requests.get(N1_ANALYSIS_URL, params={'name': fault_device,'type':device_type}, timeout=300)
+            response.raise_for_status()
+            return json.dumps(response.json())
+        except requests.exceptions.RequestException as e:
+            print(f"Error calling N-1 Analysis API: {e}")
+            return f"Error performing N-1 analysis for '{fault_device}': {e}"
+        except json.JSONDecodeError:
+            print(f"Error decoding JSON response from N-1 Analysis API for : {fault_device}")
+            return f"Error processing N-1 analysis result for '{fault_device}': Invalid JSON response."
+
+def FindContingencyPlan(fault_device:str) -> str:
+    """调用这个工具来获取电网故障设备对应的事故预案.
+
+    Args:
+        fault_device: str = Field(..., description="设备名称")
+    """
+    plans = requests.get(FIND_CONTINGENCY_PLAN_URL).json()["result"]
+    plans.extend(requests.get(FIND_OPERATION_PLAN_URL+f"?name={fault_device}").json())
+    plans_short = [
+        {
+            "预案名称":plan["预案名称"],
+            "预案id":plan["预案ID"]
+            } for plan in plans
+        ]
+    action = dict()
+    for plan in plans:
+        action[plan["预案ID"]] = (plan["预案名称"],plan["预案内容"])
+    prompt_con = f"""
+    当前电网故障设备：{fault_device}
+    检索到的事故预案:{plans_short}
+    请在检索到的事故预案中匹配，判定是否有当前电网故障设备相关或相似的1个或多个预案。注意区分单线故障和双线故障，如果发生了单线故障却匹配到了双线故障预案，则相关性仅为中等，反之亦然。
+
+    **指定输出格式：** 必须严格按照下面的 JSON 格式返回结果。
+
+    输出格式:
+    {{
+        "Found":1 , #若找到设为1，找不到设为0
+        "预案名称":["黄汤2397线跳闸"], # 匹配事故预案名称
+        "预案id":["18934"], #匹配事故预案
+        "其他说明":"预案18934与当前故障场景相关性是高/中/低，原因是..."
+    }}
+    """
+    response = plan_llm.invoke(prompt_con)
+    print(response.content)
+    matches = re.findall(r'"(\d{5})"',response.content)
+    if len(matches):
+        return_string = f"为您找到{len(matches)}个预案，包括:\n"
+        for plan_id in matches:
+            return_string += f"预案名称{action[plan_id][0]}，ID为{plan_id}，采取措施：{action[plan_id][1]}\n"
+        think_pattern = r"<think>.*?</think>"
+        extra = re.sub(think_pattern,"",response.content,flags=re.DOTALL)
+        return_string += f"\n其他情况说明:{extra}"
+        return return_string
+    else:
+        return "Not Found"
+
 tools = [
     StructuredTool.from_function(
         func=run_optimization,
@@ -137,6 +311,21 @@ tools = [
         name="modify_optimization_config",
         description="用于手动修改优化配置的工具。传入用户的要求，输出为确认信息。"
     ),
+    # StructuredTool.from_function(
+    #     func=getAuxInfo,
+    #     name="getAuxInfo",
+    #     description="用于根据指定的初始故障，获取故障的相关辅助信息，例如线路基本信息和场站基本信息，附近的备用供电线路。"
+    # ), 
+    StructuredTool.from_function(
+        func=N1Analysis,
+        name="N1Analysis",
+        description="用于根据指定的初始故障，自动完成N-1安全分析并返回结构化的潮流变化和设备失电信息，便于后续业务处理和决策支持。"
+    ), 
+    StructuredTool.from_function(
+        func=FindContingencyPlan,
+        name="FindContingencyPlan",
+        description="用于获取电网故障设备对应的事故预案。"
+    ), 
 ]
 memory = ConversationBufferWindowMemory(
         k=5, # Set context window to 5
@@ -153,7 +342,7 @@ def get_system_prompt_from_redis():
 You are a helpful assistant that can use tools to help with power grid fault recovery optimization.
 
 Guidelines:
-- If user input contains '/newfaultactivated', call get_optimization_boundary tool first with device name and device type
+- 如果用户输入包含 '/newfaultactivated', 首先调用FindContingencyPlan工具获取预案， 然后使用get_optimization_boundary工具。
 - If user input does not contain '/newfaultactivated', DO NOT call get_optimization_boundary tool. 
 - Device types must be one of: "线路", "母线", "主变"
 - After getting optimization boundary, you can run the run_optimization tool
@@ -275,6 +464,7 @@ prompt = ChatPromptTemplate.from_messages([
     ])
 # 初始化LLM
 llm = ChatOpenAI(model=os.getenv("MAIN_MODEL"), temperature=0) # 建议使用gpt-4o或gpt-4-turbo，它们在工具调用方面表现更佳
+plan_llm = ChatOpenAI(model=os.getenv("MAIN_MODEL"), temperature=0) # 建议使用gpt-4o或gpt-4-turbo，它们在工具调用方面表现更佳
 
 # 创建代理
 agent = create_tool_calling_agent(
@@ -286,6 +476,16 @@ agent = create_tool_calling_agent(
 # 创建代理执行器
 agent_executor = AgentExecutor(agent=agent, tools=tools, memory=memory, verbose=True, handle_parsing_errors=True)
 if __name__ == "__main__":
+    # Check for API key before proceeding
+    if not OPENAI_API_KEY:
+        print("Error: OPENAI_API_KEY is not set. Please create a .env file with your API key.")
+        print("Example .env content:")
+        print("OPENAI_API_KEY='your_openai_api_key_here'")
+        exit(1)
+
+    print(f"N-1 Analysis tool will use: {N1_ANALYSIS_URL}")
+    print(f"Find Contingency Plan tool will use: {FIND_CONTINGENCY_PLAN_URL if FIND_CONTINGENCY_PLAN_URL else 'Mocked (URL not set)'}")
+    print("Starting FastAPI server...")
     while True:
         # 例如，瓶窑变#1主变故障/newfaultactivated，然后设置Breaker_LineA1不可用
         user_input = input("\n请输入: ")
