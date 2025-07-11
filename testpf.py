@@ -14,7 +14,7 @@ trafo_map = {}
 def load_file(file_name):
     file_path = f"./断面数据/{file_name}.json"
     if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as file:
+        with open(file_path, "r", encoding="gbk") as file:
             return json.load(file)
     else:
         return []
@@ -28,7 +28,7 @@ def load_element_data(api_endpoint):
     if api_endpoint == "api/线端":
         return load_file("线端")
     elif api_endpoint == "api/trafo_2":
-        return load_file("变压器-双")
+        return load_file("变压器")
     elif api_endpoint == "api/trafo_3":
         return load_file("变压器-三")
     elif api_endpoint == "api/line":
@@ -66,7 +66,8 @@ def load_bus_section(net):
             max_vm_pu=float(bus["MAX_VM_PU"]),
             min_vm_pu=float(bus["MIN_VM_PU"]),
         )
-        bus_map[int(bus["INDEX"])] = int(index)
+        bus_map[int(bus["ID"])] = int(index)
+        #print(f"{bus} created")
     for bus in load_element_data("api/绕组"):
         index = pp.create_bus(
             net,
@@ -91,7 +92,6 @@ def load_bus_section(net):
     print("Bus measurements loaded.")
     print("Bus Section completed\n")
 
-
 def load_trafo_section(net):
     print("Starting Transformer Section")
     trafo2_data = load_element_data("api/trafo_2")
@@ -102,13 +102,13 @@ def load_trafo_section(net):
             name=tranfo["NAME"],
             hv_bus=bus_map[int(tranfo["HV_BUS"])],
             lv_bus=bus_map[int(tranfo["LV_BUS"])],
-            sn_mva=999,
-            vn_hv_kv=999,
-            vn_lv_kv=999,
-            vkr_percent=999,
-            vk_percent=999,
-            pfe_kw=999,
-            i0_percent=999,
+            sn_mva=tranfo["SN_MVA"],
+            vn_hv_kv=tranfo["VN_HV_KV"],
+            vn_lv_kv=tranfo["VN_LV_KV"],
+            vkr_percent=tranfo["VKR_PERCENT"],
+            vk_percent=tranfo["VK_PERCENT"],
+            pfe_kw=tranfo["PFE_KW"],
+            i0_percent=tranfo["I0_PERCENT"],
         )
         trafo_map[int(tranfo["ID"])] = int(index)
     trafo3_data = load_element_data("api/trafo_3")
@@ -123,7 +123,7 @@ def load_trafo_section(net):
             sn_mva=int(tranfo["SN_MVA"]),
             sn_hv_mva=int(tranfo["SN_MVA"]),
             sn_mv_mva=int(tranfo["SN_MVA"]),
-            sn_lv_mva=int(tranfo["SN_MVA"]),
+            sn_lv_mva=int(tranfo["SN_MVA"])/3.,
             vn_hv_kv=int(tranfo["VN_HV_KV"]),
             vn_mv_kv=int(tranfo["VN_MV_KV"]),
             vn_lv_kv=int(tranfo["VN_LV_KV"]),
@@ -145,6 +145,7 @@ def load_trafo_section(net):
     print("Transformer Section completed\n")
 
 
+
 def load_line_section(net):
     print("Starting Line Section")
     line_data = load_element_data("api/line")
@@ -159,8 +160,9 @@ def load_line_section(net):
                 length_km=float(line["LENGTH_KM"]),
                 r_ohm_per_km=float(line["R_OHM_PER_KM"]),
                 x_ohm_per_km=float(line["X_OHM_PER_KM"]),
-                c_nf_per_km=float(line["C_NF_PER_KM"]),
-                max_i_ka=float(line["MAX_I_KA"]),
+                # c_nf_per_km=float(line["C_NF_PER_KM"]),
+                c_nf_per_km=0,
+                max_i_ka=float(line["MAX_I_KA"]) if float(line["MAX_I_KA"]) else 3 ,
             )
             line_map[int(line["ID"])] = int(index)
         except Exception as e:
@@ -171,31 +173,9 @@ def load_line_section(net):
     print("Line Section completed\n")
 
 
-def load_static_gen_section(net):
-    print("Starting Static Generator Section")
-    gen_data = load_element_data("api/static-gen")
-    # print('static gen-data', gen_data)
-    for gen in gen_data:
-        try:
-            print(gen["BUS"], gen["NAME"], "static-gen-bus")
-            pp.create_sgen(
-                net,
-                index=int(gen["ID"]),
-                name=gen["NAME"],
-                bus=bus_map[int(gen["BUS"])],
-                p_mw=float(gen["P_MW"]),
-                q_mvar=float(gen["Q_MVAR"]),
-            )
-        except Exception as e:
-            print(gen, e)
-    # 加载量测数据
-    gen_measurements = load_measurement_data("api/measurement/static-gen")
-    print("Generator measurements loaded.")
-    print("Generator Section completed\n")
-
-
 def load_gen_section(net):
     print("Starting Generator Section")
+    num = 0
     gen_data = load_element_data("api/gen")
     for gen in gen_data:
         try:
@@ -203,11 +183,16 @@ def load_gen_section(net):
                 net,
                 index=int(gen["ID"]),
                 name=gen["NAME"],
-                bus=int(gen["母线ID"]),
-                p_mw=float(gen["标称功率"]),
+                bus=bus_map[int(gen["BUS"])],
+                p_mw=max(float(gen["P_MW"]), 0),
+                sn_mva=1000,
+                vm_pu=1.02,
             )
+            if float(gen["P_MW"]) <= 10:
+                num += 1
         except Exception as e:
             print(gen, e)
+    print(num)
     # 加载量测数据
     gen_measurements = load_measurement_data("api/measurement/gen")
     print("Generator measurements loaded.")
@@ -215,22 +200,47 @@ def load_gen_section(net):
 
 
 def load_load_section(net):
-    print("Starting Load Section")
+    print("Starting Load and Static Generator Section")
     load_data = load_element_data("api/load")
     for load in load_data:
-        pp.create_load(
-            net,
-            index=load["ID"],
-            name=load["NAME"],
-            bus=bus_map[int(load["BUS"])],
-            p_mw=float(load["P_MW"]),
-            q_mvar=float(load["Q_MVAR"]),
-        )
+        try:
+            # 添加负荷
+            pp.create_load(
+                net,
+                index=load["ID"],
+                name=load["NAME"],
+                bus=bus_map[int(load["BUS"])],
+                p_mw=float(load["P_MW"]),
+                q_mvar=float(load["Q_MVAR"]),
+            )
+        except Exception as e:
+            print(load, e)
     # 加载量测数据
     load_measurements = load_measurement_data("api/measurement/load")
     print("Load measurements loaded.")
     print("Load Section completed\n")
 
+def load_static_gen_section(net):
+    print("Starting Static Generator Section")
+    gen_data = load_element_data("api/static-gen")
+    # print('static gen-data', gen_data)
+    for gen in gen_data:
+        try:
+            #print(gen["BUS"], gen["NAME"], "static-gen-bus")
+            pp.create_sgen(
+                net,
+                index=int(gen["ID"]),
+                name=gen["NAME"],
+                bus=bus_map[int(gen["BUS"])],
+                p_mw=-float(gen["P_MW"]),
+                q_mvar=-float(gen["Q_MVAR"]),
+            )
+        except Exception as e:
+            print(gen, e)
+    # 加载量测数据
+    gen_measurements = load_measurement_data("api/measurement/static-gen")
+    print("Static generator measurements loaded.")
+    print("Static generator Section completed\n")
 
 def load_switch_section(net):
     print("Starting Switch Section")
@@ -241,14 +251,18 @@ def load_switch_section(net):
             element = line_map[int(switch["ELEMENT"])]
         elif switch["ET"] == "t" or switch['ET'] == 't3':
             element = trafo_map[int(switch["ELEMENT"])]
-        pp.create_switch(
-            net,
-            # index=switch["ID"],
-            name=switch["NAME"],
-            bus=bus_map[int(switch["BUS"])],
-            et=switch["ET"],
-            element=element,
-        )
+        try:
+            pp.create_switch(
+                net,
+                # index=switch["ID"],
+                name=switch["NAME"],
+                bus=bus_map[int(switch["BUS"])],
+                et=switch["ET"],
+                element=element,
+                closed=True if switch["CLOSED"]==1 else False
+            )
+        except Exception as e:
+            print(switch, e)
     # 加载量测数据
     switch_measurements = load_measurement_data("api/measurement/switch")
     print("Switch measurements loaded.")
@@ -257,10 +271,10 @@ def load_switch_section(net):
 
 def run_powerflow(net):
     print("Starting Power Flow Calculation")
-
+    pp.create_continuous_elements_index(net)  
     # 保存断面数据
     pp.to_sqlite(net, "./net.db")
-
+    result = pp.diagnostic(net, report_style='compact')
     # # 检查并删除无效引用
     # elements_with_bus = [
     #     "line",
@@ -304,14 +318,18 @@ def run_powerflow(net):
     # pp.create_continuous_bus_index(net)
     # # 重置所有元件索引, 避免内存溢出
     # pp.toolbox.create_continuous_elements_index(net)
-    pp.runpp(net)
+    pp.runpp(net, max_iteration= 30)
+
     print("Power Flow Completed")
 
 
 def main():
     # 创建空网络
-    net = pp.create_empty_network(name="浙江电网")
-
+    net = pp.create_empty_network(name="浙江电网", sn_mva=1000)
+    try:
+        os.system("del net.db")
+    except:
+        pass
     # 环节1：加载母线
     load_bus_section(net)
 
@@ -322,7 +340,7 @@ def main():
             executor.submit(load_line_section, net),
             executor.submit(load_gen_section, net),
             executor.submit(load_load_section, net),
-            # executor.submit(load_static_gen_section, net),
+            executor.submit(load_static_gen_section, net),
         ]
 
         for future in futures:
@@ -335,7 +353,17 @@ def main():
 
     # 环节7：潮流计算
     run_powerflow(net)
+    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
 
 
 if __name__ == "__main__":
-    main()
+    net = pp.from_sqlite("net.db")
+    print("network loaded")
+    # result = pp.diagnostic(net)
+    import time
+    t = time.time()
+    pp.runpp(net,max_iteration=30)
+    print(time.time() - t)
+    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
+    print(net.res_bus.loc[net.gen.bus])
+    # main()
