@@ -1,4 +1,5 @@
 import pandapower as pp
+import pandapower.topology as top
 import time, json, os
 from concurrent.futures import ThreadPoolExecutor
 
@@ -354,7 +355,11 @@ def main():
     # 环节6：加载开关
     load_switch_section(net)
 
-    pp.create_ext_grid(net, bus=0)
+    pp.create_ext_grid(net, bus=0, vm_pu=1.02)
+    pp.create_ext_grid(net, bus=1376, vm_pu=1.02)
+    pp.create_ext_grid(net, bus=1383, vm_pu=1.02)
+    pp.create_ext_grid(net, bus=203, vm_pu=1.02)
+    pp.create_ext_grid(net, bus=225, vm_pu=1.02)
 
     # 环节7：潮流计算
     run_powerflow(net)
@@ -364,6 +369,9 @@ def main():
 if __name__ == "__main__":
     # net = pp.from_sqlite("net.db")
     # print("network loaded")
+    # mg = top.create_nxgraph(net)  
+    # cc = list(top.connected_components(mg))
+    # print(f"网络有 {len(cc)} 个连通分量")
     # # 获取诊断结果字典  
     # diag_results = pp.diagnostic(net, report_style='None')  # 不输出到控制台  
     # # 保存到JSON文件  
