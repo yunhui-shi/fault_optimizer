@@ -274,7 +274,12 @@ def run_powerflow(net):
     pp.create_continuous_elements_index(net)  
     # 保存断面数据
     pp.to_sqlite(net, "./net.db")
-    result = pp.diagnostic(net, report_style='compact')
+    # 获取诊断结果字典  
+    diag_results = pp.diagnostic(net, report_style='None')  # 不输出到控制台  
+    # 保存到JSON文件  
+    with open('diagnostic_results.json', 'w') as f:  
+        json.dump(diag_results, f, indent=2)
+
     # # 检查并删除无效引用
     # elements_with_bus = [
     #     "line",
@@ -357,13 +362,17 @@ def main():
 
 
 if __name__ == "__main__":
-    net = pp.from_sqlite("net.db")
-    print("network loaded")
-    # result = pp.diagnostic(net)
-    import time
-    t = time.time()
-    pp.runpp(net,max_iteration=30)
-    print(time.time() - t)
-    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
-    print(net.res_bus.loc[net.gen.bus])
-    # main()
+    # net = pp.from_sqlite("net.db")
+    # print("network loaded")
+    # # 获取诊断结果字典  
+    # diag_results = pp.diagnostic(net, report_style='None')  # 不输出到控制台  
+    # # 保存到JSON文件  
+    # with open('diagnostic_results.json', 'w') as f:  
+    #     json.dump(diag_results, f, indent=2)
+    # import time
+    # t = time.time()
+    # pp.runpp(net,max_iteration=30)
+    # print(time.time() - t)
+    # pp.to_excel(net, "network_with_results.xlsx", include_results=True)
+    # print(net.res_bus.loc[net.gen.bus])
+    main()
