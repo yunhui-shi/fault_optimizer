@@ -269,12 +269,15 @@ def load_switch_section(net):
     print("Switch measurements loaded.")
     print("Switch Section completed\n")
 
-
-def run_powerflow(net):
+# 潮流计算
+def run_powerflow():
+    net = pp.from_sqlite("net.db")
+    print("network loaded")
+    mg = top.create_nxgraph(net)  
+    cc = list(top.connected_components(mg))
+    print(f"网络有 {len(cc)} 个连通分量")
     print("Starting Power Flow Calculation")
-    pp.create_continuous_elements_index(net)  
-    # 保存断面数据
-    pp.to_sqlite(net, "./net.db")
+    pp.create_continuous_elements_index(net) 
     # 获取诊断结果字典  
     diag_results = pp.diagnostic(net, report_style='None')  # 不输出到控制台  
     # 保存到JSON文件  
@@ -324,12 +327,16 @@ def run_powerflow(net):
     # pp.create_continuous_bus_index(net)
     # # 重置所有元件索引, 避免内存溢出
     # pp.toolbox.create_continuous_elements_index(net)
+    import time
+    t = time.time()
     pp.runpp(net, max_iteration= 30)
-
+    print(time.time() - t)
+    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
+    # print(net.res_bus.loc[net.gen.bus])
     print("Power Flow Completed")
 
-
-def main():
+# 创建网络模型并存库
+def create_network():
     # 创建空网络
     net = pp.create_empty_network(name="浙江电网", sn_mva=1000)
     try:
@@ -355,32 +362,17 @@ def main():
     # 环节6：加载开关
     load_switch_section(net)
 
+    # 设置外部电网节点
     pp.create_ext_grid(net, bus=0, vm_pu=1.02)
     pp.create_ext_grid(net, bus=1376, vm_pu=1.02)
     pp.create_ext_grid(net, bus=1383, vm_pu=1.02)
     pp.create_ext_grid(net, bus=203, vm_pu=1.02)
     pp.create_ext_grid(net, bus=225, vm_pu=1.02)
 
-    # 环节7：潮流计算
-    run_powerflow(net)
-    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
+    # 保存断面数据
+    pp.to_sqlite(net, "./net.db")
 
 
 if __name__ == "__main__":
-    # net = pp.from_sqlite("net.db")
-    # print("network loaded")
-    # mg = top.create_nxgraph(net)  
-    # cc = list(top.connected_components(mg))
-    # print(f"网络有 {len(cc)} 个连通分量")
-    # # 获取诊断结果字典  
-    # diag_results = pp.diagnostic(net, report_style='None')  # 不输出到控制台  
-    # # 保存到JSON文件  
-    # with open('diagnostic_results.json', 'w') as f:  
-    #     json.dump(diag_results, f, indent=2)
-    # import time
-    # t = time.time()
-    # pp.runpp(net,max_iteration=30)
-    # print(time.time() - t)
-    # pp.to_excel(net, "network_with_results.xlsx", include_results=True)
-    # print(net.res_bus.loc[net.gen.bus])
-    main()
+    create_network()
+    run_powerflow()
