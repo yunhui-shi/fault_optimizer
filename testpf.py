@@ -122,9 +122,9 @@ def load_trafo_section(net):
             mv_bus=bus_map[int(tranfo["MV_BUS"])],
             lv_bus=bus_map[int(tranfo["LV_BUS"])],
             sn_mva=int(tranfo["SN_MVA"]),
-            sn_hv_mva=int(tranfo["SN_MVA"]),
-            sn_mv_mva=int(tranfo["SN_MVA"]),
-            sn_lv_mva=int(tranfo["SN_MVA"])/3.,
+            sn_hv_mva=int(tranfo["SN_HV_MVA"]),
+            sn_mv_mva=int(tranfo["SN_MV_MVA"]),
+            sn_lv_mva=int(tranfo["SN_LV_MVA"]),
             vn_hv_kv=int(tranfo["VN_HV_KV"]),
             vn_mv_kv=int(tranfo["VN_MV_KV"]),
             vn_lv_kv=int(tranfo["VN_LV_KV"]),
@@ -176,7 +176,6 @@ def load_line_section(net):
 
 def load_gen_section(net):
     print("Starting Generator Section")
-    num = 0
     gen_data = load_element_data("api/gen")
     for gen in gen_data:
         try:
@@ -189,11 +188,8 @@ def load_gen_section(net):
                 sn_mva=1000,
                 vm_pu=1.02,
             )
-            if float(gen["P_MW"]) <= 10:
-                num += 1
         except Exception as e:
             print(gen, e)
-    print(num)
     # 加载量测数据
     gen_measurements = load_measurement_data("api/measurement/gen")
     print("Generator measurements loaded.")
@@ -273,6 +269,8 @@ def load_switch_section(net):
 def run_powerflow():
     net = pp.from_sqlite("net.db")
     print("network loaded")
+    print("总负荷有功：", net.load.p_mw.sum())
+    print("总机组有功：", net.gen.p_mw.sum()+net.sgen.p_mw.sum())
     mg = top.create_nxgraph(net)  
     cc = list(top.connected_components(mg))
     print(f"网络有 {len(cc)} 个连通分量")
@@ -329,7 +327,7 @@ def run_powerflow():
     # pp.toolbox.create_continuous_elements_index(net)
     import time
     t = time.time()
-    pp.runpp(net, max_iteration= 30)
+    pp.runpp(net, max_iteration= 30, tolerance_mva=1e-6)
     print(time.time() - t)
     pp.to_excel(net, "network_with_results.xlsx", include_results=True)
     # print(net.res_bus.loc[net.gen.bus])
@@ -363,11 +361,8 @@ def create_network():
     load_switch_section(net)
 
     # 设置外部电网节点
-    pp.create_ext_grid(net, bus=0, vm_pu=1.02)
-    pp.create_ext_grid(net, bus=1376, vm_pu=1.02)
-    pp.create_ext_grid(net, bus=1383, vm_pu=1.02)
-    pp.create_ext_grid(net, bus=203, vm_pu=1.02)
-    pp.create_ext_grid(net, bus=225, vm_pu=1.02)
+    pp.create_ext_grid(net, bus=54, vm_pu=1.02)
+    # pp.create_ext_grid(net, bus=50, vm_pu=1.02)
 
     # 保存断面数据
     pp.to_sqlite(net, "./net.db")
