@@ -205,8 +205,9 @@ def solve_dynamic_recovery_model(
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_u) >= breaker_final_state)
             if connected_switches_on_v:
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) >= breaker_final_state)
-    # i) 不破坏网架，结束时的开关闭合数大于等于初始状态
-    model.addCons(quicksum(S[name] for name in switches) >= sum(initial_sw_states.values()))
+    # i) 不破坏网架，结束时的开关闭合数大于等于初始状态，并赋予超出值2.0的奖励系数
+    rho = model.addVar(vtype="C", lb=0, name="rho") # 超出值
+    model.addCons(quicksum(S[name] for name in switches) - rho >= sum(initial_sw_states.values()))
     # 3.5. 可用性约束
     # =================================================================================
     # 获取不可用区域线路相连的节点
@@ -250,6 +251,7 @@ def solve_dynamic_recovery_model(
         # 最小化发电成本
         obj_expr += op_cost
     obj_expr += load_shedding_cost
+    obj_expr += - 2.0 * rho
     model.setObjective(obj_expr, "minimize")
     # =================================================================================
     # 5. 求解与结果封装 (更新返回的字典)
