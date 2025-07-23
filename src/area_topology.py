@@ -115,12 +115,15 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
 
 
 def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
-    # 1. 找出所有电压等级大于等于500kV的母线
+    # 1. 找出所有电压等级大于等于500kV的母线,并把所有水电机组和燃气机组的出口开关设为 closed
     high_voltage_buses = net.bus[net.bus.vn_kv >= high_voltage_threshold].index.tolist()
     print(
         f"找到{len(high_voltage_buses)}个电压等级大于等于{high_voltage_threshold}kV的母线"
     )
-
+    hydro_gas_node = net.gen.bus[net.gen.type.isin(["水电","天然气"])].tolist()
+    # print(hydro_gas_node)
+    # 使用loc来避免SettingWithCopyWarning
+    net.switch.loc[net.switch.bus.isin(hydro_gas_node) | net.switch.element.isin(hydro_gas_node), "closed"] = True
     # 2. 创建一个不包含高压母线的网络图
     mg = top.create_nxgraph(net, nogobuses=high_voltage_buses)
 
@@ -178,11 +181,77 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                                 "capacity": float(trafo3w.sn_mva),
                             }
                         )
+            operating_generator_dict = {}
+            for idx, gen in net.gen[net.gen.type.isin(["煤","天然气"]) & (net.gen.p_mw >= 5)].iterrows():
+                if int(gen.bus) in island_buses:
+                    operating_generator_dict[int(idx)] = {
+                            "id": int(idx),
+                            "cost":500,
+                            "name": str(net.gen.name[idx]),
+                            "p_max": float(gen.max_p_mw),
+                            "p_min": float(gen.min_p_mw),
+                            "p_current": float(gen.p_mw),
+                        }
+            backup_generator_dict = {}
+            for idx, gen in net.gen[(net.gen.type == "天然气") & (net.gen.p_mw < 5)].iterrows():
+                if int(gen.bus) in island_buses:
+                    backup_generator_dict[int(idx)] = {
+                            "id": int(idx),
+                            "available": True,
+                            "cost":500,
+                            "name": str(net.gen.name[idx]),
+                            "p_max": float(gen.max_p_mw),
+                            "p_min": float(gen.min_p_mw),
+                            "startup_cost": 1000
+                        }
+            hydro_generator_dict = {}
+            for idx, gen in net.gen[net.gen.type == "水电"].iterrows():
+                if int(gen.bus) in island_buses:
+                    hydro_generator_dict[int(idx)] = {
+                            "id": int(idx),
+                            "available": True,
+                            "cost":500,
+                            "name": str(net.gen.name[idx]),
+                            "p_max": float(gen.max_p_mw),
+                            "p_min": float(gen.min_p_mw),
+                            "startup_cost": 100
+                        }
+            storage_units = []
+            for idx, storage in net.gen[net.gen.type == "电化学储能"].iterrows():
+                if int(storage.bus) in island_buses:
+                    storage_units.append(
+                        {
+                            "id": int(idx),
+                            "name": str(net.gen.name[idx]),
+                            "p_charge_max": float(storage.max_p_mw),
+                            "p_discharge_max": float(storage.max_p_mw),
+                            "soc_initial": 150,
+                            "soc_max": 2*float(storage.max_p_mw),
+                            "soc_min": 0.2*float(storage.max_p_mw),
+                            "p_current": 0.0,
+                            "st_name": storage.st_name,
+                        }
+                    )
+            # 按照st_name将储能单元的参数加总
+            storage_plant_dict = {}
+            for unit in storage_units:
+                if unit["st_name"] not in storage_plant_dict:
+                    storage_plant_dict[unit["st_name"]] = unit
+                else:
+                    storage_plant_dict[unit["st_name"]]["p_charge_max"] += unit["p_charge_max"]
+                    storage_plant_dict[unit["st_name"]]["p_discharge_max"] += unit["p_discharge_max"]
+                    storage_plant_dict[unit["st_name"]]["soc_max"] += unit["soc_max"]
+                    storage_plant_dict[unit["st_name"]]["soc_min"] += unit["soc_min"]
+            
             # 保存孤岛信息
             island_stats[area_name] = {
                 "主变": transformer_list,  # 使用trafo3w中mv_bus在供区中的列表作为主变列表
                 "变电所母线": substation_buses,  # 保留详细信息供参考
                 "联络变电站": {},
+                "operating_units": operating_generator_dict,
+                "backup_units": backup_generator_dict,
+                "hydro_units": hydro_generator_dict,
+                "storage_units": storage_plant_dict,
                 "island_index": i,  # 保存孤岛索引，用于后续识别联络变电站
                 "island_buses": island_buses,  # 保存孤岛中的所有母线，用于后续识别联络变电站
             }
@@ -212,6 +281,6 @@ if __name__ == "__main__":
     for k in island_stats.keys():
         del island_stats[k]["island_buses"]
     # 保存结果到JSON文件
-    with open("area_statistics.json", "w", encoding="utf-8") as f:
+    with open("result/area_statistics.json", "w", encoding="utf-8") as f:
         json.dump(island_stats, f, ensure_ascii=False, indent=4)
-    print("\n结果已保存到area_statistics.json文件")
+    print("\n结果已保存到result/area_statistics.json文件")
