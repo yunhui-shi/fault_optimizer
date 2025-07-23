@@ -1,5 +1,4 @@
 from typing import Literal
-
 from langchain_core.tools import StructuredTool
 from langchain.agents import create_tool_calling_agent
 from langchain.memory import ConversationBufferWindowMemory
