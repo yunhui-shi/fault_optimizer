@@ -1,0 +1,217 @@
+import pandapower as pp
+import pandapower.topology as top
+import pandas as pd
+import networkx as nx
+import json
+from collections import defaultdict
+
+def identify_interconnection_substations(
+    net, island_stats, bus_to_island, islands, substation_to_island
+):
+    """
+    识别联络变电站并收集相关设备信息
+    联络变电站定义：供区内的变电站中有一条线与别的供区相连
+    """
+    print("\n开始识别联络变电站...")
+
+    # 创建区域名称到区域索引的映射
+    area_to_island_index = {
+        area_name: info["island_index"] for area_name, info in island_stats.items()
+    }
+
+    # 遍历所有线路，检查是否连接不同的供区
+    for line_idx, line in net.line.iterrows():
+        from_st,to_st = line.from_st_name, line.to_st_name
+        if "变电所" in from_st or "变电所" in to_st:
+            continue
+        from_island, to_island = substation_to_island[from_st], substation_to_island[to_st]
+        # 检查两侧变电站是否在不同的供区，且不存在分列运行
+        if from_island != to_island and from_island and to_island:
+            # 本侧变电站在不同的供区，记录联络变电站信息
+            if "电厂" in from_st or "电厂" in to_st:
+                continue
+            # print(from_st,to_st)
+            # print(substation_to_island[from_st],substation_to_island[to_st])
+            # 如果有一侧的island==2，那么另外一侧一定只有一个 island，意味着本侧分列，另一侧并列，本侧同时加到两个供区的资源里。
+            if len(from_island) == 2:
+                for island in from_island:
+                    if from_st not in island_stats[island]["联络变电站"]:
+                        island_stats[island]["联络变电站"][from_st] = (
+                            collect_substation_equipment(net, from_st, substation_to_island)
+                        )
+            elif len(to_island) == 2:
+                for island in to_island:
+                    if to_st not in island_stats[island]["联络变电站"]:
+                        island_stats[island]["联络变电站"][to_st] = (
+                            collect_substation_equipment(net, to_st, substation_to_island)
+                        )
+            else:
+                for st in [from_st, to_st]:
+                    for island in substation_to_island[st]:
+                        if st not in island_stats[island]["联络变电站"]:
+                            island_stats[island]["联络变电站"][st] = (
+                                collect_substation_equipment(net, st, substation_to_island)
+                            )
+    for island in island_stats.keys():
+        zones = set()
+        for st in island_stats[island]["联络变电站"]:
+            zones = zones.union(set(island_stats[island]["联络变电站"][st]["zones"]))
+        island_stats[island]["zones"] = {}
+        for zone in zones:
+            island_stats[island]["zones"][zone] = {
+                "capacity": island_stats[zone]["主变"],
+                "fixed_load":[]
+            }
+    return island_stats
+
+
+def collect_substation_equipment(net, substation_name, substation_to_island):
+    """
+    收集变电站内的母线、开关、变压器、线路信息
+    """
+    # 收集变电站内的母线
+    buses = net.bus[net.bus.st_name == substation_name]
+    # 收集变电站内的开关
+    switches = net.switch[net.switch.bus.isin(buses.index)]
+    transformers = net.load[net.load.bus.isin(buses.index)]
+    lines = net.line[
+        net.line.from_bus.isin(buses.index) | net.line.to_bus.isin(buses.index)
+    ]
+    equipment = {
+        "substation_nodes": [net.bus.name[bus] for bus in buses.index],  # 母线
+        "switches": {},  # 开关
+        "transformers": {},  # 变压器
+        "zone_lines": {},  # 线路
+    }
+    for _, switch in switches.iterrows():
+        equipment["switches"][switch["name"]] = {
+            "available": True,
+            "cost": 5 if "闸刀" in switch["name"] else 1,
+            "initial_state": 1 if switch["closed"] else 0,
+            "nodes": [net.bus.name[switch["element"]], net.bus.name[switch["bus"]]],
+            "switch_type": "switch" if "闸刀" in switch["name"] else "breaker",
+        }
+    for _, line in lines.iterrows():
+        try:
+            # print(line.from_st_name,line.to_st_name)
+            # print(substation_to_island[line.from_st_name],substation_to_island[line.to_st_name])
+            equipment["zone_lines"][line["name"]] = {
+                "available": True,
+                "conn_node": net.bus.name[line["from_bus"]] if line["from_bus"] not in buses.index else net.bus.name[line["to_bus"]], # 取对侧的node
+                "zone": list(substation_to_island[line.from_st_name])[0] if line.to_st_name == substation_name else list(substation_to_island[line.to_st_name])[0], #取对侧的
+            }
+        except:
+            pass
+    zone_set = set([equipment["zone_lines"][line]["zone"] for line in equipment["zone_lines"]])
+    for _, transformer in transformers.iterrows():
+        equipment["transformers"][transformer["name"]] = {
+            "conn_node": net.bus.name[transformer["bus"]],
+            "load": [transformer["p_mw"]]*4,
+            "sensitivity": dict(zip(zone_set, [1]*len(zone_set))),
+            "cost": dict(zip(zone_set, [100]*len(zone_set)))
+        } 
+    equipment["zones"] = list(zone_set)
+    return equipment
+
+
+def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
+    # 1. 找出所有电压等级大于等于500kV的母线
+    high_voltage_buses = net.bus[net.bus.vn_kv >= high_voltage_threshold].index.tolist()
+    print(
+        f"找到{len(high_voltage_buses)}个电压等级大于等于{high_voltage_threshold}kV的母线"
+    )
+
+    # 2. 创建一个不包含高压母线的网络图
+    mg = top.create_nxgraph(net, nogobuses=high_voltage_buses)
+
+    # 3. 找出所有的孤岛（连通组件）
+    islands = list(top.connected_components(mg))
+    print(f"移除高压母线后，网络中有{len(islands)}个孤岛")
+
+    # 4. 统计每个孤岛中包含"变电所"的母线信息
+    island_stats = {}
+    valid_island_count = 0
+
+    # 创建一个字典，用于存储每个母线所属的孤岛索引
+    bus_to_island = {}
+    for i, island in enumerate(islands):
+        for bus in island:
+            bus_to_island[int(bus)] = i
+            st_name = net.bus.st_name[bus]
+
+    for i, island in enumerate(islands):
+        # 获取该孤岛中的所有母线
+        island_buses = [int(bus) for bus in island]
+
+        # 找出名称中包含"变"的母线，并保留原始名称和ID
+        substation_buses = []
+        substation_names = []
+
+        for bus in island_buses:
+            if isinstance(net.bus.name[bus], str) and "变电所" in net.bus.name[bus]:
+                # 保存母线ID和名称
+                substation_buses.append({"id": int(bus), "name": net.bus.name[bus]})
+                # 提取变电站名称（用于生成供区名称）
+                substation_names.append(net.bus.name[bus])
+        # 只保留有变电站母线的孤岛
+        if len(substation_buses) > 0:
+            valid_island_count += 1
+
+            # 生成供区名称（变电所名称的组合）
+            area_name = (
+                "+".join(set([name.split("变")[0] for name in substation_names]))
+                + "供区"
+            )
+
+            # 按照area.json的格式构建数据
+            # 查找trafo3w中mv_bus在供区中的列表作为主变
+            transformer_list = []
+            for idx, trafo3w in net.trafo3w.iterrows():
+                if int(trafo3w.mv_bus) in island_buses:
+                    # 获取对应母线的名称
+                    bus_name = net.bus.name[trafo3w.mv_bus]
+                    if isinstance(bus_name, str) and trafo3w.vn_hv_kv == 500:
+                        transformer_list.append(
+                            {
+                                "id": int(idx),
+                                "name": str(net.trafo3w.name[idx]),
+                                "capacity": float(trafo3w.sn_mva),
+                            }
+                        )
+            # 保存孤岛信息
+            island_stats[area_name] = {
+                "主变": transformer_list,  # 使用trafo3w中mv_bus在供区中的列表作为主变列表
+                "变电所母线": substation_buses,  # 保留详细信息供参考
+                "联络变电站": {},
+                "island_index": i,  # 保存孤岛索引，用于后续识别联络变电站
+                "island_buses": island_buses,  # 保存孤岛中的所有母线，用于后续识别联络变电站
+            }
+    substation_to_island = defaultdict(set)
+    for k in island_stats.keys():
+        # 获取该孤岛中的所有母线
+        for bus in island_stats[k]["island_buses"]:
+            if net.bus.type[bus] == "b" and net.bus.vn_kv[bus] == 220:
+                st_name = net.bus.st_name[bus]
+                substation_to_island[st_name].add(k)
+    print(f"有效孤岛数量（包含变电所母线）: {valid_island_count}")
+    return island_stats, bus_to_island, islands, substation_to_island
+
+
+if __name__ == "__main__":
+    net = pp.from_sqlite("net.db")
+    print("network loaded")
+    # 分析网络，找出移除高压母线后的孤岛，并统计每个孤岛中包含"xx变"的母线
+    island_stats, bus_to_island, islands, substation_to_island = (
+        find_islands_without_high_voltage_buses(net)
+    )
+    # 识别联络变电站并收集相关设备信息
+    interconnection_substation_info = identify_interconnection_substations(
+        net, island_stats, bus_to_island, islands, substation_to_island
+    )
+    #去除各个供区的island_buses
+    for k in island_stats.keys():
+        del island_stats[k]["island_buses"]
+    # 保存结果到JSON文件
+    with open("area_statistics.json", "w", encoding="utf-8") as f:
+        json.dump(island_stats, f, ensure_ascii=False, indent=4)
+    print("\n结果已保存到area_statistics.json文件")

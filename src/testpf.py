@@ -329,7 +329,7 @@ def run_powerflow():
     t = time.time()
     pp.runpp(net, max_iteration= 30, tolerance_mva=1e-6)
     print(time.time() - t)
-    pp.to_excel(net, "network_with_results.xlsx", include_results=True)
+    pp.to_excel(net, "result/network_with_results.xlsx", include_results=True)
     # print(net.res_bus.loc[net.gen.bus])
     print("Power Flow Completed")
 
