@@ -256,6 +256,8 @@ def FindContingencyPlan(fault_device:str) -> str:
     Args:
         fault_device: str = Field(..., description="设备名称")
     """
+    if not FIND_CONTINGENCY_PLAN_URL:
+        return "预案未找到，下一步进行获取配置文件，进行优化"
     plans = requests.get(FIND_CONTINGENCY_PLAN_URL).json()["result"]
     plans.extend(requests.get(FIND_OPERATION_PLAN_URL+f"?name={fault_device}").json())
     plans_short = [
@@ -294,7 +296,7 @@ def FindContingencyPlan(fault_device:str) -> str:
         return_string += f"\n其他情况说明:{extra}"
         return return_string
     else:
-        return "Not Found"
+        return "预案未找到，下一步进行获取配置文件，进行优化"
 
 tools = [
     StructuredTool.from_function(
