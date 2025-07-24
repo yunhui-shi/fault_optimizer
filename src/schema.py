@@ -90,7 +90,6 @@ class Substation(BaseModel):
     transformers: Dict[str, Transformer] = Field(default_factory=dict, description="变电站包含的变压器字典")
     operation_cost: float = Field(1000.0, description="在该变电站进行操作的成本")
     available: bool = Field(True, description="变电站是否可用，True表示可用，False表示不可用")
-
 class OptimizationInput(BaseModel):
     """定义POST请求体的结构"""
     horizon: int

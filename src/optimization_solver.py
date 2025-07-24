@@ -25,6 +25,26 @@ def solve_dynamic_recovery_model(
     求解一个完整的多层级、基于连通性推断的电网负荷转移优化问题。
     此函数接收所有参数（包括开关成本），并返回一个包含结果的字典。
     """
+    # 数据校验，确保开关、节点、变压器、线路名称唯一性
+    switch_names,node_names,transformer_names,zone_line_names = set(),set(),set(),set()   
+    for sub_name, sub_data in substations.items():
+        for switch_name in sub_data['switches']:
+            if switch_name in switch_names:
+                raise ValueError(f"Switch name {switch_name} is not unique")
+            switch_names.add(switch_name)
+        for node_name in sub_data['nodes']:
+            if node_name in node_names:         
+                raise ValueError(f"Node name {node_name} is not unique")
+            node_names.add(node_name)
+        for transformer_name in sub_data.get('transformers', {}):
+            if transformer_name in transformer_names:
+                raise ValueError(f"Transformer name {transformer_name} is not unique")
+            transformer_names.add(transformer_name) 
+        for zone_line_name in sub_data.get('zone_lines', {}):
+            if zone_line_name in zone_line_names:
+                raise ValueError(f"Zone line name {zone_line_name} is not unique")
+            zone_line_names.add(zone_line_name)
+    
     # 从substations中提取数据，同时保留变电站映射关系
     transformers = {}
     zone_lines = {}
@@ -44,10 +64,7 @@ def solve_dynamic_recovery_model(
         transformers.update(sub_data.get('transformers', {}))
         # 提取供区线路
         zone_lines.update(sub_data.get('zone_lines', {}))
-    
-    # 去重节点列表
-    substation_nodes = list(set(substation_nodes))
-    
+
     model = Model("Hybrid_Connectivity_Inference_Transfer_With_Cost")
 
     # 参数和变量创建部分保持不变...
@@ -102,12 +119,12 @@ def solve_dynamic_recovery_model(
         u, v = sw["nodes"]
         for z_name in zones:
             model.addCons(f[u, v, z_name] + f[v, u, z_name] <= C * S[s_name])
-    for line_name, line_params in zone_lines.items(): #单条联络线不能带2变
-        for s_name, sw in switches.items():
-             u, v = sw["nodes"]
-             for z_name in zones:
-                if u == line_params['conn_node'] or v == line_params['conn_node']:
-                    model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 2)
+    # for line_name, line_params in zone_lines.items(): #单条联络线不能带2变
+    #     for s_name, sw in switches.items():
+    #          u, v = sw["nodes"]
+    #          for z_name in zones:
+    #             if u == line_params['conn_node'] or v == line_params['conn_node']:
+    #                 model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 2)
     # b) 流量守恒约束 
     for n in substation_nodes + list(zones.keys()):
         for z_name in zones:
@@ -244,7 +261,7 @@ def solve_dynamic_recovery_model(
         if switch_name in ops_sw:
             model.addCons(ops_sw[switch_name] <= substation_indicator[sub_name])
 
-    # 新目标：最小化加权的操作总成本
+    # 运行成本
     op_cost = quicksum(p['cost'] * (P_opt[g, t] + operating_units[g]['p_current']) for g,p in operating_units.items() for t in range(horizon)) + \
                quicksum(p['cost'] * P_bak[g, t] for g,p in backup_units.items() for t in range(horizon)) + \
                quicksum(p['cost'] * P_hydro[g, t] for g,p in hydro_units.items() for t in range(horizon)) + \

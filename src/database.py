@@ -188,12 +188,23 @@ class OptimizationDatabase:
                     id INTEGER PRIMARY KEY AUTOINCREMENT, -- 主键ID
                     config_id INTEGER NOT NULL, -- 配置ID，外键
                     substation_name TEXT NOT NULL, -- 变电站名称
-                    nodes TEXT NOT NULL, -- 变电站包含的节点列表，JSON数组格式
                     operation_cost REAL NOT NULL DEFAULT 1000.0, -- 在该变电站进行操作的成本
                     available INTEGER NOT NULL DEFAULT 1, -- 是否可用（0不可用，1可用）
                     FOREIGN KEY (config_id) REFERENCES optimization_configs(id),
                     UNIQUE(config_id, substation_name)
                 ) -- 变电站表，存储电力系统中的变电站基本信息
+            """)
+            
+            # 创建节点表
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS nodes (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, -- 主键ID
+                    config_id INTEGER NOT NULL, -- 配置ID，外键
+                    node_name TEXT NOT NULL, -- 节点名称
+                    substation_name TEXT NOT NULL, -- 所属变电站名称
+                    FOREIGN KEY (config_id) REFERENCES optimization_configs(id),
+                    UNIQUE(config_id, node_name)
+                ) -- 节点表，存储变电站包含的节点信息
             """)
             
             conn.commit()
@@ -206,7 +217,7 @@ class OptimizationDatabase:
             # 清空所有表
             tables = ['zones', 'transformers', 'switches', 'zone_lines', 'operating_units',
                      'backup_units', 'hydro_units', 'storage_units', 'interruptible_loads',
-                     'objectives', 'substations', 'optimization_configs']
+                     'objectives', 'nodes', 'substations', 'optimization_configs']
             
             for table in tables:
                 cursor.execute(f"DELETE FROM {table}")
@@ -229,11 +240,18 @@ class OptimizationDatabase:
             # 插入变电站数据
             for substation_name, substation_data in config_data['substations'].items():
                 cursor.execute("""
-                    INSERT INTO substations (config_id, substation_name, nodes, operation_cost, available)
-                    VALUES (?, ?, ?, ?, ?)
-                """, (config_id, substation_name, json.dumps(substation_data['nodes']),
+                    INSERT INTO substations (config_id, substation_name, operation_cost, available)
+                    VALUES (?, ?, ?, ?)
+                """, (config_id, substation_name,
                       substation_data.get('operation_cost', 1000.0),
                       1 if substation_data.get('available', True) else 0))
+                
+                # 插入变电站节点数据
+                for node_name in substation_data['nodes']:
+                    cursor.execute("""
+                        INSERT INTO nodes (config_id, node_name, substation_name)
+                        VALUES (?, ?, ?)
+                    """, (config_id, node_name, substation_name))
                 
                 # 插入变电站内的变压器数据
                 for transformer_name, transformer_data in substation_data.get('transformers', {}).items():
@@ -242,7 +260,7 @@ class OptimizationDatabase:
                         VALUES (?, ?, ?, ?, ?, ?, ?)
                     """, (config_id, transformer_name, json.dumps(transformer_data['load']),
                           transformer_data['conn_node'], json.dumps(transformer_data['sensitivity']),
-                          json.dumps(transformer_data['cost']), transformer_data.get('allocate')))
+                          json.dumps(transformer_data['cost']), transformer_data.get('allocate', None)))
                 
                 # 插入变电站内的开关数据
                 for switch_name, switch_data in substation_data.get('switches', {}).items():
@@ -356,15 +374,23 @@ class OptimizationDatabase:
             
             # 获取变电站数据
             cursor.execute("""
-                SELECT substation_name, nodes, operation_cost, available 
+                SELECT substation_name, operation_cost, available 
                 FROM substations WHERE config_id = ?
             """, (config_id,))
             
             substations = {}
-            for substation_name, nodes, operation_cost, available in cursor.fetchall():
+            for substation_name, operation_cost, available in cursor.fetchall():
+                # 获取变电站的节点数据
+                cursor.execute("""
+                    SELECT node_name FROM nodes 
+                    WHERE config_id = ? AND substation_name = ?
+                """, (config_id, substation_name))
+                
+                nodes = [row[0] for row in cursor.fetchall()]
+                
                 substations[substation_name] = {
                     'name': substation_name,
-                    'nodes': json.loads(nodes),
+                    'nodes': nodes,
                     'operation_cost': operation_cost,
                     'available': bool(available),
                     'switches': {},
