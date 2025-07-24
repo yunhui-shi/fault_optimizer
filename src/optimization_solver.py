@@ -396,14 +396,14 @@ def solve_dynamic_recovery_model(
                                 bus2 = edge[1]
                             bus_connection = power_graph.get_edge_data(bus1, bus2)
                             if not (bus_connection is None) and bus_connection['initial_state'] == 1:
-                                operations.append(f"{close_switch_name}【刀闸合闸】")
-                                print(f"1、{close_switch_name}【刀闸合闸】")
+                                operations.append(f"合上{close_switch_name}")
+                                print(f"1、合上{close_switch_name}")
                                 switches_operate[close_switch_name] = 0
-                                operations.append(f"{open_switch_name}【刀闸分闸】")
-                                print(f"1、{open_switch_name}【刀闸分闸】")
+                                operations.append(f"拉开{open_switch_name}")
+                                print(f"1、拉开{open_switch_name}")
                                 switches_operate[open_switch_name] = 0
                                 break
-        # 操作开关及其刀闸
+        # 操作合闸开关及其刀闸
         for breaker_name, operate in breakers_operate.items():
             if operate == 1:
                 # 找到需要分闸的开关，应与合闸开关两端的连通子图相连
@@ -425,16 +425,16 @@ def solve_dynamic_recovery_model(
                     if edge[2]['switch_type'] == 'switch':
                         switch_name = edge[2]['switch_name']
                         if switches_operate[switch_name] == 1:
-                            operations.append(f"{switch_name}【刀闸合闸】")
-                            print(f"2、{switch_name}【刀闸合闸】")
+                            operations.append(f"合上{switch_name}")
+                            print(f"2、合上{switch_name}")
                             switches_operate[switch_name] = 0
-                operations.append(f"{breaker_name}【开关合闸】")
-                print(f"2、{breaker_name}【开关合闸】")
+                operations.append(f"合上{breaker_name}")
+                print(f"2、合上{breaker_name}")
                 breakers_operate[breaker_name] = 0
                 # 分闸开关操作
                 if open_breaker != "notfind":
-                    operations.append(f"{open_breaker}【开关分闸】")
-                    print(f"3、{open_breaker}【开关分闸】")
+                    operations.append(f"拉开{open_breaker}")
+                    print(f"3、拉开{open_breaker}")
                     breakers_operate[open_breaker] = 0
                     # 若找到与开关相连的需分闸的刀闸，则分刀闸
                     # 获取与开关相连的所有边
@@ -445,9 +445,28 @@ def solve_dynamic_recovery_model(
                         if edge[2]['switch_type'] == 'switch':
                             switch_name = edge[2]['switch_name']
                             if switches_operate[switch_name] == 2:
-                                operations.append(f"{switch_name}【刀闸分闸】")
-                                print(f"3、{switch_name}【刀闸分闸】")
+                                operations.append(f"拉开{switch_name}")
+                                print(f"3、拉开{switch_name}")
                                 switches_operate[switch_name] = 0
+        # 操作分闸开关及其刀闸
+        for breaker_name, operate in breakers_operate.items():
+            if operate == 2:
+                # 分闸开关操作
+                operations.append(f"拉开{breaker_name}")
+                print(f"2、拉开{breaker_name}")
+                breakers_operate[breaker_name] = 0
+                # 若找到与开关相连的需分闸的刀闸，则分刀闸
+                # 获取与开关相连的所有边
+                u = edges[breaker_name][0]
+                v = edges[breaker_name][1]
+                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
+                for edge in connected_edges:
+                    if edge[2]['switch_type'] == 'switch':
+                        switch_name = edge[2]['switch_name']
+                        if switches_operate[switch_name] == 2:
+                            operations.append(f"拉开{switch_name}")
+                            print(f"4、拉开{switch_name}")
+                            switches_operate[switch_name] = 0
         # 进行最终状态母联开关闭合的双母线倒排操作
         for close_switch_name, operate in switches_operate.items():
             if operate == 1:
@@ -468,11 +487,11 @@ def solve_dynamic_recovery_model(
                                 bus2 = edge[1]
                             bus_connection = power_graph.get_edge_data(bus1, bus2)
                             if not (bus_connection is None) and breakers_operate[bus_connection['switch_name']] == 1:
-                                operations.append(f"{close_switch_name}【刀闸合闸】")
-                                print(f"1、{close_switch_name}【刀闸合闸】")
+                                operations.append(f"合上{close_switch_name}")
+                                print(f"1、合上{close_switch_name}")
                                 switches_operate[close_switch_name] = 0
-                                operations.append(f"{open_switch_name}【刀闸分闸】")
-                                print(f"1、{open_switch_name}【刀闸分闸】")
+                                operations.append(f"拉开{open_switch_name}")
+                                print(f"1、拉开{open_switch_name}")
                                 switches_operate[open_switch_name] = 0
                                 break
         # 备用机组开机情况
@@ -520,8 +539,8 @@ def solve_dynamic_recovery_model(
                 "变电站操作": substation_operations,
                 "变压器所属供区": final_transformer_assignment,
                 "供区供电裕度": final_zone_status,
-                "开关状态": final_switch_states,
-                "初始开关状态": initial_sw_states,
+                # "开关状态": final_switch_states,
+                # "初始开关状态": initial_sw_states,
                 "开关操作顺序": operations,
             }
         }
@@ -531,7 +550,7 @@ def solve_dynamic_recovery_model(
 
 if __name__ == "__main__":
     # Load the JSON data (in this case, we'll use the provided dictionary)
-    with open("power_system_test.json", "r", encoding='utf-8') as f:
+    with open("example/export.json", "r", encoding='utf-8') as f:
         json_data = json.load(f)
     input = OptimizationInput(**json_data)
     params = input.model_dump()
