@@ -179,6 +179,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                                 "id": int(idx),
                                 "name": str(net.trafo3w.name[idx]),
                                 "capacity": float(trafo3w.sn_mva),
+                                "p_current": None
                             }
                         )
             operating_generator_dict = {}
@@ -221,7 +222,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                 if int(storage.bus) in island_buses:
                     storage_units.append(
                         {
-                            "id": int(idx),
+                            "id": storage.st_id,
                             "name": str(net.gen.name[idx]),
                             "p_charge_max": float(storage.max_p_mw),
                             "p_discharge_max": float(storage.max_p_mw),
@@ -230,6 +231,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "soc_min": 0.2*float(storage.max_p_mw),
                             "p_current": float(storage.p_mw),
                             "st_name": storage.st_name,
+                            "st_id": storage.st_id
                         }
                     )
             # 按照st_name将储能单元的参数加总
