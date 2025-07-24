@@ -11,3 +11,6 @@ wheels/
 # Virtual environments
 .venv
 *.sh
+断面数据/
+.history/
+.env*

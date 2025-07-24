@@ -4,6 +4,7 @@ from typing import Dict, List, Optional, Tuple, Literal
 from enum import Enum
 import json
 
+import json
 class Zone(BaseModel):
     """区域定义，负荷变为时间序列"""
     capacity: float = Field(..., description="供区最大供电能力 (MW)")
@@ -105,4 +106,6 @@ class OptimizationInput(BaseModel):
     class Config:
         json_schema_extra = {
             "example": json.load(open("example/export.json"))
+        }
+            "example": json.loads(open("example/export.json","r",encoding="utf-8").read())
         }

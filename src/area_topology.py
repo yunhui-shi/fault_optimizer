@@ -205,7 +205,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "startup_cost": 1000
                         }
             hydro_generator_dict = {}
-            for idx, gen in net.gen[net.gen.type == "水电"].iterrows():
+            for idx, gen in net.gen[(net.gen.type == "水电") & (net.gen.p_mw < 5)].iterrows():
                 if int(gen.bus) in island_buses:
                     hydro_generator_dict[int(idx)] = {
                             "id": int(idx),
@@ -228,7 +228,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "soc_initial": 150,
                             "soc_max": 2*float(storage.max_p_mw),
                             "soc_min": 0.2*float(storage.max_p_mw),
-                            "p_current": 0.0,
+                            "p_current": float(storage.p_mw),
                             "st_name": storage.st_name,
                         }
                     )

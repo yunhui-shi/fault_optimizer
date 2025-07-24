@@ -107,7 +107,7 @@ def solve_dynamic_recovery_model(
              u, v = sw["nodes"]
              for z_name in zones:
                 if u == line_params['conn_node'] or v == line_params['conn_node']:
-                    model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 1.5)
+                    model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 2)
     # b) 流量守恒约束 
     for n in substation_nodes + list(zones.keys()):
         for z_name in zones:
