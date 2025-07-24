@@ -1,8 +1,8 @@
 # optimization_solver.py
 from pyscipopt import Model, quicksum
-from .schema import ObjectiveType, OptimizationInput
+from schema import ObjectiveType, OptimizationInput
 from datetime import datetime, timedelta
-from .topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
+from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
 import json
 
 def solve_dynamic_recovery_model(

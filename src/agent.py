@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 import logging
 import json
 import re
+import sys
 load_dotenv(".env.example")
 # Get API keys and endpoints from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

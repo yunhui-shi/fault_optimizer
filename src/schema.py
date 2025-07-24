@@ -105,7 +105,5 @@ class OptimizationInput(BaseModel):
 
     class Config:
         json_schema_extra = {
-            "example": json.load(open("example/export.json"))
-        }
             "example": json.loads(open("example/export.json","r",encoding="utf-8").read())
         }
