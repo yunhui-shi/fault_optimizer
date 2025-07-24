@@ -1,8 +1,8 @@
 # optimization_solver.py
 from pyscipopt import Model, quicksum
-from schema import ObjectiveType, OptimizationInput
+from .schema import ObjectiveType, OptimizationInput
 from datetime import datetime, timedelta
-from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
+from .topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
 import json
 
 def solve_dynamic_recovery_model(
@@ -10,11 +10,8 @@ def solve_dynamic_recovery_model(
     horizon: int,
     # 区域与负荷
     zones: dict,
-    zone_lines: dict,
-    transformers: dict, # 包含时序负荷和供电成本
     # 拓扑
-    substation_nodes: list,
-    switches: dict,
+    substations: dict,
     # 发电与储能
     operating_units: dict,
     backup_units: dict, # 包含启动成本
@@ -28,19 +25,29 @@ def solve_dynamic_recovery_model(
     求解一个完整的多层级、基于连通性推断的电网负荷转移优化问题。
     此函数接收所有参数（包括开关成本），并返回一个包含结果的字典。
     """
-    # # print all input
-    # print("horizon: ", horizon)
-    # print("zones: ", zones)
-    # print("zone_lines: ", zone_lines)
-    # print("transformers: ", transformers)
-    # print("substation_nodes: ", substation_nodes)
-    # print("switches: ", switches)
-    # print("operating_units: ", operating_units)
-    # print("backup_units: ", backup_units)
-    # print("hydro_units: ", hydro_units)
-    # print("storage_units: ", storage_units)
-    # print("interruptible_loads: ", interruptible_loads)
-    # print("objective: ", objective)
+    # 从substations中提取数据，同时保留变电站映射关系
+    transformers = {}
+    zone_lines = {}
+    switches = {}
+    substation_nodes = []
+    # 保存开关到变电站的映射关系
+    switch_to_substation = {}
+    
+    for sub_name, sub_data in substations.items():
+        # 提取节点
+        substation_nodes.extend(sub_data['nodes'])
+        # 提取开关并记录映射关系
+        for switch_name, switch_data in sub_data['switches'].items():
+            switches[switch_name] = switch_data
+            switch_to_substation[switch_name] = sub_name
+        # 提取变压器
+        transformers.update(sub_data.get('transformers', {}))
+        # 提取供区线路
+        zone_lines.update(sub_data.get('zone_lines', {}))
+    
+    # 去重节点列表
+    substation_nodes = list(set(substation_nodes))
+    
     model = Model("Hybrid_Connectivity_Inference_Transfer_With_Cost")
 
     # 参数和变量创建部分保持不变...
@@ -59,6 +66,8 @@ def solve_dynamic_recovery_model(
     is_energized_by = {n: model.addVar(vtype="I", lb=0, ub=len(zones), name=f"is_energized_by_{n}") for n in substation_nodes}
     S = {name: model.addVar(vtype="B", name=f"S_{name}") for name in switches}
     ops_sw = {name: model.addVar(vtype="B", name=f"op_sw_{name}") for name in S}
+    # 变电站指示变量：如果为1表示在该变电站进行操作，为0表示不在该变电站操作
+    substation_indicator = {sub_name: model.addVar(vtype="B", name=f"sub_indicator_{sub_name}") for sub_name in substations}
     y = { (t_name, z_name): model.addVar(vtype="B", name=f"y_{t_name}_{z_name}") for t_name in transformers for z_name in zones}
     directed_edges = []
     for name, sw in switches.items(): 
@@ -229,6 +238,11 @@ def solve_dynamic_recovery_model(
             model.addCons(ops_sw[name] >= s_var)
         else: 
             model.addCons(ops_sw[name] >= 1 - s_var)
+    
+    # 变电站指示变量约束：如果变电站指示变量为0，则该变电站内所有开关操作变量都为0
+    for switch_name, sub_name in switch_to_substation.items():
+        if switch_name in ops_sw:
+            model.addCons(ops_sw[switch_name] <= substation_indicator[sub_name])
 
     # 新目标：最小化加权的操作总成本
     op_cost = quicksum(p['cost'] * (P_opt[g, t] + operating_units[g]['p_current']) for g,p in operating_units.items() for t in range(horizon)) + \
@@ -237,13 +251,16 @@ def solve_dynamic_recovery_model(
                quicksum(p['startup_cost'] * v_bak_startup[g, t] for g, p in backup_units.items()) + \
                quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] * transformers[t_name]['cost'][z_name] for t_name in transformers for z_name in zones)
     load_shedding_cost = quicksum(p['cost'] * P_shed[il, t] for il, p in interruptible_loads.items() for t in range(horizon))
+    # 变电站操作成本
+    substation_operation_cost = quicksum(substation_indicator[sub_name] * sub_params['operation_cost'] for sub_name, sub_params in substations.items())
+    
     # 根据目标类型设置单一目标函数（3选1）
     print(f"Optimization objective: {objective}")
     eps = 1e-4
-    obj_expr = eps * (quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) - min_safety_region + op_cost/max([p['cost']*p['p_max'] for p in operating_units.values()]))
+    obj_expr = eps * (quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) - min_safety_region + op_cost/max([p['cost']*p['p_max'] for p in operating_units.values()]) + substation_operation_cost)
     if objective == ObjectiveType.MIN_SWITCH_OP:
-        # 最小化开关操作成本
-        obj_expr += quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S)
+        # 最小化开关操作成本 + 变电站操作成本
+        obj_expr += quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) + substation_operation_cost
     elif objective == ObjectiveType.MAX_SAFETY_REGION:
         # 最大化安全裕度（转换为最小化负的安全裕度）
         obj_expr += -min_safety_region  # 将比值转化为百分数
@@ -448,6 +465,19 @@ def solve_dynamic_recovery_model(
                 if model.getVal(v_bak_startup[g,t]) == 1:
                     backup_unit_commitment += f"{g}在时段{(datetime.now() + timedelta(hours=t)).strftime("%H:%M")}开机\n"
                     break
+        
+        # 变电站操作信息
+        substation_operations = []
+        total_substation_cost = 0
+        for sub_name, sub_params in substations.items():
+            if model.getVal(substation_indicator[sub_name]) > 0.5:
+                operated_switches = [sw_name for sw_name in sub_params['switches'] if any(op['switch_name'] == sw_name for op in switch_operations)]
+                substation_operations.append({
+                    "substation_name": sub_name,
+                    "operation_cost": sub_params['operation_cost'],
+                    "switches_operated": operated_switches
+                })
+                total_substation_cost += sub_params['operation_cost']
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
@@ -455,7 +485,9 @@ def solve_dynamic_recovery_model(
             "summary": {
                 "operation_cost": round(model.getVal(op_cost), 4),
                 "safety_region_percent": round(model.getVal(min_safety_region)*100, 2),
-                "total_operations_count": op_count
+                "total_operations_count": op_count,
+                "substations_operated_count": len(substation_operations),
+                "total_substation_cost": total_substation_cost
             },
             "results": {
                 "调度时段": [f"{(datetime.now() + timedelta(hours=t)).strftime('%H:%M')}" for t in range(horizon)],
@@ -468,6 +500,7 @@ def solve_dynamic_recovery_model(
                 "备用机组开机计划": backup_unit_commitment,
                 "机组出力计划": final_dispatch_plan,
                 "开关操作": switch_operations,
+                "变电站操作": substation_operations,
                 "变压器所属供区": final_transformer_assignment,
                 "供区供电裕度": final_zone_status,
                 "开关状态": final_switch_states,
