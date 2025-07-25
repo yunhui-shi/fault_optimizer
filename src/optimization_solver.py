@@ -432,7 +432,7 @@ def solve_dynamic_recovery_model(
                 print(f"2、合上{breaker_name}")
                 breakers_operate[breaker_name] = 0
                 # 分闸开关操作
-                if open_breaker != "notfind":
+                if open_breaker != "not_find":
                     operations.append(f"拉开{open_breaker}")
                     print(f"3、拉开{open_breaker}")
                     breakers_operate[open_breaker] = 0
