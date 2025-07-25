@@ -30,7 +30,7 @@
             ]
         },
         "双龙变供区": {
-            "capacity": 350,
+            "capacity": 750,
             "fixed_load": [
                 1300,
                 1350,
@@ -346,7 +346,7 @@
     "hydro_units": {},
     "storage_units": {
         "欣元储能站": {
-            "zone": "双龙变供区", "p_charge_max": 199.98, "p_discharge_max": 199.98, "soc_min": 20, "soc_max": 200, "soc_initial": 150, "sensitivity": 1, "p_current": 0
+            "zone": "双龙变供区", "p_charge_max": 199.98, "p_discharge_max": 199.98, "soc_min": 20, "soc_max": 200, "soc_initial": 150, "sensitivity": 1, "p_current": 0, "available": true
         }
     },
     "interruptible_loads": {

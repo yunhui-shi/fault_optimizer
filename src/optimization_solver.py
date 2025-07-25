@@ -64,7 +64,8 @@ def solve_dynamic_recovery_model(
         transformers.update(sub_data.get('transformers', {}))
         # 提取供区线路
         zone_lines.update(sub_data.get('zone_lines', {}))
-
+    # 过滤掉不可用的储能
+    storage_units = {es: p for es, p in storage_units.items() if p["available"]}
     model = Model("Hybrid_Connectivity_Inference_Transfer_With_Cost")
 
     # 参数和变量创建部分保持不变...
@@ -119,12 +120,12 @@ def solve_dynamic_recovery_model(
         u, v = sw["nodes"]
         for z_name in zones:
             model.addCons(f[u, v, z_name] + f[v, u, z_name] <= C * S[s_name])
-    # for line_name, line_params in zone_lines.items(): #单条联络线不能带2变
-    #     for s_name, sw in switches.items():
-    #          u, v = sw["nodes"]
-    #          for z_name in zones:
-    #             if u == line_params['conn_node'] or v == line_params['conn_node']:
-    #                 model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 2)
+    for line_name, line_params in zone_lines.items(): #单条联络线不能带2变
+        for s_name, sw in switches.items():
+             u, v = sw["nodes"]
+             for z_name in zones:
+                if u == line_params['conn_node'] or v == line_params['conn_node']:
+                    model.addCons(f[u, v, z_name] + f[v, u, z_name] <= 2)
     # b) 流量守恒约束 
     for n in substation_nodes + list(zones.keys()):
         for z_name in zones:
@@ -265,7 +266,7 @@ def solve_dynamic_recovery_model(
     op_cost = quicksum(p['cost'] * (P_opt[g, t] + operating_units[g]['p_current']) for g,p in operating_units.items() for t in range(horizon)) + \
                quicksum(p['cost'] * P_bak[g, t] for g,p in backup_units.items() for t in range(horizon)) + \
                quicksum(p['cost'] * P_hydro[g, t] for g,p in hydro_units.items() for t in range(horizon)) + \
-               quicksum(p['startup_cost'] * v_bak_startup[g, t] for g, p in backup_units.items()) + \
+               quicksum(p['startup_cost'] * v_bak_startup[g, t] for g, p in backup_units.items() for t in range(horizon)) + \
                quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] * transformers[t_name]['cost'][z_name] for t_name in transformers for z_name in zones)
     load_shedding_cost = quicksum(p['cost'] * P_shed[il, t] for il, p in interruptible_loads.items() for t in range(horizon))
     # 变电站操作成本
@@ -531,7 +532,7 @@ def solve_dynamic_recovery_model(
 
 if __name__ == "__main__":
     # Load the JSON data (in this case, we'll use the provided dictionary)
-    with open("power_system_test.json", "r", encoding='utf-8') as f:
+    with open("example/export.json", "r", encoding='utf-8') as f:
         json_data = json.load(f)
     input = OptimizationInput(**json_data)
     params = input.model_dump()

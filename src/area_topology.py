@@ -95,12 +95,117 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
         try:
             # print(line.from_st_name,line.to_st_name)
             # print(substation_to_island[line.from_st_name],substation_to_island[line.to_st_name])
-            equipment["zone_lines"][line["name"]] = {
-                "available": True,
-                "conn_node": net.bus.name[line["from_bus"]] if line["from_bus"] not in buses.index else net.bus.name[line["to_bus"]], # 取对侧的node
-                "zone": list(substation_to_island[line.from_st_name])[0] if line.to_st_name == substation_name else list(substation_to_island[line.to_st_name])[0], #取对侧的
-            }
-        except:
+            
+            # 确定线路的本侧和对侧母线
+            local_bus = line["from_bus"] if line["from_bus"] in buses.index else line["to_bus"]
+            remote_bus = line["from_bus"] if line["from_bus"] not in buses.index else line["to_bus"]
+            
+            # 获取对侧母线名称（虚拟母线b）
+            remote_bus_name = net.bus.name[remote_bus]
+            
+            # 查找从虚拟母线b出发，通过开关连接到其他母线的路径
+            final_bus_name = remote_bus_name  # 默认使用对侧母线名称
+            
+            # 查找连接到对侧母线的闸刀
+            connected_switches = net.switch[(net.switch.bus == remote_bus) | (net.switch.element == remote_bus)]
+            connected_switches = connected_switches[connected_switches['name'].str.contains('闸刀', na=False)]
+            
+            # 如果找到连接的闸刀，继续查找连接到的下一个母线（虚拟母线c）
+            if not connected_switches.empty and len(connected_switches) == 1:  # 确保只有一把闸刀
+                switch = connected_switches.iloc[0]  # 获取唯一的闸刀
+                # 确定闸刀连接的另一端母线
+                next_bus = switch["element"] if switch["bus"] == remote_bus else switch["bus"]
+                if next_bus != remote_bus and net.bus.loc[next_bus, "st_name"] != substation_name:
+                    # 找到了虚拟母线c
+                    bus_c = next_bus
+                    bus_c_name = net.bus.name[bus_c]
+                    
+                    # 继续查找连接到虚拟母线c的开关（非闸刀）
+                    c_connected_switches = net.switch[(net.switch.bus == bus_c) | (net.switch.element == bus_c)]
+                    c_connected_switches = c_connected_switches[~c_connected_switches['name'].str.contains('闸刀', na=False)]
+                    
+                    # 如果找到连接的开关，且只有一个开关，继续查找连接到的下一个母线（虚拟母线d）
+                    if not c_connected_switches.empty and len(c_connected_switches) == 1:  # 确保只有一个开关
+                        c_switch = c_connected_switches.iloc[0]  # 获取唯一的开关
+                        # 确定开关连接的另一端母线
+                        bus_d = c_switch["element"] if c_switch["bus"] == bus_c else c_switch["bus"]
+                        if bus_d != bus_c and net.bus.loc[bus_d, "st_name"] != substation_name:
+                            # 找到了虚拟母线d
+                            final_bus_name = net.bus.name[bus_d]
+                    else:
+                        # 如果没有找到连接到虚拟母线c的开关，或者开关数量不为1，使用虚拟母线c作为最终母线
+                        final_bus_name = bus_c_name
+            
+            # 获取对侧变电站的供区，添加错误处理以避免list index out of range错误
+            try:
+                if line.to_st_name == substation_name:
+                    # 对侧是from_st_name
+                    if line.from_st_name in substation_to_island and substation_to_island[line.from_st_name]:
+                        zone = list(substation_to_island[line.from_st_name])[0]
+                    else:
+                        # 如果对侧变电站没有对应的供区，跳过此线路
+                        continue
+                else:
+                    # 对侧是to_st_name
+                    if line.to_st_name in substation_to_island and substation_to_island[line.to_st_name]:
+                        zone = list(substation_to_island[line.to_st_name])[0]
+                    else:
+                        # 如果对侧变电站没有对应的供区，跳过此线路
+                        continue
+                
+                equipment["zone_lines"][line["name"]] = {
+                    "available": True,
+                    "conn_node": final_bus_name,  # 使用找到的最终母线作为conn_node
+                    "zone": zone, #取对侧的
+                }
+            except Exception as e:
+                print(f"处理线路 {line['name']} 的供区时出错: {str(e)}")
+                continue
+            
+            # 将找到的虚拟母线b、c、d及其连接的开关添加到设备中
+            # 添加虚拟母线b到设备中
+            if remote_bus_name not in equipment["substation_nodes"]:
+                equipment["substation_nodes"].append(remote_bus_name)
+            
+            # 如果找到了闸刀和虚拟母线c，将它们添加到设备中
+            if not connected_switches.empty and len(connected_switches) == 1:
+                switch = connected_switches.iloc[0]
+                # 添加闸刀到设备中
+                if switch["name"] not in equipment["switches"]:
+                    equipment["switches"][switch["name"]] = {
+                        "available": True,
+                        "cost": 5,  # 闸刀成本
+                        "initial_state": 1 if switch["closed"] else 0,
+                        "nodes": [net.bus.name[switch["element"]], net.bus.name[switch["bus"]]],
+                        "switch_type": "switch"
+                    }
+                
+                # 添加虚拟母线c到设备中
+                # 在这里，我们已经确定了bus_c和bus_c_name变量存在，因为它们是在上面的代码中定义的
+                if bus_c_name not in equipment["substation_nodes"]:
+                    equipment["substation_nodes"].append(bus_c_name)
+                
+                # 如果找到了开关和虚拟母线d，将它们添加到设备中
+                # 我们已经确定了c_connected_switches变量存在，因为它是在上面的代码中定义的
+                if not c_connected_switches.empty and len(c_connected_switches) == 1:
+                    c_switch = c_connected_switches.iloc[0]
+                    # 添加开关到设备中
+                    if c_switch["name"] not in equipment["switches"]:
+                        equipment["switches"][c_switch["name"]] = {
+                            "available": True,
+                            "cost": 1,  # 开关成本
+                            "initial_state": 1 if c_switch["closed"] else 0,
+                            "nodes": [net.bus.name[c_switch["element"]], net.bus.name[c_switch["bus"]]],
+                            "switch_type": "breaker"
+                        }
+                    
+                    # 添加虚拟母线d到设备中
+                    # 在这里，我们已经确定了bus_d变量存在，因为它是在上面的代码中定义的
+                    if net.bus.name[bus_d] not in equipment["substation_nodes"]:
+                        equipment["substation_nodes"].append(net.bus.name[bus_d])
+            
+        except Exception as e:
+            print(f"处理线路 {line['name']} 时出错: {str(e)}")
             pass
     zone_set = set([equipment["zone_lines"][line]["zone"] for line in equipment["zone_lines"]])
     for _, transformer in transformers.iterrows():
@@ -182,6 +287,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                                 "p_current": None
                             }
                         )
+            # if len(transformer_list) <= 2:
+            #     print(transformer_list)
             operating_generator_dict = {}
             for idx, gen in net.gen[net.gen.type.isin(["煤","天然气"]) & (net.gen.p_mw >= 5)].iterrows():
                 if int(gen.bus) in island_buses:

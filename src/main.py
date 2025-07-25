@@ -143,6 +143,13 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
     - **返回**: 包含该设备所在供区数据的OptimizationInput对象
     """
     try:
+        # 导入update_network模块
+        from update_network import update_network_for_small_areas
+        
+        # 更新网络配置（当供区主变数量≤2时）
+        logging.info(f"检查供区 {target_area} 是否需要更新网络配置...")
+        update_network_for_small_areas(target_area)
+        
         # 读取area_statistics.json文件
         with open("result/area_statistics.json", "r", encoding="utf-8") as f:
             area_stats = json.load(f)
@@ -160,7 +167,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                 status_code=400,
                 detail=f"设备类型 {device_type} 暂不支持"
             )
-    # 使用process.extractOne找到最相似的设备，并直接获取其所属供区
+        # 使用process.extractOne找到最相似的设备，并直接获取其所属供区
         best_match, score = process.extractOne(
             device_name, 
             all_devices.keys(), 
@@ -179,7 +186,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         
         # 提取目标供区的数据，组装成OptimizationInput格式
         area_data = area_stats[target_area]
-        
+        # 替换area_data中的量测为实际数据
         # 构建OptimizationInput对象
         optimization_input = {
             "horizon": 4,  # 默认时间步长为4
