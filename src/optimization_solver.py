@@ -575,7 +575,7 @@ if __name__ == "__main__":
     # with open("example/export.json", "r", encoding='utf-8') as f:
     #     json_data = json.load(f)
     from main import get_optimization_boundary
-    json_data = get_optimization_boundary(device_name="妙西变1号主变",device_type="主变")
+    json_data = get_optimization_boundary(device_name="丹溪变1号主变",device_type="主变")
     with open("example/export.json", "w", encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=4)
     input = OptimizationInput(**json_data)

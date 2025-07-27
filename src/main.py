@@ -19,6 +19,7 @@ import pandapower as pp
 from power_flow import create_network, run_powerflow
 from area_topology import find_islands_without_high_voltage_buses, identify_interconnection_substations
 from dotenv import load_dotenv
+from collections import defaultdict
 load_dotenv(".env.example")
 for key,value in os.environ.items():
     logging.info(f"{key}:{value}") #print to stdout
@@ -195,7 +196,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         area_data = area_stats[target_area]
         
         # 尝试调用接口获取量测
-        meas_data = {}
+        meas_data = defaultdict(dict)
         try:
             api_url = os.getenv("MEAS_URL")
             payload = meas_request_data(area_data)
@@ -302,7 +303,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         # 添加zones数据
         for zone_name, zone_data in area_data.get("zones", {}).items():
             zone_capacity = sum(transformer.get("capacity", 0) for transformer in zone_data.get("capacity", []))
-            zone_fix_load = 1800
+            zone_fix_load = 1000
             zone_var_load = sum(area_data["联络变电站"][st]["transformers"][tr]["load"][0] for st in area_data["联络变电站"] for tr in area_data["联络变电站"][st]["transformers"]) if zone_name == target_area else 0
             print(zone_var_load)
             # 去除device_name对应的主变、以及剩下最大一台主变的容量
