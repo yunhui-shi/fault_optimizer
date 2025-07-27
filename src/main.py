@@ -13,6 +13,13 @@ from agent import agent_executor
 import logging,os
 # 导入模糊匹配库
 from fuzzywuzzy import fuzz, process
+import requests
+from datetime import datetime, timedelta
+import pandapower as pp
+from power_flow import create_network, run_powerflow
+from area_topology import find_islands_without_high_voltage_buses, identify_interconnection_substations
+from dotenv import load_dotenv
+load_dotenv(".env.example")
 for key,value in os.environ.items():
     logging.info(f"{key}:{value}") #print to stdout
 
@@ -186,7 +193,99 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         print(target_area)
         # 提取目标供区的数据，组装成OptimizationInput格式
         area_data = area_stats[target_area]
-        # 替换area_data中的量测为实际数据
+        
+        # 尝试调用接口获取量测
+        meas_data = {}
+        try:
+            api_url = os.getenv("MEAS_URL")
+            payload = meas_request_data(area_data)
+            headers = {
+                "Content-Type": "application/json"
+            }
+            print(payload)
+            print()
+            current_time = datetime.now() - timedelta(minutes=5)
+            adj_min = (current_time.minute // 5) * 5
+            current_min = datetime.now().replace(minute=adj_min, second=0, microsecond=0)
+            dataTime = current_min.strftime("%Y-%m-%d %H:%M:%S")
+            params = {
+                "dataTime": dataTime
+            }
+            response = requests.post(api_url, params=params, json=payload, headers=headers, timeout=10)
+            # 检查响应状态码是否为2xx
+            if response.status_code // 100 == 2:
+                # API调用成功，处理返回的数据
+                meas_data = response.json()
+            else:
+                # API调用失败，使用默认数据
+                print(f"API调用失败（状态码: {response.status_code}）")
+        except requests.exceptions.RequestException as e:
+            # 网络错误或超时，使用默认数据
+            print(f"API调用异常（{str(e)}）")
+        except Exception as e:
+            print(f"获取量测数据时发生错误: {str(e)}")
+        print(meas_data)
+        # 主变量测赋值
+        for tr in meas_data['tr']:
+            target_id = tr['transfm_id']
+            new_p_current = tr['val'] if tr['val'] is not None else 0
+            if "主变" in area_data and isinstance(area_data["主变"], list):
+                for item in area_data["主变"]:
+                    if "id" in item and str(item["id"]) == target_id:
+                        if "p_current" in item:
+                            item["p_current"] = new_p_current
+            # zones量测赋值
+            if "zones" in area_data and isinstance(area_data["zones"], dict):
+                for zone_name, zone_data in area_data["zones"].items():
+                    if "capacity" in zone_data and isinstance(zone_data["capacity"], list):
+                        for item in zone_data["capacity"]:
+                            if "id" in item and str(item["id"]) == target_id:
+                                if "p_current" in item:
+                                    item["p_current"] = new_p_current
+    
+        # operating_units、backup_units、hydro_units量测赋值
+        for unit in meas_data['units']:
+            target_id = unit['id']
+            new_p_current = unit['val'] if unit['val'] is not None else 0
+            if "operating_units" in area_data and isinstance(area_data["operating_units"], dict):
+                for unit_id, unit_data in area_data["operating_units"].items():
+                    if "id" in unit_data and str(unit_data["id"]) == target_id:
+                        if "p_current" in unit_data:
+                            unit_data["p_current"] = new_p_current if new_p_current is not None else 0
+        
+            if "backup_units" in area_data and isinstance(area_data["backup_units"], dict):
+                for unit_id, unit_data in area_data["backup_units"].items():
+                    if "id" in unit_data and str(unit_data["id"]) == target_id:
+                        if "p_current" in unit_data:
+                            unit_data["p_current"] = new_p_current if new_p_current is not None else 0
+       
+            if "hydro_units" in area_data and isinstance(area_data["hydro_units"], dict):
+                for unit_id, unit_data in area_data["hydro_units"].items():
+                    if "id" in unit_data and str(unit_data["id"]) == target_id:
+                        if "p_current" in unit_data:
+                            unit_data["p_current"] = new_p_current if new_p_current is not None else 0
+        
+        # storage_units量测赋值
+        for plant in meas_data['plant']:
+            target_id = plant['id']
+            new_p_current = plant['val'] if plant['val'] is not None else 0
+            if "storage_units" in area_data and isinstance(area_data["storage_units"], dict):
+                for unit_name, unit_data in area_data["storage_units"].items():
+                    if "st_id" in unit_data and unit_data["st_id"] == target_id:
+                        if "p_current" in unit_data:
+                            unit_data["p_current"] = new_p_current if new_p_current is not None else 0
+
+        # 设置zones的fix_load
+        for zone_name, zone_data in area_data["zones"].items():
+            total_p_current = 0.0
+            # 计算capacity中所有p_current的和
+            if "capacity" in zone_data and isinstance(zone_data["capacity"], list):
+                for item in zone_data["capacity"]:
+                    if "p_current" in item and item["p_current"] is not None:
+                        total_p_current += item["p_current"]
+            # 将结果赋值给fixed_load
+            zone_data["fixed_load"] = [total_p_current] * 4
+
         # 构建OptimizationInput对象
         optimization_input = {
             "horizon": 4,  # 默认时间步长为4
@@ -276,6 +375,80 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"服务器内部错误: {str(e)}")
 
+# 生成量测数据请求payload
+def meas_request_data(data):
+    result = {
+        "tr": [str(item["id"]) for item in data["主变"]] + [str(zone["id"]) for zone in sum([item["capacity"] for item in data["zones"].values()], []) if "id" in zone],
+        "units": list(data["operating_units"].keys()) + list(data["backup_units"].keys()) + list(data["hydro_units"].keys()),
+        "plant": [unit["st_id"] for unit in data["storage_units"].values()]
+    }
+    return result
+
+def get_power_grid_data():
+    """
+    获取电网全量数据，用于后续分析
+    """
+    try:
+        # 尝试调用API接口获取电网数据
+        api_url = os.getenv("POWER_FLOW_URL")
+        current_hour = datetime.now().replace(minute=0, second=0, microsecond=0)
+        dataTime = current_hour.strftime("%Y-%m-%d %H:%M:%S")
+        params = {
+            "dataTime": dataTime
+        }
+        response = requests.post(api_url, params=params, timeout=180)
+        # 检查响应状态码是否为2xx
+        if response.status_code // 100 == 2:
+            # API调用成功，处理返回的数据
+            pf_data = response.json()
+            net = create_network(pf_data)
+            # net = pp.from_sqlite("net.db")
+            print("network loaded")
+            # 分析网络，找出移除高压母线后的孤岛，并统计每个孤岛中包含"xx变"的母线
+            island_stats, bus_to_island, islands, substation_to_island = (
+                find_islands_without_high_voltage_buses(net)
+            )
+            # 识别联络变电站并收集相关设备信息
+            interconnection_substation_info = identify_interconnection_substations(
+                net, island_stats, bus_to_island, islands, substation_to_island
+            )
+            #去除各个供区的island_buses
+            for k in island_stats.keys():
+                del island_stats[k]["island_buses"]
+            # 保存结果到JSON文件
+            with open("result/area_statistics.json", "w", encoding="utf-8") as f:
+                json.dump(island_stats, f, ensure_ascii=False, indent=4)
+            # 修改文件格式
+            return f"成功从API获取到电网数据\n结果已保存到result/area_statistics.json文件"
+        else:
+            # API调用失败，使用默认数据
+            return f"API调用失败（状态码: {response.status_code}）"
+    except requests.exceptions.RequestException as e:
+        # 网络错误或超时，使用默认数据
+        return f"API调用异常（{str(e)}）"
+    except Exception as e:
+        return f"获取电网数据时发生错误: {str(e)}"
+
+import threading
+import time
+
+def periodic_task(interval, func, *args, **kwargs):
+    """周期执行函数
+    :param interval: 间隔时间(秒)
+    :param func: 要执行的函数
+    """
+    def wrapper():
+        while not event.is_set():
+            func(*args, **kwargs)
+            time.sleep(interval)
+    
+    event = threading.Event()
+    thread = threading.Thread(target=wrapper)
+    thread.daemon = True  # 主线程退出时自动停止
+    thread.start()
+    return event  # 返回控制句柄
+
 if __name__ == "__main__":
     import uvicorn
+    stop_event = periodic_task(3600, get_power_grid_data)  # 每30分钟执行一次，获取全量潮流数据
     uvicorn.run(app, host="0.0.0.0", port=8001)
