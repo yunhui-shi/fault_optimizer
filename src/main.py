@@ -144,11 +144,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
     """
     try:
         # 导入update_network模块
-        from update_network import update_network_for_small_areas
-        
-        # 更新网络配置（当供区主变数量≤2时）
-        logging.info(f"检查供区 {target_area} 是否需要更新网络配置...")
-        update_network_for_small_areas(target_area)
+        # from update_network import update_network_for_small_areas
         
         # 读取area_statistics.json文件
         with open("result/area_statistics.json", "r", encoding="utf-8") as f:
@@ -177,13 +173,17 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         # 直接从匹配结果获取供区
         target_area = all_devices[best_match] if best_match else None
         
+        # # 更新网络配置（当供区主变数量≤2时）
+        # logging.info(f"检查供区 {target_area} 是否需要更新网络配置...")
+        # update_network_for_small_areas(target_area)
+        
         # 如果没有找到对应的供区，返回错误
         if not target_area:
             raise HTTPException(
                 status_code=404,
                 detail=f"未找到设备 {device_name} ({device_type}) 所在的供区"
             )
-        
+        print(target_area)
         # 提取目标供区的数据，组装成OptimizationInput格式
         area_data = area_stats[target_area]
         # 替换area_data中的量测为实际数据
@@ -192,7 +192,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             "horizon": 4,  # 默认时间步长为4
             "zones": {},
             "substations": {},
-            "objective": "MIN_SWITCH_OP",
+            "objective": "minimize_switch_operation",
             "operating_units": area_data.get("operating_units", {}),
             "backup_units": area_data.get("backup_units", {}),
             "hydro_units": area_data.get("hydro_units", {}),
@@ -203,6 +203,9 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         # 添加zones数据
         for zone_name, zone_data in area_data.get("zones", {}).items():
             zone_capacity = sum(transformer.get("capacity", 0) for transformer in zone_data.get("capacity", []))
+            zone_fix_load = 1800
+            zone_var_load = sum(area_data["联络变电站"][st]["transformers"][tr]["load"][0] for st in area_data["联络变电站"] for tr in area_data["联络变电站"][st]["transformers"]) if zone_name == target_area else 0
+            print(zone_var_load)
             # 去除device_name对应的主变、以及剩下最大一台主变的容量
             if zone_name == target_area:
                 for transformer in area_data["主变"]:
@@ -214,17 +217,22 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                     zone_capacity -= max(transformer.get("capacity", 0) for transformer in remaining_transformers)
             optimization_input["zones"][zone_name] = {
                 "capacity": zone_capacity,
-                "fixed_load": zone_data.get("fixed_load", [])
+                "fixed_load": [zone_fix_load - zone_var_load]*4
             }
         
         # 添加substations数据
+        # exclude_substation = ["汤溪变","华金变"]
         for substation_name, substation_data in area_data.get("联络变电站", {}).items():
+            # if substation_name in exclude_substation:
+            #     continue
             # 构建变电站数据
             substation = {
+                "name": substation_name,
+                "nodes": substation_data.get("nodes"),
                 "transformers": {},
                 "switches": {},
                 "zone_lines": {},
-                "operation_cost": 1000.0,
+                "operation_cost": 20.0,
                 "available": True
             }
             
@@ -233,12 +241,14 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                 substation["transformers"][transformer_name] = {
                     "conn_node": transformer_data.get("conn_node"),
                     "load": transformer_data.get("load"),
-                    "sensitivity": transformer_data.get("sensitivity", {}),
-                    "cost": transformer_data.get("cost", {})
+                    "sensitivity": transformer_data.get("sensitivity", dict([(zone_name,1) for zone_name in optimization_input["zones"].keys()])),
+                    "cost": transformer_data.get("cost", dict([(zone_name,100) for zone_name in optimization_input["zones"].keys()]))
                 }
                 
             # 添加开关数据
             for switch_name, switch_data in substation_data.get("switches", {}).items():
+                if any(keyword in switch_name for keyword in ["中性点","隔直"]):
+                    continue
                 substation["switches"][switch_name] = {
                     "available": switch_data.get("available", True),
                     "cost": switch_data.get("cost", 1),
@@ -246,7 +256,6 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                     "nodes": switch_data.get("nodes", []),
                     "switch_type": switch_data.get("switch_type", "breaker")
                 }
-                
             # 添加线路数据
             for line_name, line_data in substation_data.get("zone_lines", {}).items():
                 substation["zone_lines"][line_name] = {

@@ -2,7 +2,7 @@
 from pyscipopt import Model, quicksum
 from schema import ObjectiveType, OptimizationInput
 from datetime import datetime, timedelta
-from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus
+from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus, analyze_components
 import json
 
 def solve_dynamic_recovery_model(
@@ -26,25 +26,24 @@ def solve_dynamic_recovery_model(
     此函数接收所有参数（包括开关成本），并返回一个包含结果的字典。
     """
     # 数据校验，确保开关、节点、变压器、线路名称唯一性
-    switch_names,node_names,transformer_names,zone_line_names = set(),set(),set(),set()   
-    for sub_name, sub_data in substations.items():
-        for switch_name in sub_data['switches']:
-            if switch_name in switch_names:
-                raise ValueError(f"Switch name {switch_name} is not unique")
-            switch_names.add(switch_name)
-        for node_name in sub_data['nodes']:
-            if node_name in node_names:         
-                raise ValueError(f"Node name {node_name} is not unique")
-            node_names.add(node_name)
-        for transformer_name in sub_data.get('transformers', {}):
-            if transformer_name in transformer_names:
-                raise ValueError(f"Transformer name {transformer_name} is not unique")
-            transformer_names.add(transformer_name) 
-        for zone_line_name in sub_data.get('zone_lines', {}):
-            if zone_line_name in zone_line_names:
-                raise ValueError(f"Zone line name {zone_line_name} is not unique")
-            zone_line_names.add(zone_line_name)
-    
+    # switch_names,node_names,transformer_names,zone_line_names = set(),set(),set(),set()   
+    # for sub_name, sub_data in substations.items():
+    #     for switch_name in sub_data['switches']:
+    #         if switch_name in switch_names:
+    #             raise ValueError(f"Switch name {switch_name} is not unique")
+    #         switch_names.add(switch_name)
+    #     for node_name in sub_data['nodes']:
+    #         if node_name in node_names:         
+    #             raise ValueError(f"Node name {node_name} is not unique")
+    #         node_names.add(node_name)
+    #     for transformer_name in sub_data.get('transformers', {}):
+    #         if transformer_name in transformer_names:
+    #             raise ValueError(f"Transformer name {transformer_name} is not unique")
+    #         transformer_names.add(transformer_name) 
+    #     for zone_line_name in sub_data.get('zone_lines', {}):
+    #         if zone_line_name in zone_line_names:
+    #             raise ValueError(f"Zone line name {zone_line_name} is not unique")
+    #         zone_line_names.add(zone_line_name)
     # 从substations中提取数据，同时保留变电站映射关系
     transformers = {}
     zone_lines = {}
@@ -52,7 +51,6 @@ def solve_dynamic_recovery_model(
     substation_nodes = []
     # 保存开关到变电站的映射关系
     switch_to_substation = {}
-    
     for sub_name, sub_data in substations.items():
         # 提取节点
         substation_nodes.extend(sub_data['nodes'])
@@ -66,6 +64,10 @@ def solve_dynamic_recovery_model(
         zone_lines.update(sub_data.get('zone_lines', {}))
     # 过滤掉不可用的储能
     storage_units = {es: p for es, p in storage_units.items() if p["available"]}
+    # for u,v in switches.items():
+    #     if v["nodes"][0] not in node_names or v["nodes"][1] not in node_names:
+    #         print(f"Switch {u} is not connected to valid nodes")
+
     model = Model("Hybrid_Connectivity_Inference_Transfer_With_Cost")
 
     # 参数和变量创建部分保持不变...
@@ -81,7 +83,7 @@ def solve_dynamic_recovery_model(
     # =================================================================================
     # 2. 变量创建
     # =================================================================================
-    is_energized_by = {n: model.addVar(vtype="I", lb=0, ub=len(zones), name=f"is_energized_by_{n}") for n in substation_nodes}
+    is_energized_by = {n: model.addVar(vtype="C", lb=0, name=f"is_energized_by_{n}") for n in substation_nodes}
     S = {name: model.addVar(vtype="B", name=f"S_{name}") for name in switches}
     ops_sw = {name: model.addVar(vtype="B", name=f"op_sw_{name}") for name in S}
     # 变电站指示变量：如果为1表示在该变电站进行操作，为0表示不在该变电站操作
@@ -106,6 +108,7 @@ def solve_dynamic_recovery_model(
     # d) 储能变量 (简化为单功率变量)
     P_storage = { (es, t): model.addVar(vtype="C", lb=-p['p_charge_max'] - p['p_current'], ub=p['p_discharge_max'] - p['p_current'], name=f"P_storage_{es}_{t}") for es, p in storage_units.items() for t in range(horizon) }
     SOC = { (es, t): model.addVar(vtype="C", lb=p['soc_min'], ub=p['soc_max'], name=f"SOC_{es}_{t}") for es, p in storage_units.items() for t in range(horizon) }
+    SOC_penalty = {es: model.addVar(vtype="C", lb=0, name=f"SOC_penalty_{es}") for es in storage_units}
     
     # 可中断负荷
     P_shed = { (il,t): model.addVar(vtype="C", lb=0, ub=p['shed_max'], name=f"P_shed_{il}_{t}") for il, p in interruptible_loads.items() for t in range(horizon)}
@@ -168,18 +171,18 @@ def solve_dynamic_recovery_model(
 
     # e) 供区容量约束
     safety_region = {(name,t): model.addVar(vtype="C", lb=0, name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
-    min_safety_region = model.addVar(vtype="C", name="min_safety_region")
+    min_safety_region = model.addVar(vtype="C", lb=0, name="min_safety_region")
     # b) 系统功率平衡约束,供区充裕度约束
     for t in range(horizon):
         for z_name, z_params in zones.items():
-            supply_side = (quicksum((P_opt[g, t] + operating_units[g]['p_current']) * operating_units[g]['sensitivity'] for g, p in operating_units.items() if p['zone'] == z_name) +
+            supply_side = (quicksum(P_opt[g, t] * operating_units[g]['sensitivity'] for g, p in operating_units.items() if p['zone'] == z_name) +
                            quicksum(P_bak[g, t] * backup_units[g]['sensitivity'] for g, p in backup_units.items() if p['zone'] == z_name) +
                            quicksum(P_hydro[g, t] * hydro_units[g]['sensitivity'] for g, p in hydro_units.items() if p['zone'] == z_name) +
-                           quicksum((P_storage[es, t] + storage_units[es]['p_current']) * storage_units[es]['sensitivity'] for es, p in storage_units.items() if p['zone'] == z_name))
+                           quicksum(P_storage[es, t] * storage_units[es]['sensitivity'] for es, p in storage_units.items() if p['zone'] == z_name))
             demand_side = (z_params['fixed_load'][t] +
                            quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] for t_name in transformers) - \
                            quicksum(P_shed[il,t] for il, p in interruptible_loads.items() if p['zone'] == z_name))
-            model.addCons( demand_side + safety_region[z_name,t] == supply_side + z_params['capacity'])
+            model.addCons(demand_side + safety_region[z_name,t] == supply_side + z_params['capacity'])
             model.addCons(min_safety_region <= safety_region[z_name,t]/z_params['capacity'])
 
     # f) 备用机组启动延迟约束,启动一小时后并网，并网一小时后带满，开机之后不停机
@@ -200,6 +203,18 @@ def solve_dynamic_recovery_model(
                 model.addCons(P_bak[g, t] == v_bak_startup[g, t - 1] * p['p_min'] + v_bak_operating[g, t - 1] * p['p_max'])
                 model.addCons(v_bak_startup[g,t - 1] + v_bak_operating[g,t - 1] == v_bak_operating[g,t])
 
+    # 如果进行了倒排，那么运行机组需要出力加满，水电应该出力加满，至少开一台备用机组
+    operation_on = model.addVar(vtype="B", name="operation_on")
+    for switch_name, switch_params in switches.items():
+        model.addCons(operation_on >= ops_sw[switch_name])
+    if backup_units:
+        model.addCons(quicksum(v_bak_operating[g, horizon-1] for g, p in backup_units.items()) >= operation_on)
+    for g,p in operating_units.items():
+        for t in range(horizon):
+            model.addCons(P_opt[g, t] + p['p_current'] >= p['p_max'] * operation_on)
+    for g,p in hydro_units.items():
+        for t in range(horizon):
+            model.addCons(P_hydro[g, t] >= p['p_max'] * operation_on)
     # g) 储能SOC动态约束
     for es, p in storage_units.items():
         # 初始SOC
@@ -207,6 +222,8 @@ def solve_dynamic_recovery_model(
         # 时序SOC
         for t in range(1, horizon):
             model.addCons(SOC[es, t] == SOC[es, t-1] - P_storage[es, t] * 1)
+        # SOC 惩罚
+        model.addCons(SOC_penalty[es] >= p['soc_max'] * 0.5 - SOC[es, horizon-1])
             
     # h) 隔离开关-断路器耦合约束
     for s_name, sw in switches.items():
@@ -233,7 +250,7 @@ def solve_dynamic_recovery_model(
             if connected_switches_on_v:
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) >= breaker_final_state)
     # i) 不破坏网架，结束时的开关闭合数大于等于初始状态，并赋予超出值2.0的奖励系数
-    rho = model.addVar(vtype="C", lb=0, name="rho") # 超出值
+    rho = model.addVar(vtype="C", name="rho",lb=-10) # 超出值
     model.addCons(quicksum(S[name] for name in switches) - rho >= sum(initial_sw_states.values()))
     # 3.5. 可用性约束
     # =================================================================================
@@ -269,13 +286,16 @@ def solve_dynamic_recovery_model(
                quicksum(p['startup_cost'] * v_bak_startup[g, t] for g, p in backup_units.items() for t in range(horizon)) + \
                quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] * transformers[t_name]['cost'][z_name] for t_name in transformers for z_name in zones)
     load_shedding_cost = quicksum(p['cost'] * P_shed[il, t] for il, p in interruptible_loads.items() for t in range(horizon))
+    #潜在的失负荷
+    load_shedding_cost += quicksum(SOC_penalty[es] * 100 for es in storage_units)
     # 变电站操作成本
     substation_operation_cost = quicksum(substation_indicator[sub_name] * sub_params['operation_cost'] for sub_name, sub_params in substations.items())
     
     # 根据目标类型设置单一目标函数（3选1）
     print(f"Optimization objective: {objective}")
     eps = 1e-4
-    obj_expr = eps * (quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) - min_safety_region + op_cost/max([p['cost']*p['p_max'] for p in operating_units.values()]) + substation_operation_cost)
+    max_cost = max([p['cost']*p['p_max'] for p in operating_units.values()]) if operating_units else 1000
+    obj_expr = eps * (quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) - min_safety_region + op_cost/max_cost + substation_operation_cost)
     if objective == ObjectiveType.MIN_SWITCH_OP:
         # 最小化开关操作成本 + 变电站操作成本
         obj_expr += quicksum(ops_sw[name] * switch_costs.get(name, 1.0) for name in S) + substation_operation_cost
@@ -295,7 +315,6 @@ def solve_dynamic_recovery_model(
     
     if model.getStatus() == "optimal":
         final_switch_states = {name: round(model.getVal(var)) for name, var in S.items()}
-        
         switch_operations = []
         op_count = 0
         for name, initial_state in initial_sw_states.items():
@@ -521,8 +540,8 @@ def solve_dynamic_recovery_model(
                 "变电站操作": substation_operations,
                 "变压器所属供区": final_transformer_assignment,
                 "供区供电裕度": final_zone_status,
-                "开关状态": final_switch_states,
-                "初始开关状态": initial_sw_states,
+                # "开关状态": final_switch_states,
+                # "初始开关状态": initial_sw_states,
                 "开关操作顺序": operations,
             }
         }
@@ -532,8 +551,12 @@ def solve_dynamic_recovery_model(
 
 if __name__ == "__main__":
     # Load the JSON data (in this case, we'll use the provided dictionary)
-    with open("example/export.json", "r", encoding='utf-8') as f:
-        json_data = json.load(f)
+    # with open("example/export.json", "r", encoding='utf-8') as f:
+    #     json_data = json.load(f)
+    from main import get_optimization_boundary
+    json_data = get_optimization_boundary(device_name="妙西变1号主变",device_type="主变")
+    with open("example/export.json", "w", encoding='utf-8') as f:
+        json.dump(json_data, f, ensure_ascii=False, indent=4)
     input = OptimizationInput(**json_data)
     params = input.model_dump()
     result = solve_dynamic_recovery_model(**params)

@@ -60,8 +60,17 @@ def identify_interconnection_substations(
         for zone in zones:
             island_stats[island]["zones"][zone] = {
                 "capacity": island_stats[zone]["主变"],
-                "fixed_load":[]
+                # "fixed_load":None
             }
+        zone_line_count = defaultdict(int)
+        # 如果多个变电站出现了同一条zone_line名称，那么把这些线路都移除
+        for st in island_stats[island]["联络变电站"]:
+            for zone_line in island_stats[island]["联络变电站"][st]["zone_lines"]:
+                zone_line_count[zone_line] += 1
+        for st in island_stats[island]["联络变电站"]:
+            for zone_line in list(island_stats[island]["联络变电站"][st]["zone_lines"].keys()):
+                if zone_line_count[zone_line] > 1:
+                    del island_stats[island]["联络变电站"][st]["zone_lines"][zone_line]
     return island_stats
 
 
@@ -72,13 +81,13 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
     # 收集变电站内的母线
     buses = net.bus[net.bus.st_name == substation_name]
     # 收集变电站内的开关
-    switches = net.switch[net.switch.bus.isin(buses.index)]
+    switches = net.switch[net.switch.bus.isin(buses.index)]    
     transformers = net.load[net.load.bus.isin(buses.index)]
     lines = net.line[
         net.line.from_bus.isin(buses.index) | net.line.to_bus.isin(buses.index)
     ]
     equipment = {
-        "substation_nodes": [net.bus.name[bus] for bus in buses.index],  # 母线
+        "nodes": [net.bus.name[bus] for bus in buses.index],  # 母线
         "switches": {},  # 开关
         "transformers": {},  # 变压器
         "zone_lines": {},  # 线路
@@ -86,11 +95,16 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
     for _, switch in switches.iterrows():
         equipment["switches"][switch["name"]] = {
             "available": True,
-            "cost": 5 if "闸刀" in switch["name"] else 1,
             "initial_state": 1 if switch["closed"] else 0,
             "nodes": [net.bus.name[switch["element"]], net.bus.name[switch["bus"]]],
-            "switch_type": "switch" if "闸刀" in switch["name"] else "breaker",
+            "switch_type": "switch" if "闸刀" in switch["name"] else "breaker"
         }
+        if "闸刀" in switch["name"]:
+            equipment["switches"][switch["name"]]["cost"] = 5
+        elif "母联" in switch["name"]:
+            equipment["switches"][switch["name"]]["cost"] = 3
+        else:
+            equipment["switches"][switch["name"]]["cost"] = 1
     for _, line in lines.iterrows():
         try:
             # print(line.from_st_name,line.to_st_name)
@@ -100,11 +114,14 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
             local_bus = line["from_bus"] if line["from_bus"] in buses.index else line["to_bus"]
             remote_bus = line["from_bus"] if line["from_bus"] not in buses.index else line["to_bus"]
             
-            # 获取对侧母线名称（虚拟母线b）
-            remote_bus_name = net.bus.name[remote_bus]
-            
+            # 获取本侧和对侧母线名称
+            local_bus_name = net.bus.name[local_bus]
+            remote_bus_name = net.bus.name[remote_bus]                
+            # 创建以线路名称命名的合并节点
+            merged_node_name = line["name"]
+            # equipment["nodes"].append(merged_node_name)
             # 查找从虚拟母线b出发，通过开关连接到其他母线的路径
-            final_bus_name = remote_bus_name  # 默认使用对侧母线名称
+            final_bus_name = merged_node_name  # 使用合并后的节点名称
             
             # 查找连接到对侧母线的闸刀
             connected_switches = net.switch[(net.switch.bus == remote_bus) | (net.switch.element == remote_bus)]
@@ -162,28 +179,33 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
                 print(f"处理线路 {line['name']} 的供区时出错: {str(e)}")
                 continue
             
-            # 将找到的虚拟母线b、c、d及其连接的开关添加到设备中
-            # 添加虚拟母线b到设备中
-            if remote_bus_name not in equipment["substation_nodes"]:
-                equipment["substation_nodes"].append(remote_bus_name)
-            
+            # 将合并后的节点添加到设备中
+            # if merged_node_name not in equipment["nodes"]:
+            #     equipment["nodes"].append(merged_node_name)
+            # 修改本侧线路闸刀，连接到合并节点
+            for switch_name, switch in equipment["switches"].items():
+                if local_bus_name in switch["nodes"]:
+                    equipment["switches"][switch_name]["nodes"] = [merged_node_name, switch["nodes"][1] if switch["nodes"][0] == local_bus_name else switch["nodes"][0]]
+
             # 如果找到了闸刀和虚拟母线c，将它们添加到设备中
             if not connected_switches.empty and len(connected_switches) == 1:
                 switch = connected_switches.iloc[0]
-                # 添加闸刀到设备中
+                # 添加闸刀到设备中，但连接到合并节点而不是远程母线
                 if switch["name"] not in equipment["switches"]:
+                    # 确定闸刀的两个端点
+                    switch_node1 = net.bus.name[switch["element"]]
+                    switch_node2 = net.bus.name[switch["bus"]]
                     equipment["switches"][switch["name"]] = {
                         "available": True,
                         "cost": 5,  # 闸刀成本
                         "initial_state": 1 if switch["closed"] else 0,
-                        "nodes": [net.bus.name[switch["element"]], net.bus.name[switch["bus"]]],
+                        "nodes": [merged_node_name, switch_node1 if switch_node1 != remote_bus_name else switch_node2],
                         "switch_type": "switch"
                     }
-                
                 # 添加虚拟母线c到设备中
-                # 在这里，我们已经确定了bus_c和bus_c_name变量存在，因为它们是在上面的代码中定义的
-                if bus_c_name not in equipment["substation_nodes"]:
-                    equipment["substation_nodes"].append(bus_c_name)
+                # # 在这里，我们已经确定了bus_c和bus_c_name变量存在，因为它们是在上面的代码中定义的
+                # if bus_c_name not in equipment["nodes"]:
+                #     equipment["nodes"].append(bus_c_name)
                 
                 # 如果找到了开关和虚拟母线d，将它们添加到设备中
                 # 我们已经确定了c_connected_switches变量存在，因为它是在上面的代码中定义的
@@ -191,18 +213,22 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
                     c_switch = c_connected_switches.iloc[0]
                     # 添加开关到设备中
                     if c_switch["name"] not in equipment["switches"]:
+                        # 确定开关的两个端点
+                        c_switch_node1 = net.bus.name[c_switch["element"]]
+                        c_switch_node2 = net.bus.name[c_switch["bus"]]
+                        
                         equipment["switches"][c_switch["name"]] = {
                             "available": True,
                             "cost": 1,  # 开关成本
                             "initial_state": 1 if c_switch["closed"] else 0,
-                            "nodes": [net.bus.name[c_switch["element"]], net.bus.name[c_switch["bus"]]],
+                            "nodes": [c_switch_node1, c_switch_node2],
                             "switch_type": "breaker"
                         }
                     
                     # 添加虚拟母线d到设备中
                     # 在这里，我们已经确定了bus_d变量存在，因为它是在上面的代码中定义的
-                    if net.bus.name[bus_d] not in equipment["substation_nodes"]:
-                        equipment["substation_nodes"].append(net.bus.name[bus_d])
+                    # if net.bus.name[bus_d] not in equipment["nodes"]:
+                    #     equipment["nodes"].append(net.bus.name[bus_d])
             
         except Exception as e:
             print(f"处理线路 {line['name']} 时出错: {str(e)}")
@@ -212,10 +238,12 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
         equipment["transformers"][transformer["name"]] = {
             "conn_node": net.bus.name[transformer["bus"]],
             "load": [transformer["p_mw"]]*4,
-            "sensitivity": dict(zip(zone_set, [1]*len(zone_set))),
-            "cost": dict(zip(zone_set, [100]*len(zone_set)))
+            # "sensitivity": dict(zip(zone_set, [1]*len(zone_set))),
+            # "cost": dict(zip(zone_set, [100]*len(zone_set)))
         } 
     equipment["zones"] = list(zone_set)
+    # merge nodes in switches
+    equipment["nodes"] = list(set([node for switch in equipment["switches"].values() for node in switch["nodes"]]))
     return equipment
 
 
@@ -282,7 +310,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                         transformer_list.append(
                             {
                                 "id": int(idx),
-                                "name": str(net.trafo3w.name[idx]),
+                                "name": str(net.trafo3w.name[idx]).replace("变电所","变"),
                                 "capacity": float(trafo3w.sn_mva),
                                 "p_current": None
                             }
@@ -292,43 +320,49 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
             operating_generator_dict = {}
             for idx, gen in net.gen[net.gen.type.isin(["煤","天然气"]) & (net.gen.p_mw >= 5)].iterrows():
                 if int(gen.bus) in island_buses:
-                    operating_generator_dict[int(idx)] = {
+                    operating_generator_dict[str(net.gen.name[idx])] = {
+                            "zone": area_name,
                             "id": int(idx),
                             "cost":500,
                             "name": str(net.gen.name[idx]),
                             "p_max": float(gen.max_p_mw),
                             "p_min": float(gen.min_p_mw),
                             "p_current": float(gen.p_mw),
+                            "sensitivity": 1
                         }
             backup_generator_dict = {}
             for idx, gen in net.gen[(net.gen.type == "天然气") & (net.gen.p_mw < 5)].iterrows():
                 if int(gen.bus) in island_buses:
-                    backup_generator_dict[int(idx)] = {
+                    backup_generator_dict[str(net.gen.name[idx])] = {
+                            "zone": area_name,
                             "id": int(idx),
                             "available": True,
                             "cost":500,
                             "name": str(net.gen.name[idx]),
                             "p_max": float(gen.max_p_mw),
-                            "p_min": float(gen.min_p_mw),
-                            "startup_cost": 1000
+                            "p_min": max(float(gen.min_p_mw),float(gen.max_p_mw)*0.4),
+                            "startup_cost": 10000,
+                            "sensitivity": 1
                         }
             hydro_generator_dict = {}
             for idx, gen in net.gen[(net.gen.type == "水电") & (net.gen.p_mw < 5)].iterrows():
                 if int(gen.bus) in island_buses:
                     hydro_generator_dict[int(idx)] = {
+                            "zone": area_name,
                             "id": int(idx),
                             "available": True,
                             "cost":500,
                             "name": str(net.gen.name[idx]),
                             "p_max": float(gen.max_p_mw),
-                            "p_min": float(gen.min_p_mw),
-                            "startup_cost": 100
+                            "startup_cost": 1000,
+                            "sensitivity": 1
                         }
             storage_units = []
             for idx, storage in net.gen[net.gen.type == "电化学储能"].iterrows():
                 if int(storage.bus) in island_buses:
                     storage_units.append(
                         {
+                            "zone": area_name,
                             "id": storage.st_id,
                             "name": str(net.gen.name[idx]),
                             "p_charge_max": float(storage.max_p_mw),
@@ -338,7 +372,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "soc_min": 0.2*float(storage.max_p_mw),
                             "p_current": float(storage.p_mw),
                             "st_name": storage.st_name,
-                            "st_id": storage.st_id
+                            "st_id": storage.st_id,
+                            "sensitivity": 1
                         }
                     )
             # 按照st_name将储能单元的参数加总

@@ -96,7 +96,7 @@ def print_graph_summary(G):
     for edge in list(G.edges(data=True)):
         print(f"{edge[0]} -- {edge[1]}: {edge[2]}")
 
-def build_power_system_graph(substation_nodes: list, switches: dict,):
+def build_power_system_graph(substation_nodes: list, switches: dict, transformer={}):
     """
     构建电力系统图结构并分析连通子图
     :param substation_nodes: 节点
@@ -105,7 +105,6 @@ def build_power_system_graph(substation_nodes: list, switches: dict,):
     """
     # 创建无向图
     G = nx.Graph()
-    
     # 1. 添加所有变电站节点
     for node in substation_nodes:
         G.add_node(node)
@@ -122,7 +121,12 @@ def build_power_system_graph(substation_nodes: list, switches: dict,):
             "available": switch_data["available"]
         }
         G.add_edge(node1, node2, **edge_data)
-    
+    # 如果有变压器，则把变压器 conn_node对应的节点重命名为变压器名称
+    if transformer:
+        for transformer_name, transformer_data in transformer.items():
+            conn_node = transformer_data["conn_node"]
+            G = nx.relabel_nodes(G, {conn_node: transformer_name})
+
     # 3. 创建仅包含初始连通开关的子图
     active_edges = [(u, v) for u, v, d in G.edges(data=True) 
                    if d["initial_state"] == 1]
@@ -195,12 +199,12 @@ def analyze_components(G):
         print(f"  节点类型分布: {dict(type_count)}")
         
         # 打印部分节点示例
-        sample_nodes = list(component)[:3]
+        sample_nodes = list(component)
         print(f"  示例节点: {sample_nodes}{'...' if len(component)>3 else ''}\n")
 
     print("\nSample edge attributes:")
-    for edge in list(G.edges(data=True)):
-        print(f"{edge[0]} -- {edge[1]}: {edge[2]}")
+    # for edge in list(G.edges(data=True)):
+    #     print(f"{edge[0]} -- {edge[1]}: {edge[2]}")
 
 # Example usage:
 if __name__ == "__main__":
