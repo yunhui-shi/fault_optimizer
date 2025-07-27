@@ -13,4 +13,5 @@ wheels/
 *.sh
 断面数据/
 .history/
-.env*
+.env
+.env.example
