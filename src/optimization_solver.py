@@ -1,9 +1,192 @@
 # optimization_solver.py
 from pyscipopt import Model, quicksum
 from schema import ObjectiveType, OptimizationInput
-from datetime import datetime, timedelta
 from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus, analyze_components
+from datetime import datetime, timedelta
 import json
+import networkx as nx
+from collections import defaultdict
+
+def generate_tickets(switch_operations: list, switches: dict, source_nodes: set, load_nodes: set, substations: dict = None) -> list:
+    """
+    生成操作票：k个开关变位的排序，使得每次变位：
+    1. 主变与电源存在最短路径
+    2. 闸刀变位前后孤岛数量不变化
+    
+    开关选择的优先级排序为：与上一步操作存在共同节点的闸刀、任意闸刀、任意断路器
+    使用贪心算法：每次选择合法操作中优先级最高的，直到排序完成
+    
+    Args:
+        switch_operations: 开关操作列表
+        switches: 开关字典
+        source_nodes: 电源节点集合
+    
+    Returns:
+        list: 排序后的操作票列表
+    """
+    if not switch_operations:
+        return []
+    
+    # 构建初始网络图
+    G = nx.Graph()
+    # 从switch_operations中获取初始状态信息
+    initial_states = {}
+    for operation in switch_operations:
+        initial_states[operation['switch_name']] = operation['initial_state']
+    
+    for switch_name, switch_data in switches.items():
+        u, v = switch_data["nodes"]
+        # 根据初始状态添加边
+        if switch_data["initial_state"] == 1:
+            G.add_edge(u, v, switch=switch_name)
+    
+    # 待执行的操作
+    remaining_operations = switch_operations.copy()
+    ordered_tickets = []
+    last_operated_nodes = set()
+    
+    while remaining_operations:
+        best_operation = None
+        best_priority = -1
+        for operation in remaining_operations:
+            switch_name = operation['switch_name']
+            switch_data = switches[switch_name]
+            u, v = switch_data["nodes"]
+            switch_type = switch_data["switch_type"]
+            # 检查操作的合法性
+            if not is_valid_operation(G, u, v, operation, switch_type, source_nodes, load_nodes):
+                continue
+            
+            # 计算优先级
+            priority = calculate_priority(u, v, switch_type, last_operated_nodes, operation['action'])
+            if priority > best_priority:
+                best_priority = priority
+                best_operation = operation
+        
+        if best_operation is None:
+            # 如果没有合法操作，选择第一个可用的操作
+            raise ValueError("No valid operation found")
+        print(best_operation)
+        # 执行操作
+        switch_name = best_operation['switch_name']
+        switch_data = switches[switch_name]
+        u, v = switch_data["nodes"]
+        
+        # 更新网络图
+        if best_operation['action'] == 'close':
+            G.add_edge(u, v, switch=switch_name)
+        else:
+            if G.has_edge(u, v):
+                G.remove_edge(u, v)
+        
+        # 创建操作票
+        ticket = create_operation_ticket(best_operation, substations)
+        ordered_tickets.append(ticket)
+        
+        # 更新最后操作的节点
+        last_operated_nodes = {u, v}
+        
+        # 从待执行列表中移除
+        remaining_operations.remove(best_operation)
+    
+    return ordered_tickets
+
+
+def is_valid_operation(G: nx.Graph, u: str, v: str, operation: dict, switch_type: str, source_nodes: set, load_nodes: set) -> bool:
+    """
+    检查操作是否合法：
+    1. 主变与电源存在最短路径
+    2. 闸刀变位前后孤岛数量不变化
+    """
+    # 创建操作后的临时图
+    temp_G = G.copy()
+    
+    if operation['action'] == 'close':
+        temp_G.add_edge(u, v)
+    else:
+        if temp_G.has_edge(u, v):
+            temp_G.remove_edge(u, v)
+    
+    # 检查连通性：确保主要节点与电源节点连通
+    # 这里简化处理，假设所有节点都应该与至少一个电源节点连通
+    components_before = list(nx.connected_components(G))
+    components_after = list(nx.connected_components(temp_G))
+    
+    # 孤岛数量不应变化
+    if switch_type == 'switch':
+        if len(components_after) != len(components_before):
+            return False
+    
+    # 检查是否有电源节点在每个连通分量中
+    for component in components_after:
+        has_source = any(node in source_nodes for node in component)
+        has_transformer = any(node in load_nodes for node in component)
+        if not has_source and has_transformer:  # 变压器所在的分量必须有电源
+            return False
+    
+    return True
+
+
+def calculate_priority(u: str, v: str, switch_type: str, last_operated_nodes: set, action: str) -> int:
+    """
+    计算操作优先级：
+    - 与上一步操作存在共同节点的闸刀：优先级3
+    - 任意闸刀：优先级2
+    - 任意断路器：优先级1
+    """    
+    if switch_type == 'switch':  # 闸刀
+        if u in last_operated_nodes or v in last_operated_nodes:
+            return 3  # 与上一步操作存在共同节点的闸刀
+        else:
+            return 2  # 任意闸刀
+    else:  # 断路器
+        if action == 'close':
+            return 1  
+        else:
+            return 0  
+
+
+def create_operation_ticket(operation: dict, substations: dict = None) -> dict:
+    """
+    创建单个操作票
+    """
+    action_type = "合上" if operation['action'] == 'close' else "分开"
+    switch_name = operation['switch_name']
+    
+    # 根据开关名称和变电站信息确定unit
+    unit = "调度中心"  # 默认值
+    
+    if substations:
+        # 通过substations字典查找开关所属的变电站
+        station_name = None
+        for substation_name, substation_data in substations.items():
+            if switch_name in substation_data.get('switches', {}):
+                station_name = substation_name
+                break
+        
+        # 根据unit规则确定unit
+        if station_name and '变电所' not in station_name:
+            # 查找相关线路的owner
+            line_owner = None
+            for substation_name, substation_data in substations.items():
+                for line_name, line_data in substation_data.get('zone_lines', {}).items():
+                    if switch_name in line_data.get("breakers", {}).values():
+                        line_owner = line_data.get('owner', '') + "集控"
+                        break
+                if line_owner:
+                    break
+            unit = line_owner if line_owner else station_name
+        else:
+            unit = '浙江集控'
+    
+    return {
+        "unit": unit,
+        "operation": f"{action_type}{switch_name}",
+        "action": "close" if operation['action'] == 'close' else "open",
+        "switch_name": switch_name,
+        "priority": operation.get('priority', 1)
+    }
+
 
 def solve_dynamic_recovery_model(
     # --- 输入参数 ---
@@ -19,7 +202,8 @@ def solve_dynamic_recovery_model(
     storage_units: dict,
     interruptible_loads: dict,
     # 优化目标
-    objective: ObjectiveType
+    objective: ObjectiveType,
+    load_enlarge_factor: float,
 ):
     """
     求解一个完整的多层级、基于连通性推断的电网负荷转移优化问题。
@@ -75,7 +259,7 @@ def solve_dynamic_recovery_model(
     # 1. 参数定义
     # =================================================================================
     C = len(transformers)
-    M = C + 1
+    M = len(zones)
     # 从新的Switch类结构中提取信息
     initial_sw_states = {name: sw["initial_state"] for name, sw in switches.items()}
     switch_costs = {name: sw["cost"] for name, sw in switches.items()}
@@ -83,7 +267,6 @@ def solve_dynamic_recovery_model(
     # =================================================================================
     # 2. 变量创建
     # =================================================================================
-    is_energized_by = {n: model.addVar(vtype="C", lb=0, name=f"is_energized_by_{n}") for n in substation_nodes}
     S = {name: model.addVar(vtype="B", name=f"S_{name}") for name in switches}
     ops_sw = {name: model.addVar(vtype="B", name=f"op_sw_{name}") for name in S}
     # 变电站指示变量：如果为1表示在该变电站进行操作，为0表示不在该变电站操作
@@ -97,7 +280,7 @@ def solve_dynamic_recovery_model(
         directed_edges.append((line_params['conn_node'], line_params['zone']))
         directed_edges.append((line_params['zone'], line_params['conn_node']))
     f = { (u, v, z_name): model.addVar(vtype="C", lb=0, name=f"f_{u}_{v}_{z_name}") for u, v in directed_edges for z_name in zones}
-
+    is_energized_by = {n: model.addVar(vtype="C", lb=0, name=f"is_energized_by_{n}") for n in substation_nodes}
     # b) 发电出力变量
     P_opt = { (g, t): model.addVar(vtype="C", lb=0, ub=p['p_max'] - p['p_current'], name=f"P_opt_{g}_{t}") for g, p in operating_units.items() for t in range(horizon) }
     P_bak = { (g, t): model.addVar(vtype="C", lb=0, ub=p['p_max'] if p.get('available', True) else 0, name=f"P_bak_{g}_{t}") for g, p in backup_units.items() for t in range(horizon) }
@@ -147,7 +330,7 @@ def solve_dynamic_recovery_model(
 
     # c) 负荷归属和连通性约束
     for t_name in transformers:
-        if max(transformers[t_name]['load']) > 0:
+        if max(abs(x) for x in transformers[t_name]["load"]) > 0.5:
             model.addCons(quicksum(y[t_name, z_name] for z_name in zones) == 1)
         t_conn_node = transformers[t_name]['conn_node']
         for z_name in zones:
@@ -170,8 +353,8 @@ def solve_dynamic_recovery_model(
         model.addCons(is_energized_by[u] - is_energized_by[v] >= - M * (1 - S[s_name]))
 
     # e) 供区容量约束
-    safety_region = {(name,t): model.addVar(vtype="C", lb=0, name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
-    min_safety_region = model.addVar(vtype="C", lb=0, name="min_safety_region")
+    safety_region = {(name,t): model.addVar(vtype="C", lb=0, ub=zones[name]['capacity'], name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
+    min_safety_region = model.addVar(vtype="C", lb=0, ub=1, name="min_safety_region")
     # b) 系统功率平衡约束,供区充裕度约束
     for t in range(horizon):
         for z_name, z_params in zones.items():
@@ -179,7 +362,8 @@ def solve_dynamic_recovery_model(
                            quicksum(P_bak[g, t] * backup_units[g]['sensitivity'] for g, p in backup_units.items() if p['zone'] == z_name) +
                            quicksum(P_hydro[g, t] * hydro_units[g]['sensitivity'] for g, p in hydro_units.items() if p['zone'] == z_name) +
                            quicksum(P_storage[es, t] * storage_units[es]['sensitivity'] for es, p in storage_units.items() if p['zone'] == z_name))
-            demand_side = (z_params['fixed_load'][t] +
+            enlarged_fixed_load = load_enlarge_factor * z_params['fixed_load'][t] + (load_enlarge_factor - 1)*sum(operating_units[g]['p_current'] for g, p in operating_units.items() if p['zone'] == z_name)
+            demand_side = (enlarged_fixed_load +
                            quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] for t_name in transformers) - \
                            quicksum(P_shed[il,t] for il, p in interruptible_loads.items() if p['zone'] == z_name))
             model.addCons(demand_side + safety_region[z_name,t] == supply_side + z_params['capacity'])
@@ -246,11 +430,13 @@ def solve_dynamic_recovery_model(
             
             # 添加约束条件, 确保最终状态在运行、热备用、冷备用三者之间
             if connected_switches_on_u:
+                model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_u) <= 1)
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_u) >= breaker_final_state)
             if connected_switches_on_v:
+                model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) <= 1)
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) >= breaker_final_state)
-    # i) 不破坏网架，结束时的开关闭合数大于等于初始状态，并赋予超出值2.0的奖励系数
-    rho = model.addVar(vtype="C", name="rho",lb=-10) # 超出值
+    # i) 不破坏网架，结束时的开关闭合数大于等于初始状态，并赋予超出值3.0的奖励系数
+    rho = model.addVar(vtype="C", name="rho",lb=-1,ub=10) # 超出值
     model.addCons(quicksum(S[name] for name in switches) - rho >= sum(initial_sw_states.values()))
     # 3.5. 可用性约束
     # =================================================================================
@@ -290,7 +476,7 @@ def solve_dynamic_recovery_model(
     load_shedding_cost += quicksum(SOC_penalty[es] * 100 for es in storage_units)
     # 变电站操作成本
     substation_operation_cost = quicksum(substation_indicator[sub_name] * sub_params['operation_cost'] for sub_name, sub_params in substations.items())
-    
+    # substation_operation_cost = 0
     # 根据目标类型设置单一目标函数（3选1）
     print(f"Optimization objective: {objective}")
     eps = 1e-4
@@ -306,7 +492,7 @@ def solve_dynamic_recovery_model(
         # 最小化发电成本
         obj_expr += op_cost
     obj_expr += load_shedding_cost
-    obj_expr += - 2.0 * rho
+    obj_expr += - 3.0 * rho
     model.setObjective(obj_expr, "minimize")
     # =================================================================================
     # 5. 求解与结果封装 (更新返回的字典)
@@ -321,7 +507,7 @@ def solve_dynamic_recovery_model(
             final_state = final_switch_states[name]
             if initial_state != final_state:
                 op_count +=1
-                action = "合闸 (Close)" if final_state == 1 else "分闸 (Open)"
+                action = "close" if final_state == 1 else "open"
                 switch_operations.append({
                     "switch_name": name,
                     "initial_state": initial_state,
@@ -331,7 +517,9 @@ def solve_dynamic_recovery_model(
                 })
         final_transformer_assignment = {}
         for t_name, t_params in transformers.items():
-            assigned_zone = "失电"
+            if "储能" in t_name:
+                continue
+            assigned_zone = "停役"
             for z_name in zones:
                 if model.getVal(y[t_name, z_name]) > 0.5:
                     assigned_zone = z_name
@@ -367,153 +555,6 @@ def solve_dynamic_recovery_model(
                 }
             for il in interruptible_loads: hourly_plan["shedding"][il] = round(model.getVal(P_shed[il, t]), 2)
             final_dispatch_plan.append(hourly_plan)
-        # 生成开关刀闸操作顺序
-        power_graph = build_power_system_graph(substation_nodes, switches)
-        operations = []
-        edges = {}
-        breakers_operate = {}
-        switches_operate = {}
-        for edge in list(power_graph.edges(data=True)):
-            edge_name = edge[2]['switch_name']
-            edges[edge_name] = edge
-            if edge[2]['switch_type'] == 'breaker':
-                # 无需操作
-                if final_switch_states[edge_name] == edge[2]['initial_state']:
-                    breakers_operate[edge_name] = 0
-                # 由分到合
-                elif final_switch_states[edge_name] == 1 and edge[2]['initial_state'] == 0:
-                    breakers_operate[edge_name] = 1
-                # 由合到分
-                elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
-                    breakers_operate[edge_name] = 2
-            elif edge[2]['switch_type'] == 'switch':
-                # 无需操作
-                if final_switch_states[edge_name] == edge[2]['initial_state']:
-                    switches_operate[edge_name] = 0
-                # 由分到合
-                elif final_switch_states[edge_name] == 1 and edge[2]['initial_state'] == 0:
-                    switches_operate[edge_name] = 1
-                # 由合到分
-                elif final_switch_states[edge_name] == 0 and edge[2]['initial_state'] == 1:
-                    switches_operate[edge_name] = 2
-        # 进行初始状态母联开关闭合的双母线倒排操作
-        for close_switch_name, operate in switches_operate.items():
-            if operate == 1:
-                # 找到需要分闸的刀闸，应与合闸刀闸相连
-                u = edges[close_switch_name][0]
-                v = edges[close_switch_name][1]
-                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                for edge in connected_edges:
-                    if edge[2]['switch_type'] == 'switch':
-                        open_switch_name = edge[2]['switch_name']
-                        if switches_operate[open_switch_name] == 2:
-                            # 判断母联开关是否闭合
-                            bus1 = u
-                            if is_bus(v):
-                                bus1 = v
-                            bus2 = edge[0]
-                            if is_bus(edge[1]):
-                                bus2 = edge[1]
-                            bus_connection = power_graph.get_edge_data(bus1, bus2)
-                            if not (bus_connection is None) and bus_connection['initial_state'] == 1:
-                                operations.append(f"合上{close_switch_name}")
-                                print(f"1、合上{close_switch_name}")
-                                switches_operate[close_switch_name] = 0
-                                operations.append(f"拉开{open_switch_name}")
-                                print(f"1、拉开{open_switch_name}")
-                                switches_operate[open_switch_name] = 0
-                                break
-        # 操作合闸开关及其刀闸
-        for breaker_name, operate in breakers_operate.items():
-            if operate == 1:
-                # 找到需要分闸的开关，应与合闸开关两端的连通子图相连
-                close_conn_graph = edges[breaker_name][2]['connected_components']
-                open_breaker = "not_find"
-                for open_breaker_name, open_operate in breakers_operate.items():
-                    if open_operate == 2:
-                        open_conn_graph = edges[open_breaker_name][2]['connected_components']
-                        if open_conn_graph[0] in close_conn_graph or open_conn_graph[1] in close_conn_graph:
-                            open_breaker = open_breaker_name
-                    if open_breaker != "not_find":
-                        break
-                # 合闸操作，若找到与开关相连的需合闸的刀闸，则先合刀闸
-                # 获取与开关相连的所有边
-                u = edges[breaker_name][0]
-                v = edges[breaker_name][1]
-                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                for edge in connected_edges:
-                    if edge[2]['switch_type'] == 'switch':
-                        switch_name = edge[2]['switch_name']
-                        if switches_operate[switch_name] == 1:
-                            operations.append(f"合上{switch_name}")
-                            print(f"2、合上{switch_name}")
-                            switches_operate[switch_name] = 0
-                operations.append(f"合上{breaker_name}")
-                print(f"2、合上{breaker_name}")
-                breakers_operate[breaker_name] = 0
-                # 分闸开关操作
-                if open_breaker != "not_find":
-                    operations.append(f"拉开{open_breaker}")
-                    print(f"3、拉开{open_breaker}")
-                    breakers_operate[open_breaker] = 0
-                    # 若找到与开关相连的需分闸的刀闸，则分刀闸
-                    # 获取与开关相连的所有边
-                    u = edges[open_breaker][0]
-                    v = edges[open_breaker][1]
-                    connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                    for edge in connected_edges:
-                        if edge[2]['switch_type'] == 'switch':
-                            switch_name = edge[2]['switch_name']
-                            if switches_operate[switch_name] == 2:
-                                operations.append(f"拉开{switch_name}")
-                                print(f"3、拉开{switch_name}")
-                                switches_operate[switch_name] = 0
-        # 操作分闸开关及其刀闸
-        for breaker_name, operate in breakers_operate.items():
-            if operate == 2:
-                # 分闸开关操作
-                operations.append(f"拉开{breaker_name}")
-                print(f"2、拉开{breaker_name}")
-                breakers_operate[breaker_name] = 0
-                # 若找到与开关相连的需分闸的刀闸，则分刀闸
-                # 获取与开关相连的所有边
-                u = edges[breaker_name][0]
-                v = edges[breaker_name][1]
-                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                for edge in connected_edges:
-                    if edge[2]['switch_type'] == 'switch':
-                        switch_name = edge[2]['switch_name']
-                        if switches_operate[switch_name] == 2:
-                            operations.append(f"拉开{switch_name}")
-                            print(f"4、拉开{switch_name}")
-                            switches_operate[switch_name] = 0
-        # 进行最终状态母联开关闭合的双母线倒排操作
-        for close_switch_name, operate in switches_operate.items():
-            if operate == 1:
-                # 找到需要分闸的刀闸，应与合闸刀闸相连
-                u = edges[close_switch_name][0]
-                v = edges[close_switch_name][1]
-                connected_edges = get_connected_edges_with_attrs(power_graph, u, v)
-                for edge in connected_edges:
-                    if edge[2]['switch_type'] == 'switch':
-                        open_switch_name = edge[2]['switch_name']
-                        if switches_operate[open_switch_name] == 2:
-                            # 判断母联开关是否闭合
-                            bus1 = u
-                            if is_bus(v):
-                                bus1 = v
-                            bus2 = edge[0]
-                            if is_bus(edge[1]):
-                                bus2 = edge[1]
-                            bus_connection = power_graph.get_edge_data(bus1, bus2)
-                            if not (bus_connection is None) and breakers_operate[bus_connection['switch_name']] == 1:
-                                operations.append(f"合上{close_switch_name}")
-                                print(f"1、合上{close_switch_name}")
-                                switches_operate[close_switch_name] = 0
-                                operations.append(f"拉开{open_switch_name}")
-                                print(f"1、拉开{open_switch_name}")
-                                switches_operate[open_switch_name] = 0
-                                break
         # 备用机组开机情况
         backup_unit_commitment = ""
         for g in backup_units:
@@ -530,10 +571,25 @@ def solve_dynamic_recovery_model(
                 operated_switches = [sw_name for sw_name in sub_params['switches'] if any(op['switch_name'] == sw_name for op in switch_operations)]
                 substation_operations.append({
                     "substation_name": sub_name,
+                    "st_id": sub_params['st_id'],
                     "operation_cost": sub_params['operation_cost'],
                     "switches_operated": operated_switches
                 })
                 total_substation_cost += sub_params['operation_cost']
+        line_operations = set()
+        for operation in switch_operations:
+            for line_params in zone_lines.values():
+                if operation['switch_name'] in line_params['breakers'].values():
+                    line_operations.add(line_params["line_id"])
+        line_operations = list(line_operations)
+        source_node,load_nodes = set(),set()
+        for _, line_params in zone_lines.items():
+            source_node.add(line_params['conn_node'])
+        for _, trans_param in transformers.items():
+            if max(abs(x) for x in trans_param["load"]) > 0:
+                load_nodes.add(trans_param['conn_node'])
+        print(switch_operations)
+        tickets = generate_tickets(switch_operations, switches, source_node, load_nodes, substations)
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
@@ -556,16 +612,14 @@ def solve_dynamic_recovery_model(
                 "备用机组开机计划": backup_unit_commitment,
                 "机组出力计划": final_dispatch_plan,
                 "开关操作": switch_operations,
-                "变电站操作": substation_operations,
+                "待操作变电站": substation_operations,
+                "待操作线路": line_operations,
                 "变压器所属供区": final_transformer_assignment,
                 "供区供电裕度": final_zone_status,
-                # "开关状态": final_switch_states,
-                # "初始开关状态": initial_sw_states,
-                # "开关状态": final_switch_states,
-                # "初始开关状态": initial_sw_states,
-                "开关操作顺序": operations,
+                "操作票": tickets,
             }
         }
+        json.dump(result, open("example/tmp.json", "w"), ensure_ascii=False, indent=4)
         return result
     else:
         return None
@@ -575,10 +629,17 @@ if __name__ == "__main__":
     # with open("example/export.json", "r", encoding='utf-8') as f:
     #     json_data = json.load(f)
     from main import get_optimization_boundary
-    json_data = get_optimization_boundary(device_name="丹溪变1号主变",device_type="主变")
+    json_data = get_optimization_boundary(device_name="双龙变1号主变",device_type="主变",load_enlarge_factor=1)
     with open("example/export.json", "w", encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=4)
     input = OptimizationInput(**json_data)
     params = input.model_dump()
     result = solve_dynamic_recovery_model(**params)
+    with open("example/tmp.json", "w", encoding='utf-8') as f:
+        json.dump(result, f, ensure_ascii=False, indent=4)
+    from utils import save_tickets_to_excel
+    save_tickets_to_excel({
+        "tickets": result['results']['操作票'],
+        "description": "故障恢复操作票"
+    })
     print(result)

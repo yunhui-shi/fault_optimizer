@@ -20,6 +20,8 @@ from power_flow import create_network, run_powerflow
 from area_topology import find_islands_without_high_voltage_buses, identify_interconnection_substations
 from dotenv import load_dotenv
 from collections import defaultdict
+import base64
+from kafka import KafkaProducer
 load_dotenv(".env.example")
 for key,value in os.environ.items():
     logging.info(f"{key}:{value}") #print to stdout
@@ -38,6 +40,58 @@ class ChatResponse(BaseModel):
     response: str
     success: bool
     error: str = None
+
+class PushTicketResponse(BaseModel):
+    success: bool
+    message: str
+    error: str = None
+
+def push_ticket_to_kafka():
+    """
+    将操作票文件转换为base64并推送到Kafka
+    """
+    try:
+        # 检查操作票文件是否存在
+        ticket_file_path = "result/temp_ops_ticket.xls"
+        if not os.path.exists(ticket_file_path):
+            return {"success": False, "message": "操作票文件不存在", "error": "File not found"}
+        
+        # 读取文件并转换为base64
+        with open(ticket_file_path, "rb") as file:
+            file_content = file.read()
+            base64_content = base64.b64encode(file_content).decode('utf-8')
+        
+        # 创建Kafka生产者
+        producer = KafkaProducer(
+            bootstrap_servers=['10.33.66.38:9092'],
+            value_serializer=lambda v: json.dumps(v).encode('utf-8')
+        )
+        
+        # 准备消息数据
+        message_data = {
+            "timestamp": datetime.now().isoformat(),
+            "file_name": "temp_ops_ticket.xls",
+            "file_content": base64_content,
+            "content_type": "application/vnd.ms-excel"
+        }
+        
+        # 发送消息到Kafka
+        future = producer.send('operation_tickets', value=message_data)
+        result = future.get(timeout=10)  # 等待发送完成
+        
+        producer.close()
+        
+        return {
+            "success": True, 
+            "message": f"操作票已成功推送到Kafka，分区: {result.partition}, 偏移量: {result.offset}"
+        }
+        
+    except Exception as e:
+        return {
+            "success": False, 
+            "message": "推送操作票到Kafka失败", 
+            "error": str(e)
+        }
 
 async def event_stream(agent_executor, agent_input: str):
     async for event in agent_executor.astream_events({"input": agent_input},version="v1"):
@@ -141,13 +195,26 @@ def chat_with_agent(request: ChatRequest):
             error=f"处理请求时发生错误: {str(e)}"
         )
 
+@app.post("/push-ticket", response_model=PushTicketResponse, tags=["Operations"])
+def push_operation_ticket():
+    """
+    推送操作票到Kafka消息队列
+    """
+    result = push_ticket_to_kafka()
+    return PushTicketResponse(
+        success=result["success"],
+        message=result["message"],
+        error=result.get("error")
+    )
+        
 @app.get("/get_optimization_boundary", tags=["Optimization"])
-def get_optimization_boundary(device_name: str, device_type: Literal["线路", "母线", "主变"]):
+def get_optimization_boundary(device_name: str, device_type: Literal["线路", "母线", "主变"],load_enlarge_factor: float):
     """
     根据设备名称和类型获取对应供区的优化边界数据
     
     - **device_name**: 设备名称，例如"双龙变1号主变"
     - **device_type**: 设备类型，可选值为"线路"、"母线"、"主变"
+    - factor: 负荷放大系数
     - **返回**: 包含该设备所在供区数据的OptimizationInput对象
     """
     try:
@@ -212,7 +279,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             params = {
                 "dataTime": dataTime
             }
-            response = requests.post(api_url, params=params, json=payload, headers=headers, timeout=10)
+            response = requests.post(api_url, json=payload, headers=headers, timeout=10)
             # 检查响应状态码是否为2xx
             if response.status_code // 100 == 2:
                 # API调用成功，处理返回的数据
@@ -293,19 +360,18 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             "zones": {},
             "substations": {},
             "objective": "minimize_switch_operation",
+            "load_enlarge_factor": load_enlarge_factor,
             "operating_units": area_data.get("operating_units", {}),
             "backup_units": area_data.get("backup_units", {}),
             "hydro_units": area_data.get("hydro_units", {}),
             "storage_units": area_data.get("storage_units", {}),
             "interruptible_loads": {}
         }
-        
         # 添加zones数据
         for zone_name, zone_data in area_data.get("zones", {}).items():
             zone_capacity = sum(transformer.get("capacity", 0) for transformer in zone_data.get("capacity", []))
-            zone_fix_load = 1000
-            zone_var_load = sum(area_data["联络变电站"][st]["transformers"][tr]["load"][0] for st in area_data["联络变电站"] for tr in area_data["联络变电站"][st]["transformers"]) if zone_name == target_area else 0
-            print(zone_var_load)
+            zone_var_load = [sum(area_data["联络变电站"][st]["transformers"][tr]["load"][t] for st in area_data["联络变电站"] for tr in area_data["联络变电站"][st]["transformers"]) if zone_name == target_area else 0 for t in range(4)]
+            print(zone_name,zone_data["fixed_load"],zone_var_load)
             # 去除device_name对应的主变、以及剩下最大一台主变的容量
             if zone_name == target_area:
                 for transformer in area_data["主变"]:
@@ -317,23 +383,31 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                     zone_capacity -= max(transformer.get("capacity", 0) for transformer in remaining_transformers)
             optimization_input["zones"][zone_name] = {
                 "capacity": zone_capacity,
-                "fixed_load": [zone_fix_load - zone_var_load]*4
+                "fixed_load": [zone_data["fixed_load"][t] - zone_var_load[t] for t in range(4)]
             }
+            # if zone_name == target_area:
+            #     optimization_input["zones"][zone_name] = {
+            #         "capacity": zone_capacity,
+            #         "fixed_load": [1.8*zone_capacity - zone_var_load[t] for t in range(4)]
+            #     }
+            # else:
+            #     optimization_input["zones"][zone_name] = {
+            #         "capacity": zone_capacity,
+            #         "fixed_load": [0.5 * zone_capacity] * 4
+            #     }
         
         # 添加substations数据
-        # exclude_substation = ["汤溪变","华金变"]
         for substation_name, substation_data in area_data.get("联络变电站", {}).items():
-            # if substation_name in exclude_substation:
-            #     continue
             # 构建变电站数据
             substation = {
                 "name": substation_name,
                 "nodes": substation_data.get("nodes"),
                 "transformers": {},
                 "switches": {},
-                "zone_lines": {},
-                "operation_cost": 20.0,
-                "available": True
+                "zone_lines": substation_data.get("zone_lines"),
+                "operation_cost": 3.0,
+                "available": True,
+                "st_id": substation_data.get("st_id")
             }
             
             # 添加变压器数据
@@ -342,31 +416,19 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                     "conn_node": transformer_data.get("conn_node"),
                     "load": transformer_data.get("load"),
                     "sensitivity": transformer_data.get("sensitivity", dict([(zone_name,1) for zone_name in optimization_input["zones"].keys()])),
-                    "cost": transformer_data.get("cost", dict([(zone_name,100) for zone_name in optimization_input["zones"].keys()]))
+                    "cost": transformer_data.get("cost", dict([(zone_name,100) for zone_name in optimization_input["zones"].keys()])),
+                    "allocate": transformer_data.get("allocate",None)
                 }
                 
             # 添加开关数据
             for switch_name, switch_data in substation_data.get("switches", {}).items():
                 if any(keyword in switch_name for keyword in ["中性点","隔直"]):
                     continue
-                substation["switches"][switch_name] = {
-                    "available": switch_data.get("available", True),
-                    "cost": switch_data.get("cost", 1),
-                    "initial_state": switch_data.get("initial_state", 0),
-                    "nodes": switch_data.get("nodes", []),
-                    "switch_type": switch_data.get("switch_type", "breaker")
-                }
-            # 添加线路数据
-            for line_name, line_data in substation_data.get("zone_lines", {}).items():
-                substation["zone_lines"][line_name] = {
-                    "available": line_data.get("available", True),
-                    "conn_node": line_data.get("conn_node", ""),
-                    "zone": line_data.get("zone", "")
-                }
+                substation["switches"][switch_name] = switch_data
             
             # 添加变电站到substations字典
             optimization_input["substations"][substation_name] = substation
-        
+        # print(optimization_input)
         # 返回OptimizationInput对象
         return optimization_input
         
@@ -379,9 +441,9 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
 # 生成量测数据请求payload
 def meas_request_data(data):
     result = {
-        "tr": [str(item["id"]) for item in data["主变"]] + [str(zone["id"]) for zone in sum([item["capacity"] for item in data["zones"].values()], []) if "id" in zone],
-        "units": list(data["operating_units"].keys()) + list(data["backup_units"].keys()) + list(data["hydro_units"].keys()),
-        "plant": [unit["st_id"] for unit in data["storage_units"].values()]
+        "tr": [str(zone["id"]) for zone in sum([item["capacity"] for item in data["zones"].values()], []) if "id" in zone],
+        "units": [str(item["id"]) for item in data["operating_units"].values()] + [str(item["id"]) for item in data["backup_units"].values()] + [str(item["id"]) for item in data["hydro_units"].values()],
+        "plant": [str(unit["st_id"]) for unit in data["storage_units"].values()]
     }
     return result
 
@@ -403,7 +465,7 @@ def get_power_grid_data():
             # API调用成功，处理返回的数据
             pf_data = response.json()
             net = create_network(pf_data)
-            # net = pp.from_sqlite("net.db")
+            # net = pp.from_sqlite("./net.db")
             print("network loaded")
             # 分析网络，找出移除高压母线后的孤岛，并统计每个孤岛中包含"xx变"的母线
             island_stats, bus_to_island, islands, substation_to_island = (
@@ -419,6 +481,7 @@ def get_power_grid_data():
             # 保存结果到JSON文件
             with open("result/area_statistics.json", "w", encoding="utf-8") as f:
                 json.dump(island_stats, f, ensure_ascii=False, indent=4)
+                print("结果已保存到result/area_statistics.json文件",dataTime)
             # 修改文件格式
             return f"成功从API获取到电网数据\n结果已保存到result/area_statistics.json文件"
         else:

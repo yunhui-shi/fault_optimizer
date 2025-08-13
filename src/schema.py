@@ -1,6 +1,6 @@
 # --- Pydantic 模型定义 ---
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Tuple, Literal
+from typing import Any, Dict, List, Optional, Tuple, Literal
 from enum import Enum
 import json
 
@@ -23,6 +23,10 @@ class ZoneLine(BaseModel):
     zone: str = Field(..., description="该线路归属的供区")
     conn_node: str = Field(..., description="线路在拓扑中的连接点名称")
     available: bool = Field(True, description="线路是否可用，True表示可用，False表示不可用")
+    owner: str = Field(None, description="线路管辖单位")
+    breakers: Dict[str, Any] = Field(None, description="线路上的断路器")
+    line_id: str = Field(None, description="线路ID")
+    to_st_name: str = Field(None, description="线路的对侧变电站名称")
 
 class Switch(BaseModel):
     """开关定义，包含连接节点、初始状态和操作成本"""
@@ -47,6 +51,7 @@ class OperatingUnit(BaseModel):
     cost: float = Field(..., description="发电成本 ($/MWh)")
     sensitivity: float = Field(..., description="敏感度")
     p_current: float = Field(0.0, description="当前出力 (MW)")
+    st_id: str = Field(None, description="发电厂ID")
     
 class BackupUnit(BaseModel):
     zone: str = Field(..., description="机组所属区域")
@@ -56,6 +61,7 @@ class BackupUnit(BaseModel):
     startup_cost: float = Field(..., description="单次启动成本 ($)")
     sensitivity: float = Field(..., description="敏感度")
     available: bool = Field(True, description="机组是否可用，True表示可用，False表示不可用")
+    st_id: str = Field(None, description="发电厂ID")
 
 class HydroUnit(BaseModel):
     zone: str = Field(..., description="机组所属区域")
@@ -63,6 +69,7 @@ class HydroUnit(BaseModel):
     cost: float = Field(..., description="发电成本 ($/MWh), 通常较低")
     sensitivity: float = Field(..., description="敏感度")
     available: bool = Field(True, description="机组是否可用，True表示可用，False表示不可用")
+    st_id: str = Field(None, description="发电厂ID")
 
 class StorageUnit(BaseModel):
     zone: str = Field(..., description="储能所属区域")
@@ -74,6 +81,7 @@ class StorageUnit(BaseModel):
     sensitivity: float = Field(..., description="敏感度")
     p_current: float = Field(0.0, description="当前出力 (MW)，正值为放电，负值为充电")
     available: bool = Field(True, description="储能是否可用，True表示可用，False表示不可用")
+    st_id: str = Field(None, description="储能单元ID")
 
 class InterruptibleLoad(BaseModel):
     zone: str = Field(..., description="可中断负荷所属区域")
@@ -90,6 +98,8 @@ class Substation(BaseModel):
     transformers: Dict[str, Transformer] = Field(default_factory=dict, description="变电站包含的变压器字典")
     operation_cost: float = Field(1000.0, description="在该变电站进行操作的成本")
     available: bool = Field(True, description="变电站是否可用，True表示可用，False表示不可用")
+    st_id: str = Field(None, description="变电站ID")
+    
 class OptimizationInput(BaseModel):
     """定义POST请求体的结构"""
     horizon: int
@@ -101,7 +111,7 @@ class OptimizationInput(BaseModel):
     hydro_units: Optional[Dict[str, HydroUnit]] = {}
     storage_units: Optional[Dict[str, StorageUnit]] = {}
     interruptible_loads: Optional[Dict[str, InterruptibleLoad]] = {}
-
+    load_enlarge_factor: float = 1.0
     class Config:
         json_schema_extra = {
             "example": json.loads(open("example/export.json","r",encoding="utf-8").read())

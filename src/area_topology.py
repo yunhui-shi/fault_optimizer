@@ -87,17 +87,20 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
         net.line.from_bus.isin(buses.index) | net.line.to_bus.isin(buses.index)
     ]
     equipment = {
+        "st_id": net.bus[net.bus.st_name == substation_name].st_id.values[0],
         "nodes": [net.bus.name[bus] for bus in buses.index],  # 母线
         "switches": {},  # 开关
         "transformers": {},  # 变压器
         "zone_lines": {},  # 线路
     }
     for _, switch in switches.iterrows():
+        if "待用" in switch["name"]:
+            continue
         equipment["switches"][switch["name"]] = {
             "available": True,
             "initial_state": 1 if switch["closed"] else 0,
             "nodes": [net.bus.name[switch["element"]], net.bus.name[switch["bus"]]],
-            "switch_type": "switch" if "闸刀" in switch["name"] else "breaker"
+            "switch_type": "switch" if "闸刀" in switch["name"] else "breaker",
         }
         if "闸刀" in switch["name"]:
             equipment["switches"][switch["name"]]["cost"] = 5
@@ -107,6 +110,7 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
             equipment["switches"][switch["name"]]["cost"] = 1
     for _, line in lines.iterrows():
         try:
+
             # print(line.from_st_name,line.to_st_name)
             # print(substation_to_island[line.from_st_name],substation_to_island[line.to_st_name])
             
@@ -152,29 +156,34 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
                     else:
                         # 如果没有找到连接到虚拟母线c的开关，或者开关数量不为1，使用虚拟母线c作为最终母线
                         final_bus_name = bus_c_name
-            
             # 获取对侧变电站的供区，添加错误处理以避免list index out of range错误
             try:
-                if line.to_st_name == substation_name:
-                    # 对侧是from_st_name
-                    if line.from_st_name in substation_to_island and substation_to_island[line.from_st_name]:
-                        zone = list(substation_to_island[line.from_st_name])[0]
-                    else:
-                        # 如果对侧变电站没有对应的供区，跳过此线路
-                        continue
+                remote_st_name = line.to_st_name if line.to_st_name != substation_name else line.from_st_name
+                if "储能" in remote_st_name:
+                    print(list(substation_to_island[remote_st_name])[0])
+                    equipment["transformers"][remote_st_name] = {
+                        "conn_node": final_bus_name,
+                        "available": True,
+                        "load": [1]*4,  # 使用找到的最终母线作为conn_node
+                        "allocate": list(substation_to_island[remote_st_name])[0],
+                    }
                 else:
-                    # 对侧是to_st_name
-                    if line.to_st_name in substation_to_island and substation_to_island[line.to_st_name]:
-                        zone = list(substation_to_island[line.to_st_name])[0]
+                    if remote_st_name in substation_to_island and substation_to_island[remote_st_name]:
+                        zone = list(substation_to_island[remote_st_name])[0]
                     else:
                         # 如果对侧变电站没有对应的供区，跳过此线路
                         continue
-                
-                equipment["zone_lines"][line["name"]] = {
-                    "available": True,
-                    "conn_node": final_bus_name,  # 使用找到的最终母线作为conn_node
-                    "zone": zone, #取对侧的
-                }
+                    equipment["zone_lines"][line["name"]] = {
+                        "available": True,
+                        "conn_node": final_bus_name,  # 使用找到的最终母线作为conn_node
+                        "zone": zone, #取对侧的
+                        "to_st_name": line.to_st_name if line.to_st_name != substation_name else line.from_st_name,
+                        "owner": line.owner,
+                        "breakers": {},  # 改为字典格式，稍后填充
+                        "local_bus_name": local_bus_name,  # 保存本侧母线名称
+                        "remote_bus_name": remote_bus_name,  # 保存对侧母线名称
+                        "line_id": line["ext_id"]
+                    }
             except Exception as e:
                 print(f"处理线路 {line['name']} 的供区时出错: {str(e)}")
                 continue
@@ -234,6 +243,57 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
             print(f"处理线路 {line['name']} 时出错: {str(e)}")
             pass
     zone_set = set([equipment["zone_lines"][line]["zone"] for line in equipment["zone_lines"]])
+    # 收集每条线路相关的所有breaker，分为本侧和对侧
+    for line_name, line_info in equipment["zone_lines"].items():
+        local_breakers = []  # 本侧breaker（当前变电站内的breaker）
+        remote_breakers = []  # 对侧breaker（对侧变电站内的breaker）
+        
+        conn_node = line_info["conn_node"]
+        local_bus_name = line_info["local_bus_name"]
+        remote_bus_name = line_info["remote_bus_name"]
+        
+        for switch_name, switch_info in equipment["switches"].items():
+            if switch_info["switch_type"] == "breaker":
+                # 检查breaker连接的节点
+                switch_nodes = switch_info["nodes"]
+                
+                # 检查breaker是否与该线路相关（连接到线路的任一节点或remote_bus）
+                is_line_related = (conn_node in switch_nodes or 
+                                 line_name in switch_nodes or 
+                                 local_bus_name in switch_nodes or
+                                 remote_bus_name in switch_nodes)
+                
+                # 额外检查：如果breaker名称包含线路名称（去掉"线"字），也认为是相关的
+                line_name_without_suffix = line_name.replace("线", "")
+                if line_name_without_suffix in switch_name:
+                    is_line_related = True
+                
+                if is_line_related:
+                    # 通过检查switch连接的节点的st_name来判断是本侧还是对侧
+                    is_local = False
+                    for node_name in switch_nodes:
+                        # 查找该节点在net.bus中的信息
+                        try:
+                            bus_idx = net.bus[net.bus.name == node_name].index[0]
+                            node_st_name = net.bus.loc[bus_idx, 'st_name']
+                            if node_st_name == substation_name:
+                                is_local = True
+                                break
+                        except (IndexError, KeyError):
+                            continue
+                    
+                    if is_local:
+                        local_breakers.append(switch_name)
+                    else:
+                        remote_breakers.append(switch_name)
+        
+        equipment["zone_lines"][line_name]["breakers"] = {
+            "local": local_breakers[0] if local_breakers else None,
+            "remote": remote_breakers[0] if remote_breakers else None
+        }
+    # drop zone_lines if local or remote break is None
+    equipment["zone_lines"] = {k: v for k, v in equipment["zone_lines"].items() if v["breakers"]["local"] and v["breakers"]["remote"]}
+        
     for _, transformer in transformers.iterrows():
         equipment["transformers"][transformer["name"]] = {
             "conn_node": net.bus.name[transformer["bus"]],
@@ -253,7 +313,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
     print(
         f"找到{len(high_voltage_buses)}个电压等级大于等于{high_voltage_threshold}kV的母线"
     )
-    hydro_gas_node = net.gen.bus[net.gen.type.isin(["水电","天然气"])].tolist()
+    # 包含水电、燃气的出口开关、所有机组变压器的出口开关
+    hydro_gas_node = net.gen.bus[net.gen.type.isin(["水电","天然气"])].tolist() + net.trafo["hv_bus"].tolist()
     # print(hydro_gas_node)
     # 使用loc来避免SettingWithCopyWarning
     net.switch.loc[net.switch.bus.isin(hydro_gas_node) | net.switch.element.isin(hydro_gas_node), "closed"] = True
@@ -270,6 +331,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
 
     # 创建一个字典，用于存储每个母线所属的孤岛索引
     bus_to_island = {}
+    substation_to_island = defaultdict(set)
     for i, island in enumerate(islands):
         for bus in island:
             bus_to_island[int(bus)] = i
@@ -328,7 +390,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "p_max": float(gen.max_p_mw),
                             "p_min": float(gen.min_p_mw),
                             "p_current": float(gen.p_mw),
-                            "sensitivity": 1
+                            "sensitivity": 1,
+                            "st_id": net.gen.st_id[idx]
                         }
             backup_generator_dict = {}
             for idx, gen in net.gen[(net.gen.type == "天然气") & (net.gen.p_mw < 5)].iterrows():
@@ -342,7 +405,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "p_max": float(gen.max_p_mw),
                             "p_min": max(float(gen.min_p_mw),float(gen.max_p_mw)*0.4),
                             "startup_cost": 10000,
-                            "sensitivity": 1
+                            "sensitivity": 1,
+                            "st_id": net.gen.st_id[idx]
                         }
             hydro_generator_dict = {}
             for idx, gen in net.gen[(net.gen.type == "水电") & (net.gen.p_mw < 5)].iterrows():
@@ -355,7 +419,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "name": str(net.gen.name[idx]),
                             "p_max": float(gen.max_p_mw),
                             "startup_cost": 1000,
-                            "sensitivity": 1
+                            "sensitivity": 1,
+                            "st_id": net.gen.st_id[idx]
                         }
             storage_units = []
             for idx, storage in net.gen[net.gen.type == "电化学储能"].iterrows():
@@ -373,7 +438,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                             "p_current": float(storage.p_mw),
                             "st_name": storage.st_name,
                             "st_id": storage.st_id,
-                            "sensitivity": 1
+                            "sensitivity": 1,
                         }
                     )
             # 按照st_name将储能单元的参数加总
@@ -381,6 +446,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
             for unit in storage_units:
                 if unit["st_name"] not in storage_plant_dict:
                     storage_plant_dict[unit["st_name"]] = unit
+                    substation_to_island[unit["st_name"]].add(area_name)
                 else:
                     storage_plant_dict[unit["st_name"]]["p_charge_max"] += unit["p_charge_max"]
                     storage_plant_dict[unit["st_name"]]["p_discharge_max"] += unit["p_discharge_max"]
@@ -399,7 +465,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                 "island_index": i,  # 保存孤岛索引，用于后续识别联络变电站
                 "island_buses": island_buses,  # 保存孤岛中的所有母线，用于后续识别联络变电站
             }
-    substation_to_island = defaultdict(set)
+    
     for k in island_stats.keys():
         # 获取该孤岛中的所有母线
         for bus in island_stats[k]["island_buses"]:

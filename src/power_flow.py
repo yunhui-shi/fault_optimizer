@@ -40,7 +40,7 @@ def load_bus_section(net, pf_data):
             type=bus["type"],
         )
         bus_map[int(bus["id"])] = int(index)
-        #print(f"{bus} created")
+        # print(f"{bus} created")
 
     # 加载量测数据
     bus_measurements = load_measurement_data("api/measurement/bus")
@@ -119,6 +119,7 @@ def load_line_section(net, pf_data):
                 max_i_ka=float(line["max_i_ka"]) if float(line["max_i_ka"]) else 3 ,
                 from_st_name=line["from_st_name"],
                 to_st_name=line["to_st_name"],
+                owner=line["owner"]
             )
             line_map[int(line["id"])] = int(index)
         except Exception as e:

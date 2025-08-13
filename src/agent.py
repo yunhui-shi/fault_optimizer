@@ -1,5 +1,4 @@
 from typing import Literal
-
 from langchain_core.tools import StructuredTool
 from langchain.agents import create_tool_calling_agent
 from langchain.memory import ConversationBufferWindowMemory
@@ -13,19 +12,14 @@ import requests
 import os
 import redis
 from dotenv import load_dotenv
-import logging
 import json
 import re
-import sys
-from datetime import datetime, timedelta
-import pandapower as pp
-from fuzzywuzzy import fuzz, process
-from power_flow import create_network, run_powerflow
-from area_topology import find_islands_without_high_voltage_buses, identify_interconnection_substations
+from utils import save_tickets_to_excel
 load_dotenv(".env.example")
 # Get API keys and endpoints from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE") # Optional
+FAULT_OPT_URL = os.getenv("FAULT_OPT_URL")
 N1_ANALYSIS_URL = os.getenv("N1_ANALYSIS_URL", "http://127.0.0.1:9999/n1_analysis") # Default if not set
 FIND_CONTINGENCY_PLAN_URL = os.getenv("FIND_CONTINGENCY_PLAN_URL") # Needs to be set if not mocked
 FIND_OPERATION_PLAN_URL = os.getenv("FIND_OPERATION_PLAN_URL")
@@ -35,312 +29,25 @@ if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY is not set in the environment variables.")
 # 初始化数据库
 db = OptimizationDatabase()
-db.save_optimization_config(OptimizationInput.Config.json_schema_extra["example"])
-def get_optimization_boundary(device_name:str,device_type:Literal["线路", "母线", "主变"]) -> str:
+# db.save_optimization_config(OptimizationInput.Config.json_schema_extra["example"])
+def get_optimization_boundary(device_name:str,device_type:Literal["线路", "母线", "主变"],load_enlarge_factor=1) -> str:
     """
     获取优化边界的工具，当识别到新故障时调用
     
     Args:
         device_name: 故障设备的具体名称
         device_type: 故障设备的类型
+        load_enlarge_factor: 负荷放大倍数，默认为1
     
     Returns:
         str: 操作结果描述
     """
     try:
-        # 尝试调用API接口获取优化边界
-        api_url = os.getenv("FAULT_OPT_URL")
-        # payload = {
-        #     "device_name": device_name,
-        #     "device_type": device_type
-        # }
-        current_hour = datetime.now().replace(minute=0, second=0, microsecond=0)
-        dataTime = current_hour.strftime("%Y-%m-%d %H:%M:%S")
-        params = {
-            "dataTime": dataTime
-        }
-        response = requests.post(api_url, params=params, timeout=10)
-        # 检查响应状态码是否为2xx
-        if response.status_code // 100 == 2:
-            # API调用成功，处理返回的数据
-            json_data = response.json()
-            device_exist = False
-            if device_type == "主变":
-                for key in list(json_data["transformers"].keys()):
-                    if (device_name in key) or (key in device_name):
-                        del json_data["transformers"][key]
-                        device_exist = True
-                        break
-            elif device_type == "线路":
-                for key in list(json_data["zone_lines"].keys()):
-                    if (device_name in key) or (key in device_name):
-                        json_data["zone_lines"][key]["available"] = False
-                        device_exist = True
-                        break
-            elif device_type == "母线":
-                for key in list(json_data["substation_nodes"]):
-                    if (device_name in key) or (key in device_name):
-                        # 删除母线
-                        json_data["substation_nodes"].remove(key)
-                        device_exist = True
-                        # 删除与母线连接的变压器
-                        for tf_key in list(json_data["transformers"].keys()):
-                            if json_data["transformers"][tf_key]["conn_node"] == key:
-                                del json_data["transformers"][tf_key]
-                        # 删除与母线连接的开关
-                        for sw_key in list(json_data["switches"].keys()):
-                            if key in json_data["switches"][sw_key]["nodes"]:
-                                del json_data["switches"][sw_key]
-                        # 删除与母线连接的线路
-                        for line_key in list(json_data["zone_lines"].keys()):
-                            if json_data["zone_lines"][line_key]["conn_node"] == key:
-                                del json_data["zone_lines"][line_key]
-                        break
-            if device_exist:
-                print(f"存在故障设备 {device_name}（{device_type}）")
-            else:
-                print(f"不存在故障设备 {device_name}（{device_type}），已忽略")
-            # db.save_optimization_config(json_data)
-            # return f"成功从API获取到设备 {device_name}（{device_type}）的优化边界数据, 请继续执行后续优化"
-            return f"使用默认配置数据, 请继续执行后续优化"
-        else:
-            # API调用失败，使用默认数据
-            return f"API调用失败（状态码: {response.status_code}），使用默认配置数据, 请继续执行后续优化"
-            
-    except requests.exceptions.RequestException as e:
-        # 网络错误或超时，使用默认数据
-        return f"API调用异常（{str(e)}），使用默认配置数据, 请继续执行后续优化"
+        response = requests.get(FAULT_OPT_URL, params={'device_name': device_name,'device_type':device_type,'load_enlarge_factor':load_enlarge_factor}, timeout=30)
+        db.save_optimization_config(response.json())
+        return f"成功从API获取到设备 {device_name}（{device_type}）的优化边界数据, 请继续执行后续优化"
     except Exception as e:
         return f"获取优化边界时发生错误: {str(e)}"
-
-# 从接口获取量测数据 
-# def get_optimization_boundary(device_name: str, device_type: Literal["线路", "母线", "主变"]):
-#     """
-#     根据设备名称和类型获取对应供区的优化边界数据
-    
-#     - **device_name**: 设备名称，例如"双龙变1号主变"
-#     - **device_type**: 设备类型，可选值为"线路"、"母线"、"主变"
-#     - **返回**: 包含该设备所在供区数据的OptimizationInput对象
-#     """
-#     try:
-#         # 读取area_statistics.json文件
-#         with open("result/area_statistics.json", "r", encoding="utf-8") as f:
-#             area_stats = json.load(f)
-        
-#         # 先收集所有设备及其所属供区
-#         all_devices = {}
-        
-#         if device_type == "主变":
-#             # 收集所有主变及其所属供区
-#             for area_name, area_data in area_stats.items():
-#                 for transformer in area_data.get("主变", []):
-#                     all_devices[transformer.get("name", "")] = area_name
-#         else:
-#             raise HTTPException(
-#                 status_code=400,
-#                 detail=f"设备类型 {device_type} 暂不支持"
-#             )
-#     # 使用process.extractOne找到最相似的设备，并直接获取其所属供区
-#         best_match, score = process.extractOne(
-#             device_name, 
-#             all_devices.keys(), 
-#             scorer=fuzz.partial_ratio
-#         )
-#         print(best_match)
-#         # 直接从匹配结果获取供区
-#         target_area = all_devices[best_match] if best_match else None
-        
-#         # 如果没有找到对应的供区，返回错误
-#         if not target_area:
-#             raise HTTPException(
-#                 status_code=404,
-#                 detail=f"未找到设备 {device_name} ({device_type}) 所在的供区"
-#             )
-        
-#         # 提取目标供区的数据，组装成OptimizationInput格式
-#         area_data = area_stats[target_area]
-        
-#         # 尝试调用接口获取量测
-#         meas_data = {}
-#         try:
-#             api_url = os.getenv("MEAS_URL")
-#             payload = meas_request_data(area_data)
-#             headers = {
-#                 "Content-Type": "application/json"
-#             }
-#             print(payload)
-#             print()
-#             current_time = datetime.now() - timedelta(minutes=5)
-#             adj_min = (current_time.minute // 5) * 5
-#             current_min = datetime.now().replace(minute=adj_min, second=0, microsecond=0)
-#             dataTime = current_min.strftime("%Y-%m-%d %H:%M:%S")
-#             params = {
-#                 "dataTime": dataTime
-#             }
-#             response = requests.post(api_url, params=params, json=payload, headers=headers, timeout=10)
-#             # 检查响应状态码是否为2xx
-#             if response.status_code // 100 == 2:
-#                 # API调用成功，处理返回的数据
-#                 meas_data = response.json()
-#             else:
-#                 # API调用失败，使用默认数据
-#                 print(f"API调用失败（状态码: {response.status_code}）")
-#         except requests.exceptions.RequestException as e:
-#             # 网络错误或超时，使用默认数据
-#             print(f"API调用异常（{str(e)}）")
-#         except Exception as e:
-#             print(f"获取量测数据时发生错误: {str(e)}")
-#         print(meas_data)
-#         # 主变量测赋值
-#         for tr in meas_data['tr']:
-#             target_id = tr['transfm_id']
-#             new_p_current = tr['val'] if tr['val'] is not None else 0
-#             if "主变" in area_data and isinstance(area_data["主变"], list):
-#                 for item in area_data["主变"]:
-#                     if "id" in item and str(item["id"]) == target_id:
-#                         if "p_current" in item:
-#                             item["p_current"] = new_p_current
-#             # zones量测赋值
-#             if "zones" in area_data and isinstance(area_data["zones"], dict):
-#                 for zone_name, zone_data in area_data["zones"].items():
-#                     if "capacity" in zone_data and isinstance(zone_data["capacity"], list):
-#                         for item in zone_data["capacity"]:
-#                             if "id" in item and str(item["id"]) == target_id:
-#                                 if "p_current" in item:
-#                                     item["p_current"] = new_p_current
-    
-#         # operating_units、backup_units、hydro_units量测赋值
-#         for unit in meas_data['units']:
-#             target_id = unit['id']
-#             new_p_current = unit['val'] if unit['val'] is not None else 0
-#             if "operating_units" in area_data and isinstance(area_data["operating_units"], dict):
-#                 for unit_id, unit_data in area_data["operating_units"].items():
-#                     if "id" in unit_data and str(unit_data["id"]) == target_id:
-#                         if "p_current" in unit_data:
-#                             unit_data["p_current"] = new_p_current if new_p_current is not None else 0
-        
-#             if "backup_units" in area_data and isinstance(area_data["backup_units"], dict):
-#                 for unit_id, unit_data in area_data["backup_units"].items():
-#                     if "id" in unit_data and str(unit_data["id"]) == target_id:
-#                         if "p_current" in unit_data:
-#                             unit_data["p_current"] = new_p_current if new_p_current is not None else 0
-       
-#             if "hydro_units" in area_data and isinstance(area_data["hydro_units"], dict):
-#                 for unit_id, unit_data in area_data["hydro_units"].items():
-#                     if "id" in unit_data and str(unit_data["id"]) == target_id:
-#                         if "p_current" in unit_data:
-#                             unit_data["p_current"] = new_p_current if new_p_current is not None else 0
-        
-#         # storage_units量测赋值
-#         for plant in meas_data['plant']:
-#             target_id = plant['id']
-#             new_p_current = plant['val'] if plant['val'] is not None else 0
-#             if "storage_units" in area_data and isinstance(area_data["storage_units"], dict):
-#                 for unit_name, unit_data in area_data["storage_units"].items():
-#                     if "st_id" in unit_data and unit_data["st_id"] == target_id:
-#                         if "p_current" in unit_data:
-#                             unit_data["p_current"] = new_p_current if new_p_current is not None else 0
-
-#         # 设置zones的fix_load
-#         for zone_name, zone_data in area_data["zones"].items():
-#             total_p_current = 0.0
-#             # 计算capacity中所有p_current的和
-#             if "capacity" in zone_data and isinstance(zone_data["capacity"], list):
-#                 for item in zone_data["capacity"]:
-#                     if "p_current" in item and item["p_current"] is not None:
-#                         total_p_current += item["p_current"]
-#             # 将结果赋值给fixed_load
-#             zone_data["fixed_load"] = [total_p_current] * 4
-
-#         # 构建OptimizationInput对象
-#         optimization_input = {
-#             "horizon": 4,  # 默认时间步长为4
-#             "zones": {},
-#             "substations": {},
-#             "objective": "MIN_SWITCH_OP",
-#             "operating_units": area_data.get("operating_units", {}),
-#             "backup_units": area_data.get("backup_units", {}),
-#             "hydro_units": area_data.get("hydro_units", {}),
-#             "storage_units": area_data.get("storage_units", {}),
-#             "interruptible_loads": {}
-#         }
-        
-#         # 添加zones数据
-#         for zone_name, zone_data in area_data.get("zones", {}).items():
-#             zone_capacity = sum(transformer.get("capacity", 0) for transformer in zone_data.get("capacity", []))
-#             # 去除device_name对应的主变、以及剩下最大一台主变的容量
-#             if zone_name == target_area:
-#                 for transformer in area_data["主变"]:
-#                     if transformer["name"] == best_match:
-#                         zone_capacity -= transformer.get("capacity", 0)
-#                 # 找出剩余主变中容量最大的一台并去除
-#                 remaining_transformers = [transformer for transformer in area_data.get("主变", []) if transformer.get("name", "") != best_match]
-#                 if remaining_transformers:
-#                     zone_capacity -= max(transformer.get("capacity", 0) for transformer in remaining_transformers)
-#             optimization_input["zones"][zone_name] = {
-#                 "capacity": zone_capacity,
-#                 "fixed_load": zone_data.get("fixed_load", [])
-#             }
-        
-#         # 添加substations数据
-#         for substation_name, substation_data in area_data.get("联络变电站", {}).items():
-#             # 构建变电站数据
-#             substation = {
-#                 "transformers": {},
-#                 "switches": {},
-#                 "zone_lines": {},
-#                 "operation_cost": 1000.0,
-#                 "available": True
-#             }
-            
-#             # 添加变压器数据
-#             for transformer_name, transformer_data in substation_data.get("transformers", {}).items():
-#                 substation["transformers"][transformer_name] = {
-#                     "conn_node": transformer_data.get("conn_node"),
-#                     "load": transformer_data.get("load"),
-#                     "sensitivity": transformer_data.get("sensitivity", {}),
-#                     "cost": transformer_data.get("cost", {})
-#                 }
-                
-#             # 添加开关数据
-#             for switch_name, switch_data in substation_data.get("switches", {}).items():
-#                 substation["switches"][switch_name] = {
-#                     "available": switch_data.get("available", True),
-#                     "cost": switch_data.get("cost", 1),
-#                     "initial_state": switch_data.get("initial_state", 0),
-#                     "nodes": switch_data.get("nodes", []),
-#                     "switch_type": switch_data.get("switch_type", "breaker")
-#                 }
-                
-#             # 添加线路数据
-#             for line_name, line_data in substation_data.get("zone_lines", {}).items():
-#                 substation["zone_lines"][line_name] = {
-#                     "available": line_data.get("available", True),
-#                     "conn_node": line_data.get("conn_node", ""),
-#                     "zone": line_data.get("zone", "")
-#                 }
-            
-#             # 添加变电站到substations字典
-#             optimization_input["substations"][substation_name] = substation  
-#         # 返回OptimizationInput对象
-#         return optimization_input
-#         # db.save_optimization_config(optimization_input)
-#         # return f"成功从API获取到设备 {device_name}（{device_type}）的优化边界数据, 请继续执行后续优化"
-#     except Exception as e:
-#         import traceback
-#         print("发生异常：")
-#         traceback.print_exc()
-#         raise HTTPException(status_code=500, detail=f"服务器内部错误: {str(e)}")
-
-# # 生成量测数据请求payload
-# def meas_request_data(data):
-#     result = {
-#         "tr": [str(item["id"]) for item in data["主变"]] + [str(zone["id"]) for zone in sum([item["capacity"] for item in data["zones"].values()], []) if "id" in zone],
-#         "units": list(data["operating_units"].keys()) + list(data["backup_units"].keys()) + list(data["hydro_units"].keys()),
-#         "plant": [unit["st_id"] for unit in data["storage_units"].values()]
-#     }
-#     return result
-
 
 def run_optimization(objective: Literal["MIN_SWITCH_OP", "MAX_SAFETY_REGION", "MIN_COST"] = None):
     """
@@ -367,6 +74,8 @@ def run_optimization(objective: Literal["MIN_SWITCH_OP", "MAX_SAFETY_REGION", "M
                 data['objective'] = ObjectiveType.MIN_COST        
         # 运行优化
         result = solve_dynamic_recovery_model(**data)
+        # 写操作票，保存到 result/temp_ops_ticket.xls
+        save_tickets_to_excel(result.get('results', {}).get('操作票', []))
         return result
     except Exception as e:
         return f"运行优化时发生错误: {str(e)}"
@@ -636,7 +345,9 @@ Guidelines:
 
 OPTIMIZATION REPORT TEMPLATE 
 -----
-#### **一、 核心优化结果**
+#### **一、 处置要点**
+一句话总结，需要加哪些机组出力、需要增开哪些燃气、水电，需要进行哪些变电站的倒排操作，是否需要启用可中断负荷。
+#### **二、 核心优化结果**
 
 | 指标 | 结果 |
 | :--- | :--- |
@@ -646,7 +357,7 @@ OPTIMIZATION REPORT TEMPLATE
 
 -----
 
-#### **二、 开关操作**
+#### **三、 开关操作**
 
   * **操作总结**: `[此处填写开关操作的总体描述。例如：本次调度周期内无开关操作，系统网络结构保持稳定。或：本次调度共执行 N 次操作以优化潮流分布。]`
 
@@ -658,7 +369,7 @@ OPTIMIZATION REPORT TEMPLATE
 
 -----
 
-#### **三、 机组调度**
+#### **四、 机组调度**
 
   * **在运机组**:
       * 以表格形式列出各机组在各个时段出力（如200.0 MW）描述，各机组名称放于第一列，各个时段列于第一行。
@@ -673,16 +384,16 @@ OPTIMIZATION REPORT TEMPLATE
 
 -----
 
-#### **四、 网络拓扑**
+#### **五、 网络拓扑**
 
 **1. 变压器分配:**
 
   * `[变压器名称, 如: T1]`:  分配至 **`[供区名称, 如: Zone_A]`**
   * `[变压器名称, 如: T2]`:  分配至 **`[供区名称, 如: Zone_A]`**
 
-**2. 各供区安全状态:**
+**2. 各供区供电裕度:**
 
-  * 以表格形式列出各供区的状态（\<span style="color:green;"\>**`[安全/告警/越限]`**\</span\>）、容量（`[容量值] MW`）和各个时段安全裕度（如：**`[裕度百分比]`%** (负载 `[负载值]` MW)），各供区名称（如: Zone_A）放于第一列，总列数根据时段数量增减。
+  * 以表格形式列出各供区的供电裕度（<span style="color:green;">**`[安全/告警/越限]`**</span>）、容量（`[容量值] MW`）和各个时段供电裕度（如：**`[裕度百分比]`%** (负载 `[负载值]` MW)），各供区名称（如: Zone_A）放于第一列，总列数根据时段数量增减。
 
 
 """
