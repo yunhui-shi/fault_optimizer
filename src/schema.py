@@ -35,7 +35,7 @@ class Switch(BaseModel):
     cost: float = Field(1.0, description="开关单次操作的成本")
     available: bool = Field(True, description="开关是否可用，True表示可用，False表示不可用")
     switch_type: Literal["breaker", "switch"] = Field("switch", description="开关类型，breaker或switch")
-    
+
 class ObjectiveType(Enum):
     MIN_SWITCH_OP = "minimize_switch_operation"
     MAX_SAFETY_REGION = "maximize_safety_region"

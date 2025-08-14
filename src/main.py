@@ -383,20 +383,20 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                 remaining_transformers = [transformer for transformer in area_data.get("主变", []) if transformer.get("name", "") != best_match]
                 if remaining_transformers:
                     zone_capacity -= max(transformer.get("capacity", 0) for transformer in remaining_transformers)
-            optimization_input["zones"][zone_name] = {
-                "capacity": zone_capacity,
-                "fixed_load": [zone_data["fixed_load"][t] - zone_var_load[t] for t in range(4)]
-            }
-            # if zone_name == target_area:
-            #     optimization_input["zones"][zone_name] = {
-            #         "capacity": zone_capacity,
-            #         "fixed_load": [1.8*zone_capacity - zone_var_load[t] for t in range(4)]
-            #     }
-            # else:
-            #     optimization_input["zones"][zone_name] = {
-            #         "capacity": zone_capacity,
-            #         "fixed_load": [0.5 * zone_capacity] * 4
-            #     }
+            # optimization_input["zones"][zone_name] = {
+            #     "capacity": zone_capacity,
+            #     "fixed_load": [zone_data["fixed_load"][t] - zone_var_load[t] for t in range(4)]
+            # }
+            if zone_name == target_area:
+                optimization_input["zones"][zone_name] = {
+                    "capacity": zone_capacity,
+                    "fixed_load": [1.8*zone_capacity - zone_var_load[t] for t in range(4)]
+                }
+            else:
+                optimization_input["zones"][zone_name] = {
+                    "capacity": zone_capacity,
+                    "fixed_load": [0.5 * zone_capacity] * 4
+                }
         
         # 添加substations数据
         for substation_name, substation_data in area_data.get("联络变电站", {}).items():

@@ -1,7 +1,6 @@
 # optimization_solver.py
 from pyscipopt import Model, quicksum
 from schema import ObjectiveType, OptimizationInput
-from topology_analysis import build_power_system_graph, get_connected_edges_with_attrs, is_bus, analyze_components
 from datetime import datetime, timedelta
 import json
 import networkx as nx
@@ -352,6 +351,41 @@ def solve_dynamic_recovery_model(
         s_var = S[s_name]
         model.addCons(is_energized_by[u] - is_energized_by[v] <= M * (1 - S[s_name]))
         model.addCons(is_energized_by[u] - is_energized_by[v] >= - M * (1 - S[s_name]))
+    # d) 供区线路流量约束：线路相关开关在非目标供区中的流量为0
+    for line_name, line_params in zone_lines.items():
+        target_zone = line_params['zone']
+        line_related_switches = set()
+        
+        # 获取该线路的local和remote breaker
+        breakers = line_params.get('breakers', {})
+        local_breaker = breakers.get('local')
+        remote_breaker = breakers.get('remote')
+        
+        # 收集线路相关的开关
+        line_related_switches.add(local_breaker)
+        line_related_switches.add(remote_breaker)
+        
+        # 找到与这些breaker共享节点的其他开关
+        breaker_nodes = set()
+        for breaker_name in [local_breaker, remote_breaker]:
+            breaker_nodes.update(switches[breaker_name]['nodes'])
+        
+        # 查找与breaker共享节点的其他开关
+        for switch_name, switch_data in switches.items():
+            switch_nodes = set(switch_data['nodes'])
+            if switch_nodes & breaker_nodes:  # 如果有共同节点
+                line_related_switches.add(switch_name)
+        
+        # 为线路相关开关在非目标供区中的流量设置为0
+        for switch_name in line_related_switches:
+            print(switch_name)
+            u, v = switches[switch_name]['nodes']
+            for z_name in zones:
+                if z_name != target_zone:
+                    model.chgVarLb(f[u, v, z_name], 0)
+                    model.chgVarLb(f[v, u, z_name], 0)
+                    model.chgVarUb(f[u, v, z_name], 0)
+                    model.chgVarUb(f[v, u, z_name], 0)
 
     # e) 供区容量约束
     safety_region = {(name,t): model.addVar(vtype="C", lb=0, ub=zones[name]['capacity'], name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
