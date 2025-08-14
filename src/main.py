@@ -125,7 +125,9 @@ app = FastAPI(
     docs_url=None,
     debug=True
 )
-app.mount("/static", StaticFiles(directory="static"), name="static")
+from pathlib import Path
+static_dir = Path(__file__).parent.parent / "static"
+app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 # --- API 端点定义 ---
 @app.get("/docs", include_in_schema=False)
 async def custom_swagger_ui_html():

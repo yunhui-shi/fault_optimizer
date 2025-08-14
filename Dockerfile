@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y build-essential
 RUN pip install cython setuptools wheel
 
 # 复制源代码和构建脚本
-COPY optimization_solver.py .
+COPY src/optimization_solver.py ./
 COPY setup.py .
 
 # 运行编译命令，生成 .so 文件
@@ -46,7 +46,7 @@ RUN chmod +x /tmp/scip_installer.sh \
 # 将 SCIP 的可执行文件和库路径添加到环境变量中
 # 请根据实际安装路径调整这里
 ENV PATH="/usr/local/scip/bin:${PATH}"
-ENV LD_LIBRARY_PATH="/usr/local/scip/lib:${LD_LIBRARY_PATH}"
+ENV LD_LIBRARY_PATH="/usr/local/scip/lib:$LD_LIBRARY_PATH"
 
 # 1. 只安装运行时的依赖 (注意，这里不需要 cython 或 setuptools)
 COPY requirements.txt .
@@ -54,13 +54,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 2. 从 builder 阶段复制 FastAPI 的入口文件和编译好的二进制模块
 COPY . .
-RUN rm -f optimization_solver.py
+RUN rm -f src/optimization_solver.py
 # --- 关键步骤 ---
 # 将 builder 阶段编译好的 .so 文件复制过来
-COPY --from=builder /build/*.so .
+COPY --from=builder /build/*.so ./src/
 
 # 3. 复制其他必要文件，比如 Pydantic 模型用到的文件（如果它们在别的文件里）
 
 # 暴露端口并运行应用
 EXPOSE 8000
+# 在src目录下创建example目录的符号链接
+RUN ln -s /app/example /app/src/example
+WORKDIR /app/src
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

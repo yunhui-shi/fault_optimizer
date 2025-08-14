@@ -67,7 +67,8 @@ class OptimizationDatabase:
                     available INTEGER NOT NULL DEFAULT 1, -- 是否可用（0不可用，1可用）
                     owner TEXT, -- 线路管辖单位
                     breakers TEXT, -- 线路上的断路器，JSON格式
-                    line_id TEXT -- 线路ID
+                    line_id TEXT, -- 线路ID
+                    to_st_name TEXT -- 对侧变电站名称
                 ) -- 区域间线路表，存储连接不同区域的输电线路信息
             """)
             

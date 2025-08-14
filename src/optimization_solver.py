@@ -132,7 +132,8 @@ def calculate_priority(u: str, v: str, switch_type: str, last_operated_nodes: se
     计算操作优先级：
     - 与上一步操作存在共同节点的闸刀：优先级3
     - 任意闸刀：优先级2
-    - 任意断路器：优先级1
+    - 闭合断路器：优先级1
+    - 拉开断路器：优先级0
     """    
     if switch_type == 'switch':  # 闸刀
         if u in last_operated_nodes or v in last_operated_nodes:
@@ -497,7 +498,10 @@ def solve_dynamic_recovery_model(
     # =================================================================================
     # 5. 求解与结果封装 (更新返回的字典)
     # =================================================================================
+
     model.optimize()
+    # model.solveConcurrent()
+
     
     if model.getStatus() == "optimal":
         final_switch_states = {name: round(model.getVal(var)) for name, var in S.items()}
@@ -560,7 +564,7 @@ def solve_dynamic_recovery_model(
         for g in backup_units:
             for t in range(horizon):
                 if model.getVal(v_bak_startup[g,t]) == 1:
-                    backup_unit_commitment += f"{g}在时段{(datetime.now() + timedelta(hours=t)).strftime("%H:%M")}开机\n"
+                    backup_unit_commitment += f"{g}在时段{(datetime.now() + timedelta(hours=t)).strftime('%H:%M')}开机\n"
                     break
         
         # 变电站操作信息

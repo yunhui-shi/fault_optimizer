@@ -21,12 +21,10 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE") # Optional
 FAULT_OPT_URL = os.getenv("FAULT_OPT_URL")
 N1_ANALYSIS_URL = os.getenv("N1_ANALYSIS_URL", "http://127.0.0.1:9999/n1_analysis") # Default if not set
-FIND_CONTINGENCY_PLAN_URL = os.getenv("FIND_CONTINGENCY_PLAN_URL") # Needs to be set if not mocked
-FIND_OPERATION_PLAN_URL = os.getenv("FIND_OPERATION_PLAN_URL")
-GET_MODEL_URL  = os.getenv("GET_MODEL_URL")
-GET_BACKUP_LINE_URL = os.getenv("GET_BACKUP_LINE_URL")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY is not set in the environment variables.")
+FIND_CONTINGENCY_PLAN_URL = os.getenv("FIND_CONTINGENCY_PLAN_URL","") # Needs to be set if not mocked
+FIND_OPERATION_PLAN_URL = os.getenv("FIND_OPERATION_PLAN_URL","")
+GET_MODEL_URL  = os.getenv("GET_MODEL_URL","")
+GET_BACKUP_LINE_URL = os.getenv("GET_BACKUP_LINE_URL","")
 # 初始化数据库
 db = OptimizationDatabase()
 # db.save_optimization_config(OptimizationInput.Config.json_schema_extra["example"])
@@ -75,7 +73,10 @@ def run_optimization(objective: Literal["MIN_SWITCH_OP", "MAX_SAFETY_REGION", "M
         # 运行优化
         result = solve_dynamic_recovery_model(**data)
         # 写操作票，保存到 result/temp_ops_ticket.xls
-        save_tickets_to_excel(result.get('results', {}).get('操作票', []))
+        save_tickets_to_excel({
+            "tickets": result['results']['操作票'],
+            "description": "故障恢复操作票"
+        })
         return result
     except Exception as e:
         return f"运行优化时发生错误: {str(e)}"
@@ -257,18 +258,16 @@ def FindContingencyPlan(fault_device:str) -> str:
     for plan in plans:
         action[plan["预案ID"]] = (plan["预案名称"],plan["预案内容"])
     prompt_con = f"""
-    当前电网故障设备：{fault_device}
-    检索到的事故预案:{plans_short}
-    请在检索到的事故预案中匹配，判定是否有当前电网故障设备相关或相似的1个或多个预案。注意区分单线故障和双线故障，如果发生了单线故障却匹配到了双线故障预案，则相关性仅为中等，反之亦然。
+    /nothink 当前电网故障设备：{fault_device}
+    检索到的事故预案:{plans}
+    请在检索到的事故预案中匹配与当前电网故障设备相关或相似的1个或多个预案。
 
     **指定输出格式：** 必须严格按照下面的 JSON 格式返回结果。
 
     输出格式:
     {{
-        "Found":1 , #若找到设为1，找不到设为0
         "预案名称":["黄汤2397线跳闸"], # 匹配事故预案名称
         "预案id":["18934"], #匹配事故预案
-        "其他说明":"预案18934与当前故障场景相关性是高/中/低，原因是..."
     }}
     """
     response = plan_llm.invoke(prompt_con)
@@ -351,7 +350,6 @@ OPTIMIZATION REPORT TEMPLATE
 
 | 指标 | 结果 |
 | :--- | :--- |
-| **目标函数** | `[填入总目标成本，例如: 32.4998]` |
 | **运行成本** | `[填入总操作成本，例如: 325000.0]` |
 | **操作次数** | `[填入总操作次数，例如: 0]` |
 
@@ -386,7 +384,7 @@ OPTIMIZATION REPORT TEMPLATE
 
 #### **五、 网络拓扑**
 
-**1. 变压器分配:**
+**1. 主变所属供区:**
 
   * `[变压器名称, 如: T1]`:  分配至 **`[供区名称, 如: Zone_A]`**
   * `[变压器名称, 如: T2]`:  分配至 **`[供区名称, 如: Zone_A]`**
