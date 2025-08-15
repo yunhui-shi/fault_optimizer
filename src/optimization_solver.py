@@ -387,7 +387,25 @@ def solve_dynamic_recovery_model(
                     model.chgVarUb(f[u, v, z_name], 0)
                     model.chgVarUb(f[v, u, z_name], 0)
 
-    # e) 供区容量约束
+    # e) 变电站开关流量约束：每个变电站内的开关流量只能来自该变电站内zone_lines对应的zone集合
+    for substation_name, substation_data in substations.items():
+        # 获取该变电站内zone_lines对应的zone集合
+        substation_zones = set()
+        for line_name, line_params in substation_data.get('zone_lines', {}).items():
+            substation_zones.add(line_params['zone'])
+        
+        # 为该变电站内的所有开关设置流量约束
+        for switch_name, switch_data in substation_data.get('switches', {}).items():
+            u, v = switch_data['nodes']
+            # 对于不在该变电站zone集合中的zone，将流量设置为0
+            for z_name in zones:
+                if z_name not in substation_zones:
+                    model.chgVarLb(f[u, v, z_name], 0)
+                    model.chgVarLb(f[v, u, z_name], 0)
+                    model.chgVarUb(f[u, v, z_name], 0)
+                    model.chgVarUb(f[v, u, z_name], 0)
+
+    # f) 供区容量约束
     safety_region = {(name,t): model.addVar(vtype="C", lb=0, ub=zones[name]['capacity'], name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
     min_safety_region = model.addVar(vtype="C", lb=0, ub=1, name="min_safety_region")
     # b) 系统功率平衡约束,供区充裕度约束
@@ -404,7 +422,7 @@ def solve_dynamic_recovery_model(
             model.addCons(demand_side + safety_region[z_name,t] == supply_side + z_params['capacity'])
             model.addCons(min_safety_region <= safety_region[z_name,t]/z_params['capacity'])
 
-    # f) 备用机组启动延迟约束,启动一小时后并网，并网一小时后带满，开机之后不停机
+    # g) 备用机组启动延迟约束,启动一小时后并网，并网一小时后带满，开机之后不停机
     for g, p in backup_units.items():
         for t in range(horizon):
             model.addCons(v_bak_startup[g,t] + v_bak_operating[g,t] <= 1)
