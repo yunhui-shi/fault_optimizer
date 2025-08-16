@@ -1,0 +1,2315 @@
+{
+    "horizon": 4,
+    "zones": {
+        "涌潮供区": {
+            "capacity": 1500.0,
+            "fixed_load": [
+                1616.0944,
+                1616.0944,
+                1616.0944,
+                1616.0944
+            ]
+        },
+        "古越供区": {
+            "capacity": 2000.0,
+            "fixed_load": [
+                1400.0,
+                1400.0,
+                1400.0,
+                1400.0
+            ]
+        },
+        "昇光供区": {
+            "capacity": 3600.0,
+            "fixed_load": [
+                2520.0,
+                2520.0,
+                2520.0,
+                2520.0
+            ]
+        }
+    },
+    "substations": {
+        "凤凰变": {
+            "name": "凤凰变",
+            "nodes": [
+                "0112330600000310050023",
+                "0112330100008210050185",
+                "凤涌4418线",
+                "凤凰变220kV副母Ⅰ段",
+                "0112330100008210050186",
+                "0112330100008210050177",
+                "0112330600000310050022",
+                "凤凰变220kV副母Ⅱ段",
+                "0112330100008210050019",
+                "凤凰变220kV正母Ⅰ段",
+                "0112330000000810050054",
+                "安凤2492线",
+                "0112330100008210050178",
+                "0112330100008210050180",
+                "0112330000000810050051",
+                "0112330100008210050195",
+                "0112330000000810050038",
+                "0112330100008210050190",
+                "凤瓜2P15线",
+                "0112330100008210050169",
+                "0112330100008210050199",
+                "0112330100008210050197",
+                "凤沥2P16线",
+                "0112330100008210050181",
+                "0112330100008210050189",
+                "0112330600000310050021",
+                "0112330000000810050052",
+                "0112330100008210050168",
+                "0112330100008210050192",
+                "0112330100008610050014",
+                "0112330600000310050024",
+                "0112330100008210050165",
+                "0112330100008210050183",
+                "0112330100008210050130",
+                "0112330100008210050131",
+                "0112330100008210050184",
+                "0112330100008210050166",
+                "安凰2P29线",
+                "0112330100008210050162",
+                "涌凤4419线",
+                "涌凰4420线",
+                "0112330100008610050012",
+                "凤凰变220kV正母Ⅱ段",
+                "0112330100008210050179",
+                "0112330100008210050164",
+                "0112330100008610050013",
+                "0112330000000810050037",
+                "0112330100008210050198",
+                "0112330100008210050191",
+                "0112330000000810050050",
+                "0112330100008210050014",
+                "0112330100008210050194",
+                "凰涌4417线",
+                "0112330100008210050193",
+                "0112330100008210050176",
+                "0112330100008210050160",
+                "0112330100008610050011",
+                "0112330100008210050187",
+                "0112330100008210050161",
+                "0112330100008210050023",
+                "0112330000000810050049",
+                "0112330100008210050188",
+                "0112330100008210050196",
+                "0112330000000810050053",
+                "0112330100008210050182",
+                "0112330100008210050028",
+                "0112330100008210050167",
+                "0112330100008210050163"
+            ],
+            "transformers": {
+                "凤凰变#3主变-220kV": {
+                    "conn_node": "0112330100008210050028",
+                    "load": [
+                        84.8104,
+                        84.8104,
+                        84.8104,
+                        84.8104
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                },
+                "凤凰变#1主变-220kV": {
+                    "conn_node": "0112330100008210050019",
+                    "load": [
+                        113.6792,
+                        113.6792,
+                        113.6792,
+                        113.6792
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                },
+                "凤凰变#2主变-220kV": {
+                    "conn_node": "0112330100008210050023",
+                    "load": [
+                        110.1945,
+                        110.1945,
+                        110.1945,
+                        110.1945
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                },
+                "凤凰变#4主变-220kV": {
+                    "conn_node": "0112330100008210050014",
+                    "load": [
+                        89.6889,
+                        89.6889,
+                        89.6889,
+                        89.6889
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "凤凰变220kV正母分段开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050199",
+                        "0112330100008210050198"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变#3主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050130",
+                        "0112330100008210050131"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变#4主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050180",
+                        "0112330100008210050181"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变220kV#1母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050190",
+                        "0112330100008210050191"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "凤凰变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050166",
+                        "0112330100008210050167"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变涌凤4419开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050184",
+                        "0112330100008210050185"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变安凤2492开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050188",
+                        "0112330100008210050189"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变安凰2P29开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050186",
+                        "0112330100008210050187"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变220kV#2母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050176",
+                        "0112330100008210050177"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "凤凰变220kV副母分段开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050169",
+                        "0112330100008210050168"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变凰涌4417开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050196",
+                        "0112330100008210050197"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变凤瓜2P15开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050162",
+                        "0112330100008210050163"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变涌凰4420开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050182",
+                        "0112330100008210050183"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050194",
+                        "0112330100008210050195"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变凤沥2P16开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050164",
+                        "0112330100008210050165"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变凤涌4418开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050160",
+                        "0112330100008210050161"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "凤凰变#4主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050014",
+                        "0112330100008210050180"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#4主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050181",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#4主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050181",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050019",
+                        "0112330100008210050166"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050167",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050167",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV#1母联副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050191",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV#1母联正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV正母Ⅰ段",
+                        "0112330100008210050190"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV副母Ⅰ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV副母Ⅰ段",
+                        "0112330100008210050192"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050023",
+                        "0112330100008210050194"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050195",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV正母Ⅰ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV正母Ⅰ段",
+                        "0112330100008210050193"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV正母分段Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050198",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV正母分段Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050199",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凤2492副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050189",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凤2492线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "安凤2492线",
+                        "0112330100008210050188"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凤2492正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050189",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凰2P29副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050187",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凰2P29线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "安凰2P29线",
+                        "0112330100008210050186"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050195",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凤4419副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050185",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凤4419线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌凤4419线",
+                        "0112330100008210050184"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凤4419正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050185",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凰4420副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050183",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凰4420线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌凰4420线",
+                        "0112330100008210050182"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变涌凰4420正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050183",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤瓜2P15副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050163",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤瓜2P15线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤瓜2P15线",
+                        "0112330100008210050162"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤瓜2P15正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050163",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤沥2P16副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050165",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤沥2P16线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤沥2P16线",
+                        "0112330100008210050164"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤沥2P16正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050165",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变安凰2P29正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050187",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#3主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050028",
+                        "0112330100008210050130"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#3主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050131",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变#3主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050131",
+                        "凤凰变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV#2母联正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV正母Ⅱ段",
+                        "0112330100008210050176"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV副母Ⅱ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV副母Ⅱ段",
+                        "0112330100008210050178"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV副母分段Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050169",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV副母分段Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050168",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV#2母联副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050177",
+                        "凤凰变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变220kV正母Ⅱ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤凰变220kV正母Ⅱ段",
+                        "0112330100008210050179"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤涌4418副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050161",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤涌4418线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤涌4418线",
+                        "0112330100008210050160"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凰涌4417副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050197",
+                        "凤凰变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凰涌4417线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凰涌4417线",
+                        "0112330100008210050196"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凰涌4417正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008210050197",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "凤凰变凤涌4418正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008210050161",
+                        "凤凰变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瓜沥变凤瓜2P15线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤瓜2P15线",
+                        "0112330100008610050011"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓜沥变凤瓜2P15开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008610050011",
+                        "0112330100008610050012"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瓜沥变凤沥2P16线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤沥2P16线",
+                        "0112330100008610050013"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓜沥变凤沥2P16开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008610050013",
+                        "0112330100008610050014"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "涌潮变电所凤涌4418线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凤涌4418线",
+                        "0112330000000810050053"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所凤涌4418开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050053",
+                        "0112330000000810050054"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "涌潮变电所凰涌4417线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "凰涌4417线",
+                        "0112330000000810050051"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所凰涌4417开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050051",
+                        "0112330000000810050052"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "涌潮变电所涌凰4420线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌凰4420线",
+                        "0112330000000810050037"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所涌凰4420开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050037",
+                        "0112330000000810050038"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "涌潮变电所涌凤4419线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌凤4419线",
+                        "0112330000000810050049"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所涌凤4419开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050049",
+                        "0112330000000810050050"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "太安变安凤2492线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "安凤2492线",
+                        "0112330600000310050021"
+                    ],
+                    "switch_type": "switch"
+                },
+                "太安变安凤2492开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330600000310050021",
+                        "0112330600000310050022"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "太安变安凰2P29线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "安凰2P29线",
+                        "0112330600000310050023"
+                    ],
+                    "switch_type": "switch"
+                },
+                "太安变安凰2P29开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330600000310050023",
+                        "0112330600000310050024"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "凤瓜2P15线": {
+                    "available": true,
+                    "conn_node": "0112330100008610050012",
+                    "zone": "涌潮供区",
+                    "to_st_name": "瓜沥变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "凤凰变凤瓜2P15开关",
+                        "remote": "瓜沥变凤瓜2P15开关"
+                    },
+                    "local_bus_name": "0112330100008210050042",
+                    "remote_bus_name": "0112330100008610050004",
+                    "line_id": "120133010000000476"
+                },
+                "凤沥2P16线": {
+                    "available": true,
+                    "conn_node": "0112330100008610050014",
+                    "zone": "涌潮供区",
+                    "to_st_name": "瓜沥变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "凤凰变凤沥2P16开关",
+                        "remote": "瓜沥变凤沥2P16开关"
+                    },
+                    "local_bus_name": "0112330100008210050043",
+                    "remote_bus_name": "0112330100008610050003",
+                    "line_id": "120133010000000477"
+                },
+                "凤涌4418线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050054",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "凤凰变凤涌4418开关",
+                        "remote": "涌潮变电所凤涌4418开关"
+                    },
+                    "local_bus_name": "0112330100008210050044",
+                    "remote_bus_name": "0112330000000810050017",
+                    "line_id": "120133010000000478"
+                },
+                "凰涌4417线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050052",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "凤凰变凰涌4417开关",
+                        "remote": "涌潮变电所凰涌4417开关"
+                    },
+                    "local_bus_name": "0112330100008210050041",
+                    "remote_bus_name": "0112330000000810050016",
+                    "line_id": "120133010000000533"
+                },
+                "涌凰4420线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050038",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "萧山",
+                    "breakers": {
+                        "local": "凤凰变涌凰4420开关",
+                        "remote": "涌潮变电所涌凰4420开关"
+                    },
+                    "local_bus_name": "0112330100008210050047",
+                    "remote_bus_name": "0112330000000810050007",
+                    "line_id": "120133010000000643"
+                },
+                "涌凤4419线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050050",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "凤凰变涌凤4419开关",
+                        "remote": "涌潮变电所涌凤4419开关"
+                    },
+                    "local_bus_name": "0112330100008210050046",
+                    "remote_bus_name": "0112330000000810050006",
+                    "line_id": "120133010000000644"
+                },
+                "安凤2492线": {
+                    "available": true,
+                    "conn_node": "0112330600000310050022",
+                    "zone": "古越供区",
+                    "to_st_name": "太安变",
+                    "owner": "绍兴",
+                    "breakers": {
+                        "local": "凤凰变安凤2492开关",
+                        "remote": "太安变安凤2492开关"
+                    },
+                    "local_bus_name": "0112330100008210050045",
+                    "remote_bus_name": "0112330600000310050004",
+                    "line_id": "120133010000000667"
+                },
+                "安凰2P29线": {
+                    "available": true,
+                    "conn_node": "0112330600000310050024",
+                    "zone": "古越供区",
+                    "to_st_name": "太安变",
+                    "owner": "绍兴",
+                    "breakers": {
+                        "local": "凤凰变安凰2P29开关",
+                        "remote": "太安变安凰2P29开关"
+                    },
+                    "local_bus_name": "0112330100008210050048",
+                    "remote_bus_name": "0112330600000310050003",
+                    "line_id": "120133010000000668"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123301000082"
+        },
+        "祝桥变": {
+            "name": "祝桥变",
+            "nodes": [
+                "0112330100008310050017",
+                "0112330100000110050031",
+                "0112330100008310050056",
+                "0112330100008310050024",
+                "0112330100008310050057",
+                "0112330100008310050042",
+                "0112330100008310050031",
+                "0112330100008310050021",
+                "0112330100008310050041",
+                "0112330100008310050040",
+                "0112330100008310050044",
+                "0111330000007810050018",
+                "0112330100008310050050",
+                "0112330000000810050081",
+                "0112330100000110050032",
+                "0112330100008310050051",
+                "涌桥4422线",
+                "0112330000003110050030",
+                "0112330100008310050037",
+                "祝桥变220kV正母Ⅰ段",
+                "0112330100008310050028",
+                "0112330100008310050038",
+                "0111330000007810050023",
+                "0112330000003110050054",
+                "萧祝2P25线",
+                "0112330000003110050053",
+                "0112330100008310050058",
+                "0112330100008310050049",
+                "0112330100008310050039",
+                "0112330100008310050026",
+                "0112330100136610050025",
+                "0112330100008310050027",
+                "0112330100003410050040",
+                "裘桥2491线",
+                "0112330100008310050023",
+                "0112330100008310050046",
+                "0112330100008310050043",
+                "祝桥变220kV副母Ⅱ段",
+                "0112330000000810050080",
+                "裘祝2490线",
+                "萧桥2P26线",
+                "0111330000007810050017",
+                "0112330100008310050035",
+                "祝同2PA4线",
+                "0112330100008310050052",
+                "0111330000007810050022",
+                "0112330100008310050053",
+                "0112330100003410050041",
+                "0112330100008310050034",
+                "涌祝4421线",
+                "祝兴2P23线",
+                "0112330100008310050032",
+                "0112330100008310050047",
+                "0112330100008310050045",
+                "光祝43C5线",
+                "0112330000000810050082",
+                "0112330000003110050029",
+                "0112330100003410050042",
+                "0112330000000810050079",
+                "祝桥变220kV正母Ⅱ段",
+                "0112330100008310050048",
+                "0112330100008310050029",
+                "0112330100003410050039",
+                "0112330100008310050033",
+                "0112330100008310050055",
+                "0112330100008310050025",
+                "0112330100008310050015",
+                "0112330100008310050019",
+                "0112330100008310050022",
+                "0112330100008310050036",
+                "0112330100008310050054",
+                "光桥43C6线",
+                "0112330100136610050026",
+                "祝桥变220kV副母Ⅰ段",
+                "0112330100008310050030"
+            ],
+            "transformers": {
+                "祝桥变#3主变-220kV": {
+                    "conn_node": "0112330100008310050019",
+                    "load": [
+                        72.4869,
+                        72.4869,
+                        72.4869,
+                        72.4869
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                },
+                "祝桥变#1主变-220kV": {
+                    "conn_node": "0112330100008310050017",
+                    "load": [
+                        92.8785,
+                        92.8785,
+                        92.8785,
+                        92.8785
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                },
+                "祝桥变#2主变-220kV": {
+                    "conn_node": "0112330100008310050015",
+                    "load": [
+                        95.1672,
+                        95.1672,
+                        95.1672,
+                        95.1672
+                    ],
+                    "sensitivity": {
+                        "涌潮供区": 1,
+                        "古越供区": 1,
+                        "昇光供区": 1
+                    },
+                    "cost": {
+                        "涌潮供区": 100,
+                        "古越供区": 100,
+                        "昇光供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "祝桥变萧祝2P25开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050051",
+                        "0112330100008310050052"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变萧桥2P26开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050047",
+                        "0112330100008310050048"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变#3主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050029",
+                        "0112330100008310050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变光桥43C6开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050049",
+                        "0112330100008310050050"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变光祝43C5开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050053",
+                        "0112330100008310050054"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变祝兴2P23开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050057",
+                        "0112330100008310050058"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变220kV#2母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050033",
+                        "0112330100008310050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "祝桥变祝同2PA4开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050055",
+                        "0112330100008310050056"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变涌桥4422开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050039",
+                        "0112330100008310050040"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变涌祝4421开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050041",
+                        "0112330100008310050042"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变220kV#1母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050031",
+                        "0112330100008310050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "祝桥变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050025",
+                        "0112330100008310050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050027",
+                        "0112330100008310050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变220kV副母分段开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050035",
+                        "0112330100008310050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变220kV正母分段开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050037",
+                        "0112330100008310050038"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变裘桥2491线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050045",
+                        "0112330100008310050046"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变裘祝2490线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050043",
+                        "0112330100008310050044"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "祝桥变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050026",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050026",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050015",
+                        "0112330100008310050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050028",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050028",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV#1母联副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050032",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV#1母联正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV正母Ⅰ段",
+                        "0112330100008310050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV副母Ⅰ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV副母Ⅰ段",
+                        "0112330100008310050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV副母分段Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV副母Ⅰ段",
+                        "0112330100008310050035"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV正母Ⅰ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV正母Ⅰ段",
+                        "0112330100008310050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌桥4422线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌桥4422线",
+                        "0112330100008310050039"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌桥4422正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050040",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌祝4421副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050042",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌祝4421线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌祝4421线",
+                        "0112330100008310050041"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌祝4421正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050042",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光桥43C6副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050050",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光桥43C6线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "光桥43C6线",
+                        "0112330100008310050049"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光桥43C6正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050050",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光祝43C5副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050054",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变涌桥4422副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050040",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光祝43C5正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050054",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#3主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050030",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV正母分段Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050037",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变光祝43C5线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "光祝43C5线",
+                        "0112330100008310050053"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#3主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050019",
+                        "0112330100008310050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#3主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050030",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV#2母联正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV正母Ⅱ段",
+                        "0112330100008310050033"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV副母Ⅱ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV副母Ⅱ段",
+                        "0112330100008310050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV正母Ⅱ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV正母Ⅱ段",
+                        "0112330100008310050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝兴2P23线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝兴2P23线",
+                        "0112330100008310050057"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝同2PA4线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝同2PA4线",
+                        "0112330100008310050055"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝同2PA4正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050056",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV#2母联副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050034",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝兴2P23正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050058",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝兴2P23副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050058",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变祝同2PA4副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050056",
+                        "祝桥变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV副母分段Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝桥变220kV副母Ⅱ段",
+                        "0112330100008310050036"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘祝2490正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050044",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘桥2491副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050046",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘桥2491正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050046",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘桥2491线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "裘桥2491线",
+                        "0112330100008310050045"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘祝2490副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050044",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变裘祝2490线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "裘祝2490线",
+                        "0112330100008310050043"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧桥2P26副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050048",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧桥2P26线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "萧桥2P26线",
+                        "0112330100008310050047"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧桥2P26正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050048",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧祝2P25线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "萧祝2P25线",
+                        "0112330100008310050051"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧祝2P25正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050052",
+                        "祝桥变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变萧祝2P25副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100008310050052",
+                        "祝桥变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050017",
+                        "0112330100008310050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "祝桥变220kV正母分段Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100008310050038",
+                        "祝桥变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "涌潮变电所涌桥4422线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌桥4422线",
+                        "0112330000000810050081"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所涌桥4422开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050081",
+                        "0112330000000810050082"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "昇光变电所光桥43C6线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "光桥43C6线",
+                        "0112330000003110050029"
+                    ],
+                    "switch_type": "switch"
+                },
+                "昇光变电所光桥43C6开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000003110050029",
+                        "0112330000003110050030"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "昇光变电所光祝43C5线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "光祝43C5线",
+                        "0112330000003110050053"
+                    ],
+                    "switch_type": "switch"
+                },
+                "昇光变电所光祝43C5开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000003110050053",
+                        "0112330000003110050054"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "涌潮变电所涌祝4421线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "涌祝4421线",
+                        "0112330000000810050079"
+                    ],
+                    "switch_type": "switch"
+                },
+                "涌潮变电所涌祝4421开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000810050079",
+                        "0112330000000810050080"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "兴南变祝兴2P23线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝兴2P23线",
+                        "0112330100000110050031"
+                    ],
+                    "switch_type": "switch"
+                },
+                "兴南变祝兴2P23开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100000110050031",
+                        "0112330100000110050032"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "裘江变裘祝2490线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "裘祝2490线",
+                        "0112330100003410050039"
+                    ],
+                    "switch_type": "switch"
+                },
+                "裘江变裘祝2490开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100003410050039",
+                        "0112330100003410050040"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "裘江变裘桥2491线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "裘桥2491线",
+                        "0112330100003410050041"
+                    ],
+                    "switch_type": "switch"
+                },
+                "裘江变裘桥2491开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100003410050041",
+                        "0112330100003410050042"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "协同变祝同2PA4线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "祝同2PA4线",
+                        "0112330100136610050025"
+                    ],
+                    "switch_type": "switch"
+                },
+                "协同变祝同2PA4线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100136610050025",
+                        "0112330100136610050026"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "萧山发电厂萧祝2P25线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "萧祝2P25线",
+                        "0111330000007810050018"
+                    ],
+                    "switch_type": "switch"
+                },
+                "萧山发电厂萧祝2P25开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0111330000007810050017",
+                        "0111330000007810050018"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "萧山发电厂萧桥2P26线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "萧桥2P26线",
+                        "0111330000007810050023"
+                    ],
+                    "switch_type": "switch"
+                },
+                "萧山发电厂萧桥2P26开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0111330000007810050022",
+                        "0111330000007810050023"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "涌桥4422线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050082",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变涌桥4422开关",
+                        "remote": "涌潮变电所涌桥4422开关"
+                    },
+                    "local_bus_name": "0112330100008310050008",
+                    "remote_bus_name": "0112330000000810050014",
+                    "line_id": "120133010000000454"
+                },
+                "光桥43C6线": {
+                    "available": true,
+                    "conn_node": "0112330000003110050030",
+                    "zone": "昇光供区",
+                    "to_st_name": "昇光变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变光桥43C6开关",
+                        "remote": "昇光变电所光桥43C6开关"
+                    },
+                    "local_bus_name": "0112330100008310050007",
+                    "remote_bus_name": "0112330000003110050008",
+                    "line_id": "120133010000000507"
+                },
+                "光祝43C5线": {
+                    "available": true,
+                    "conn_node": "0112330000003110050054",
+                    "zone": "昇光供区",
+                    "to_st_name": "昇光变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变光祝43C5开关",
+                        "remote": "昇光变电所光祝43C5开关"
+                    },
+                    "local_bus_name": "0112330100008310050006",
+                    "remote_bus_name": "0112330000003110050007",
+                    "line_id": "120133010000000509"
+                },
+                "涌祝4421线": {
+                    "available": true,
+                    "conn_node": "0112330000000810050080",
+                    "zone": "涌潮供区",
+                    "to_st_name": "涌潮变电所",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变涌祝4421开关",
+                        "remote": "涌潮变电所涌祝4421开关"
+                    },
+                    "local_bus_name": "0112330100008310050005",
+                    "remote_bus_name": "0112330000000810050005",
+                    "line_id": "120133010000000669"
+                },
+                "祝兴2P23线": {
+                    "available": true,
+                    "conn_node": "0112330100000110050032",
+                    "zone": "昇光供区",
+                    "to_st_name": "兴南变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变祝兴2P23开关",
+                        "remote": "兴南变祝兴2P23开关"
+                    },
+                    "local_bus_name": "0112330100008310050009",
+                    "remote_bus_name": "0112330100000110050007",
+                    "line_id": "120133010000001475"
+                },
+                "裘祝2490线": {
+                    "available": true,
+                    "conn_node": "0112330100003410050040",
+                    "zone": "涌潮供区",
+                    "to_st_name": "裘江变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变裘祝2490线开关",
+                        "remote": "裘江变裘祝2490开关"
+                    },
+                    "local_bus_name": "0112330100008310050010",
+                    "remote_bus_name": "0112330100003410050008",
+                    "line_id": "120133010000001476"
+                },
+                "裘桥2491线": {
+                    "available": true,
+                    "conn_node": "0112330100003410050042",
+                    "zone": "涌潮供区",
+                    "to_st_name": "裘江变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变裘桥2491线开关",
+                        "remote": "裘江变裘桥2491开关"
+                    },
+                    "local_bus_name": "0112330100008310050011",
+                    "remote_bus_name": "0112330100003410050009",
+                    "line_id": "120133010000001477"
+                },
+                "祝同2PA4线": {
+                    "available": true,
+                    "conn_node": "0112330100136610050026",
+                    "zone": "昇光供区",
+                    "to_st_name": "协同变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变祝同2PA4开关",
+                        "remote": "协同变祝同2PA4线开关"
+                    },
+                    "local_bus_name": "0112330100008310050012",
+                    "remote_bus_name": "0112330100136610050004",
+                    "line_id": "120133010000001674"
+                },
+                "萧祝2P25线": {
+                    "available": true,
+                    "conn_node": "0111330000007810050017",
+                    "zone": "涌潮供区",
+                    "to_st_name": "萧山发电厂",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变萧祝2P25开关",
+                        "remote": "萧山发电厂萧祝2P25开关"
+                    },
+                    "local_bus_name": "0112330100008310050013",
+                    "remote_bus_name": "0111330000007810050003",
+                    "line_id": "120133010000001776"
+                },
+                "萧桥2P26线": {
+                    "available": true,
+                    "conn_node": "0111330000007810050022",
+                    "zone": "涌潮供区",
+                    "to_st_name": "萧山发电厂",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "祝桥变萧桥2P26开关",
+                        "remote": "萧山发电厂萧桥2P26开关"
+                    },
+                    "local_bus_name": "0112330100008310050014",
+                    "remote_bus_name": "0111330000007810050004",
+                    "line_id": "120133010000001777"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123301000083"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "萧山发电厂#4机组": {
+            "zone": "涌潮供区",
+            "id": 110133000000000122,
+            "cost": 500,
+            "name": "萧山发电厂#4机组",
+            "p_max": 402.455,
+            "p_min": 240.0,
+            "p_current": 254.205,
+            "sensitivity": 1,
+            "st_id": "01113300000078"
+        },
+        "萧山发电厂#5机组": {
+            "zone": "涌潮供区",
+            "id": 110133000000000201,
+            "cost": 500,
+            "name": "萧山发电厂#5机组",
+            "p_max": 421.2,
+            "p_min": 250.0,
+            "p_current": 335.8656,
+            "sensitivity": 1,
+            "st_id": "01113300000078"
+        }
+    },
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "涌潮供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

@@ -7,7 +7,7 @@ from schema import *
 import asyncio,json
 from typing import Literal
 # 从另一个文件导入求解器函数
-from optimization_solver import solve_dynamic_recovery_model
+from optimization_solver import solve_dynamic_recovery_model, create_operation_ticket
 # 导入agent执行器
 from agent import agent_executor
 import logging,os
@@ -22,9 +22,19 @@ from dotenv import load_dotenv
 from collections import defaultdict
 import base64
 from kafka import KafkaProducer
-load_dotenv(".env.example")
-for key,value in os.environ.items():
-    logging.info(f"{key}:{value}") #print to stdout
+from area_topology import analyse,update_switch_status
+# 配置日志，同时输出到控制台和文件
+log_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs')
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, 'main.log')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ]
+)
 
 from fastapi.openapi.docs import (
     get_swagger_ui_html,
@@ -209,6 +219,64 @@ def push_operation_ticket():
         error=result.get("error")
     )
         
+def find_target_area(device_name: str, device_type: Literal["线路", "母线", "主变"], area_stats_file: str):
+    """
+    根据设备名称和类型查找对应的供区
+    
+    Args:
+        device_name: 设备名称，例如"双龙变1号主变"
+        device_type: 设备类型，可选值为"线路"、"母线"、"主变"
+        
+    Returns:
+        tuple: (target_area, area_data, area_stats) 目标供区名称、供区数据和所有供区统计数据
+        
+    Raises:
+        HTTPException: 当设备类型不支持或未找到对应供区时抛出异常
+    """
+    # 读取area_statistics.json文件
+    with open(area_stats_file, "r", encoding="utf-8") as f:
+        area_stats = json.load(f)
+    
+    # 先收集所有设备及其所属供区
+    all_devices = {}
+    
+    if device_type == "主变":
+        # 收集所有主变及其所属供区
+        for area_name, area_data in area_stats.items():
+            for transformer in area_data.get("主变", []):
+                all_devices[transformer.get("name", "")] = area_name
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail=f"设备类型 {device_type} 暂不支持"
+        )
+    # 使用process.extractOne找到最相似的设备，并直接获取其所属供区
+    best_match, score = process.extractOne(
+        device_name, 
+        all_devices.keys(), 
+        scorer=fuzz.partial_ratio
+    )
+    print(best_match)
+    # 直接从匹配结果获取供区
+    target_area = all_devices[best_match] if best_match else None
+    
+    # # 更新网络配置（当供区主变数量≤2时）
+    # logging.info(f"检查供区 {target_area} 是否需要更新网络配置...")
+    # update_network_for_small_areas(target_area)
+    
+    # 如果没有找到对应的供区，返回错误
+    if not target_area:
+        raise HTTPException(
+            status_code=404,
+            detail=f"未找到设备 {device_name} ({device_type}) 所在的供区"
+        )
+    print(target_area)
+    # 提取目标供区的数据
+    area_data = area_stats[target_area]
+    
+    return best_match,target_area, area_data, area_stats
+
+
 @app.get("/get_optimization_boundary", tags=["Optimization"])
 def get_optimization_boundary(device_name: str, device_type: Literal["线路", "母线", "主变"],load_enlarge_factor: float):
     """
@@ -223,47 +291,74 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         # 导入update_network模块
         # from update_network import update_network_for_small_areas
         
-        # 读取area_statistics.json文件
-        with open("result/area_statistics.json", "r", encoding="utf-8") as f:
-            area_stats = json.load(f)
+        # 查找目标供区
+        best_match, target_area, area_data, area_stats = find_target_area(device_name, device_type, "result/area_statistics.json")
         
-        # 先收集所有设备及其所属供区
-        all_devices = {}
-        
-        if device_type == "主变":
-            # 收集所有主变及其所属供区
-            for area_name, area_data in area_stats.items():
-                for transformer in area_data.get("主变", []):
-                    all_devices[transformer.get("name", "")] = area_name
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail=f"设备类型 {device_type} 暂不支持"
-            )
-        # 使用process.extractOne找到最相似的设备，并直接获取其所属供区
-        best_match, score = process.extractOne(
-            device_name, 
-            all_devices.keys(), 
-            scorer=fuzz.partial_ratio
-        )
-        print(best_match)
-        # 直接从匹配结果获取供区
-        target_area = all_devices[best_match] if best_match else None
-        
-        # # 更新网络配置（当供区主变数量≤2时）
-        # logging.info(f"检查供区 {target_area} 是否需要更新网络配置...")
-        # update_network_for_small_areas(target_area)
-        
-        # 如果没有找到对应的供区，返回错误
-        if not target_area:
-            raise HTTPException(
-                status_code=404,
-                detail=f"未找到设备 {device_name} ({device_type}) 所在的供区"
-            )
-        print(target_area)
-        # 提取目标供区的数据，组装成OptimizationInput格式
-        area_data = area_stats[target_area]
-        
+        # 检测供区是否只有两台主变，如果是则进行合环操作
+        operation_adjustment = {}
+        pre_operations = []
+        merged_areas = [target_area]  # 记录合并的供区
+        logging.info(f"供区 {target_area} 主变数量: {len(area_data.get('主变', []))}")
+        if len(area_data.get("主变", [])) == 2:
+            logging.info(f"供区 {target_area} 只有两台主变，需要进行合环操作")            
+            # 计算各供区的容量，选择容量最低的供区进行合并
+            min_capacity = float('inf')
+            selected_area = None
+            selected_area_data = None
+            
+            for area_name in area_data["zones"]:
+                if area_name == target_area:
+                    continue
+                other_area_data = area_stats[area_name]
+                # 计算总容量
+                total_capacity = sum(t.get("capacity", 0) for t in other_area_data.get("主变", []))
+                
+                if total_capacity < min_capacity:
+                    min_capacity = total_capacity
+                    selected_area = area_name
+            if selected_area:
+                logging.info(f"选择与供区 {selected_area} 进行合环")
+                # 收集所有zone_lines
+                selected_switches = set()
+                # [area_data["联络变电站"]["zone_lines"]["breakers"].values()]
+                for substation_name, substation_data in area_data.get("联络变电站", {}).items():
+                    for zone_line_name, zone_line_data in substation_data["zone_lines"].items():
+                        if zone_line_data["zone"] == selected_area:
+                            selected_switches.update(set(zone_line_data["breakers"].values()))
+                    if substation_name in area_stats[selected_area]["联络变电站"]:
+                        for switch_name, switch_data in area_data["联络变电站"][substation_name]["switches"].items():
+                            if switch_data["switch_type"] == "breaker" and ("母联" in switch_name or "分段" in switch_name):
+                                selected_switches.add(switch_name)
+                operated_switches = set()
+                switch_status = {}
+                
+                # 生成合环操作：将所有与目标供区有联络的zone_lines全部合上
+                substations = area_data.get("联络变电站", {})
+                for substation_name, substation_data in substations.items():
+                    for switch_name in selected_switches:
+                        if substation_data["switches"].get(switch_name,{}).get("initial_state", 1) == 0 and switch_name not in operated_switches:  # 如果开关初始状态为断开
+                            # 使用create_operation_ticket函数创建操作票
+                            operation = {
+                                "switch_name": switch_name,
+                                "initial_state": 0,
+                                "final_state": 1,
+                                "action": "close",
+                                "cost": 1.0 # 在结果中也返回成本
+                            }
+                            switch_status[switch_name] = 1
+                            # 获取所有变电站信息用于确定unit
+                            substations = area_data.get("联络变电站", {})
+                            ops = create_operation_ticket(operation, substations)
+                            pre_operations.append(ops)
+                            print(ops["operation"])
+                            operated_switches.add(switch_name)
+                operation_adjustment["pre_operations"] = pre_operations
+                operation_adjustment["description"] = f"供区 {target_area} 存在单主变供电风险，需与供区 {selected_area} 进行合环。合环点为：{'、'.join(operated_switches)}"
+                logging.info(f"生成了 {len(pre_operations)} 个前置合环操作")
+                # 通过subprocess重新运行area_topology.py
+                update_switch_status(switch_status,"net_new.db")
+                analyse("net_new.db","result/area_statistics_new.json")
+            best_match, target_area, area_data, area_stats = find_target_area(device_name, device_type, "result/area_statistics_new.json")
         # 尝试调用接口获取量测
         meas_data = defaultdict(dict)
         try:
@@ -272,8 +367,6 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             headers = {
                 "Content-Type": "application/json"
             }
-            print(payload)
-            print()
             current_time = datetime.now() - timedelta(minutes=5)
             adj_min = (current_time.minute // 5) * 5
             current_min = datetime.now().replace(minute=adj_min, second=0, microsecond=0)
@@ -294,7 +387,6 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             print(f"API调用异常（{str(e)}）")
         except Exception as e:
             print(f"获取量测数据时发生错误: {str(e)}")
-        print(meas_data)
         # 主变量测赋值
         for tr in meas_data['tr']:
             target_id = tr['transfm_id']
@@ -339,11 +431,14 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         for plant in meas_data['plant']:
             target_id = plant['id']
             new_p_current = plant['val'] if plant['val'] is not None else 0
+            new_soc = plant['soc'] if plant['soc'] is not None else 0
             if "storage_units" in area_data and isinstance(area_data["storage_units"], dict):
                 for unit_name, unit_data in area_data["storage_units"].items():
                     if "st_id" in unit_data and unit_data["st_id"] == target_id:
                         if "p_current" in unit_data:
                             unit_data["p_current"] = new_p_current if new_p_current is not None else 0
+                        if "soc" in unit_data:
+                            unit_data["soc_initial"] = new_soc if new_soc is not None else 0.5*unit_data["soc_max"]
 
         # 设置zones的fix_load
         for zone_name, zone_data in area_data["zones"].items():
@@ -355,7 +450,6 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
                         total_p_current += item["p_current"]
             # 将结果赋值给fixed_load
             zone_data["fixed_load"] = [total_p_current] * 4
-
         # 构建OptimizationInput对象
         optimization_input = {
             "horizon": 4,  # 默认时间步长为4
@@ -367,7 +461,14 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             "backup_units": area_data.get("backup_units", {}),
             "hydro_units": area_data.get("hydro_units", {}),
             "storage_units": area_data.get("storage_units", {}),
-            "interruptible_loads": {}
+            "interruptible_loads": {
+                "可中断负荷": {
+                    "zone": target_area,
+                    "shed_max": 10000,
+                    "cost": 1000,
+                    "sensitivity": 1
+                }
+             },
         }
         # 添加zones数据
         for zone_name, zone_data in area_data.get("zones", {}).items():
@@ -390,7 +491,7 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             # if zone_name == target_area:
             #     optimization_input["zones"][zone_name] = {
             #         "capacity": zone_capacity,
-            #         "fixed_load": [1.8*zone_capacity - zone_var_load[t] for t in range(4)]
+            #         "fixed_load": [1.2*zone_capacity - zone_var_load[t] for t in range(4)]
             #     }
             # else:
             #     optimization_input["zones"][zone_name] = {
@@ -400,6 +501,8 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
         
         # 添加substations数据
         for substation_name, substation_data in area_data.get("联络变电站", {}).items():
+            if not substation_data.get("available",True):
+                continue
             # 构建变电站数据
             substation = {
                 "name": substation_name,
@@ -431,6 +534,8 @@ def get_optimization_boundary(device_name: str, device_type: Literal["线路", "
             # 添加变电站到substations字典
             optimization_input["substations"][substation_name] = substation
         # print(optimization_input)
+        # 添加前置操作参数
+        optimization_input["operation_adjustment"] = operation_adjustment
         # 返回OptimizationInput对象
         return optimization_input
         

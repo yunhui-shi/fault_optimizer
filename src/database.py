@@ -152,7 +152,8 @@ class OptimizationDatabase:
                 CREATE TABLE IF NOT EXISTS objectives (
                     id INTEGER PRIMARY KEY AUTOINCREMENT, -- 主键ID
                     obj_type TEXT NOT NULL, -- 目标函数类型（3选1：minimize_switch_operation、maximize_safety_region、minimize_gen_cost）
-                    load_enlarge_factor REAL NOT NULL -- 负荷放大系数
+                    load_enlarge_factor REAL NOT NULL, -- 负荷放大系数
+                    operation_adjustment TEXT -- 方式调整，JSON格式
                 ) -- 优化目标函数表，存储单一优化目标类型（3选1模式）
             """)
             
@@ -298,10 +299,16 @@ class OptimizationDatabase:
                 obj_type = objective
                 if hasattr(obj_type, 'value'):
                     obj_type = obj_type.value
+                
+                # 处理operation_adjustment字段，如果存在则转为JSON字符串
+                operation_adjustment = None
+                if 'operation_adjustment' in config_data and config_data['operation_adjustment'] is not None:
+                    operation_adjustment = json.dumps(config_data['operation_adjustment'])
+                
                 cursor.execute("""
-                    INSERT INTO objectives (obj_type, load_enlarge_factor)
-                    VALUES (?, ?)
-                """, (obj_type, config_data['load_enlarge_factor']))
+                    INSERT INTO objectives (obj_type, load_enlarge_factor, operation_adjustment)
+                    VALUES (?, ?, ?)
+                """, (obj_type, config_data['load_enlarge_factor'], operation_adjustment))
             
             # 变电站节点数据现在已经包含在变电站数据中，不需要单独插入
             
@@ -490,7 +497,7 @@ class OptimizationDatabase:
             
             # 获取目标函数数据（单一目标）
             cursor.execute("""
-                SELECT obj_type, load_enlarge_factor FROM objectives
+                SELECT obj_type, load_enlarge_factor, operation_adjustment FROM objectives
             """)
             
             result = cursor.fetchone()
@@ -498,10 +505,17 @@ class OptimizationDatabase:
                 # 如果查询结果存在,设置目标函数和负荷放大系数
                 config_data['objective'] = result[0]
                 config_data['load_enlarge_factor'] = result[1]
+                
+                # 处理operation_adjustment字段，如果存在则解析为JSON对象
+                if result[2] is not None:
+                    config_data['operation_adjustment'] = json.loads(result[2])
+                else:
+                    config_data['operation_adjustment'] = None
             else:
                 # 如果查询结果不存在,设置目标函数为None,负荷放大系数为默认值1.0
                 config_data['objective'] = 'minimize_switch_operation'
                 config_data['load_enlarge_factor'] = 1.0
+                config_data['operation_adjustment'] = None
             
             return config_data
     

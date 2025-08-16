@@ -1,0 +1,2531 @@
+{
+    "horizon": 4,
+    "zones": {
+        "回浦供区": {
+            "capacity": 3500.0,
+            "fixed_load": [
+                2450.0,
+                2450.0,
+                2450.0,
+                2450.0
+            ]
+        },
+        "长潭+柏树+塘岭供区": {
+            "capacity": 3500.0,
+            "fixed_load": [
+                2879.9366,
+                2879.9366,
+                2879.9366,
+                2879.9366
+            ]
+        },
+        "麦屿供区": {
+            "capacity": 2500.0,
+            "fixed_load": [
+                1750.0,
+                1750.0,
+                1750.0,
+                1750.0
+            ]
+        }
+    },
+    "substations": {
+        "君田变": {
+            "name": "君田变",
+            "nodes": [
+                "0112331000002310050016",
+                "0112331000001310050025",
+                "君田变220kV正母线",
+                "0112331000001310050026",
+                "0112331000002310050021",
+                "0112331000002310050008",
+                "0112331000002310050017",
+                "0111330000008010050016",
+                "君田变220kV副母线",
+                "0112331000002310050022",
+                "0112331000002310050013",
+                "0111330000008010050025",
+                "0111330000008010050017",
+                "0112331000002310050006",
+                "0112331000002310050020",
+                "州君2Q34线",
+                "0112331000002310050014",
+                "0112331000002310050018",
+                "0111330000008010050024",
+                "君燎2Q48线",
+                "0112331000002310050019",
+                "州田2351线",
+                "0112331000002310050015",
+                "0112331000002310050011",
+                "0112331000002310050012"
+            ],
+            "transformers": {
+                "君田变#1主变-220kV": {
+                    "conn_node": "0112331000002310050006",
+                    "load": [
+                        70.5084,
+                        70.5084,
+                        70.5084,
+                        70.5084
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                },
+                "君田变#2主变-220kV": {
+                    "conn_node": "0112331000002310050008",
+                    "load": [
+                        70.5634,
+                        70.5634,
+                        70.5634,
+                        70.5634
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "君田变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050011",
+                        "0112331000002310050012"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "君田变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050013",
+                        "0112331000002310050014"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "君田变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050015",
+                        "0112331000002310050016"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "君田变君燎2Q48开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050017",
+                        "0112331000002310050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "君田变州君2Q34开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050019",
+                        "0112331000002310050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "君田变州田2351开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050021",
+                        "0112331000002310050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "君田变州田2351线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "州田2351线",
+                        "0112331000002310050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变州田2351正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050021",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050013",
+                        "君田变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050013",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050008",
+                        "0112331000002310050014"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050011",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050006",
+                        "0112331000002310050012"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "君田变220kV副母线",
+                        "0112331000002310050016"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050015",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变君燎2Q48副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050017",
+                        "君田变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变君燎2Q48线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "君燎2Q48线",
+                        "0112331000002310050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变君燎2Q48正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050017",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变州君2Q34副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002310050019",
+                        "君田变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变州君2Q34线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "州君2Q34线",
+                        "0112331000002310050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变州君2Q34正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050019",
+                        "君田变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变州田2351副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050021",
+                        "君田变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "君田变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000002310050011",
+                        "君田变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "童燎变君燎2Q48线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "君燎2Q48线",
+                        "0112331000001310050026"
+                    ],
+                    "switch_type": "switch"
+                },
+                "童燎变君燎2Q48开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000001310050025",
+                        "0112331000001310050026"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "台州发电厂州君2Q34线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "州君2Q34线",
+                        "0111330000008010050025"
+                    ],
+                    "switch_type": "switch"
+                },
+                "台州发电厂州君2Q34开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0111330000008010050024",
+                        "0111330000008010050025"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "台州发电厂州田2351线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "州田2351线",
+                        "0111330000008010050017"
+                    ],
+                    "switch_type": "switch"
+                },
+                "台州发电厂州田2351开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0111330000008010050016",
+                        "0111330000008010050017"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "君燎2Q48线": {
+                    "available": true,
+                    "conn_node": "0112331000001310050025",
+                    "zone": "回浦供区",
+                    "to_st_name": "童燎变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "君田变君燎2Q48开关",
+                        "remote": "童燎变君燎2Q48开关"
+                    },
+                    "local_bus_name": "0112331000002310050003",
+                    "remote_bus_name": "0112331000001310050003",
+                    "line_id": "120133100000000374"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123310000023"
+        },
+        "上珙变": {
+            "name": "上珙变",
+            "nodes": [
+                "0112331000000610050041",
+                "0112331000001510050035",
+                "0112331000000610050043",
+                "曙上2Q37线",
+                "0112330000000310050065",
+                "0112331000000610050039",
+                "0112331000000610050013",
+                "0112331000000610050023",
+                "0112331000000610050024",
+                "0112330000000310050067",
+                "0112331000000610050029",
+                "0112331000000610050034",
+                "0112331000000610050040",
+                "0112331000000610050045",
+                "0112331000000610050025",
+                "0112331000000610050028",
+                "上珙变220kV副母Ⅰ段",
+                "岭珙4346线",
+                "0112331000000610050037",
+                "0112331000000610050044",
+                "0112331000000610050031",
+                "0112331000000610050026",
+                "上珙变220kV正母Ⅱ段",
+                "上门24F0线",
+                "0112331000000610050033",
+                "0112331000000610050021",
+                "0112330000000310050068",
+                "0112331000000610050038",
+                "岭上4345线",
+                "0112331000000610050019",
+                "0112331000000510050036",
+                "0112331000000610050022",
+                "0112331000000610050030",
+                "0112331000000610050020",
+                "0112331000000610050011",
+                "0112331000001510050034",
+                "0112331000000510050035",
+                "铁珙24H4线",
+                "0112330000000310050066",
+                "上珙变220kV副母Ⅱ段",
+                "0112331000000610050027",
+                "0112331000000610050015",
+                "上珙变220kV正母Ⅰ段",
+                "0112331000000610050042",
+                "珙铁24H3线",
+                "0112331000000610050046",
+                "0112331000000610050017",
+                "0112331000000610050036",
+                "0112331000000610050032",
+                "0112331000000610050035",
+                "0112331000000610050018"
+            ],
+            "transformers": {
+                "上珙变#1主变-高": {
+                    "conn_node": "0112331000000610050011",
+                    "load": [
+                        84.6782,
+                        84.6782,
+                        84.6782,
+                        84.6782
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                },
+                "上珙变#2主变-高": {
+                    "conn_node": "0112331000000610050013",
+                    "load": [
+                        104.1935,
+                        104.1935,
+                        104.1935,
+                        104.1935
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                },
+                "上珙变#3主变-220kV": {
+                    "conn_node": "0112331000000610050015",
+                    "load": [
+                        123.1024,
+                        123.1024,
+                        123.1024,
+                        123.1024
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "上珙变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050021",
+                        "0112331000000610050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050023",
+                        "0112331000000610050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变岭上4345开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050025",
+                        "0112331000000610050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变岭珙4346开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050027",
+                        "0112331000000610050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变220kV正母分段开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050029",
+                        "0112331000000610050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变220kV副母分段开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050031",
+                        "0112331000000610050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变220kV#1母联开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050033",
+                        "0112331000000610050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "上珙变220kV#2母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050035",
+                        "0112331000000610050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "上珙变上门24F0开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050037",
+                        "0112331000000610050038"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变曙上2Q37线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050039",
+                        "0112331000000610050040"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变珙铁24H3线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050041",
+                        "0112331000000610050042"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变铁珙24H4开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050043",
+                        "0112331000000610050044"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变#3主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050045",
+                        "0112331000000610050046"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "上珙变220kV副母Ⅱ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上珙变220kV副母Ⅱ段",
+                        "0112331000000610050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭上4345副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050025",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭上4345线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭上4345线",
+                        "0112331000000610050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭珙4346副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050027",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭珙4346线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭珙4346线",
+                        "0112331000000610050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050021",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050023",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050023",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050013",
+                        "0112331000000610050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV正母Ⅱ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上珙变220kV正母Ⅱ段",
+                        "0112331000000610050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭上4345正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050025",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变岭珙4346正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050027",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050021",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050011",
+                        "0112331000000610050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV副母分段副母Ⅰ段闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上珙变220kV副母Ⅰ段",
+                        "0112331000000610050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV副母分段副母Ⅱ段闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050031",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV正母分段正母Ⅰ段闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050030",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV正母分段正母Ⅱ段闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050029",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV#1母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050034",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV#1母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050033",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV#2母联正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050035",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV#2母联副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050036",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变上门24F0线正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050038",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变上门24F0线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上门24F0线",
+                        "0112331000000610050037"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变上门24F0线副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050038",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变曙上2Q37线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050040",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变曙上2Q37线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙上2Q37线",
+                        "0112331000000610050039"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变曙上2Q37线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050040",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变珙铁24H3线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050042",
+                        "上珙变220kV正母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变珙铁24H3线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "珙铁24H3线",
+                        "0112331000000610050041"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变珙铁24H3线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050042",
+                        "上珙变220kV副母Ⅰ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变铁珙24H4线正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050044",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变铁珙24H4线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "铁珙24H4线",
+                        "0112331000000610050043"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变铁珙24H4线副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050044",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#3主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000610050046",
+                        "上珙变220kV正母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#3主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050015",
+                        "0112331000000610050045"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变#3主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050046",
+                        "上珙变220kV副母Ⅱ段"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV正母Ⅰ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上珙变220kV正母Ⅰ段",
+                        "0112331000000610050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "上珙变220kV副母Ⅰ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上珙变220kV副母Ⅰ段",
+                        "0112331000000610050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "塘岭变电所岭上4345线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭上4345线",
+                        "0112330000000310050067"
+                    ],
+                    "switch_type": "switch"
+                },
+                "塘岭变电所岭上4345开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000310050067",
+                        "0112330000000310050068"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "塘岭变电所岭珙4346线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭珙4346线",
+                        "0112330000000310050065"
+                    ],
+                    "switch_type": "switch"
+                },
+                "塘岭变电所岭珙4346开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000310050065",
+                        "0112330000000310050066"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "龙门变上门24F0线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "上门24F0线",
+                        "0112331000001510050035"
+                    ],
+                    "switch_type": "switch"
+                },
+                "龙门变上门24F0开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000001510050034",
+                        "0112331000001510050035"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "曙光变曙上2Q37线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙上2Q37线",
+                        "0112331000000510050036"
+                    ],
+                    "switch_type": "switch"
+                },
+                "曙光变曙上2Q37开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050035",
+                        "0112331000000510050036"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "岭上4345线": {
+                    "available": true,
+                    "conn_node": "0112330000000310050068",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "塘岭变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "上珙变岭上4345开关",
+                        "remote": "塘岭变电所岭上4345开关"
+                    },
+                    "local_bus_name": "0112331000000610050006",
+                    "remote_bus_name": "0112330000000310050010",
+                    "line_id": "120133100000000381"
+                },
+                "岭珙4346线": {
+                    "available": true,
+                    "conn_node": "0112330000000310050066",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "塘岭变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "上珙变岭珙4346开关",
+                        "remote": "塘岭变电所岭珙4346开关"
+                    },
+                    "local_bus_name": "0112331000000610050005",
+                    "remote_bus_name": "0112330000000310050007",
+                    "line_id": "120133100000000384"
+                },
+                "上门24F0线": {
+                    "available": true,
+                    "conn_node": "0112331000001510050034",
+                    "zone": "麦屿供区",
+                    "to_st_name": "龙门变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "上珙变上门24F0开关",
+                        "remote": "龙门变上门24F0开关"
+                    },
+                    "local_bus_name": "0112331000000610050008",
+                    "remote_bus_name": "0112331000001510050006",
+                    "line_id": "120133100000000963"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123310000006"
+        },
+        "环柚变": {
+            "name": "环柚变",
+            "nodes": [
+                "0112331000065510050012",
+                "0112331000065510050028",
+                "0112331000065510050029",
+                "0112330000000310050046",
+                "龙柚24H9线",
+                "0112331000065510050025",
+                "0112331000001510050027",
+                "0112331000001510050024",
+                "0112331000065510050027",
+                "0112331000065510050014",
+                "0112331000065510050010",
+                "0112331000065510050018",
+                "0112331000065510050023",
+                "0112331000065510050019",
+                "龙环24H8线",
+                "0112331000065510050032",
+                "环柚变220kV副母Ⅰ段母线",
+                "0112331000065510050013",
+                "0112331000065510050021",
+                "0112331000065510050024",
+                "0112331000065510050026",
+                "0112331000065510050008",
+                "0112331000065510050016",
+                "0112330000000310050069",
+                "0112330000000310050070",
+                "环柚变220kV副母Ⅱ段母线",
+                "0112331000065510050017",
+                "0112331000065510050015",
+                "0112330000000310050045",
+                "0112331000001510050026",
+                "0112331000065510050031",
+                "0112331000065510050022",
+                "岭柚4347线",
+                "环柚变220kV正母母线",
+                "0112331000065510050030",
+                "岭环4348线",
+                "0112331000001510050025",
+                "0112331000065510050020"
+            ],
+            "transformers": {
+                "环柚变#2主变_220kV": {
+                    "conn_node": "0112331000065510050010",
+                    "load": [
+                        111.2271,
+                        111.2271,
+                        111.2271,
+                        111.2271
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "环柚变220kV#1母联开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050015",
+                        "0112331000065510050016"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "环柚变220kV#2母联开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050017",
+                        "0112331000065510050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "环柚变220kV副母分段开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050019",
+                        "0112331000065510050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变岭柚4347开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050021",
+                        "0112331000065510050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变岭环4348开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050023",
+                        "0112331000065510050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变龙环24H8开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050025",
+                        "0112331000065510050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变龙柚24H9开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050027",
+                        "0112331000065510050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050029",
+                        "0112331000065510050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050031",
+                        "0112331000065510050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "环柚变岭柚4347正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050022",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变岭柚4347副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050022",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变岭柚4347线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭柚4347线",
+                        "0112331000065510050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变岭环4348正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050024",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变岭环4348副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050024",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变岭环4348线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭环4348线",
+                        "0112331000065510050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙环24H8正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050026",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙环24H8副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050026",
+                        "环柚变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙环24H8线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙环24H8线",
+                        "0112331000065510050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙柚24H9正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050028",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙柚24H9副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050028",
+                        "环柚变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变龙柚24H9线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙柚24H9线",
+                        "0112331000065510050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV#1母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050016",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV#1母联开关副母Ⅰ段闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050015",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV#2母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050018",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV#2母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050017",
+                        "环柚变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV副母分段开关Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050019",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV副母分段开关Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "环柚变220kV副母Ⅱ段母线",
+                        "0112331000065510050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "环柚变220kV正母母线",
+                        "0112331000065510050014"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV副母Ⅰ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050012",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变220kV副母Ⅱ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050013",
+                        "环柚变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050030",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050030",
+                        "环柚变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050008",
+                        "0112331000065510050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000065510050032",
+                        "环柚变220kV正母母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050032",
+                        "环柚变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "环柚变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000065510050010",
+                        "0112331000065510050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "龙门变龙柚24H9线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙柚24H9线",
+                        "0112331000001510050025"
+                    ],
+                    "switch_type": "switch"
+                },
+                "龙门变龙柚24H9开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000001510050024",
+                        "0112331000001510050025"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "龙门变龙环24H8线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙环24H8线",
+                        "0112331000001510050027"
+                    ],
+                    "switch_type": "switch"
+                },
+                "龙门变龙环24H8开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000001510050026",
+                        "0112331000001510050027"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "塘岭变电所岭柚4347线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭柚4347线",
+                        "0112330000000310050069"
+                    ],
+                    "switch_type": "switch"
+                },
+                "塘岭变电所岭柚4347开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000310050069",
+                        "0112330000000310050070"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "塘岭变电所岭环4348线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "岭环4348线",
+                        "0112330000000310050045"
+                    ],
+                    "switch_type": "switch"
+                },
+                "塘岭变电所岭环4348开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000310050045",
+                        "0112330000000310050046"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "龙柚24H9线": {
+                    "available": true,
+                    "conn_node": "0112331000001510050024",
+                    "zone": "麦屿供区",
+                    "to_st_name": "龙门变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "环柚变龙柚24H9开关",
+                        "remote": "龙门变龙柚24H9开关"
+                    },
+                    "local_bus_name": "0112331000065510050004",
+                    "remote_bus_name": "0112331000001510050007",
+                    "line_id": "120133100000000978"
+                },
+                "龙环24H8线": {
+                    "available": true,
+                    "conn_node": "0112331000001510050026",
+                    "zone": "麦屿供区",
+                    "to_st_name": "龙门变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "环柚变龙环24H8开关",
+                        "remote": "龙门变龙环24H8开关"
+                    },
+                    "local_bus_name": "0112331000065510050005",
+                    "remote_bus_name": "0112331000001510050008",
+                    "line_id": "120133100000000979"
+                },
+                "岭柚4347线": {
+                    "available": true,
+                    "conn_node": "0112330000000310050070",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "塘岭变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "环柚变岭柚4347开关",
+                        "remote": "塘岭变电所岭柚4347开关"
+                    },
+                    "local_bus_name": "0112331000065510050006",
+                    "remote_bus_name": "0112330000000310050015",
+                    "line_id": "120133100000000980"
+                },
+                "岭环4348线": {
+                    "available": true,
+                    "conn_node": "0112330000000310050046",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "塘岭变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "环柚变岭环4348开关",
+                        "remote": "塘岭变电所岭环4348开关"
+                    },
+                    "local_bus_name": "0112331000065510050007",
+                    "remote_bus_name": "0112330000000310050016",
+                    "line_id": "120133100000000981"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123310000655"
+        },
+        "曙光变": {
+            "name": "曙光变",
+            "nodes": [
+                "0112331000000510050032",
+                "牧曙2U87线",
+                "0112331000000510050028",
+                "曙上2Q37线",
+                "0112331000000510050018",
+                "0112331000000610050039",
+                "龙曙24K0线",
+                "0112331000000510050020",
+                "0112331000000510050027",
+                "0112331000000510050024",
+                "柏光4R69线",
+                "0112331000000510050017",
+                "0112331000000610050040",
+                "0112331000002410050022",
+                "0112331000000510050021",
+                "0112331000001510050039",
+                "0112331000000510050016",
+                "0112331000002410050023",
+                "曙光变220kV正母线",
+                "柏曙4R68线",
+                "0112330000000210050048",
+                "0112331000000510050033",
+                "0112331000002410050021",
+                "0112331000001510050038",
+                "0112331000000510050031",
+                "0112330000000210050047",
+                "0112331000000510050036",
+                "0112331000000510050035",
+                "0112330000000210050030",
+                "0112331000000510050022",
+                "曙光变220kV副母线",
+                "0112331000000510050030",
+                "0112331000000510050034",
+                "0112331000000510050015",
+                "0112331000000510050019",
+                "0112331000000510050011",
+                "0112331000000510050009",
+                "0112331000000510050023",
+                "0112331000000510050013",
+                "0112331000000510050025",
+                "0112331000002410050024",
+                "牧光2U88线",
+                "0112331000000510050026",
+                "0112330000000210050029",
+                "0112331000000510050029"
+            ],
+            "transformers": {
+                "曙光变#1主变-220kV": {
+                    "conn_node": "0112331000000510050009",
+                    "load": [
+                        90.5878,
+                        90.5878,
+                        90.5878,
+                        90.5878
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                },
+                "曙光变#2主变-220kV": {
+                    "conn_node": "0112331000000510050013",
+                    "load": [
+                        73.3097,
+                        73.3097,
+                        73.3097,
+                        73.3097
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                },
+                "曙光变#3主变-220kV": {
+                    "conn_node": "0112331000000510050011",
+                    "load": [
+                        66.8929,
+                        66.8929,
+                        66.8929,
+                        66.8929
+                    ],
+                    "sensitivity": {
+                        "回浦供区": 1,
+                        "长潭+柏树+塘岭供区": 1,
+                        "麦屿供区": 1
+                    },
+                    "cost": {
+                        "回浦供区": 100,
+                        "长潭+柏树+塘岭供区": 100,
+                        "麦屿供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "曙光变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050017",
+                        "0112331000000510050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050019",
+                        "0112331000000510050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变#3主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050021",
+                        "0112331000000510050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050023",
+                        "0112331000000510050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "曙光变柏光4R69开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050025",
+                        "0112331000000510050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变柏曙4R68开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050027",
+                        "0112331000000510050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变牧光2U88开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050029",
+                        "0112331000000510050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变牧曙2U87开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050031",
+                        "0112331000000510050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变龙曙24K0开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050033",
+                        "0112331000000510050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变曙上2Q37开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050035",
+                        "0112331000000510050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "曙光变柏曙4R68副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050027",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变柏曙4R68线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "柏曙4R68线",
+                        "0112331000000510050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变柏曙4R68正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050027",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧光2U88副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050029",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧光2U88线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "牧光2U88线",
+                        "0112331000000510050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧光2U88正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050029",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧曙2U87副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050031",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧曙2U87线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "牧曙2U87线",
+                        "0112331000000510050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变牧曙2U87正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050031",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#3主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050021",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#3主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050021",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#3主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050011",
+                        "0112331000000510050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变龙曙24K0副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050033",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变龙曙24K0线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙曙24K0线",
+                        "0112331000000510050034"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变龙曙24K0正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050033",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变曙上2Q37副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050035",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变曙上2Q37线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙上2Q37线",
+                        "0112331000000510050036"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变曙上2Q37正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050035",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050009",
+                        "0112331000000510050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050019",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050019",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050013",
+                        "0112331000000510050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙光变220kV副母线",
+                        "0112331000000510050016"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050023",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙光变220kV正母线",
+                        "0112331000000510050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变柏光4R69副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050025",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变柏光4R69线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "柏光4R69线",
+                        "0112331000000510050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331000000510050017",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050017",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变柏光4R69正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050025",
+                        "曙光变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "曙光变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000510050024",
+                        "曙光变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "柏树变电所柏光4R69线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "柏光4R69线",
+                        "0112330000000210050029"
+                    ],
+                    "switch_type": "switch"
+                },
+                "柏树变电所柏光4R69开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000210050029",
+                        "0112330000000210050030"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "柏树变电所柏曙4R68线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "柏曙4R68线",
+                        "0112330000000210050047"
+                    ],
+                    "switch_type": "switch"
+                },
+                "柏树变电所柏曙4R68开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000000210050047",
+                        "0112330000000210050048"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "牧岩变牧光2U88线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "牧光2U88线",
+                        "0112331000002410050022"
+                    ],
+                    "switch_type": "switch"
+                },
+                "牧岩变牧光2U88开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002410050021",
+                        "0112331000002410050022"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "牧岩变牧曙2U87线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "牧曙2U87线",
+                        "0112331000002410050024"
+                    ],
+                    "switch_type": "switch"
+                },
+                "牧岩变牧曙2U87开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000002410050023",
+                        "0112331000002410050024"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "龙门变龙曙24K0线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "龙曙24K0线",
+                        "0112331000001510050039"
+                    ],
+                    "switch_type": "switch"
+                },
+                "龙门变龙曙24K0开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000001510050038",
+                        "0112331000001510050039"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "上珙变曙上2Q37线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "曙上2Q37线",
+                        "0112331000000610050039"
+                    ],
+                    "switch_type": "switch"
+                },
+                "上珙变曙上2Q37线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331000000610050039",
+                        "0112331000000610050040"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "柏光4R69线": {
+                    "available": true,
+                    "conn_node": "0112330000000210050030",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "柏树变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "曙光变柏光4R69开关",
+                        "remote": "柏树变电所柏光4R69开关"
+                    },
+                    "local_bus_name": "0112331000000510050006",
+                    "remote_bus_name": "0112330000000210050012",
+                    "line_id": "120133100000000332"
+                },
+                "柏曙4R68线": {
+                    "available": true,
+                    "conn_node": "0112330000000210050048",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "柏树变电所",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "曙光变柏曙4R68开关",
+                        "remote": "柏树变电所柏曙4R68开关"
+                    },
+                    "local_bus_name": "0112331000000510050005",
+                    "remote_bus_name": "0112330000000210050009",
+                    "line_id": "120133100000000335"
+                },
+                "牧光2U88线": {
+                    "available": true,
+                    "conn_node": "0112331000002410050021",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "牧岩变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "曙光变牧光2U88开关",
+                        "remote": "牧岩变牧光2U88开关"
+                    },
+                    "local_bus_name": "0112331000000510050004",
+                    "remote_bus_name": "0112331000002410050004",
+                    "line_id": "120133100000000392"
+                },
+                "牧曙2U87线": {
+                    "available": true,
+                    "conn_node": "0112331000002410050023",
+                    "zone": "长潭+柏树+塘岭供区",
+                    "to_st_name": "牧岩变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "曙光变牧曙2U87开关",
+                        "remote": "牧岩变牧曙2U87开关"
+                    },
+                    "local_bus_name": "0112331000000510050003",
+                    "remote_bus_name": "0112331000002410050003",
+                    "line_id": "120133100000000394"
+                },
+                "龙曙24K0线": {
+                    "available": true,
+                    "conn_node": "0112331000001510050038",
+                    "zone": "麦屿供区",
+                    "to_st_name": "龙门变",
+                    "owner": "台州",
+                    "breakers": {
+                        "local": "曙光变龙曙24K0开关",
+                        "remote": "龙门变龙曙24K0开关"
+                    },
+                    "local_bus_name": "0112331000000510050007",
+                    "remote_bus_name": "0112331000001510050009",
+                    "line_id": "120133100000000982"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123310000005"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "台州发电厂#9机组": {
+            "zone": "长潭+柏树+塘岭供区",
+            "id": 110133000000000099,
+            "cost": 500,
+            "name": "台州发电厂#9机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 210.3073,
+            "sensitivity": 1,
+            "st_id": "01113300000080"
+        },
+        "台州发电厂#7机组": {
+            "zone": "长潭+柏树+塘岭供区",
+            "id": 110133000000000169,
+            "cost": 500,
+            "name": "台州发电厂#7机组",
+            "p_max": 350.0,
+            "p_min": 132.0,
+            "p_current": 219.9717,
+            "sensitivity": 1,
+            "st_id": "01113300000080"
+        },
+        "台州发电厂#10机组": {
+            "zone": "长潭+柏树+塘岭供区",
+            "id": 110133000000000273,
+            "cost": 500,
+            "name": "台州发电厂#10机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 211.4585,
+            "sensitivity": 1,
+            "st_id": "01113300000080"
+        },
+        "台州发电厂#8机组": {
+            "zone": "长潭+柏树+塘岭供区",
+            "id": 110133000000000162,
+            "cost": 500,
+            "name": "台州发电厂#8机组",
+            "p_max": 350.0,
+            "p_min": 132.0,
+            "p_current": 217.5341,
+            "sensitivity": 1,
+            "st_id": "01113300000080"
+        }
+    },
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "长潭+柏树+塘岭供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

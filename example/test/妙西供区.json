@@ -1,0 +1,867 @@
+{
+    "horizon": 4,
+    "zones": {
+        "妙西供区": {
+            "capacity": 1000.0,
+            "fixed_load": [
+                2042.448,
+                2042.448,
+                2042.448,
+                2042.448
+            ]
+        },
+        "雉城+含山供区": {
+            "capacity": 4000.0,
+            "fixed_load": [
+                2800.0,
+                2800.0,
+                2800.0,
+                2800.0
+            ]
+        }
+    },
+    "substations": {
+        "扬子变": {
+            "name": "扬子变",
+            "nodes": [
+                "0112330500008510050030",
+                "0112330500008510050028",
+                "扬太23T7线",
+                "0112330500027810050038",
+                "0112330500008510050021",
+                "0112330500008510050035",
+                "0112330500027810050037",
+                "0112330500001810050029",
+                "0112330500008510050029",
+                "0112330500008510050040",
+                "0112330500008510050036",
+                "0112330500008510050019",
+                "0112330500008510050027",
+                "0112330500008510050016",
+                "0112330500008510050011",
+                "0112330000002410050059",
+                "0112330000002410050060",
+                "扬子变220kV副母线",
+                "0112330500027810050036",
+                "0112330500008510050038",
+                "0112330500008510050025",
+                "0112330000002410050061",
+                "0112330500008510050017",
+                "0112330500008510050024",
+                "0112330500008510050033",
+                "0112330500008510050020",
+                "0112330500008510050023",
+                "0112330500008510050013",
+                "0112330500008510050032",
+                "0112330500008510050026",
+                "0112330500008510050037",
+                "扬孝23W1线",
+                "0112330500001810050028",
+                "子铁23U2线",
+                "0112330500001810050030",
+                "0112330500008510050022",
+                "扬傅23T8线",
+                "0112330500008510050031",
+                "0112330500008510050018",
+                "扬景23W2线",
+                "0112330500008510050012",
+                "扬铁23U1线",
+                "0112330500027810050035",
+                "0112330500008510050034",
+                "0112330500008510050015",
+                "西子4U12线",
+                "西扬4U13线",
+                "0112330500001810050027",
+                "0112330000002410050062",
+                "扬子变220kV正母线",
+                "0112330500008510050014"
+            ],
+            "transformers": {
+                "扬子变#1主变-220kV": {
+                    "conn_node": "0112330500008510050013",
+                    "load": [
+                        29.9059,
+                        29.9059,
+                        29.9059,
+                        29.9059
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "雉城+含山供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "雉城+含山供区": 100
+                    },
+                    "allocate": null
+                },
+                "扬子变#2主变-220kV": {
+                    "conn_node": "0112330500008510050011",
+                    "load": [
+                        27.6461,
+                        27.6461,
+                        27.6461,
+                        27.6461
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "雉城+含山供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "雉城+含山供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "扬子变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050017",
+                        "0112330500008510050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变西扬4U13线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050019",
+                        "0112330500008510050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050021",
+                        "0112330500008510050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变扬傅23T8线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050023",
+                        "0112330500008510050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变西子4U12线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050025",
+                        "0112330500008510050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050027",
+                        "0112330500008510050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "扬子变扬太23T7线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050029",
+                        "0112330500008510050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变子铁23U2线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050031",
+                        "0112330500008510050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变扬铁23U1线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050033",
+                        "0112330500008510050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变扬孝23W1线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050035",
+                        "0112330500008510050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变扬景23W2线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050037",
+                        "0112330500008510050038"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "扬子变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西子4U12副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬傅23T8正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050028",
+                        "扬子变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬傅23T8线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬傅23T8线",
+                        "0112330500008510050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050018",
+                        "0112330500008510050011"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西扬4U13线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "西扬4U13线",
+                        "0112330500008510050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050016",
+                        "扬子变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西扬4U13副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬太23T7副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西子4U12线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "西子4U12线",
+                        "0112330500008510050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050015",
+                        "扬子变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬傅23T8副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬太23T7正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西子4U12正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变西扬4U13正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬太23T7线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬太23T7线",
+                        "0112330500008510050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050022",
+                        "0112330500008510050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变子铁23U2线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "子铁23U2线",
+                        "0112330500008510050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变子铁23U2线正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变子铁23U2线副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬铁23U1线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬铁23U1线",
+                        "0112330500008510050034"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬铁23U1线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬子变220kV正母线",
+                        "0112330500008510050033"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬铁23U1线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "扬子变220kV副母线",
+                        "0112330500008510050033"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬孝23W1线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500008510050036",
+                        "扬子变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬孝23W1线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050036",
+                        "扬子变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬景23W2线正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500008510050037",
+                        "扬子变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬景23W2线副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050037",
+                        "扬子变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬孝23W1线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬孝23W1线",
+                        "0112330500008510050035"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "扬子变扬景23W2线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬景23W2线",
+                        "0112330500008510050038"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "妙西变电所西子4U12线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "西子4U12线",
+                        "0112330000002410050059"
+                    ],
+                    "switch_type": "switch"
+                },
+                "妙西变电所西子4U12开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002410050059",
+                        "0112330000002410050060"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "太傅变扬傅23T8线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬傅23T8线",
+                        "0112330500001810050028"
+                    ],
+                    "switch_type": "switch"
+                },
+                "太傅变扬傅23T8开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500001810050027",
+                        "0112330500001810050028"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "太傅变扬太23T7线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬太23T7线",
+                        "0112330500001810050030"
+                    ],
+                    "switch_type": "switch"
+                },
+                "太傅变扬太23T7开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500001810050029",
+                        "0112330500001810050030"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "妙西变电所西扬4U13线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "西扬4U13线",
+                        "0112330000002410050061"
+                    ],
+                    "switch_type": "switch"
+                },
+                "妙西变电所西扬4U13开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002410050061",
+                        "0112330000002410050062"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "孝景变扬景23W2线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬景23W2线",
+                        "0112330500027810050036"
+                    ],
+                    "switch_type": "switch"
+                },
+                "孝景变扬景23W2开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027810050035",
+                        "0112330500027810050036"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "孝景变扬孝23W1线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬孝23W1线",
+                        "0112330500027810050038"
+                    ],
+                    "switch_type": "switch"
+                },
+                "孝景变扬孝23W1开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027810050037",
+                        "0112330500027810050038"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "西子4U12线": {
+                    "available": true,
+                    "conn_node": "0112330000002410050060",
+                    "zone": "妙西供区",
+                    "to_st_name": "妙西变电所",
+                    "owner": "浙江",
+                    "breakers": {
+                        "local": "扬子变西子4U12线开关",
+                        "remote": "妙西变电所西子4U12开关"
+                    },
+                    "local_bus_name": "0112330500008510050006",
+                    "remote_bus_name": "0112330000002410050009",
+                    "line_id": "120133050000000452"
+                },
+                "扬傅23T8线": {
+                    "available": true,
+                    "conn_node": "0112330500001810050027",
+                    "zone": "雉城+含山供区",
+                    "to_st_name": "太傅变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "扬子变扬傅23T8线开关",
+                        "remote": "太傅变扬傅23T8开关"
+                    },
+                    "local_bus_name": "0112330500008510050003",
+                    "remote_bus_name": "0112330500001810050003",
+                    "line_id": "120133050000000481"
+                },
+                "扬太23T7线": {
+                    "available": true,
+                    "conn_node": "0112330500001810050029",
+                    "zone": "雉城+含山供区",
+                    "to_st_name": "太傅变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "扬子变扬太23T7线开关",
+                        "remote": "太傅变扬太23T7开关"
+                    },
+                    "local_bus_name": "0112330500008510050004",
+                    "remote_bus_name": "0112330500001810050004",
+                    "line_id": "120133050000000506"
+                },
+                "西扬4U13线": {
+                    "available": true,
+                    "conn_node": "0112330000002410050062",
+                    "zone": "妙西供区",
+                    "to_st_name": "妙西变电所",
+                    "owner": "浙江",
+                    "breakers": {
+                        "local": "扬子变西扬4U13线开关",
+                        "remote": "妙西变电所西扬4U13开关"
+                    },
+                    "local_bus_name": "0112330500008510050005",
+                    "remote_bus_name": "0112330000002410050005",
+                    "line_id": "120133050000000514"
+                },
+                "扬景23W2线": {
+                    "available": true,
+                    "conn_node": "0112330500027810050035",
+                    "zone": "妙西供区",
+                    "to_st_name": "孝景变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "扬子变扬景23W2线开关",
+                        "remote": "孝景变扬景23W2开关"
+                    },
+                    "local_bus_name": "0112330500008510050009",
+                    "remote_bus_name": "0112330500027810050008",
+                    "line_id": "120133050000000975"
+                },
+                "扬孝23W1线": {
+                    "available": true,
+                    "conn_node": "0112330500027810050037",
+                    "zone": "妙西供区",
+                    "to_st_name": "孝景变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "扬子变扬孝23W1线开关",
+                        "remote": "孝景变扬孝23W1开关"
+                    },
+                    "local_bus_name": "0112330500008510050010",
+                    "remote_bus_name": "0112330500027810050009",
+                    "line_id": "120133050000000976"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123305000085"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "长兴发电厂#1机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000161,
+            "cost": 500,
+            "name": "长兴发电厂#1机组",
+            "p_max": 660.0,
+            "p_min": 240.0,
+            "p_current": 329.4805,
+            "sensitivity": 1,
+            "st_id": "01113300000057"
+        },
+        "长兴发电厂#2机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000071,
+            "cost": 500,
+            "name": "长兴发电厂#2机组",
+            "p_max": 660.0,
+            "p_min": 240.0,
+            "p_current": 329.8457,
+            "sensitivity": 1,
+            "st_id": "01113300000057"
+        }
+    },
+    "backup_units": {
+        "吉能发电厂#1机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000179,
+            "available": true,
+            "cost": 500,
+            "name": "吉能发电厂#1机组",
+            "p_max": 31.0,
+            "p_min": 12.4,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000072"
+        },
+        "吉能发电厂#2机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000108,
+            "available": true,
+            "cost": 500,
+            "name": "吉能发电厂#2机组",
+            "p_max": 12.0,
+            "p_min": 4.800000000000001,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000072"
+        },
+        "德能电厂#3机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000118,
+            "available": true,
+            "cost": 500,
+            "name": "德能电厂#3机组",
+            "p_max": 38.0,
+            "p_min": 15.200000000000001,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000089"
+        },
+        "德能电厂#1机组": {
+            "zone": "妙西供区",
+            "id": 110133000000000181,
+            "available": true,
+            "cost": 500,
+            "name": "德能电厂#1机组",
+            "p_max": 38.0,
+            "p_min": 15.200000000000001,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000089"
+        }
+    },
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "妙西供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

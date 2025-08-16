@@ -1,0 +1,878 @@
+{
+    "horizon": 4,
+    "zones": {
+        "万象+剑川供区": {
+            "capacity": 2500.0,
+            "fixed_load": [
+                3064.3172,
+                3064.3172,
+                3064.3172,
+                3064.3172
+            ]
+        },
+        "双龙供区": {
+            "capacity": 2250.0,
+            "fixed_load": [
+                1575.0,
+                1575.0,
+                1575.0,
+                1575.0
+            ]
+        }
+    },
+    "substations": {
+        "枫树变": {
+            "name": "枫树变",
+            "nodes": [
+                "0112331100000910050015",
+                "河树24P3线",
+                "丽枫2Q68线",
+                "0112331100000910050012",
+                "0112331100000910050017",
+                "双枫2371线",
+                "0112330700001510050023",
+                "0112331100000910050036",
+                "0112331100000910050034",
+                "0112331100000910050030",
+                "0112331100000910050011",
+                "0112331100000910050027",
+                "0112331100000910050041",
+                "0112331100000610050025",
+                "0112331100000310050016",
+                "0112330000003310050064",
+                "0112330000003310050063",
+                "0112331100000910050021",
+                "0112331100000910050008",
+                "0112331100000610050027",
+                "0112330700001510050022",
+                "枫树变220kV副母线",
+                "0112331100000910050028",
+                "0112331100000910050033",
+                "0112331100000910050014",
+                "0112331100000910050039",
+                "0112331100000910050032",
+                "0112331100000310050020",
+                "0112331100000910050025",
+                "0112331100000910050023",
+                "0112331100000910050026",
+                "0112331100000910050040",
+                "枫温24P5线",
+                "0112331100000310050017",
+                "0112331100000910050022",
+                "0112331100000910050020",
+                "0112331100000610050028",
+                "0112331100000310050021",
+                "0112331100000910050009",
+                "0112331100000910050031",
+                "0112331100000910050024",
+                "0112331100000910050013",
+                "0112331100000910050042",
+                "0112331100000910050019",
+                "0112331100000910050038",
+                "0112331100000910050037",
+                "丽树2Q67线",
+                "0112331100000610050026",
+                "河枫24P0线",
+                "枫树变220kV正母线",
+                "0112331100000910050035",
+                "0112331100000910050029"
+            ],
+            "transformers": {
+                "枫树变#1主变-220kV": {
+                    "conn_node": "0112331100000910050013",
+                    "load": [
+                        42.0199,
+                        42.0199,
+                        42.0199,
+                        42.0199
+                    ],
+                    "sensitivity": {
+                        "万象+剑川供区": 1,
+                        "双龙供区": 1
+                    },
+                    "cost": {
+                        "万象+剑川供区": 100,
+                        "双龙供区": 100
+                    },
+                    "allocate": null
+                },
+                "枫树变#2主变-220kV": {
+                    "conn_node": "0112331100000910050011",
+                    "load": [
+                        43.6629,
+                        43.6629,
+                        43.6629,
+                        43.6629
+                    ],
+                    "sensitivity": {
+                        "万象+剑川供区": 1,
+                        "双龙供区": 1
+                    },
+                    "cost": {
+                        "万象+剑川供区": 100,
+                        "双龙供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "枫树变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050021",
+                        "0112331100000910050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050023",
+                        "0112331100000910050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050025",
+                        "0112331100000910050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "枫树变枫铁2R31开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050027",
+                        "0112331100000910050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变丽枫2Q68开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050029",
+                        "0112331100000910050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变树铁2R32开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050031",
+                        "0112331100000910050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变河枫24P0开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050033",
+                        "0112331100000910050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变河树24P3开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050035",
+                        "0112331100000910050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变双枫2371开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112331100000910050037",
+                        "0112331100000910050038"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变枫温24P5开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050039",
+                        "0112331100000910050040"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变丽树2Q67开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050041",
+                        "0112331100000910050042"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "枫树变河枫24P0副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050034"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变河树24P3副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050036"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变河树24P3正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050036"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫铁2R31正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫铁2R31副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫铁2R31线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050027",
+                        "0112331100000910050009"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变树铁2R32正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变树铁2R32副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变树铁2R32线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050031",
+                        "0112331100000910050008"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050021",
+                        "0112331100000910050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050019",
+                        "枫树变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050025",
+                        "枫树变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050026",
+                        "枫树变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050020",
+                        "枫树变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽枫2Q68副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽枫2Q68线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽枫2Q68线",
+                        "0112331100000910050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽枫2Q68正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000910050023",
+                        "0112331100000910050011"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变河枫24P0正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050034"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变河枫24P0线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "河枫24P0线",
+                        "0112331100000910050033"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变河树24P3线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "河树24P3线",
+                        "0112331100000910050035"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变双枫2371副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050038"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变双枫2371正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050038"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变双枫2371线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "双枫2371线",
+                        "0112331100000910050037"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽树2Q67线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽树2Q67线",
+                        "0112331100000910050041"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽树2Q67正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050042"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变丽树2Q67副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050042"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫温24P5副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "枫树变220kV副母线",
+                        "0112331100000910050040"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫温24P5正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫树变220kV正母线",
+                        "0112331100000910050040"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "枫树变枫温24P5线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫温24P5线",
+                        "0112331100000910050039"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "双龙变电所双枫2371线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "双枫2371线",
+                        "0112330000003310050063"
+                    ],
+                    "switch_type": "switch"
+                },
+                "双龙变电所双枫2371开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000003310050063",
+                        "0112330000003310050064"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "丽水变丽枫2Q68线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽枫2Q68线",
+                        "0112331100000310050016"
+                    ],
+                    "switch_type": "switch"
+                },
+                "丽水变丽枫2Q68开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000310050016",
+                        "0112331100000310050017"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "丽水变丽树2Q67线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽树2Q67线",
+                        "0112331100000310050020"
+                    ],
+                    "switch_type": "switch"
+                },
+                "丽水变丽树2Q67开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000310050020",
+                        "0112331100000310050021"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "河阳变河枫24P0线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "河枫24P0线",
+                        "0112331100000610050025"
+                    ],
+                    "switch_type": "switch"
+                },
+                "河阳变河枫24P0开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000610050025",
+                        "0112331100000610050026"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "河阳变河树24P3线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "河树24P3线",
+                        "0112331100000610050027"
+                    ],
+                    "switch_type": "switch"
+                },
+                "河阳变河树24P3开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112331100000610050027",
+                        "0112331100000610050028"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "温泉变枫温24P5线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "枫温24P5线",
+                        "0112330700001510050023"
+                    ],
+                    "switch_type": "switch"
+                },
+                "温泉变枫温24P5开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330700001510050022",
+                        "0112330700001510050023"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "双枫2371线": {
+                    "available": true,
+                    "conn_node": "0112330000003310050064",
+                    "zone": "双龙供区",
+                    "to_st_name": "双龙变电所",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变双枫2371开关",
+                        "remote": "双龙变电所双枫2371开关"
+                    },
+                    "local_bus_name": "0112331100000910050004",
+                    "remote_bus_name": "0112330000003310050013",
+                    "line_id": "120133070000000408"
+                },
+                "丽枫2Q68线": {
+                    "available": true,
+                    "conn_node": "0112331100000310050017",
+                    "zone": "万象+剑川供区",
+                    "to_st_name": "丽水变",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变丽枫2Q68开关",
+                        "remote": "丽水变丽枫2Q68开关"
+                    },
+                    "local_bus_name": "0112331100000910050005",
+                    "remote_bus_name": "0112331100000310050005",
+                    "line_id": "120133110000000227"
+                },
+                "丽树2Q67线": {
+                    "available": true,
+                    "conn_node": "0112331100000310050021",
+                    "zone": "万象+剑川供区",
+                    "to_st_name": "丽水变",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变丽树2Q67开关",
+                        "remote": "丽水变丽树2Q67开关"
+                    },
+                    "local_bus_name": "0112331100000910050003",
+                    "remote_bus_name": "0112331100000310050003",
+                    "line_id": "120133110000000257"
+                },
+                "河枫24P0线": {
+                    "available": true,
+                    "conn_node": "0112331100000610050026",
+                    "zone": "万象+剑川供区",
+                    "to_st_name": "河阳变",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变河枫24P0开关",
+                        "remote": "河阳变河枫24P0开关"
+                    },
+                    "local_bus_name": "0112331100000910050006",
+                    "remote_bus_name": "0112331100000610050005",
+                    "line_id": "120133110000000296"
+                },
+                "河树24P3线": {
+                    "available": true,
+                    "conn_node": "0112331100000610050028",
+                    "zone": "万象+剑川供区",
+                    "to_st_name": "河阳变",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变河树24P3开关",
+                        "remote": "河阳变河树24P3开关"
+                    },
+                    "local_bus_name": "0112331100000910050007",
+                    "remote_bus_name": "0112331100000610050006",
+                    "line_id": "120133110000000297"
+                },
+                "枫温24P5线": {
+                    "available": true,
+                    "conn_node": "0112330700001510050022",
+                    "zone": "双龙供区",
+                    "to_st_name": "温泉变",
+                    "owner": "丽水",
+                    "breakers": {
+                        "local": "枫树变枫温24P5开关",
+                        "remote": "温泉变枫温24P5开关"
+                    },
+                    "local_bus_name": "0112331100000910050010",
+                    "remote_bus_name": "0112330700001510050006",
+                    "line_id": "120133110000000380"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123311000009"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {},
+    "backup_units": {},
+    "hydro_units": {
+        "110133000000000219": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000219,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#3机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        },
+        "110133000000000136": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000136,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#1机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        },
+        "110133000000000231": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000231,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#5机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        },
+        "110133000000000048": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000048,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#6机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        },
+        "110133000000000223": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000223,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#2机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        },
+        "110133000000000085": {
+            "zone": "万象+剑川供区",
+            "id": 110133000000000085,
+            "available": true,
+            "cost": 500,
+            "name": "紧水滩水电厂#4机组",
+            "p_max": 55.0,
+            "startup_cost": 1000,
+            "sensitivity": 1,
+            "st_id": "01113300000064"
+        }
+    },
+    "storage_units": {
+        "泉电储能站": {
+            "zone": "万象+剑川供区",
+            "id": "01113300000359",
+            "name": "泉电储能站#8储能单元组（泉电3508线）",
+            "p_charge_max": 200.0,
+            "p_discharge_max": 200.0,
+            "soc_initial": 150,
+            "soc_max": 400.0,
+            "soc_min": 40.0,
+            "p_current": 0.0,
+            "st_name": "泉电储能站",
+            "st_id": "01113300000359",
+            "sensitivity": 1
+        }
+    },
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "万象+剑川供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

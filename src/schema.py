@@ -112,6 +112,7 @@ class OptimizationInput(BaseModel):
     storage_units: Optional[Dict[str, StorageUnit]] = {}
     interruptible_loads: Optional[Dict[str, InterruptibleLoad]] = {}
     load_enlarge_factor: float = 1.0
+    operation_adjustment: Optional[dict] = None
     class Config:
         json_schema_extra = {
             "example": json.loads(open("example/export.json","r",encoding="utf-8").read())

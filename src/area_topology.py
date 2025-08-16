@@ -4,6 +4,7 @@ import pandas as pd
 import networkx as nx
 import json
 from collections import defaultdict
+import sqlite3
 
 def identify_interconnection_substations(
     net, island_stats, bus_to_island, islands, substation_to_island
@@ -28,32 +29,38 @@ def identify_interconnection_substations(
         # 检查两侧变电站是否在不同的供区，且不存在分列运行
         if from_island != to_island and from_island and to_island:
             # 本侧变电站在不同的供区，记录联络变电站信息
-            if "电厂" in from_st or "电厂" in to_st:
-                continue
+            # if "电厂" in from_st or "电厂" in to_st or from_st.endswith("厂") or to_st.endswith("厂"):
+            #     continue
             # print(from_st,to_st)
             # print(substation_to_island[from_st],substation_to_island[to_st])
-            # 如果有一侧的island==2，那么另外一侧一定只有一个 island，意味着本侧分列，另一侧并列，本侧同时加到两个供区的资源里。
-            if len(from_island) == 2:
+            # 如果有一侧的island>=2，那么另外一侧一定只有一个 island，意味着本侧分列，另一侧并列，本侧同时加到两个供区的资源里。
+            if len(from_island) >= 2:
                 for island in from_island:
                     if from_st not in island_stats[island]["联络变电站"]:
-                        island_stats[island]["联络变电站"][from_st] = (
-                            collect_substation_equipment(net, from_st, substation_to_island)
-                        )
-            elif len(to_island) == 2:
+                        substation_info = collect_substation_equipment(net, from_st, substation_to_island)
+                        if substation_info["zone_lines"]:
+                            island_stats[island]["联络变电站"][from_st] = (
+                                substation_info
+                            )
+            elif len(to_island) >= 2:
                 for island in to_island:
                     if to_st not in island_stats[island]["联络变电站"]:
-                        island_stats[island]["联络变电站"][to_st] = (
-                            collect_substation_equipment(net, to_st, substation_to_island)
-                        )
+                        substation_info = collect_substation_equipment(net, to_st, substation_to_island)
+                        if substation_info["zone_lines"]:
+                            island_stats[island]["联络变电站"][to_st] = (
+                                substation_info
+                            )
             else:
                 for st in [from_st, to_st]:
                     for island in substation_to_island[st]:
                         if st not in island_stats[island]["联络变电站"]:
-                            island_stats[island]["联络变电站"][st] = (
-                                collect_substation_equipment(net, st, substation_to_island)
-                            )
+                            substation_info = collect_substation_equipment(net, st, substation_to_island)
+                            if substation_info["zone_lines"]:
+                                island_stats[island]["联络变电站"][st] = (
+                                    substation_info
+                                )
     for island in island_stats.keys():
-        zones = set()
+        zones = set([island])
         for st in island_stats[island]["联络变电站"]:
             zones = zones.union(set(island_stats[island]["联络变电站"][st]["zones"]))
         island_stats[island]["zones"] = {}
@@ -103,7 +110,7 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
             "switch_type": "switch" if "闸刀" in switch["name"] else "breaker",
         }
         if "闸刀" in switch["name"]:
-            equipment["switches"][switch["name"]]["cost"] = 5
+            equipment["switches"][switch["name"]]["cost"] = 10
         elif "母联" in switch["name"]:
             equipment["switches"][switch["name"]]["cost"] = 3
         else:
@@ -206,33 +213,30 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
                     switch_node2 = net.bus.name[switch["bus"]]
                     equipment["switches"][switch["name"]] = {
                         "available": True,
-                        "cost": 5,  # 闸刀成本
+                        "cost": 10,  # 闸刀成本
                         "initial_state": 1 if switch["closed"] else 0,
                         "nodes": [merged_node_name, switch_node1 if switch_node1 != remote_bus_name else switch_node2],
                         "switch_type": "switch"
                     }
-                # 添加虚拟母线c到设备中
-                # # 在这里，我们已经确定了bus_c和bus_c_name变量存在，因为它们是在上面的代码中定义的
-                # if bus_c_name not in equipment["nodes"]:
-                #     equipment["nodes"].append(bus_c_name)
                 
-                # 如果找到了开关和虚拟母线d，将它们添加到设备中
-                # 我们已经确定了c_connected_switches变量存在，因为它是在上面的代码中定义的
-                if not c_connected_switches.empty and len(c_connected_switches) == 1:
-                    c_switch = c_connected_switches.iloc[0]
-                    # 添加开关到设备中
-                    if c_switch["name"] not in equipment["switches"]:
-                        # 确定开关的两个端点
-                        c_switch_node1 = net.bus.name[c_switch["element"]]
-                        c_switch_node2 = net.bus.name[c_switch["bus"]]
-                        
-                        equipment["switches"][c_switch["name"]] = {
-                            "available": True,
-                            "cost": 1,  # 开关成本
-                            "initial_state": 1 if c_switch["closed"] else 0,
-                            "nodes": [c_switch_node1, c_switch_node2],
-                            "switch_type": "breaker"
-                        }
+                # 检查c_connected_switches是否已定义
+                if 'bus_c' in locals() and 'c_connected_switches' in locals():
+                    # 如果找到了开关和虚拟母线d，将它们添加到设备中
+                    if not c_connected_switches.empty and len(c_connected_switches) == 1:
+                        c_switch = c_connected_switches.iloc[0]
+                        # 添加开关到设备中
+                        if c_switch["name"] not in equipment["switches"]:
+                            # 确定开关的两个端点
+                            c_switch_node1 = net.bus.name[c_switch["element"]]
+                            c_switch_node2 = net.bus.name[c_switch["bus"]]
+                            
+                            equipment["switches"][c_switch["name"]] = {
+                                "available": True,
+                                "cost": 1,  # 开关成本
+                                "initial_state": 1 if c_switch["closed"] else 0,
+                                "nodes": [c_switch_node1, c_switch_node2],
+                                "switch_type": "breaker"
+                            }
                     
                     # 添加虚拟母线d到设备中
                     # 在这里，我们已经确定了bus_d变量存在，因为它是在上面的代码中定义的
@@ -286,14 +290,24 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
                         local_breakers.append(switch_name)
                     else:
                         remote_breakers.append(switch_name)
-        
-        equipment["zone_lines"][line_name]["breakers"] = {
-            "local": local_breakers[0] if local_breakers else None,
-            "remote": remote_breakers[0] if remote_breakers else None
-        }
-    # drop zone_lines if local or remote break is None
-    equipment["zone_lines"] = {k: v for k, v in equipment["zone_lines"].items() if v["breakers"]["local"] and v["breakers"]["remote"]}
-        
+        if local_breakers and remote_breakers:
+            equipment["zone_lines"][line_name]["breakers"] = {
+                "local": local_breakers[0] ,
+                "remote": remote_breakers[0] 
+            }
+    # remove zone_lines without breakers
+    zone_lines_to_remove = []
+    for line_name, line_info in equipment["zone_lines"].items():
+        if not line_info["breakers"]:
+            zone_lines_to_remove.append(line_name)
+        else:
+            local_breaker = line_info["breakers"]["local"]
+            remote_breaker = line_info["breakers"]["remote"]
+            if equipment["switches"][local_breaker]["initial_state"] == 0 and equipment["switches"][remote_breaker]["initial_state"] == 0:
+                zone_lines_to_remove.append(line_name)
+                print(f"{line_name}冷备用状态")
+    for line_name in zone_lines_to_remove:
+        del equipment["zone_lines"][line_name]
     for _, transformer in transformers.iterrows():
         equipment["transformers"][transformer["name"]] = {
             "conn_node": net.bus.name[transformer["bus"]],
@@ -304,6 +318,8 @@ def collect_substation_equipment(net, substation_name, substation_to_island):
     equipment["zones"] = list(zone_set)
     # merge nodes in switches
     equipment["nodes"] = list(set([node for switch in equipment["switches"].values() for node in switch["nodes"]]))
+    if "电厂" in substation_name or substation_name.endswith("厂"):
+        equipment["available"] = False
     return equipment
 
 
@@ -374,7 +390,7 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
                                 "id": int(idx),
                                 "name": str(net.trafo3w.name[idx]).replace("变电所","变"),
                                 "capacity": float(trafo3w.sn_mva),
-                                "p_current": None
+                                "p_current": 0.75*float(trafo3w.sn_mva)
                             }
                         )
             # if len(transformer_list) <= 2:
@@ -475,9 +491,8 @@ def find_islands_without_high_voltage_buses(net, high_voltage_threshold=500):
     print(f"有效孤岛数量（包含变电所母线）: {valid_island_count}")
     return island_stats, bus_to_island, islands, substation_to_island
 
-
-if __name__ == "__main__":
-    net = pp.from_sqlite("net.db")
+def analyse(db_name:str,save_path:str):
+    net = pp.from_sqlite(db_name)
     print("network loaded")
     # 分析网络，找出移除高压母线后的孤岛，并统计每个孤岛中包含"xx变"的母线
     island_stats, bus_to_island, islands, substation_to_island = (
@@ -491,6 +506,21 @@ if __name__ == "__main__":
     for k in island_stats.keys():
         del island_stats[k]["island_buses"]
     # 保存结果到JSON文件
-    with open("result/area_statistics.json", "w", encoding="utf-8") as f:
+    with open(save_path, "w", encoding="utf-8") as f:
         json.dump(island_stats, f, ensure_ascii=False, indent=4)
-    print("\n结果已保存到result/area_statistics.json文件")
+    print(f"\n结果已保存到{save_path}文件")
+    
+def update_switch_status(switch_status:dict,new_db_name:str):
+    """
+    先将net.db复制为net.db.bak,根据开关状态变化更新net.db,使用sqlite select语句更新
+    """
+    import os
+    os.system(f"cp net.db {new_db_name}")
+    conn = sqlite3.connect(new_db_name)
+    cursor = conn.cursor()
+    for k,v in switch_status.items():
+        cursor.execute("update switch set closed = ? where name = ?", (v,k))
+    conn.commit()
+    conn.close()
+if __name__ == "__main__":
+    analyse("net.db","result/area_statistics.json")

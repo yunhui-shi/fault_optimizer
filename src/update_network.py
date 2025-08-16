@@ -4,8 +4,9 @@ import os
 import logging
 from area_topology import find_islands_without_high_voltage_buses, identify_interconnection_substations
 
-# 配置日志
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# 配置日志 - 仅在直接运行此文件时配置
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 def update_network_for_small_areas(area_name: str = None):
     """

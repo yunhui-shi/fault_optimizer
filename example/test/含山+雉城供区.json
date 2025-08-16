@@ -1,0 +1,1858 @@
+{
+    "horizon": 4,
+    "zones": {
+        "妙西供区": {
+            "capacity": 3000.0,
+            "fixed_load": [
+                2400.0,
+                2400.0,
+                2400.0,
+                2400.0
+            ]
+        },
+        "含山+雉城供区": {
+            "capacity": 2000.0,
+            "fixed_load": [
+                2725.6947,
+                2725.6947,
+                2725.6947,
+                2725.6947
+            ]
+        },
+        "翔云供区": {
+            "capacity": 3000.0,
+            "fixed_load": [
+                2400.0,
+                2400.0,
+                2400.0,
+                2400.0
+            ]
+        },
+        "由拳供区": {
+            "capacity": 4000.0,
+            "fixed_load": [
+                3200.0,
+                3200.0,
+                3200.0,
+                3200.0
+            ]
+        }
+    },
+    "substations": {
+        "太傅变": {
+            "name": "太傅变",
+            "nodes": [
+                "0112330500001810050018",
+                "0112330500001810050021",
+                "0112330500001810050023",
+                "0112330500001810050028",
+                "金太2444线",
+                "0112330500001810050011",
+                "太傅变220kV副母线",
+                "0112330500001810050029",
+                "0112330000037810050048",
+                "城太4QB8线",
+                "0112330500001810050016",
+                "0112330500001810050017",
+                "城傅4QB9线",
+                "扬太23T7线",
+                "0112330000037810050050",
+                "0112330500001810050014",
+                "0112330500001810050009",
+                "0112330500001810050027",
+                "0112330500000610050022",
+                "0112330500008510050029",
+                "0112330500001810050026",
+                "0112330500008510050030",
+                "扬傅23T8线",
+                "0112330500001810050022",
+                "0112330500001810050030",
+                "0112330500001810050025",
+                "0112330500008510050023",
+                "太傅变220kV正母线",
+                "0112330500008510050024",
+                "0112330500000610050019",
+                "0112330000037810050047",
+                "0112330500001810050019",
+                "0112330500001810050024",
+                "0112330500001810050020",
+                "金傅2P87线",
+                "0112330500001810050012",
+                "0112330500000610050021",
+                "0112330500001810050013",
+                "0112330500001810050010",
+                "0112330500001810050015",
+                "0112330500000610050020",
+                "0112330000037810050049"
+            ],
+            "transformers": {
+                "太傅变#1主变-220kV": {
+                    "conn_node": "0112330500001810050010",
+                    "load": [
+                        76.3758,
+                        76.3758,
+                        76.3758,
+                        76.3758
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                },
+                "太傅变#2主变-220kV": {
+                    "conn_node": "0112330500001810050009",
+                    "load": [
+                        61.1325,
+                        61.1325,
+                        61.1325,
+                        61.1325
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "太傅变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050013",
+                        "0112330500001810050014"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050015",
+                        "0112330500001810050016"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050017",
+                        "0112330500001810050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "太傅变金太2444开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050019",
+                        "0112330500001810050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变金傅2P87开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050021",
+                        "0112330500001810050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变城太4QB8开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050023",
+                        "0112330500001810050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变城傅4QB9开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050025",
+                        "0112330500001810050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变扬傅23T8开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500001810050027",
+                        "0112330500001810050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变扬太23T7开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500001810050029",
+                        "0112330500001810050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "太傅变金太2444副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变金太2444线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "金太2444线",
+                        "0112330500001810050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变金太2444正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬傅23T8副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬傅23T8线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬傅23T8线",
+                        "0112330500001810050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬傅23T8正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城太4QB8母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城太4QB8线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "城太4QB8线",
+                        "0112330500001810050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城太4QB8正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城傅4QB9副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城傅4QB9线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "城傅4QB9线",
+                        "0112330500001810050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变城傅4QB9正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050016",
+                        "0112330500001810050009"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050014",
+                        "0112330500001810050010"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050012",
+                        "太傅变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050018",
+                        "太傅变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500001810050011",
+                        "太傅变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变金傅2P87副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变金傅2P87线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "金傅2P87线",
+                        "0112330500001810050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变金傅2P87正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬太23T7副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "太傅变220kV副母线",
+                        "0112330500001810050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬太23T7线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬太23T7线",
+                        "0112330500001810050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "太傅变扬太23T7正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "太傅变220kV正母线",
+                        "0112330500001810050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "金钉变金太2444线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "金太2444线",
+                        "0112330500000610050022"
+                    ],
+                    "switch_type": "switch"
+                },
+                "金钉变金太2444开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000610050021",
+                        "0112330500000610050022"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "扬子变扬傅23T8线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬傅23T8线",
+                        "0112330500008510050024"
+                    ],
+                    "switch_type": "switch"
+                },
+                "扬子变扬傅23T8线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050023",
+                        "0112330500008510050024"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "扬子变扬太23T7线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "扬太23T7线",
+                        "0112330500008510050030"
+                    ],
+                    "switch_type": "switch"
+                },
+                "扬子变扬太23T7线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500008510050029",
+                        "0112330500008510050030"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "金钉变金傅2P87线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "金傅2P87线",
+                        "0112330500000610050020"
+                    ],
+                    "switch_type": "switch"
+                },
+                "金钉变金傅2P87开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000610050019",
+                        "0112330500000610050020"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "雉城变电所城太4QB8线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "城太4QB8线",
+                        "0112330000037810050047"
+                    ],
+                    "switch_type": "switch"
+                },
+                "雉城变电所城太4QB8线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000037810050047",
+                        "0112330000037810050048"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "雉城变电所城傅4QB9线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "城傅4QB9线",
+                        "0112330000037810050049"
+                    ],
+                    "switch_type": "switch"
+                },
+                "雉城变电所城傅4QB9线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000037810050049",
+                        "0112330000037810050050"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "金太2444线": {
+                    "available": true,
+                    "conn_node": "0112330500000610050021",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "金钉变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变金太2444开关",
+                        "remote": "金钉变金太2444开关"
+                    },
+                    "local_bus_name": "0112330500001810050005",
+                    "remote_bus_name": "0112330500000610050003",
+                    "line_id": "120133050000000420"
+                },
+                "扬傅23T8线": {
+                    "available": true,
+                    "conn_node": "0112330500008510050023",
+                    "zone": "妙西供区",
+                    "to_st_name": "扬子变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变扬傅23T8开关",
+                        "remote": "扬子变扬傅23T8线开关"
+                    },
+                    "local_bus_name": "0112330500001810050003",
+                    "remote_bus_name": "0112330500008510050003",
+                    "line_id": "120133050000000481"
+                },
+                "扬太23T7线": {
+                    "available": true,
+                    "conn_node": "0112330500008510050029",
+                    "zone": "妙西供区",
+                    "to_st_name": "扬子变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变扬太23T7开关",
+                        "remote": "扬子变扬太23T7线开关"
+                    },
+                    "local_bus_name": "0112330500001810050004",
+                    "remote_bus_name": "0112330500008510050004",
+                    "line_id": "120133050000000506"
+                },
+                "金傅2P87线": {
+                    "available": true,
+                    "conn_node": "0112330500000610050019",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "金钉变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变金傅2P87开关",
+                        "remote": "金钉变金傅2P87开关"
+                    },
+                    "local_bus_name": "0112330500001810050006",
+                    "remote_bus_name": "0112330500000610050006",
+                    "line_id": "120133050000001173"
+                },
+                "城太4QB8线": {
+                    "available": true,
+                    "conn_node": "0112330000037810050048",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "雉城变电所",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变城太4QB8开关",
+                        "remote": "雉城变电所城太4QB8线开关"
+                    },
+                    "local_bus_name": "0112330500001810050007",
+                    "remote_bus_name": "0112330000037810050013",
+                    "line_id": "120133050000001232"
+                },
+                "城傅4QB9线": {
+                    "available": true,
+                    "conn_node": "0112330000037810050050",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "雉城变电所",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "太傅变城傅4QB9开关",
+                        "remote": "雉城变电所城傅4QB9线开关"
+                    },
+                    "local_bus_name": "0112330500001810050008",
+                    "remote_bus_name": "0112330000037810050014",
+                    "line_id": "120133050000001233"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123305000018"
+        },
+        "解放变": {
+            "name": "解放变",
+            "nodes": [
+                "0112330000004210050042",
+                "解放变220kV正母线",
+                "桐解23T5线",
+                "0111330000006610050017",
+                "0112330500000710050022",
+                "解放变220kV副母线",
+                "0112330500000710050013",
+                "0112330000004210050041",
+                "0112330400001510050033",
+                "0112330500000710050088",
+                "0112330500000710050029",
+                "0112330500000710050023",
+                "0112330500000710050012",
+                "含放4435线",
+                "解青23T6线",
+                "0112330500000710050075",
+                "0112330400001510050032",
+                "0112330500000710050021",
+                "0112330000004210050037",
+                "0112330500000710050011",
+                "0112330500000710050092",
+                "0112330000004210050038",
+                "0112330500000710050076",
+                "0111330000006610050016",
+                "0112330500000710050089",
+                "0112330500000710050030",
+                "0112330500000710050093",
+                "含解4434线",
+                "0112330500000710050028",
+                "0112330500000710050041",
+                "0112330500000710050008",
+                "0112330500000710050042"
+            ],
+            "transformers": {
+                "解放变#1主变-220kV": {
+                    "conn_node": "0112330500000710050013",
+                    "load": [
+                        96.4742,
+                        96.4742,
+                        96.4742,
+                        96.4742
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                },
+                "解放变#2主变-220kV": {
+                    "conn_node": "0112330500000710050030",
+                    "load": [
+                        96.5636,
+                        96.5636,
+                        96.5636,
+                        96.5636
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "解放变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050012",
+                        "0112330500000710050011"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050029",
+                        "0112330500000710050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050021",
+                        "0112330500000710050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "解放变含放4435开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050092",
+                        "0112330500000710050093"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变含解4434开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050041",
+                        "0112330500000710050042"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变解青23T6开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050088",
+                        "0112330500000710050089"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变桐解23T5开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050075",
+                        "0112330500000710050076"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "解放变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050030",
+                        "0112330500000710050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050028",
+                        "解放变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500000710050028",
+                        "解放变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050022",
+                        "解放变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解放变220kV正母线",
+                        "0112330500000710050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050023",
+                        "解放变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050008",
+                        "解放变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含放4435副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "解放变220kV副母线",
+                        "0112330500000710050092"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含放4435正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解放变220kV正母线",
+                        "0112330500000710050092"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含放4435线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含放4435线",
+                        "0112330500000710050093"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含解4434正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "解放变220kV正母线",
+                        "0112330500000710050041"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含解4434副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解放变220kV副母线",
+                        "0112330500000710050041"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变含解4434线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含解4434线",
+                        "0112330500000710050042"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变解青23T6副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解放变220kV副母线",
+                        "0112330500000710050088"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变解青23T6正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "解放变220kV正母线",
+                        "0112330500000710050088"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变解青23T6线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解青23T6线",
+                        "0112330500000710050089"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变桐解23T5副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "解放变220kV副母线",
+                        "0112330500000710050075"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变桐解23T5正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解放变220kV正母线",
+                        "0112330500000710050075"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变桐解23T5线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "桐解23T5线",
+                        "0112330500000710050076"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500000710050011",
+                        "解放变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050011",
+                        "解放变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "解放变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500000710050013",
+                        "0112330500000710050012"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "桐燃发电厂桐解23T5线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "桐解23T5线",
+                        "0111330000006610050017"
+                    ],
+                    "switch_type": "switch"
+                },
+                "桐燃发电厂桐解23T5线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0111330000006610050016",
+                        "0111330000006610050017"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "青石变解青23T6线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "解青23T6线",
+                        "0112330400001510050033"
+                    ],
+                    "switch_type": "switch"
+                },
+                "青石变解青23T6线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330400001510050032",
+                        "0112330400001510050033"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "含山变电所含放4435线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含放4435线",
+                        "0112330000004210050037"
+                    ],
+                    "switch_type": "switch"
+                },
+                "含山变电所含放4435开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000004210050037",
+                        "0112330000004210050038"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "含山变电所含解4434线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含解4434线",
+                        "0112330000004210050041"
+                    ],
+                    "switch_type": "switch"
+                },
+                "含山变电所含解4434开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000004210050041",
+                        "0112330000004210050042"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "解青23T6线": {
+                    "available": true,
+                    "conn_node": "0112330400001510050032",
+                    "zone": "由拳供区",
+                    "to_st_name": "青石变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "解放变解青23T6开关",
+                        "remote": "青石变解青23T6线开关"
+                    },
+                    "local_bus_name": "0112330500000710050090",
+                    "remote_bus_name": "0112330400001510050006",
+                    "line_id": "120133050000000496"
+                },
+                "含放4435线": {
+                    "available": true,
+                    "conn_node": "0112330000004210050038",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "含山变电所",
+                    "owner": "浙江",
+                    "breakers": {
+                        "local": "解放变含放4435开关",
+                        "remote": "含山变电所含放4435开关"
+                    },
+                    "local_bus_name": "0112330500000710050091",
+                    "remote_bus_name": "0112330000004210050005",
+                    "line_id": "120133050000000497"
+                },
+                "含解4434线": {
+                    "available": true,
+                    "conn_node": "0112330000004210050042",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "含山变电所",
+                    "owner": "浙江",
+                    "breakers": {
+                        "local": "解放变含解4434开关",
+                        "remote": "含山变电所含解4434开关"
+                    },
+                    "local_bus_name": "0112330500000710050040",
+                    "remote_bus_name": "0112330000004210050006",
+                    "line_id": "120133050000000498"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123305000007"
+        },
+        "南浔变": {
+            "name": "南浔变",
+            "nodes": [
+                "0112330500027610050015",
+                "0112330500027610050024",
+                "0112330500027610050027",
+                "0112330500027610050012",
+                "南浔变220kV副母线",
+                "含浔4439线",
+                "0112330500027610050017",
+                "0112330500027610050026",
+                "0112330400000210050025",
+                "0112330000004210050035",
+                "0112330500027610050009",
+                "0112330500027610050029",
+                "0112330500027610050020",
+                "南浔变220kV正母线",
+                "0112330000004210050056",
+                "0112330500027610050019",
+                "0112330500028210050028",
+                "0112330400000210050024",
+                "0112330500027610050013",
+                "0112330500027610050016",
+                "含南4438线",
+                "0112330500027610050025",
+                "0112330500028210050027",
+                "0112330500027610050014",
+                "浔投23U5线",
+                "浔安23Q9线",
+                "0112330500027610050028",
+                "0112330500027610050021",
+                "0112330500027610050018",
+                "0112330500027610050007",
+                "0112330000004210050036",
+                "0112330000004210050055"
+            ],
+            "transformers": {
+                "南浔变#1主变-高": {
+                    "conn_node": "0112330500027610050007",
+                    "load": [
+                        71.9303,
+                        71.9303,
+                        71.9303,
+                        71.9303
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                },
+                "南浔变#2主变-高": {
+                    "conn_node": "0112330500027610050009",
+                    "load": [
+                        71.8289,
+                        71.8289,
+                        71.8289,
+                        71.8289
+                    ],
+                    "sensitivity": {
+                        "妙西供区": 1,
+                        "含山+雉城供区": 1,
+                        "翔云供区": 1,
+                        "由拳供区": 1
+                    },
+                    "cost": {
+                        "妙西供区": 100,
+                        "含山+雉城供区": 100,
+                        "翔云供区": 100,
+                        "由拳供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "南浔变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050014",
+                        "0112330500027610050015"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "南浔变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050016",
+                        "0112330500027610050017"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050018",
+                        "0112330500027610050019"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变浔安23Q9线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050020",
+                        "0112330500027610050021"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变含南4438线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050024",
+                        "0112330500027610050025"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变含浔4439线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050026",
+                        "0112330500027610050027"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变浔投23U5线开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050028",
+                        "0112330500027610050029"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "南浔变#1主变220kV变压器闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050007",
+                        "0112330500027610050016"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500027610050017",
+                        "南浔变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050017",
+                        "南浔变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变#2主变220kV变压器闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050009",
+                        "0112330500027610050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050019",
+                        "南浔变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330500027610050019",
+                        "南浔变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050013",
+                        "南浔变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050012",
+                        "南浔变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500027610050015",
+                        "南浔变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南浔变220kV正母线",
+                        "0112330500027610050014"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔安23Q9线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "南浔变220kV副母线",
+                        "0112330500027610050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔安23Q9线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南浔变220kV正母线",
+                        "0112330500027610050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔安23Q9线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "浔安23Q9线",
+                        "0112330500027610050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含南4438线副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南浔变220kV副母线",
+                        "0112330500027610050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含南4438线正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "南浔变220kV正母线",
+                        "0112330500027610050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含南4438线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含南4438线",
+                        "0112330500027610050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含浔4439线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "南浔变220kV副母线",
+                        "0112330500027610050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含浔4439线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南浔变220kV正母线",
+                        "0112330500027610050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变含浔4439线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含浔4439线",
+                        "0112330500027610050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔投23U5线线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "浔投23U5线",
+                        "0112330500027610050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔投23U5线正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南浔变220kV正母线",
+                        "0112330500027610050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南浔变浔投23U5线副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "南浔变220kV副母线",
+                        "0112330500027610050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "含山变电所含浔4439线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含浔4439线",
+                        "0112330000004210050055"
+                    ],
+                    "switch_type": "switch"
+                },
+                "含山变电所含浔4439开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000004210050055",
+                        "0112330000004210050056"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "含山变电所含南4438线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "含南4438线",
+                        "0112330000004210050035"
+                    ],
+                    "switch_type": "switch"
+                },
+                "含山变电所含南4438开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000004210050035",
+                        "0112330000004210050036"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "新投变220kV浔投23U5线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "浔投23U5线",
+                        "0112330500028210050027"
+                    ],
+                    "switch_type": "switch"
+                },
+                "新投变浔投23U5线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330500028210050027",
+                        "0112330500028210050028"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "安兴变浔安23Q9线线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "浔安23Q9线",
+                        "0112330400000210050025"
+                    ],
+                    "switch_type": "switch"
+                },
+                "安兴变浔安23Q9线开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330400000210050024",
+                        "0112330400000210050025"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "含浔4439线": {
+                    "available": true,
+                    "conn_node": "0112330000004210050056",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "含山变电所",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "南浔变含浔4439线开关",
+                        "remote": "含山变电所含浔4439开关"
+                    },
+                    "local_bus_name": "0112330500027610050003",
+                    "remote_bus_name": "0112330000004210050016",
+                    "line_id": "120133050000000954"
+                },
+                "含南4438线": {
+                    "available": true,
+                    "conn_node": "0112330000004210050036",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "含山变电所",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "南浔变含南4438线开关",
+                        "remote": "含山变电所含南4438开关"
+                    },
+                    "local_bus_name": "0112330500027610050004",
+                    "remote_bus_name": "0112330000004210050017",
+                    "line_id": "120133050000000955"
+                },
+                "浔投23U5线": {
+                    "available": true,
+                    "conn_node": "0112330500028210050028",
+                    "zone": "含山+雉城供区",
+                    "to_st_name": "新投变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "南浔变浔投23U5线开关",
+                        "remote": "新投变浔投23U5线开关"
+                    },
+                    "local_bus_name": "0112330500027610050005",
+                    "remote_bus_name": "0112330500028210050004",
+                    "line_id": "120133050000000990"
+                },
+                "浔安23Q9线": {
+                    "available": true,
+                    "conn_node": "0112330400000210050024",
+                    "zone": "翔云供区",
+                    "to_st_name": "安兴变",
+                    "owner": "湖州",
+                    "breakers": {
+                        "local": "南浔变浔安23Q9线开关",
+                        "remote": "安兴变浔安23Q9线开关"
+                    },
+                    "local_bus_name": "0112330500027610050006",
+                    "remote_bus_name": "0112330400000210050008",
+                    "line_id": "120133050000001140"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123305000276"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "长兴二厂#2机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000229,
+            "cost": 500,
+            "name": "长兴二厂#2机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 241.9489,
+            "sensitivity": 1,
+            "st_id": "01113300000055"
+        },
+        "长兴二厂#4机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000134,
+            "cost": 500,
+            "name": "长兴二厂#4机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 145.5539,
+            "sensitivity": 1,
+            "st_id": "01113300000055"
+        },
+        "长兴二厂#1机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000197,
+            "cost": 500,
+            "name": "长兴二厂#1机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 140.4392,
+            "sensitivity": 1,
+            "st_id": "01113300000055"
+        },
+        "长兴二厂#3机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000270,
+            "cost": 500,
+            "name": "长兴二厂#3机组",
+            "p_max": 330.0,
+            "p_min": 120.0,
+            "p_current": 140.5448,
+            "sensitivity": 1,
+            "st_id": "01113300000055"
+        },
+        "长燃发电厂#1机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000112,
+            "cost": 500,
+            "name": "长燃发电厂#1机组",
+            "p_max": 435.0,
+            "p_min": 15.0,
+            "p_current": 204.6997,
+            "sensitivity": 1,
+            "st_id": "01113300000071"
+        }
+    },
+    "backup_units": {
+        "桐燃发电厂#22机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000128,
+            "available": true,
+            "cost": 500,
+            "name": "桐燃发电厂#22机组",
+            "p_max": 21.9,
+            "p_min": 18.76,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000066"
+        },
+        "桐燃发电厂#21机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000215,
+            "available": true,
+            "cost": 500,
+            "name": "桐燃发电厂#21机组",
+            "p_max": 170.0,
+            "p_min": 68.0,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000066"
+        },
+        "长燃发电厂#2机组": {
+            "zone": "含山+雉城供区",
+            "id": 110133000000000183,
+            "available": true,
+            "cost": 500,
+            "name": "长燃发电厂#2机组",
+            "p_max": 435.0,
+            "p_min": 174.0,
+            "startup_cost": 10000,
+            "sensitivity": 1,
+            "st_id": "01113300000071"
+        }
+    },
+    "hydro_units": {},
+    "storage_units": {
+        "长电储能站": {
+            "zone": "含山+雉城供区",
+            "id": "01113300000375",
+            "name": "长电储能站#5储能单元组（长电3505）",
+            "p_charge_max": 100.0,
+            "p_discharge_max": 100.0,
+            "soc_initial": 150,
+            "soc_max": 200.0,
+            "soc_min": 20.0,
+            "p_current": 0.0,
+            "st_name": "长电储能站",
+            "st_id": "01113300000375",
+            "sensitivity": 1
+        }
+    },
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "含山+雉城供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

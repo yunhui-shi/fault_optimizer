@@ -1,0 +1,1599 @@
+2025-08-16 09:28:30,236 - root - INFO - MallocNanoZone:0
+2025-08-16 09:28:30,236 - root - INFO - USER:shiyunhui
+2025-08-16 09:28:30,236 - root - INFO - COMMAND_MODE:unix2003
+2025-08-16 09:28:30,236 - root - INFO - __CFBundleIdentifier:com.trae.app
+2025-08-16 09:28:30,236 - root - INFO - PATH:/Users/shiyunhui/code/fault_agent_optimizer/.venv/bin:/Users/shiyunhui/.trae/sdks/workspaces/85961281/versions/node/current:/Users/shiyunhui/.trae/sdks/versions/node/current:/Applications/Julia-1.10.app/Contents/Resources/julia/bin:/Users/shiyunhui/.local/bin:/Applications/Trae.app/Contents/Resources/app/bin:/Users/shiyunhui/.trae/sdks/workspaces/85961281/versions/node/current:/Users/shiyunhui/.trae/sdks/versions/node/current:/Applications/Julia-1.10.app/Contents/Resources/julia/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/Users/shiyunhui/.local/bin:/Users/shiyunhui/.orbstack/bin:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts
+2025-08-16 09:28:30,236 - root - INFO - LOGNAME:shiyunhui
+2025-08-16 09:28:30,236 - root - INFO - SSH_AUTH_SOCK:/private/tmp/com.apple.launchd.OvfNmVdble/Listeners
+2025-08-16 09:28:30,236 - root - INFO - HOME:/Users/shiyunhui
+2025-08-16 09:28:30,236 - root - INFO - SHELL:/bin/zsh
+2025-08-16 09:28:30,236 - root - INFO - TMPDIR:/var/folders/_5/wvydyz5108l23sk5yz1pn_ch0000gn/T/
+2025-08-16 09:28:30,236 - root - INFO - __CF_USER_TEXT_ENCODING:0x1F5:0x19:0x34
+2025-08-16 09:28:30,236 - root - INFO - XPC_SERVICE_NAME:0
+2025-08-16 09:28:30,236 - root - INFO - XPC_FLAGS:0x0
+2025-08-16 09:28:30,236 - root - INFO - ORIGINAL_XDG_CURRENT_DESKTOP:undefined
+2025-08-16 09:28:30,236 - root - INFO - SHLVL:1
+2025-08-16 09:28:30,236 - root - INFO - PWD:/Users/shiyunhui/code/fault_agent_optimizer
+2025-08-16 09:28:30,236 - root - INFO - OLDPWD:/Users/shiyunhui/code/fault_agent_optimizer
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_PIP_INDEX_URL:http://mirrors.aliyun.com/pypi/simple
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_API_DOMAIN:https://mirrors.aliyun.com/homebrew/homebrew-bottles/api
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_BOTTLE_DOMAIN:https://mirrors.aliyun.com/homebrew/homebrew-bottles
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_PREFIX:/opt/homebrew
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_CELLAR:/opt/homebrew/Cellar
+2025-08-16 09:28:30,236 - root - INFO - HOMEBREW_REPOSITORY:/opt/homebrew
+2025-08-16 09:28:30,236 - root - INFO - INFOPATH:/opt/homebrew/share/info:
+2025-08-16 09:28:30,236 - root - INFO - ZSH:/Users/shiyunhui/.oh-my-zsh
+2025-08-16 09:28:30,236 - root - INFO - PAGER:
+2025-08-16 09:28:30,236 - root - INFO - LESS:-R
+2025-08-16 09:28:30,236 - root - INFO - LSCOLORS:Gxfxcxdxbxegedabagacad
+2025-08-16 09:28:30,236 - root - INFO - LS_COLORS:no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:
+2025-08-16 09:28:30,236 - root - INFO - TRAE_AI_SHELL_ID:8
+2025-08-16 09:28:30,236 - root - INFO - TERM_PROGRAM:vscode
+2025-08-16 09:28:30,236 - root - INFO - TERM_PRODUCT:Trae
+2025-08-16 09:28:30,236 - root - INFO - TERM_PROGRAM_VERSION:1.100.3
+2025-08-16 09:28:30,236 - root - INFO - LANG:zh_CN.UTF-8
+2025-08-16 09:28:30,236 - root - INFO - COLORTERM:truecolor
+2025-08-16 09:28:30,236 - root - INFO - PYDEVD_DISABLE_FILE_VALIDATION:1
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_DEBUGPY_ADAPTER_ENDPOINTS:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/.noConfigDebugAdapterEndpoints/endpoint-bd63ee62154a407f.txt
+2025-08-16 09:28:30,236 - root - INFO - BUNDLED_DEBUGPY_PATH:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/libs/debugpy
+2025-08-16 09:28:30,236 - root - INFO - GIT_ASKPASS:/Applications/Trae.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_GIT_ASKPASS_NODE:/Applications/Trae.app/Contents/Frameworks/Trae Helper (Plugin).app/Contents/MacOS/Trae Helper (Plugin)
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_GIT_ASKPASS_EXTRA_ARGS:
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_GIT_ASKPASS_MAIN:/Applications/Trae.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_GIT_IPC_HANDLE:/var/folders/_5/wvydyz5108l23sk5yz1pn_ch0000gn/T/vscode-git-05edc6c984.sock
+2025-08-16 09:28:30,236 - root - INFO - VSCODE_INJECTION:1
+2025-08-16 09:28:30,236 - root - INFO - ZDOTDIR:/Users/shiyunhui
+2025-08-16 09:28:30,236 - root - INFO - USER_ZDOTDIR:/Users/shiyunhui
+2025-08-16 09:28:30,236 - root - INFO - TERM:xterm-256color
+2025-08-16 09:28:30,236 - root - INFO - GIT_PAGER:
+2025-08-16 09:28:30,236 - root - INFO - VIRTUAL_ENV:/Users/shiyunhui/code/fault_agent_optimizer/.venv
+2025-08-16 09:28:30,236 - root - INFO - VIRTUAL_ENV_PROMPT:(fault_agent_optimizer) 
+2025-08-16 09:28:30,236 - root - INFO - PS1:(fault_agent_optimizer) (TraeAI-8) %~ [%?] $ 
+2025-08-16 09:28:30,236 - root - INFO - _:/Users/shiyunhui/code/fault_agent_optimizer/.venv/bin/python
+2025-08-16 09:28:30,236 - root - INFO - OPENAI_API_KEY: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
+2025-08-16 09:28:30,236 - root - INFO - OPENAI_API_BASE:https://openrouter.ai/api/v1
+2025-08-16 09:28:30,236 - root - INFO - DATA_URL:
+2025-08-16 09:28:30,236 - root - INFO - XIYAN_API_URL:https://api-inference.modelscope.cn/v1/s
+2025-08-16 09:28:30,236 - root - INFO - XIYAN_API_KEY:ms-0aa8a31f-b54d-4b9d-aefd-7d790b6240ca
+2025-08-16 09:28:30,236 - root - INFO - XIYAN_MODEL:XGenerationLab/XiYanSQL-QwenCoder-32B-2504
+2025-08-16 09:28:30,236 - root - INFO - MAIN_MODEL:qwen/qwen3-235b-a22b-2507
+2025-08-16 09:28:30,236 - root - INFO - REDIS_SYSTEM_PROMPT_KEY:fault_agent_prompt
+2025-08-16 09:28:30,236 - root - INFO - REDIS_HOST:host.docker.internal
+2025-08-16 09:28:30,236 - root - INFO - REDIS_PORT:6379
+2025-08-16 09:28:30,236 - root - INFO - REDIS_DB:0
+2025-08-16 09:28:30,236 - root - INFO - REDIS_PASSWORD:
+2025-08-16 09:28:30,236 - root - INFO - N1_ANALYSIS_URL:
+2025-08-16 09:28:30,236 - root - INFO - FIND_CONTINGENCY_PLAN_URL:
+2025-08-16 09:28:30,236 - root - INFO - FIND_OPERATION_PLAN_URL:
+2025-08-16 09:28:30,236 - root - INFO - GET_MODEL_URL:
+2025-08-16 09:28:30,236 - root - INFO - GET_BACKUP_LINE_URL:
+2025-08-16 09:28:30,236 - root - INFO - FAULT_OPT_URL:http://127.0.0.1:8001/get_optimization_boundary
+2025-08-16 09:29:25,109 - root - INFO - MallocNanoZone:0
+2025-08-16 09:29:25,109 - root - INFO - USER:shiyunhui
+2025-08-16 09:29:25,109 - root - INFO - COMMAND_MODE:unix2003
+2025-08-16 09:29:25,109 - root - INFO - __CFBundleIdentifier:com.trae.app
+2025-08-16 09:29:25,109 - root - INFO - PATH:/Users/shiyunhui/code/fault_agent_optimizer/.venv/bin:/Users/shiyunhui/.trae/sdks/workspaces/85961281/versions/node/current:/Users/shiyunhui/.trae/sdks/versions/node/current:/Applications/Julia-1.10.app/Contents/Resources/julia/bin:/Users/shiyunhui/.local/bin:/Applications/Trae.app/Contents/Resources/app/bin:/Users/shiyunhui/.trae/sdks/workspaces/85961281/versions/node/current:/Users/shiyunhui/.trae/sdks/versions/node/current:/Applications/Julia-1.10.app/Contents/Resources/julia/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.13/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/Users/shiyunhui/.local/bin:/Users/shiyunhui/.orbstack/bin:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts
+2025-08-16 09:29:25,109 - root - INFO - LOGNAME:shiyunhui
+2025-08-16 09:29:25,109 - root - INFO - SSH_AUTH_SOCK:/private/tmp/com.apple.launchd.OvfNmVdble/Listeners
+2025-08-16 09:29:25,109 - root - INFO - HOME:/Users/shiyunhui
+2025-08-16 09:29:25,109 - root - INFO - SHELL:/bin/zsh
+2025-08-16 09:29:25,109 - root - INFO - TMPDIR:/var/folders/_5/wvydyz5108l23sk5yz1pn_ch0000gn/T/
+2025-08-16 09:29:25,109 - root - INFO - __CF_USER_TEXT_ENCODING:0x1F5:0x19:0x34
+2025-08-16 09:29:25,109 - root - INFO - XPC_SERVICE_NAME:0
+2025-08-16 09:29:25,109 - root - INFO - XPC_FLAGS:0x0
+2025-08-16 09:29:25,109 - root - INFO - ORIGINAL_XDG_CURRENT_DESKTOP:undefined
+2025-08-16 09:29:25,109 - root - INFO - SHLVL:1
+2025-08-16 09:29:25,109 - root - INFO - PWD:/Users/shiyunhui/code/fault_agent_optimizer
+2025-08-16 09:29:25,109 - root - INFO - OLDPWD:/Users/shiyunhui/code/fault_agent_optimizer
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_PIP_INDEX_URL:http://mirrors.aliyun.com/pypi/simple
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_API_DOMAIN:https://mirrors.aliyun.com/homebrew/homebrew-bottles/api
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_BOTTLE_DOMAIN:https://mirrors.aliyun.com/homebrew/homebrew-bottles
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_PREFIX:/opt/homebrew
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_CELLAR:/opt/homebrew/Cellar
+2025-08-16 09:29:25,109 - root - INFO - HOMEBREW_REPOSITORY:/opt/homebrew
+2025-08-16 09:29:25,109 - root - INFO - INFOPATH:/opt/homebrew/share/info:
+2025-08-16 09:29:25,109 - root - INFO - ZSH:/Users/shiyunhui/.oh-my-zsh
+2025-08-16 09:29:25,109 - root - INFO - PAGER:
+2025-08-16 09:29:25,109 - root - INFO - LESS:-R
+2025-08-16 09:29:25,109 - root - INFO - LSCOLORS:Gxfxcxdxbxegedabagacad
+2025-08-16 09:29:25,109 - root - INFO - LS_COLORS:no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:
+2025-08-16 09:29:25,109 - root - INFO - TRAE_AI_SHELL_ID:8
+2025-08-16 09:29:25,109 - root - INFO - TERM_PROGRAM:vscode
+2025-08-16 09:29:25,109 - root - INFO - TERM_PRODUCT:Trae
+2025-08-16 09:29:25,110 - root - INFO - TERM_PROGRAM_VERSION:1.100.3
+2025-08-16 09:29:25,110 - root - INFO - LANG:zh_CN.UTF-8
+2025-08-16 09:29:25,110 - root - INFO - COLORTERM:truecolor
+2025-08-16 09:29:25,110 - root - INFO - PYDEVD_DISABLE_FILE_VALIDATION:1
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_DEBUGPY_ADAPTER_ENDPOINTS:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/.noConfigDebugAdapterEndpoints/endpoint-bd63ee62154a407f.txt
+2025-08-16 09:29:25,110 - root - INFO - BUNDLED_DEBUGPY_PATH:/Users/shiyunhui/.trae/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/libs/debugpy
+2025-08-16 09:29:25,110 - root - INFO - GIT_ASKPASS:/Applications/Trae.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_GIT_ASKPASS_NODE:/Applications/Trae.app/Contents/Frameworks/Trae Helper (Plugin).app/Contents/MacOS/Trae Helper (Plugin)
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_GIT_ASKPASS_EXTRA_ARGS:
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_GIT_ASKPASS_MAIN:/Applications/Trae.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_GIT_IPC_HANDLE:/var/folders/_5/wvydyz5108l23sk5yz1pn_ch0000gn/T/vscode-git-05edc6c984.sock
+2025-08-16 09:29:25,110 - root - INFO - VSCODE_INJECTION:1
+2025-08-16 09:29:25,110 - root - INFO - ZDOTDIR:/Users/shiyunhui
+2025-08-16 09:29:25,110 - root - INFO - USER_ZDOTDIR:/Users/shiyunhui
+2025-08-16 09:29:25,110 - root - INFO - TERM:xterm-256color
+2025-08-16 09:29:25,110 - root - INFO - GIT_PAGER:
+2025-08-16 09:29:25,110 - root - INFO - VIRTUAL_ENV:/Users/shiyunhui/code/fault_agent_optimizer/.venv
+2025-08-16 09:29:25,110 - root - INFO - VIRTUAL_ENV_PROMPT:(fault_agent_optimizer) 
+2025-08-16 09:29:25,110 - root - INFO - PS1:(fault_agent_optimizer) (TraeAI-8) %~ [%?] $ 
+2025-08-16 09:29:25,110 - root - INFO - _:/Users/shiyunhui/code/fault_agent_optimizer/.venv/bin/python
+2025-08-16 09:29:25,110 - root - INFO - OPENAI_API_KEY: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
+2025-08-16 09:29:25,110 - root - INFO - OPENAI_API_BASE:https://openrouter.ai/api/v1
+2025-08-16 09:29:25,110 - root - INFO - DATA_URL:
+2025-08-16 09:29:25,110 - root - INFO - XIYAN_API_URL:https://api-inference.modelscope.cn/v1/s
+2025-08-16 09:29:25,110 - root - INFO - XIYAN_API_KEY:ms-0aa8a31f-b54d-4b9d-aefd-7d790b6240ca
+2025-08-16 09:29:25,110 - root - INFO - XIYAN_MODEL:XGenerationLab/XiYanSQL-QwenCoder-32B-2504
+2025-08-16 09:29:25,110 - root - INFO - MAIN_MODEL:qwen/qwen3-235b-a22b-2507
+2025-08-16 09:29:25,110 - root - INFO - REDIS_SYSTEM_PROMPT_KEY:fault_agent_prompt
+2025-08-16 09:29:25,110 - root - INFO - REDIS_HOST:host.docker.internal
+2025-08-16 09:29:25,110 - root - INFO - REDIS_PORT:6379
+2025-08-16 09:29:25,110 - root - INFO - REDIS_DB:0
+2025-08-16 09:29:25,110 - root - INFO - REDIS_PASSWORD:
+2025-08-16 09:29:25,110 - root - INFO - N1_ANALYSIS_URL:
+2025-08-16 09:29:25,110 - root - INFO - FIND_CONTINGENCY_PLAN_URL:
+2025-08-16 09:29:25,110 - root - INFO - FIND_OPERATION_PLAN_URL:
+2025-08-16 09:29:25,110 - root - INFO - GET_MODEL_URL:
+2025-08-16 09:29:25,110 - root - INFO - GET_BACKUP_LINE_URL:
+2025-08-16 09:29:25,110 - root - INFO - FAULT_OPT_URL:http://127.0.0.1:8001/get_optimization_boundary
+2025-08-16 09:31:24,838 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 09:31:24,838 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 09:39:22,856 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 09:39:22,856 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 09:39:22,856 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 09:40:32,788 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 09:40:32,788 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 09:40:32,788 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 09:40:56,039 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 09:40:56,040 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 09:40:56,040 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 09:41:55,664 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 09:41:55,664 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 09:41:55,664 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:12:07,857 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:12:07,857 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:12:07,857 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:13:39,243 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:13:39,243 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:13:39,243 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:13:39,243 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:13:39,243 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 10:13:39,243 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:13:39,243 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:13:39,243 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:14:27,131 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:14:27,131 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:14:27,131 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:14:27,131 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:15:32,567 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:15:32,568 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:15:32,568 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:15:32,568 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:16:28,340 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:16:28,340 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:16:28,340 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:16:28,340 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:22:57,926 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:22:57,927 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:22:57,927 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:22:57,927 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:25:16,601 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:25:16,602 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:25:16,602 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:25:16,602 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:25:48,644 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:25:48,644 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:25:48,644 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:25:48,644 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:26:32,467 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:26:32,467 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:26:32,467 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:26:32,467 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:28:21,675 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:28:21,675 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:28:21,675 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:28:21,675 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:29:03,210 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:29:03,210 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:29:03,210 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:29:03,210 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:29:36,689 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:29:36,689 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:29:36,689 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:29:36,689 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 10:41:38,710 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:41:38,710 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:41:38,711 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:41:38,711 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:42:16,025 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:42:16,025 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:42:16,025 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:42:16,025 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:53:36,996 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:53:36,996 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:53:36,997 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:54:22,727 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:54:22,727 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:54:22,727 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:55:01,810 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:55:01,810 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:55:01,810 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:55:01,810 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:55:46,135 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:55:46,136 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:55:46,136 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:55:46,136 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 10:57:41,212 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 10:57:41,212 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 10:57:41,212 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 10:57:41,212 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:10:25,154 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:10:25,154 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:10:25,154 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:10:25,154 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 11:11:04,130 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:11:04,130 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:11:04,130 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:11:04,130 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:28:12,353 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:28:12,353 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:28:12,353 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:28:12,353 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:28:57,521 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:28:57,521 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:28:57,521 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:28:57,521 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:36:50,832 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:36:50,832 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:36:50,832 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:36:50,832 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:40:10,472 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:40:10,472 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:40:10,472 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:40:10,472 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:44:36,790 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:44:36,791 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:44:36,791 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:44:36,791 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:45:03,975 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:45:03,976 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:45:03,976 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:45:03,976 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:47:51,454 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:47:51,454 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:47:51,454 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:47:51,454 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:48:08,017 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:48:08,018 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:48:08,018 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:48:08,018 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:49:07,764 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:49:07,764 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:49:07,764 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:49:07,764 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:49:36,246 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:49:36,246 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:49:36,246 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:49:36,247 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:49:38,702 - root - INFO - [{'unit': '衢州集控', 'operation': '合上衢州变文州2Q50开关', 'action': 'close', 'switch_name': '衢州变文州2Q50开关', 'priority': 1}, {'unit': '衢州集控', 'operation': '合上太真变太华24N6开关', 'action': 'close', 'switch_name': '太真变太华24N6开关', 'priority': 1}, {'unit': '衢州集控', 'operation': '合上太真变太九24N5开关', 'action': 'close', 'switch_name': '太真变太九24N5开关', 'priority': 1}]
+2025-08-16 11:51:43,666 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:51:43,667 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:51:43,667 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:51:43,667 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:53:38,507 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:53:38,507 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:53:38,507 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:53:38,507 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:54:12,759 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:54:12,759 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:54:12,759 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:54:12,759 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:54:54,354 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:54:54,355 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:54:54,355 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:54:54,355 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:55:35,527 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:55:35,528 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:55:35,528 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:55:35,528 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 11:56:22,761 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 11:56:22,762 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 11:56:22,762 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 11:56:22,762 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:08:05,006 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:08:05,006 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:08:05,006 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:08:05,006 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:08:37,160 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:08:37,160 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:08:37,160 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:08:37,160 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:08:53,407 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:08:53,407 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:08:53,407 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:08:53,407 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:09:21,754 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:09:21,754 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:09:21,755 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:09:21,755 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:10:08,785 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 12:10:11,245 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 12:10:12,335 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:10:12,335 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:10:12,335 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:10:12,335 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:10:15,933 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 12:10:18,364 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 12:11:39,746 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 12:11:39,775 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 12:11:39,801 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 12:11:39,828 - root - INFO - 供区 长潭+塘岭+柏树供区 主变数量: 6
+2025-08-16 12:11:39,923 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 12:11:39,948 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 12:11:39,973 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 12:11:40,000 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 12:11:40,027 - root - INFO - 供区 潘村+丹溪+吴宁供区 主变数量: 8
+2025-08-16 12:11:40,055 - root - INFO - 供区 春晖+舜江供区 主变数量: 5
+2025-08-16 12:11:40,081 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 12:11:40,081 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:40,081 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 12:11:40,081 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:11:42,670 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 12:11:42,695 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 12:11:42,695 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:42,720 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 12:11:42,747 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 12:11:42,774 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 12:11:42,799 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 12:11:42,799 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:42,799 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 12:11:42,799 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:11:45,267 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 12:11:45,291 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 12:11:45,317 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 12:11:45,342 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 12:11:45,367 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 12:11:45,395 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:11:45,395 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:45,395 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:11:45,395 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:11:47,765 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 12:11:47,791 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 12:11:47,816 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 12:11:47,843 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 12:11:47,869 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 12:11:47,896 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 12:11:47,921 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 12:11:47,947 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 12:11:47,974 - root - INFO - 供区 望嘉+南雁供区 主变数量: 5
+2025-08-16 12:11:47,999 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 12:11:48,028 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 12:11:48,054 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 12:11:48,080 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 12:11:48,106 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 12:11:48,131 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 12:11:48,156 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 12:11:48,181 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 12:11:48,181 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:48,181 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 12:11:48,181 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:11:50,600 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 12:11:50,600 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 12:11:50,600 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 12:11:50,600 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:12:32,778 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 12:12:32,868 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 12:12:32,914 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 12:12:33,009 - root - INFO - 供区 长潭+塘岭+柏树供区 主变数量: 6
+2025-08-16 12:12:33,121 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 12:12:33,506 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 12:12:33,532 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 12:12:33,585 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 12:12:33,628 - root - INFO - 供区 潘村+丹溪+吴宁供区 主变数量: 8
+2025-08-16 12:12:33,689 - root - INFO - 供区 春晖+舜江供区 主变数量: 5
+2025-08-16 12:12:33,730 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 12:12:33,730 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:33,730 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 12:12:33,730 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:12:36,245 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 12:12:36,282 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 12:12:36,282 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:36,308 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 12:12:36,387 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 12:12:36,814 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 12:12:36,881 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 12:12:36,881 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:36,881 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 12:12:36,881 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:12:39,344 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 12:12:39,406 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 12:12:39,450 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 12:12:39,530 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 12:12:39,593 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 12:12:39,697 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:12:39,697 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:39,697 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:12:39,697 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:12:42,074 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 12:12:42,134 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 12:12:42,209 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 12:12:42,581 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 12:12:42,881 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 12:12:42,918 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 12:12:42,962 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 12:12:42,991 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 12:12:43,324 - root - INFO - 供区 望嘉+南雁供区 主变数量: 5
+2025-08-16 12:12:43,365 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 12:12:44,858 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 12:12:44,940 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 12:12:45,028 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 12:12:45,239 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 12:12:45,323 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 12:12:45,358 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 12:12:45,383 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 12:12:45,384 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:45,384 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 12:12:45,384 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:12:47,755 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 12:12:47,755 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:47,755 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 12:12:47,755 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:12:50,170 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 12:12:50,170 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 12:12:50,170 - root - INFO - 选择与供区 威远+句章供区 进行合环
+2025-08-16 12:12:50,170 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 12:21:32,524 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 12:21:32,663 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 12:21:32,737 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 12:21:32,899 - root - INFO - 供区 柏树+长潭+塘岭供区 主变数量: 6
+2025-08-16 12:21:33,051 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 12:21:33,683 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 12:21:33,725 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 12:21:33,809 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 12:21:33,878 - root - INFO - 供区 丹溪+潘村+吴宁供区 主变数量: 8
+2025-08-16 12:21:33,978 - root - INFO - 供区 春晖+舜江供区 主变数量: 5
+2025-08-16 12:21:34,042 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 12:21:34,042 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:34,042 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 12:21:34,042 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:21:38,670 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 12:21:38,733 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 12:21:38,733 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:38,777 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 12:21:39,020 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 12:21:39,325 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 12:21:39,454 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 12:21:39,454 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:39,454 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 12:21:39,454 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:21:43,934 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 12:21:44,031 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 12:21:44,103 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 12:21:44,270 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 12:21:44,382 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 12:21:44,558 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:21:44,558 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:44,558 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:21:44,558 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:21:49,110 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 12:21:49,292 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 12:21:49,419 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 12:21:49,924 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 12:21:50,394 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 12:21:51,213 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 12:21:51,270 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 12:21:51,321 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 12:21:51,884 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 12:21:51,931 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 12:21:54,058 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 12:21:54,149 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 12:21:54,256 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 12:21:54,436 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 12:21:54,564 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 12:21:54,617 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 12:21:54,655 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 12:21:54,655 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:54,655 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 12:21:54,655 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:21:59,006 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 12:21:59,007 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 12:21:59,007 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 12:21:59,007 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:22:03,661 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 12:22:03,661 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 12:22:03,661 - root - INFO - 选择与供区 威远+句章供区 进行合环
+2025-08-16 12:22:03,661 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 12:32:59,085 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 12:32:59,189 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 12:32:59,295 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 12:32:59,402 - root - INFO - 供区 柏树+长潭+塘岭供区 主变数量: 6
+2025-08-16 12:32:59,486 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 12:32:59,865 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 12:32:59,893 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 12:33:00,002 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 12:33:00,050 - root - INFO - 供区 丹溪+潘村+吴宁供区 主变数量: 8
+2025-08-16 12:33:00,175 - root - INFO - 供区 春晖+舜江供区 主变数量: 5
+2025-08-16 12:33:00,259 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 12:33:00,259 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:00,259 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 12:33:00,259 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:33:02,837 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 12:33:02,877 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 12:33:02,877 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:02,907 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 12:33:03,073 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 12:33:03,244 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 12:33:03,313 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 12:33:03,313 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:03,313 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 12:33:03,313 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:33:05,769 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 12:33:05,826 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 12:33:05,869 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 12:33:05,951 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 12:33:06,080 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 12:33:06,181 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 12:33:06,181 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:06,181 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 12:33:06,181 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 12:33:08,465 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 12:33:08,636 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 12:33:08,721 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 12:33:09,085 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 12:33:09,318 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 12:33:09,804 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 12:33:09,848 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 12:33:09,916 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 12:33:10,294 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 12:33:10,364 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 12:33:11,884 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 12:33:11,964 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 12:33:12,047 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 12:33:12,214 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 12:33:12,306 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 12:33:12,347 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 12:33:12,376 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 12:33:12,376 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:12,376 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 12:33:12,376 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:33:14,823 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 12:33:14,823 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:14,823 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 12:33:14,823 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 12:33:17,231 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 12:33:17,231 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 12:33:17,231 - root - INFO - 选择与供区 威远+句章供区 进行合环
+2025-08-16 12:33:17,231 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 16:16:58,655 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 16:16:58,766 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 16:16:58,861 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 16:16:58,955 - root - INFO - 供区 塘岭+柏树+长潭供区 主变数量: 6
+2025-08-16 16:16:59,036 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 16:16:59,448 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 16:16:59,474 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 16:16:59,578 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 16:16:59,621 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 16:16:59,742 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 16:16:59,819 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 16:16:59,819 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 16:16:59,819 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 16:16:59,819 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:17:02,266 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 16:17:02,303 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 16:17:02,303 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:02,361 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 16:17:02,516 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 16:17:02,719 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 16:17:02,786 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 16:17:02,786 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:02,786 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 16:17:02,786 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:17:05,207 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 16:17:05,265 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 16:17:05,308 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 16:17:05,386 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 16:17:05,448 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 16:17:05,548 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:17:05,548 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:05,548 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:17:05,548 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 16:17:07,883 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 16:17:07,985 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 16:17:08,062 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 16:17:08,329 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 16:17:08,591 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 16:17:09,240 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 16:17:09,346 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 16:17:09,389 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 16:17:09,704 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 16:17:09,748 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:17:11,979 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 16:17:12,059 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 16:17:12,139 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 16:17:12,329 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 16:17:12,414 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 16:17:12,449 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 16:17:12,475 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 16:17:12,475 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:12,475 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 16:17:12,475 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:17:14,860 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 16:17:14,860 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:14,860 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 16:17:14,860 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:17:17,308 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:17:17,308 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:17:17,308 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:17:17,308 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 16:18:02,129 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:19:16,674 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:27:00,367 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:27:18,506 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:28:53,441 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 16:28:53,569 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 16:28:53,671 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 16:28:53,763 - root - INFO - 供区 塘岭+柏树+长潭供区 主变数量: 6
+2025-08-16 16:28:53,848 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 16:28:54,296 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 16:28:54,326 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 16:28:54,431 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 16:28:54,476 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 16:28:54,601 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 16:28:54,687 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 16:28:54,687 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 16:28:54,687 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 16:28:54,687 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:28:57,192 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 16:28:57,229 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 16:28:57,229 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 16:28:57,255 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 16:28:57,389 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 16:28:57,684 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 16:28:57,752 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 16:28:57,752 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 16:28:57,752 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 16:28:57,752 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:29:00,252 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 16:29:00,312 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 16:29:00,356 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 16:29:00,435 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 16:29:00,499 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 16:29:00,605 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:29:00,605 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:29:00,605 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:29:00,605 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 16:29:02,981 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 16:29:03,083 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 16:29:03,160 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 16:29:03,403 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 16:29:03,636 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 16:29:04,067 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 16:29:04,169 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 16:29:04,211 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 16:29:04,465 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 16:29:04,509 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:29:05,520 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 16:29:05,631 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 16:29:05,715 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 16:29:05,848 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 16:29:05,938 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 16:29:05,976 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 16:29:06,003 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 16:29:06,003 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 16:29:06,003 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 16:29:06,003 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:29:08,400 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 16:29:08,400 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 16:29:08,401 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 16:29:08,401 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:29:10,813 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:29:10,813 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:29:10,813 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:29:10,813 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 16:46:05,464 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 16:46:05,593 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 16:46:05,699 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 16:46:05,798 - root - INFO - 供区 塘岭+柏树+长潭供区 主变数量: 6
+2025-08-16 16:46:05,884 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 16:46:06,443 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 16:46:06,471 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 16:46:06,573 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 16:46:06,622 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 16:46:06,747 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 16:46:06,826 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 16:46:06,826 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:06,826 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 16:46:06,826 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:46:09,310 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 16:46:09,348 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 16:46:09,349 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:09,374 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 16:46:09,500 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 16:46:09,692 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 16:46:09,760 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 16:46:09,760 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:09,760 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 16:46:09,760 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:46:12,270 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 16:46:12,328 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 16:46:12,370 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 16:46:12,449 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 16:46:12,512 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 16:46:12,615 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:46:12,615 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:12,615 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:46:12,615 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 16:46:15,006 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 16:46:15,110 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 16:46:15,268 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 16:46:15,560 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 16:46:15,879 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 16:46:16,482 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 16:46:16,525 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 16:46:16,569 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 16:46:16,846 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 16:46:16,893 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 16:46:17,762 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 16:46:17,839 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 16:46:17,922 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 16:46:18,064 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 16:46:18,154 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 16:46:18,190 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 16:46:18,215 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 16:46:18,215 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:18,215 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 16:46:18,215 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:46:20,630 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 16:46:20,630 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:20,630 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 16:46:20,630 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 16:46:23,178 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:46:23,178 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:46:23,178 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:47:09,064 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:47:09,064 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:47:09,065 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:47:09,065 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 16:48:13,585 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:48:13,585 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:48:13,585 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:48:13,585 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 16:48:49,639 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 16:48:49,639 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 16:48:49,639 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 16:48:49,639 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 16:57:33,718 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:57:33,718 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:57:33,718 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:57:33,718 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 16:58:31,908 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:58:31,908 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:58:31,908 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:58:31,908 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 16:59:37,877 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 16:59:37,877 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 16:59:37,877 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 16:59:37,877 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:02:46,273 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 17:02:46,414 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 17:02:46,557 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 17:02:46,668 - root - INFO - 供区 塘岭+柏树+长潭供区 主变数量: 6
+2025-08-16 17:02:46,765 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 17:02:47,203 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 17:02:47,236 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:02:47,352 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 17:02:47,401 - root - INFO - 供区 潘村+丹溪+吴宁供区 主变数量: 8
+2025-08-16 17:02:47,527 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 17:02:47,613 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 17:02:47,613 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 17:02:47,613 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 17:02:47,613 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:02:50,514 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 17:02:50,559 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:02:50,560 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:02:50,560 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:02:50,560 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 17:02:53,334 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 17:02:53,472 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 17:02:53,653 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 17:02:53,793 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 17:02:53,793 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 17:02:53,793 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 17:02:53,793 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:02:56,666 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 17:02:56,726 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 17:02:56,777 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 17:02:56,887 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 17:02:56,954 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 17:02:57,066 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 17:02:57,066 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 17:02:57,066 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 17:02:57,066 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:02:59,777 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 17:02:59,899 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 17:02:59,975 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 17:03:00,504 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 17:03:00,899 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 17:03:01,468 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 17:03:01,517 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 17:03:01,566 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 17:03:02,311 - root - INFO - 供区 望嘉+南雁供区 主变数量: 5
+2025-08-16 17:03:02,360 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 17:03:02,960 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 17:03:03,042 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 17:03:03,128 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 17:03:03,271 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 17:03:03,383 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 17:03:03,426 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 17:03:03,456 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 17:03:03,456 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 17:03:03,456 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 17:03:03,456 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:03:06,235 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 17:03:06,235 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 17:03:06,235 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 17:03:06,235 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:03:09,054 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 17:03:09,054 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 17:03:09,054 - root - INFO - 选择与供区 威远+句章供区 进行合环
+2025-08-16 17:03:09,054 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 17:03:32,775 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:04:06,765 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:04:21,883 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:04:37,368 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:05:15,438 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:05:40,109 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:08:48,382 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:09:35,214 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:10:05,628 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:12:29,794 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:12:47,391 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:14:02,645 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:14:25,486 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:14:34,688 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:14:52,507 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:15:43,789 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:16:16,095 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 17:16:16,201 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 17:16:16,445 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 17:16:16,756 - root - INFO - 供区 塘岭+柏树+长潭供区 主变数量: 6
+2025-08-16 17:16:16,923 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 17:16:17,027 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 17:16:17,061 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:16:17,647 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 17:16:17,715 - root - INFO - 供区 潘村+吴宁+丹溪供区 主变数量: 8
+2025-08-16 17:16:17,950 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 17:16:18,165 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 17:16:18,165 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:18,165 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 17:16:18,165 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:16:24,530 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 17:16:24,582 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:16:24,582 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:24,582 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:16:24,582 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 17:16:29,615 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 17:16:29,828 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 17:16:30,121 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 17:16:30,221 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 17:16:30,221 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:30,221 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 17:16:30,221 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 17:16:34,836 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 17:16:34,912 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 17:16:34,970 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 17:16:35,086 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 17:16:35,229 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 17:16:35,396 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 17:16:35,396 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:35,396 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 17:16:35,396 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:16:40,044 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 17:16:42,353 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 17:16:42,467 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 17:16:42,541 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 17:16:43,415 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 17:16:43,886 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 17:16:43,928 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 17:16:43,976 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 17:16:47,393 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 17:16:47,574 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 17:16:49,902 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 17:16:49,948 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 17:16:50,065 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 17:16:51,531 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 17:16:51,748 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 17:16:51,800 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 17:16:51,833 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 17:16:51,833 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:51,833 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 17:16:51,833 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:16:56,852 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 17:16:56,852 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 17:16:56,852 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 17:16:56,852 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:17:01,594 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 17:17:01,594 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 17:17:01,594 - root - INFO - 选择与供区 威远+句章供区 进行合环
+2025-08-16 17:17:01,594 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 17:25:09,444 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:25:39,410 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:26:31,257 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:26:59,112 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:36:50,068 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:37:26,202 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:38:21,794 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:39:04,891 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:41:10,526 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:41:27,556 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:42:37,512 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:44:24,570 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:46:07,164 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:46:30,018 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 17:46:30,100 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 17:46:30,279 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 17:46:30,407 - root - INFO - 供区 长潭+塘岭+柏树供区 主变数量: 6
+2025-08-16 17:46:30,490 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 17:46:31,396 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 17:46:31,412 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:46:32,136 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 17:46:32,248 - root - INFO - 供区 吴宁+丹溪+潘村供区 主变数量: 8
+2025-08-16 17:46:32,364 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 17:46:32,978 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 17:46:32,978 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 17:46:32,978 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 17:46:32,978 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:46:36,006 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 17:46:36,142 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:46:36,142 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:46:36,142 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:46:36,142 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 17:46:38,887 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 17:46:39,849 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 17:46:40,089 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 17:46:40,335 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 17:46:40,335 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 17:46:40,335 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 17:46:40,335 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:46:44,397 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 17:46:44,441 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 17:46:44,523 - root - INFO - 供区 含山+雉城供区 主变数量: 4
+2025-08-16 17:46:44,594 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 17:46:44,762 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 17:46:45,614 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 17:46:45,614 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 17:46:45,614 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 17:46:45,614 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:46:48,314 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 17:46:58,504 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 17:46:59,203 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 17:46:59,787 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 17:47:00,124 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 17:47:00,389 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 17:47:00,499 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 17:47:00,597 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 17:47:01,396 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 17:47:01,485 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 17:47:02,461 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 17:47:02,527 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 17:47:04,954 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 17:47:05,970 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 17:47:06,066 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 17:47:06,129 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 17:47:06,144 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 17:47:06,144 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 17:47:06,144 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 17:47:06,144 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:47:09,037 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 17:47:09,037 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 17:47:09,037 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 17:47:09,037 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:47:12,093 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 17:47:12,093 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 17:47:12,093 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 17:47:12,093 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 17:48:35,233 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 17:48:35,313 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 17:48:35,476 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 17:48:35,601 - root - INFO - 供区 长潭+塘岭+柏树供区 主变数量: 6
+2025-08-16 17:48:35,679 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 17:48:36,707 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 17:48:36,724 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:48:37,425 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 17:48:37,529 - root - INFO - 供区 吴宁+丹溪+潘村供区 主变数量: 8
+2025-08-16 17:48:37,639 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 17:48:38,631 - root - INFO - 供区 洪明+汾湖供区 主变数量: 2
+2025-08-16 17:48:38,631 - root - INFO - 供区 洪明+汾湖供区 只有两台主变，需要进行合环操作
+2025-08-16 17:48:38,631 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 17:48:38,631 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:48:41,455 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 17:48:41,589 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:48:41,589 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:48:41,589 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:48:41,589 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 17:48:44,357 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 17:48:45,309 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 17:48:45,541 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 17:48:45,793 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 17:48:45,793 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 17:48:45,793 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 17:48:45,793 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:48:49,989 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 17:48:50,033 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 17:48:50,118 - root - INFO - 供区 含山+雉城供区 主变数量: 4
+2025-08-16 17:48:50,188 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 17:48:50,371 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 17:48:51,311 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 17:48:51,311 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 17:48:51,311 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 17:48:51,311 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:48:54,025 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 17:49:04,225 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 17:49:04,496 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 17:49:04,951 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 17:49:05,399 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 17:49:05,810 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 17:49:05,918 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 17:49:05,996 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 17:49:06,669 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 17:49:06,757 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 17:49:07,297 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 17:49:07,367 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 17:49:10,301 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 17:49:11,316 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 17:49:11,407 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 17:49:11,470 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 17:49:11,486 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 17:49:11,486 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 17:49:11,486 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 17:49:11,486 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:49:14,383 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 17:49:14,383 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 17:49:14,383 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 17:49:14,383 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:49:17,421 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 17:49:17,421 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 17:49:17,421 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 17:49:17,421 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 17:57:27,873 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 17:57:27,987 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 17:57:28,121 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 17:57:28,291 - root - INFO - 供区 塘岭+长潭+柏树供区 主变数量: 6
+2025-08-16 17:57:28,370 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 17:57:29,319 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 17:57:29,337 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 17:57:29,951 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 17:57:30,148 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 17:57:30,263 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 17:57:31,464 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 17:57:31,464 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 17:57:31,464 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 17:57:31,464 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:57:34,536 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 17:57:34,873 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:57:34,873 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:57:34,873 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:57:34,873 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 17:57:37,940 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 17:57:39,092 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 17:57:39,336 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 17:57:39,791 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 17:57:39,791 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 17:57:39,791 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 17:57:39,791 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:57:44,252 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 17:57:44,301 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 17:57:44,503 - root - INFO - 供区 含山+雉城供区 主变数量: 4
+2025-08-16 17:57:44,584 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 17:57:44,838 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 17:57:45,899 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 17:57:45,899 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 17:57:45,899 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 17:57:45,899 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 17:57:49,016 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 17:58:02,106 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 17:58:02,650 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 17:58:03,096 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 17:58:03,571 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 17:58:04,091 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 17:58:04,199 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 17:58:04,386 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 17:58:05,277 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 17:58:05,408 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 17:58:05,930 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 17:58:06,032 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 17:58:11,347 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 17:58:13,556 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 17:58:13,671 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 17:58:13,739 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 17:58:13,759 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 17:58:13,759 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 17:58:13,759 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 17:58:13,759 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 17:58:17,200 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 17:58:17,200 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 17:58:17,200 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 17:58:17,200 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 17:58:20,428 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 17:58:20,429 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 17:58:20,429 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 17:58:20,429 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 17:59:31,458 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 17:59:31,458 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 17:59:31,458 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 17:59:31,458 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 18:01:39,251 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 18:01:39,251 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 18:01:39,251 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 18:01:39,251 - root - INFO - 生成了 0 个前置合环操作
+2025-08-16 18:02:49,391 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 18:02:49,391 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 18:02:49,391 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 18:02:49,391 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 18:03:45,051 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 18:03:45,138 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 18:03:45,272 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 18:03:45,409 - root - INFO - 供区 塘岭+长潭+柏树供区 主变数量: 6
+2025-08-16 18:03:45,489 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 18:03:46,440 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 18:03:46,458 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 18:03:47,060 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 18:03:47,253 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 18:03:47,361 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 18:03:48,499 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 18:03:48,500 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 18:03:48,500 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 18:03:48,500 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 18:03:51,319 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 18:03:51,660 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 18:03:51,660 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 18:03:51,660 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 18:03:51,660 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 18:03:54,335 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 18:03:55,382 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 18:03:55,595 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 18:03:56,001 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 18:03:56,001 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 18:03:56,001 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 18:03:56,001 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 18:03:59,911 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:03:59,956 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 18:04:00,145 - root - INFO - 供区 含山+雉城供区 主变数量: 4
+2025-08-16 18:04:00,220 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 18:04:00,457 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 18:04:01,432 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 18:04:01,432 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 18:04:01,433 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 18:04:01,433 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 18:04:04,239 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 18:04:15,774 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 18:04:16,248 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 18:04:16,619 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 18:04:17,039 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 18:04:17,511 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 18:04:17,610 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 18:04:17,851 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 18:04:18,650 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 18:04:18,791 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 18:04:19,198 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 18:04:19,291 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 18:04:23,855 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 18:04:25,796 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 18:04:25,893 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 18:04:25,955 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 18:04:25,972 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 18:04:25,972 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 18:04:25,972 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 18:04:25,972 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 18:04:28,987 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 18:04:28,987 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 18:04:28,987 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 18:04:28,988 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 18:04:31,793 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 18:04:31,793 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 18:04:31,793 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 18:04:31,793 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 18:05:17,859 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:06:50,264 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:08:09,131 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:08:23,041 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:17:10,286 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:17:24,223 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:18:10,038 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:18:35,202 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:19:50,264 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:20:20,004 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:25:27,481 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:27:07,101 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:27:18,387 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:27:27,321 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:27:39,782 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:28:06,736 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:28:37,938 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:31:25,685 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:32:48,711 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:34:12,466 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 18:41:15,520 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 18:42:14,040 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 18:42:57,281 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 18:43:13,861 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 18:46:08,822 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:02:27,825 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:03:50,137 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:06:50,202 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:07:20,382 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:07:33,155 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:08:26,114 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:09:20,499 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:11:36,977 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:11:50,717 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:13:12,975 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:18:16,619 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:19:28,642 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:20:38,281 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:22:32,331 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:23:03,529 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 19:23:03,618 - root - INFO - 供区 瓯海+白鹿供区 主变数量: 4
+2025-08-16 19:23:03,655 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 19:23:03,846 - root - INFO - 供区 柏树+塘岭+长潭供区 主变数量: 6
+2025-08-16 19:23:03,945 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 19:23:04,052 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 19:23:04,072 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:23:04,193 - root - INFO - 供区 春晓+钱湖供区 主变数量: 5
+2025-08-16 19:23:04,241 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 19:23:04,395 - root - INFO - 供区 春晖+舜江供区 主变数量: 5
+2025-08-16 19:23:04,496 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 19:23:04,496 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:04,497 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 19:23:04,497 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:23:07,651 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 19:23:07,694 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 19:23:07,694 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:07,694 - root - INFO - 选择与供区 瓯海+天柱供区 进行合环
+2025-08-16 19:23:07,694 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:23:10,393 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 19:23:10,516 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 19:23:10,573 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 19:23:10,634 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 19:23:10,634 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:10,634 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 19:23:10,634 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:23:13,393 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:23:13,445 - root - INFO - 供区 剑川+万象供区 主变数量: 5
+2025-08-16 19:23:13,480 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 19:23:13,552 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 19:23:13,607 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 19:23:13,699 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:23:13,699 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:13,699 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:23:13,700 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:23:16,342 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 19:23:16,453 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 19:23:16,520 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 19:23:16,596 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 19:23:16,668 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 19:23:17,207 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 19:23:17,253 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 19:23:17,288 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 19:23:17,381 - root - INFO - 供区 望嘉+南雁供区 主变数量: 5
+2025-08-16 19:23:17,418 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 19:23:17,546 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 19:23:17,605 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 19:23:17,683 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 19:23:17,873 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 19:23:17,968 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 19:23:17,996 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 19:23:18,012 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 19:23:18,012 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:18,012 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 19:23:18,012 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:23:20,635 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 19:23:20,635 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:20,635 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 19:23:20,635 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:23:23,366 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 19:23:23,366 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 19:23:23,366 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 19:23:23,366 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 19:24:23,934 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 19:24:24,046 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 19:24:24,083 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 19:24:24,264 - root - INFO - 供区 长潭+柏树+塘岭供区 主变数量: 6
+2025-08-16 19:24:24,343 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 19:24:25,003 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 19:24:25,019 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:24:25,525 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 19:24:25,838 - root - INFO - 供区 丹溪+吴宁+潘村供区 主变数量: 8
+2025-08-16 19:24:26,802 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 19:24:27,851 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 19:24:27,851 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 19:24:27,851 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 19:24:27,851 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:24:30,837 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 19:24:30,971 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 19:24:30,971 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 19:24:30,971 - root - INFO - 选择与供区 瓯海+天柱供区 进行合环
+2025-08-16 19:24:30,971 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:24:33,680 - root - INFO - 供区 凤仪+诸暨供区 主变数量: 6
+2025-08-16 19:25:56,338 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 19:25:56,514 - root - INFO - 供区 天一+明州供区 主变数量: 6
+2025-08-16 19:25:57,528 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 19:25:57,528 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 19:25:57,528 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 19:25:57,528 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:26:03,159 - root - INFO - 供区 瓯海+天柱供区 主变数量: 4
+2025-08-16 19:26:03,304 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 19:26:03,401 - root - INFO - 供区 含山+雉城供区 主变数量: 4
+2025-08-16 19:26:03,777 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 19:26:03,899 - root - INFO - 供区 河姆+春晖供区 主变数量: 6
+2025-08-16 19:26:04,345 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:26:04,345 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:26:04,345 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:26:04,345 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:26:06,976 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 19:26:11,806 - root - INFO - 供区 威远+句章供区 主变数量: 5
+2025-08-16 19:26:12,166 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 19:26:12,758 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 19:26:13,391 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 19:26:13,795 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 19:26:13,946 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 19:26:14,066 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 19:26:14,565 - root - INFO - 供区 望嘉+南雁供区 主变数量: 5
+2025-08-16 19:26:14,748 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 19:26:51,237 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 19:26:51,308 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 19:26:51,352 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 19:26:51,510 - root - INFO - 供区 芝堰+严州供区 主变数量: 5
+2025-08-16 19:26:52,348 - root - INFO - 供区 杭州+瓶窑供区 主变数量: 5
+2025-08-16 19:26:52,413 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 19:26:52,431 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 19:26:52,431 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 19:26:52,432 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 19:26:52,432 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:08,003 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 19:27:08,083 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 19:27:08,127 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 19:27:08,317 - root - INFO - 供区 长潭+柏树+塘岭供区 主变数量: 6
+2025-08-16 19:27:08,393 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 19:27:08,874 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 19:27:08,890 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:27:09,563 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 19:27:09,794 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 19:27:09,908 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 19:27:10,728 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 19:27:10,728 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:10,728 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 19:27:10,728 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:13,460 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 19:27:13,604 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 19:27:13,604 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:13,604 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 19:27:13,604 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:16,244 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 19:27:18,570 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 19:27:18,781 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 19:27:19,042 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 19:27:19,042 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:19,042 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 19:27:19,042 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:23,400 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:27:23,565 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 19:27:23,642 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 19:27:23,715 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 19:27:23,917 - root - INFO - 供区 春晖+河姆供区 主变数量: 6
+2025-08-16 19:27:24,513 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:27:24,513 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:24,513 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:27:24,513 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:27:27,150 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 19:27:33,989 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 19:27:34,354 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 19:27:34,649 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 19:27:35,963 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 19:27:36,364 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 19:27:36,437 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 19:27:36,562 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 19:27:36,979 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 19:27:37,078 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 19:27:37,707 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 19:27:37,770 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 19:27:40,636 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 19:27:41,462 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 19:27:41,559 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 19:27:41,629 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 19:27:41,645 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 19:27:41,645 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:41,645 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 19:27:41,645 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:44,511 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 19:27:44,511 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:44,511 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 19:27:44,511 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:27:47,477 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 19:27:47,477 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 19:27:47,477 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 19:27:47,477 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 19:28:38,532 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 19:28:38,642 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 19:28:38,689 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 19:28:38,879 - root - INFO - 供区 长潭+柏树+塘岭供区 主变数量: 6
+2025-08-16 19:28:38,954 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 19:28:39,441 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 19:28:39,458 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:28:40,133 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 19:28:40,363 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 19:28:40,475 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 19:28:41,293 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 19:28:41,293 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 19:28:41,293 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 19:28:41,294 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:28:44,304 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 19:28:44,447 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 19:28:44,447 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 19:28:44,447 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 19:28:44,447 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:28:47,116 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 19:28:49,434 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 19:28:49,617 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 19:28:49,872 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 19:28:49,872 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 19:28:49,872 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 19:28:49,872 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:28:54,691 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:28:54,854 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 19:28:54,931 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 19:28:55,003 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 19:28:55,204 - root - INFO - 供区 春晖+河姆供区 主变数量: 6
+2025-08-16 19:28:55,800 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:28:55,800 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:28:55,800 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:28:55,800 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:28:58,434 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 19:29:05,262 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 19:29:05,671 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 19:29:05,979 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 19:29:07,279 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 19:29:07,668 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 19:29:07,741 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 19:29:07,866 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 19:29:08,274 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 19:29:08,430 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 19:29:08,985 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 19:29:09,048 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 19:29:11,892 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 19:29:12,742 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 19:29:12,840 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 19:29:12,911 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 19:29:12,928 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 19:29:12,928 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 19:29:12,928 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 19:29:12,928 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:29:15,698 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 19:29:15,699 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 19:29:15,699 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 19:29:15,699 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:29:18,734 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 19:29:18,734 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 19:29:18,734 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 19:29:18,734 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 19:30:29,827 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:30:29,828 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:30:29,828 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:30:29,828 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:31:40,714 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:31:40,714 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:31:40,714 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:31:40,714 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:32:04,667 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:32:04,667 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:32:04,667 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:32:04,667 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:32:36,569 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:32:36,570 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:32:36,570 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:32:36,570 - root - INFO - 生成了 3 个前置合环操作
+2025-08-16 19:33:23,769 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:33:23,769 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:33:23,769 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:33:56,776 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:33:56,776 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:33:56,776 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:33:56,776 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:35:13,001 - root - INFO - 供区 乔司供区 主变数量: 3
+2025-08-16 19:35:13,103 - root - INFO - 供区 白鹿+瓯海供区 主变数量: 4
+2025-08-16 19:35:13,151 - root - INFO - 供区 仁和供区 主变数量: 3
+2025-08-16 19:35:13,348 - root - INFO - 供区 长潭+柏树+塘岭供区 主变数量: 6
+2025-08-16 19:35:13,433 - root - INFO - 供区 昇光供区 主变数量: 3
+2025-08-16 19:35:13,962 - root - INFO - 供区 苍岩供区 主变数量: 3
+2025-08-16 19:35:13,985 - root - INFO - 供区 双龙供区 主变数量: 3
+2025-08-16 19:35:14,713 - root - INFO - 供区 钱湖+春晓供区 主变数量: 5
+2025-08-16 19:35:14,951 - root - INFO - 供区 吴宁+潘村+丹溪供区 主变数量: 8
+2025-08-16 19:35:15,068 - root - INFO - 供区 舜江+春晖供区 主变数量: 5
+2025-08-16 19:35:15,931 - root - INFO - 供区 汾湖+洪明供区 主变数量: 2
+2025-08-16 19:35:15,931 - root - INFO - 供区 汾湖+洪明供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:15,931 - root - INFO - 选择与供区 王店供区 进行合环
+2025-08-16 19:35:15,931 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:35:18,950 - root - INFO - 供区 汾湖供区 主变数量: 3
+2025-08-16 19:35:19,092 - root - INFO - 供区 四都供区 主变数量: 2
+2025-08-16 19:35:19,092 - root - INFO - 供区 四都供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:19,092 - root - INFO - 选择与供区 天柱+瓯海供区 进行合环
+2025-08-16 19:35:19,092 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:35:21,710 - root - INFO - 供区 诸暨+凤仪供区 主变数量: 6
+2025-08-16 19:35:24,029 - root - INFO - 供区 富阳供区 主变数量: 3
+2025-08-16 19:35:24,205 - root - INFO - 供区 明州+天一供区 主变数量: 6
+2025-08-16 19:35:24,468 - root - INFO - 供区 古越供区 主变数量: 2
+2025-08-16 19:35:24,468 - root - INFO - 供区 古越供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:24,468 - root - INFO - 选择与供区 兰亭供区 进行合环
+2025-08-16 19:35:24,468 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:35:29,482 - root - INFO - 供区 天柱+瓯海供区 主变数量: 4
+2025-08-16 19:35:29,646 - root - INFO - 供区 万象+剑川供区 主变数量: 5
+2025-08-16 19:35:29,723 - root - INFO - 供区 雉城+含山供区 主变数量: 4
+2025-08-16 19:35:29,795 - root - INFO - 供区 王店供区 主变数量: 4
+2025-08-16 19:35:30,000 - root - INFO - 供区 春晖+河姆供区 主变数量: 6
+2025-08-16 19:35:30,638 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:35:30,638 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:30,638 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:35:30,638 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:35:33,286 - root - INFO - 供区 回浦供区 主变数量: 4
+2025-08-16 19:35:40,088 - root - INFO - 供区 句章+威远供区 主变数量: 5
+2025-08-16 19:35:40,447 - root - INFO - 供区 翔云供区 主变数量: 3
+2025-08-16 19:35:40,739 - root - INFO - 供区 兰亭供区 主变数量: 3
+2025-08-16 19:35:42,019 - root - INFO - 供区 麦屿供区 主变数量: 3
+2025-08-16 19:35:42,396 - root - INFO - 供区 信安供区 主变数量: 3
+2025-08-16 19:35:42,469 - root - INFO - 供区 妙西供区 主变数量: 3
+2025-08-16 19:35:42,630 - root - INFO - 供区 姚江供区 主变数量: 3
+2025-08-16 19:35:43,043 - root - INFO - 供区 南雁+望嘉供区 主变数量: 5
+2025-08-16 19:35:43,202 - root - INFO - 供区 永康供区 主变数量: 3
+2025-08-16 19:35:43,753 - root - INFO - 供区 宁海供区 主变数量: 3
+2025-08-16 19:35:43,815 - root - INFO - 供区 涌潮供区 主变数量: 4
+2025-08-16 19:35:46,682 - root - INFO - 供区 由拳供区 主变数量: 4
+2025-08-16 19:35:47,524 - root - INFO - 供区 严州+芝堰供区 主变数量: 5
+2025-08-16 19:35:47,620 - root - INFO - 供区 瓶窑+杭州供区 主变数量: 5
+2025-08-16 19:35:47,691 - root - INFO - 供区 洛迦供区 主变数量: 4
+2025-08-16 19:35:47,707 - root - INFO - 供区 萧围供区 主变数量: 2
+2025-08-16 19:35:47,707 - root - INFO - 供区 萧围供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:47,707 - root - INFO - 选择与供区 古越供区 进行合环
+2025-08-16 19:35:47,707 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:35:50,502 - root - INFO - 供区 艮山供区 主变数量: 2
+2025-08-16 19:35:50,502 - root - INFO - 供区 艮山供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:50,502 - root - INFO - 选择与供区 富阳供区 进行合环
+2025-08-16 19:35:50,502 - root - INFO - 生成了 2 个前置合环操作
+2025-08-16 19:35:53,560 - root - INFO - 供区 杭湾供区 主变数量: 2
+2025-08-16 19:35:53,560 - root - INFO - 供区 杭湾供区 只有两台主变，需要进行合环操作
+2025-08-16 19:35:53,560 - root - INFO - 选择与供区 句章+威远供区 进行合环
+2025-08-16 19:35:53,560 - root - INFO - 生成了 1 个前置合环操作
+2025-08-16 19:37:03,211 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:37:04,371 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:37:05,847 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:37:05,847 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:37:05,847 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:37:05,847 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:37:10,091 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:37:11,992 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:46:24,667 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:46:24,668 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:46:24,668 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:46:24,668 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:47:30,274 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 408 Request Timeout"
+2025-08-16 19:47:30,276 - openai._base_client - INFO - Retrying request to /chat/completions in 0.412755 seconds
+2025-08-16 19:47:35,899 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 408 Request Timeout"
+2025-08-16 19:47:35,900 - openai._base_client - INFO - Retrying request to /chat/completions in 0.876193 seconds
+2025-08-16 19:47:41,994 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 408 Request Timeout"
+2025-08-16 19:48:02,570 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:48:04,612 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:48:05,117 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:48:05,117 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:48:05,117 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:48:05,117 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:48:09,004 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:48:10,978 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:51:42,284 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:51:51,481 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:51:51,965 - root - INFO - 供区 夏金供区 主变数量: 2
+2025-08-16 19:51:51,965 - root - INFO - 供区 夏金供区 只有两台主变，需要进行合环操作
+2025-08-16 19:51:51,965 - root - INFO - 选择与供区 信安供区 进行合环
+2025-08-16 19:51:51,965 - root - INFO - 生成了 4 个前置合环操作
+2025-08-16 19:51:56,792 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-16 19:52:00,496 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"

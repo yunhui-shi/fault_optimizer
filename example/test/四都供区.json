@@ -1,0 +1,626 @@
+{
+    "horizon": 4,
+    "zones": {
+        "天柱+瓯海供区": {
+            "capacity": 3750.0,
+            "fixed_load": [
+                2812.5,
+                2812.5,
+                2812.5,
+                2812.5
+            ]
+        },
+        "四都+瓯海+白鹿供区": {
+            "capacity": 4000.0,
+            "fixed_load": [
+                4350.0726,
+                4350.0726,
+                4350.0726,
+                4350.0726
+            ]
+        }
+    },
+    "substations": {
+        "丽呈变": {
+            "name": "丽呈变",
+            "nodes": [
+                "0112330300000410050102",
+                "0112330300003010050014",
+                "0112330300003010050007",
+                "0112330300003010050020",
+                "0112330300003010050018",
+                "0112330300003010050025",
+                "丽岙2Q94线",
+                "0112330000002310050032",
+                "0112330300003010050015",
+                "0112330300003010050017",
+                "丽瞬2Q95线",
+                "海呈4358线",
+                "0112330300003010050021",
+                "0112330300003010050022",
+                "0112330300003010050023",
+                "0112330300003010050009",
+                "0112330300000410050099",
+                "丽呈变220kV副母线",
+                "0112330300003010050013",
+                "丽呈变220kV正母线",
+                "海丽4357线",
+                "0112330300003010050011",
+                "0112330000002310050049",
+                "0112330300003010050019",
+                "0112330300000410050100",
+                "0112330000002310050050",
+                "0112330300003010050026",
+                "0112330300003010050024",
+                "0112330000002310050031",
+                "0112330300003010050016",
+                "0112330300000410050101",
+                "0112330300003010050012"
+            ],
+            "transformers": {
+                "丽呈变#1主变-220kV": {
+                    "conn_node": "0112330300003010050007",
+                    "load": [
+                        75.2048,
+                        75.2048,
+                        75.2048,
+                        75.2048
+                    ],
+                    "sensitivity": {
+                        "天柱+瓯海供区": 1,
+                        "四都+瓯海+白鹿供区": 1
+                    },
+                    "cost": {
+                        "天柱+瓯海供区": 100,
+                        "四都+瓯海+白鹿供区": 100
+                    },
+                    "allocate": null
+                },
+                "丽呈变#2主变-220kV": {
+                    "conn_node": "0112330300003010050009",
+                    "load": [
+                        74.7226,
+                        74.7226,
+                        74.7226,
+                        74.7226
+                    ],
+                    "sensitivity": {
+                        "天柱+瓯海供区": 1,
+                        "四都+瓯海+白鹿供区": 1
+                    },
+                    "cost": {
+                        "天柱+瓯海供区": 100,
+                        "四都+瓯海+白鹿供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "丽呈变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050013",
+                        "0112330300003010050014"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050015",
+                        "0112330300003010050016"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050017",
+                        "0112330300003010050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "丽呈变海呈4358开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050019",
+                        "0112330300003010050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变海丽4357开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050021",
+                        "0112330300003010050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变丽瞬2Q95开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330300003010050023",
+                        "0112330300003010050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变丽岙2Q94开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330300003010050025",
+                        "0112330300003010050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "丽呈变海呈4358副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变海呈4358线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "海呈4358线",
+                        "0112330300003010050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变海呈4358正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变海丽4357副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变海丽4357线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "海丽4357线",
+                        "0112330300003010050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变海丽4357正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽瞬2Q95副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽瞬2Q95线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽瞬2Q95线",
+                        "0112330300003010050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽瞬2Q95正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽岙2Q94副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽岙2Q94线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽岙2Q94线",
+                        "0112330300003010050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变丽岙2Q94正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050014",
+                        "0112330300003010050007"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050016",
+                        "0112330300003010050009"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050012",
+                        "丽呈变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV副母线",
+                        "0112330300003010050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽呈变220kV正母线",
+                        "0112330300003010050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "丽呈变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300003010050011",
+                        "丽呈变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瓯海变电所海呈4358线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "海呈4358线",
+                        "0112330000002310050031"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓯海变电所海呈4358开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002310050031",
+                        "0112330000002310050032"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瓯海变电所海丽4357线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "海丽4357线",
+                        "0112330000002310050049"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓯海变电所海丽4357开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002310050049",
+                        "0112330000002310050050"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瞬岙变丽瞬2Q95线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽瞬2Q95线",
+                        "0112330300000410050099"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瞬岙变丽瞬2Q95开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300000410050100",
+                        "0112330300000410050099"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瞬岙变丽岙2Q94线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "丽岙2Q94线",
+                        "0112330300000410050101"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瞬岙变丽岙2Q94开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300000410050102",
+                        "0112330300000410050101"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "海呈4358线": {
+                    "available": true,
+                    "conn_node": "0112330000002310050032",
+                    "zone": "天柱+瓯海供区",
+                    "to_st_name": "瓯海变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "丽呈变海呈4358开关",
+                        "remote": "瓯海变电所海呈4358开关"
+                    },
+                    "local_bus_name": "0112330300003010050006",
+                    "remote_bus_name": "0112330000002310050016",
+                    "line_id": "120133030000000533"
+                },
+                "海丽4357线": {
+                    "available": true,
+                    "conn_node": "0112330000002310050050",
+                    "zone": "天柱+瓯海供区",
+                    "to_st_name": "瓯海变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "丽呈变海丽4357开关",
+                        "remote": "瓯海变电所海丽4357开关"
+                    },
+                    "local_bus_name": "0112330300003010050005",
+                    "remote_bus_name": "0112330000002310050013",
+                    "line_id": "120133030000000536"
+                },
+                "丽瞬2Q95线": {
+                    "available": true,
+                    "conn_node": "0112330300000410050100",
+                    "zone": "天柱+瓯海供区",
+                    "to_st_name": "瞬岙变",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "丽呈变丽瞬2Q95开关",
+                        "remote": "瞬岙变丽瞬2Q95开关"
+                    },
+                    "local_bus_name": "0112330300003010050004",
+                    "remote_bus_name": "0112330300000410050040",
+                    "line_id": "120133030000000544"
+                },
+                "丽岙2Q94线": {
+                    "available": true,
+                    "conn_node": "0112330300000410050102",
+                    "zone": "天柱+瓯海供区",
+                    "to_st_name": "瞬岙变",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "丽呈变丽岙2Q94开关",
+                        "remote": "瞬岙变丽岙2Q94开关"
+                    },
+                    "local_bus_name": "0112330300003010050003",
+                    "remote_bus_name": "0112330300000410050039",
+                    "line_id": "120133030000000547"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123303000030"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "温州厂5号机组": {
+            "zone": "四都+瓯海+白鹿供区",
+            "id": 110133000000000193,
+            "cost": 500,
+            "name": "温州厂5号机组",
+            "p_max": 330.0,
+            "p_min": 0.0,
+            "p_current": 134.9173,
+            "sensitivity": 1,
+            "st_id": "01113300000079"
+        },
+        "温州厂7号机组": {
+            "zone": "四都+瓯海+白鹿供区",
+            "id": 110133000000000114,
+            "cost": 500,
+            "name": "温州厂7号机组",
+            "p_max": 660.0,
+            "p_min": 264.0,
+            "p_current": 446.2606,
+            "sensitivity": 1,
+            "st_id": "01113300000079"
+        },
+        "温州厂3号机组": {
+            "zone": "四都+瓯海+白鹿供区",
+            "id": 110133000000000185,
+            "cost": 500,
+            "name": "温州厂3号机组",
+            "p_max": 330.0,
+            "p_min": 132.0,
+            "p_current": 195.7996,
+            "sensitivity": 1,
+            "st_id": "01113300000079"
+        },
+        "温州厂8号机组": {
+            "zone": "四都+瓯海+白鹿供区",
+            "id": 110133000000000075,
+            "cost": 500,
+            "name": "温州厂8号机组",
+            "p_max": 660.0,
+            "p_min": 264.0,
+            "p_current": 440.5436,
+            "sensitivity": 1,
+            "st_id": "01113300000079"
+        }
+    },
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {
+        "启泰储能站": {
+            "zone": "四都+瓯海+白鹿供区",
+            "id": "01113300000370",
+            "name": "启泰储能站#2储能单元组（启泰3502）",
+            "p_charge_max": 52.5,
+            "p_discharge_max": 52.5,
+            "soc_initial": 150,
+            "soc_max": 105.0,
+            "soc_min": 10.5,
+            "p_current": 0.0,
+            "st_name": "启泰储能站",
+            "st_id": "01113300000370",
+            "sensitivity": 1
+        }
+    },
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "四都+瓯海+白鹿供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {
+        "description": "供区 四都供区 存在单主变供电风险，需与供区 天柱+瓯海供区 进行合环",
+        "pre_operations": [
+            {
+                "unit": "温州厂",
+                "operation": "合上温州厂220kV副母分段开关",
+                "action": "close",
+                "switch_name": "温州厂220kV副母分段开关",
+                "priority": 1
+            },
+            {
+                "unit": "温州厂",
+                "operation": "合上温州厂220kV正母分段开关",
+                "action": "close",
+                "switch_name": "温州厂220kV正母分段开关",
+                "priority": 1
+            }
+        ]
+    }
+}

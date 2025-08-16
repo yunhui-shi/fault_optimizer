@@ -1,0 +1,516 @@
+{
+    "horizon": 4,
+    "zones": {
+        "仁和供区": {
+            "capacity": 3000.0,
+            "fixed_load": [
+                2100.0,
+                2100.0,
+                2100.0,
+                2100.0
+            ]
+        },
+        "瓶窑+杭州供区": {
+            "capacity": 3400.0,
+            "fixed_load": [
+                3673.5142,
+                3673.5142,
+                3673.5142,
+                3673.5142
+            ]
+        }
+    },
+    "substations": {
+        "庆丰变": {
+            "name": "庆丰变",
+            "nodes": [
+                "0112330100003010050029",
+                "登庆23B5线",
+                "庆丰变220kVⅡ段母线",
+                "0112330100002010050007",
+                "0112330100001510050034",
+                "古庆2499线",
+                "0112330100002010050017",
+                "0112330100002010050030",
+                "0112330100002010050016",
+                "0112330100002010050027",
+                "0112330100002010050022",
+                "庆丰变220kVⅢ段母线",
+                "0112330100024910050029",
+                "0112330100002010050011",
+                "0112330100003010050028",
+                "0112330100002010050009",
+                "天庆2P06线",
+                "0112330100002010050014",
+                "0112330100002010050019",
+                "0112330100002010050025",
+                "0112330100002010050029",
+                "0112330100002010050018",
+                "0112330100002010050023",
+                "0112330100002010050013",
+                "0112330100002010050021",
+                "0112330100002010050020",
+                "0112330100002010050015",
+                "0112330100002010050026",
+                "庆丰变220kVⅠ段母线",
+                "0112330100001510050033",
+                "0112330100002010050028",
+                "0112330100002010050032",
+                "0112330100002010050012",
+                "0112330100002010050024",
+                "0112330100024910050028",
+                "0112330100002010050031"
+            ],
+            "transformers": {
+                "庆丰变#1主变-220kV": {
+                    "conn_node": "0112330100002010050007",
+                    "load": [
+                        87.8579,
+                        87.8579,
+                        87.8579,
+                        87.8579
+                    ],
+                    "sensitivity": {
+                        "仁和供区": 1,
+                        "瓶窑+杭州供区": 1
+                    },
+                    "cost": {
+                        "仁和供区": 100,
+                        "瓶窑+杭州供区": 100
+                    },
+                    "allocate": null
+                },
+                "庆丰变#2主变-220kV": {
+                    "conn_node": "0112330100002010050009",
+                    "load": [
+                        87.6789,
+                        87.6789,
+                        87.6789,
+                        87.6789
+                    ],
+                    "sensitivity": {
+                        "仁和供区": 1,
+                        "瓶窑+杭州供区": 1
+                    },
+                    "cost": {
+                        "仁和供区": 100,
+                        "瓶窑+杭州供区": 100
+                    },
+                    "allocate": null
+                },
+                "庆丰变#3主变-220kV": {
+                    "conn_node": "0112330100002010050011",
+                    "load": [
+                        70.949,
+                        70.949,
+                        70.949,
+                        70.949
+                    ],
+                    "sensitivity": {
+                        "仁和供区": 1,
+                        "瓶窑+杭州供区": 1
+                    },
+                    "cost": {
+                        "仁和供区": 100,
+                        "瓶窑+杭州供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "庆丰变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050016",
+                        "0112330100002010050017"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050018",
+                        "0112330100002010050019"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变220kV#1母分开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050020",
+                        "0112330100002010050021"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变古庆2499开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050022",
+                        "0112330100002010050023"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变天庆2P06开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050024",
+                        "0112330100002010050025"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变220kV#2母分开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330100002010050028",
+                        "0112330100002010050029"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变登庆23B5开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050026",
+                        "0112330100002010050027"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变#3主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050030",
+                        "0112330100002010050031"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "庆丰变220kV#2母分Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050029",
+                        "庆丰变220kVⅡ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变登庆23B5线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "登庆23B5线",
+                        "0112330100002010050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变天庆2P06线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "天庆2P06线",
+                        "0112330100002010050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050007",
+                        "0112330100002010050016"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#1主变220kV母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050017",
+                        "庆丰变220kVⅠ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050009",
+                        "0112330100002010050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#2主变220kV母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050019",
+                        "庆丰变220kVⅡ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kVⅠ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "庆丰变220kVⅠ段母线",
+                        "0112330100002010050013"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kVⅡ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "庆丰变220kVⅡ段母线",
+                        "0112330100002010050014"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kV#1母分开关Ⅰ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050021",
+                        "庆丰变220kVⅠ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kV#1母分开关Ⅱ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050020",
+                        "庆丰变220kVⅡ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变古庆2499母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050023",
+                        "庆丰变220kVⅠ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变古庆2499线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "古庆2499线",
+                        "0112330100002010050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变天庆2P06母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050025",
+                        "庆丰变220kVⅡ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kV#2母分Ⅲ段母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050028",
+                        "庆丰变220kVⅢ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变登庆23B5母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050027",
+                        "庆丰变220kVⅢ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#3主变220kV母线闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050031",
+                        "庆丰变220kVⅢ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变#3主变220kV变压器闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100002010050011",
+                        "0112330100002010050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "庆丰变220kVⅢ段母线压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "庆丰变220kVⅢ段母线",
+                        "0112330100002010050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "古荡变古庆2499线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "古庆2499线",
+                        "0112330100003010050028"
+                    ],
+                    "switch_type": "switch"
+                },
+                "古荡变古庆2499开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100003010050028",
+                        "0112330100003010050029"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "天湖变天庆2P06线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "天庆2P06线",
+                        "0112330100001510050033"
+                    ],
+                    "switch_type": "switch"
+                },
+                "天湖变天庆2P06开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100001510050033",
+                        "0112330100001510050034"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "登云变登庆23B5线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "登庆23B5线",
+                        "0112330100024910050028"
+                    ],
+                    "switch_type": "switch"
+                },
+                "登云变登庆23B5开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330100024910050028",
+                        "0112330100024910050029"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "古庆2499线": {
+                    "available": true,
+                    "conn_node": "0112330100003010050029",
+                    "zone": "瓶窑+杭州供区",
+                    "to_st_name": "古荡变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "庆丰变古庆2499开关",
+                        "remote": "古荡变古庆2499开关"
+                    },
+                    "local_bus_name": "0112330100002010050005",
+                    "remote_bus_name": "0112330100003010050004",
+                    "line_id": "120133010000000501"
+                },
+                "天庆2P06线": {
+                    "available": true,
+                    "conn_node": "0112330100001510050034",
+                    "zone": "瓶窑+杭州供区",
+                    "to_st_name": "天湖变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "庆丰变天庆2P06开关",
+                        "remote": "天湖变天庆2P06开关"
+                    },
+                    "local_bus_name": "0112330100002010050004",
+                    "remote_bus_name": "0112330100001510050004",
+                    "line_id": "120133010000000600"
+                },
+                "登庆23B5线": {
+                    "available": true,
+                    "conn_node": "0112330100024910050029",
+                    "zone": "仁和供区",
+                    "to_st_name": "登云变",
+                    "owner": "杭州",
+                    "breakers": {
+                        "local": "庆丰变登庆23B5开关",
+                        "remote": "登云变登庆23B5开关"
+                    },
+                    "local_bus_name": "0112330100002010050006",
+                    "remote_bus_name": "0112330100024910050007",
+                    "line_id": "120133010000001610"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123301000020"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {},
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "瓶窑+杭州供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

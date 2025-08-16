@@ -1,0 +1,53 @@
+{
+    "horizon": 4,
+    "zones": {
+        "洛迦供区": {
+            "capacity": 2000.0,
+            "fixed_load": [
+                2800.0,
+                2800.0,
+                2800.0,
+                2800.0
+            ]
+        }
+    },
+    "substations": {},
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "朗熹电厂#3机组": {
+            "zone": "洛迦供区",
+            "id": 110133000000000221,
+            "cost": 500,
+            "name": "朗熹电厂#3机组",
+            "p_max": 315.0,
+            "p_min": 126.0,
+            "p_current": 147.4899,
+            "sensitivity": 1,
+            "st_id": "01113300000083"
+        },
+        "朗熹电厂#4机组": {
+            "zone": "洛迦供区",
+            "id": 110133000000000107,
+            "cost": 500,
+            "name": "朗熹电厂#4机组",
+            "p_max": 350.0,
+            "p_min": 140.0,
+            "p_current": 173.3672,
+            "sensitivity": 1,
+            "st_id": "01113300000083"
+        }
+    },
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "洛迦供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

@@ -1,0 +1,719 @@
+{
+    "horizon": 4,
+    "zones": {
+        "白鹿+瓯海供区": {
+            "capacity": 4000.0,
+            "fixed_load": [
+                2800.0,
+                2800.0,
+                2800.0,
+                2800.0
+            ]
+        },
+        "天柱+瓯海供区": {
+            "capacity": 3750.0,
+            "fixed_load": [
+                2625.0,
+                2625.0,
+                2625.0,
+                2625.0
+            ]
+        },
+        "南雁+望嘉供区": {
+            "capacity": 2250.0,
+            "fixed_load": [
+                2792.8202,
+                2792.8202,
+                2792.8202,
+                2792.8202
+            ]
+        }
+    },
+    "substations": {
+        "瑞仙变": {
+            "name": "瑞仙变",
+            "nodes": [
+                "0112330300002910050025",
+                "瑞仙变220kV正母线",
+                "0112330300002910050011",
+                "0112330000002710050056",
+                "0112330300002910050030",
+                "0112330000002310050067",
+                "0112330300002910050018",
+                "0112330300002910050019",
+                "0112330300002910050022",
+                "南仙4367线",
+                "0112330300002910050020",
+                "0112330300002910050016",
+                "0112330300002910050013",
+                "0112330300002310050023",
+                "塘仙24V9线",
+                "瓯瑞4351线",
+                "0112330300002910050017",
+                "0112330000002310050033",
+                "0112330300002910050032",
+                "南瑞4366线",
+                "昆仙24V0线",
+                "0112330300002910050024",
+                "0112330300020210050019",
+                "0112330300002910050031",
+                "0112330300020210050020",
+                "0112330300002910050009",
+                "0112330300002910050026",
+                "0112330300002910050028",
+                "0112330300002910050014",
+                "0112330000002710050057",
+                "瑞仙变220kV副母线",
+                "0112330000002310050068",
+                "0112330300002310050022",
+                "0112330300002910050023",
+                "瓯仙4352线",
+                "0112330300002910050021",
+                "0112330300002910050029",
+                "0112330000002710050068",
+                "0112330000002710050069",
+                "0112330000002310050034",
+                "0112330300002910050015",
+                "0112330300002910050027"
+            ],
+            "transformers": {
+                "瑞仙变#1主变-220kV": {
+                    "conn_node": "0112330300002910050009",
+                    "load": [
+                        96.012,
+                        96.012,
+                        96.012,
+                        96.012
+                    ],
+                    "sensitivity": {
+                        "白鹿+瓯海供区": 1,
+                        "天柱+瓯海供区": 1,
+                        "南雁+望嘉供区": 1
+                    },
+                    "cost": {
+                        "白鹿+瓯海供区": 100,
+                        "天柱+瓯海供区": 100,
+                        "南雁+望嘉供区": 100
+                    },
+                    "allocate": null
+                },
+                "瑞仙变#2主变-220kV": {
+                    "conn_node": "0112330300002910050011",
+                    "load": [
+                        86.1678,
+                        86.1678,
+                        86.1678,
+                        86.1678
+                    ],
+                    "sensitivity": {
+                        "白鹿+瓯海供区": 1,
+                        "天柱+瓯海供区": 1,
+                        "南雁+望嘉供区": 1
+                    },
+                    "cost": {
+                        "白鹿+瓯海供区": 100,
+                        "天柱+瓯海供区": 100,
+                        "南雁+望嘉供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "瑞仙变#1主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050015",
+                        "0112330300002910050016"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变#2主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050017",
+                        "0112330300002910050018"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变220kV母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050019",
+                        "0112330300002910050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "瑞仙变南瑞4366开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050021",
+                        "0112330300002910050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变南仙4367开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050023",
+                        "0112330300002910050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变瓯瑞4351开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330300002910050025",
+                        "0112330300002910050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变瓯仙4352开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330300002910050027",
+                        "0112330300002910050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变昆仙24V0开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050029",
+                        "0112330300002910050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变塘仙24V9开关": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330300002910050031",
+                        "0112330300002910050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "瑞仙变220kV副母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050014",
+                        "瑞仙变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南仙4367副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯仙4352副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#1主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#2主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#2主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#2主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050018",
+                        "0112330300002910050011"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变220kV母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050020",
+                        "瑞仙变220kV副母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变220kV母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南瑞4366正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯瑞4351副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯瑞4351线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瓯瑞4351线",
+                        "0112330300002910050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#1主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050015"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南瑞4366副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南仙4367正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯仙4352线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瓯仙4352线",
+                        "0112330300002910050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变#1主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050016",
+                        "0112330300002910050009"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯仙4352正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南仙4367线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南仙4367线",
+                        "0112330300002910050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变南瑞4366线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南瑞4366线",
+                        "0112330300002910050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变瓯瑞4351正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002910050013",
+                        "瑞仙变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变塘仙24V9正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变塘仙24V9线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "塘仙24V9线",
+                        "0112330300002910050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变昆仙24V0线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "昆仙24V0线",
+                        "0112330300002910050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变昆仙24V0正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV正母线",
+                        "0112330300002910050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变塘仙24V9副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "瑞仙变昆仙24V0副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瑞仙变220kV副母线",
+                        "0112330300002910050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "南雁变电所南瑞4366线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南瑞4366线",
+                        "0112330000002710050068"
+                    ],
+                    "switch_type": "switch"
+                },
+                "南雁变电所南瑞4366开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002710050068",
+                        "0112330000002710050069"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "南雁变电所南仙4367线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "南仙4367线",
+                        "0112330000002710050056"
+                    ],
+                    "switch_type": "switch"
+                },
+                "南雁变电所南仙4367开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002710050056",
+                        "0112330000002710050057"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瓯海变电所瓯仙4352线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瓯仙4352线",
+                        "0112330000002310050033"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓯海变电所瓯仙4352开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002310050033",
+                        "0112330000002310050034"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "瓯海变电所瓯瑞4351线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "瓯瑞4351线",
+                        "0112330000002310050067"
+                    ],
+                    "switch_type": "switch"
+                },
+                "瓯海变电所瓯瑞4351开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000002310050067",
+                        "0112330000002310050068"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "昆阳变昆仙24V0线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "昆仙24V0线",
+                        "0112330300002310050023"
+                    ],
+                    "switch_type": "switch"
+                },
+                "昆阳变昆仙24V0开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300002310050022",
+                        "0112330300002310050023"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "塘园变塘仙24V9线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "塘仙24V9线",
+                        "0112330300020210050020"
+                    ],
+                    "switch_type": "switch"
+                },
+                "塘园变塘仙24V9开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330300020210050019",
+                        "0112330300020210050020"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "南瑞4366线": {
+                    "available": true,
+                    "conn_node": "0112330000002710050069",
+                    "zone": "南雁+望嘉供区",
+                    "to_st_name": "南雁变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变南瑞4366开关",
+                        "remote": "南雁变电所南瑞4366开关"
+                    },
+                    "local_bus_name": "0112330300002910050003",
+                    "remote_bus_name": "0112330000002710050017",
+                    "line_id": "120133030000000565"
+                },
+                "南仙4367线": {
+                    "available": true,
+                    "conn_node": "0112330000002710050057",
+                    "zone": "南雁+望嘉供区",
+                    "to_st_name": "南雁变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变南仙4367开关",
+                        "remote": "南雁变电所南仙4367开关"
+                    },
+                    "local_bus_name": "0112330300002910050006",
+                    "remote_bus_name": "0112330000002710050013",
+                    "line_id": "120133030000000566"
+                },
+                "瓯仙4352线": {
+                    "available": true,
+                    "conn_node": "0112330000002310050034",
+                    "zone": "白鹿+瓯海供区",
+                    "to_st_name": "瓯海变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变瓯仙4352开关",
+                        "remote": "瓯海变电所瓯仙4352开关"
+                    },
+                    "local_bus_name": "0112330300002910050005",
+                    "remote_bus_name": "0112330000002310050009",
+                    "line_id": "120133030000000640"
+                },
+                "瓯瑞4351线": {
+                    "available": true,
+                    "conn_node": "0112330000002310050068",
+                    "zone": "白鹿+瓯海供区",
+                    "to_st_name": "瓯海变电所",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变瓯瑞4351开关",
+                        "remote": "瓯海变电所瓯瑞4351开关"
+                    },
+                    "local_bus_name": "0112330300002910050004",
+                    "remote_bus_name": "0112330000002310050005",
+                    "line_id": "120133030000000650"
+                },
+                "昆仙24V0线": {
+                    "available": true,
+                    "conn_node": "0112330300002310050022",
+                    "zone": "南雁+望嘉供区",
+                    "to_st_name": "昆阳变",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变昆仙24V0开关",
+                        "remote": "昆阳变昆仙24V0开关"
+                    },
+                    "local_bus_name": "0112330300002910050007",
+                    "remote_bus_name": "0112330300002310050005",
+                    "line_id": "120133030000001595"
+                },
+                "塘仙24V9线": {
+                    "available": true,
+                    "conn_node": "0112330300020210050019",
+                    "zone": "天柱+瓯海供区",
+                    "to_st_name": "塘园变",
+                    "owner": "温州",
+                    "breakers": {
+                        "local": "瑞仙变塘仙24V9开关",
+                        "remote": "塘园变塘仙24V9开关"
+                    },
+                    "local_bus_name": "0112330300002910050008",
+                    "remote_bus_name": "0112330300020210050007",
+                    "line_id": "120133030000001915"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123303000029"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {},
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "南雁+望嘉供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

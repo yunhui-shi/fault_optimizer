@@ -6,7 +6,7 @@ import json
 import networkx as nx
 from collections import defaultdict
 
-def generate_tickets(switch_operations: list, switches: dict, source_nodes: set, load_nodes: set, substations: dict = None) -> list:
+def generate_tickets(switch_operations: list, switches: dict, source_nodes: set, load_nodes: set, substations: dict = None, pre_operations: list = []) -> list:
     """
     生成操作票：k个开关变位的排序，使得每次变位：
     1. 主变与电源存在最短路径
@@ -24,7 +24,7 @@ def generate_tickets(switch_operations: list, switches: dict, source_nodes: set,
         list: 排序后的操作票列表
     """
     if not switch_operations:
-        return []
+        return pre_operations
     
     # 构建初始网络图
     G = nx.Graph()
@@ -65,7 +65,7 @@ def generate_tickets(switch_operations: list, switches: dict, source_nodes: set,
         if best_operation is None:
             # 如果没有合法操作，选择第一个可用的操作
             raise ValueError("No valid operation found")
-        print(best_operation)
+        print(f"第{len(ordered_tickets)+1}步操作",best_operation)
         # 执行操作
         switch_name = best_operation['switch_name']
         switch_data = switches[switch_name]
@@ -87,8 +87,7 @@ def generate_tickets(switch_operations: list, switches: dict, source_nodes: set,
         
         # 从待执行列表中移除
         remaining_operations.remove(best_operation)
-    
-    return ordered_tickets
+    return pre_operations + ordered_tickets
 
 
 def is_valid_operation(G: nx.Graph, u: str, v: str, operation: dict, switch_type: str, source_nodes: set, load_nodes: set) -> bool:
@@ -154,7 +153,7 @@ def create_operation_ticket(operation: dict, substations: dict = None) -> dict:
     switch_name = operation['switch_name']
     
     # 根据开关名称和变电站信息确定unit
-    unit = "调度中心"  # 默认值
+    unit = "浙江集控"  # 默认值
     
     if substations:
         # 通过substations字典查找开关所属的变电站
@@ -204,7 +203,10 @@ def solve_dynamic_recovery_model(
     # 优化目标
     objective: ObjectiveType,
     load_enlarge_factor: float,
+    # 前置操作
+    operation_adjustment: dict,
 ):
+    
     """
     求解一个完整的多层级、基于连通性推断的电网负荷转移优化问题。
     此函数接收所有参数（包括开关成本），并返回一个包含结果的字典。
@@ -229,6 +231,8 @@ def solve_dynamic_recovery_model(
     #             raise ValueError(f"Zone line name {zone_line_name} is not unique")
     #         zone_line_names.add(zone_line_name)
     # 从substations中提取数据，同时保留变电站映射关系
+    opt_desc = operation_adjustment.get("description", "")
+    pre_operations = operation_adjustment.get("pre_operations", [])
     transformers = {}
     zone_lines = {}
     switches = {}
@@ -282,6 +286,18 @@ def solve_dynamic_recovery_model(
     f = { (u, v, z_name): model.addVar(vtype="C", lb=0, name=f"f_{u}_{v}_{z_name}") for u, v in directed_edges for z_name in zones}
     is_energized_by = {n: model.addVar(vtype="C", lb=0, name=f"is_energized_by_{n}") for n in substation_nodes}
     # b) 发电出力变量
+    # 检查lb,ub的范围是否正确
+    for g, p in operating_units.items():
+        if p['p_max'] < p['p_current']:
+            print(f"Warning: Unit {g} has p_max ({p['p_max']}) less than p_current ({p['p_current']}). This will cause infeasibility. Substitute p_current with p_max.")
+            p['p_current'] = p['p_max']
+    for es, p in storage_units.items():
+        if p['soc_initial'] < p['soc_min']:
+            print(f"Warning: Unit {es} has soc_initial ({p['soc_initial']}) less than soc_min ({p['soc_min']}). This will cause infeasibility. Substitute soc_initial with soc_min.")
+            p['soc_initial'] = p['soc_min']
+        if p['soc_max'] < p['soc_initial']:
+            print(f"Warning: Unit {es} has soc_max ({p['soc_max']}) less than soc_initial ({p['soc_initial']}). This will cause infeasibility. Substitute soc_initial with soc_max.")
+            p['soc_initial'] = p['soc_max']
     P_opt = { (g, t): model.addVar(vtype="C", lb=0, ub=p['p_max'] - p['p_current'], name=f"P_opt_{g}_{t}") for g, p in operating_units.items() for t in range(horizon) }
     P_bak = { (g, t): model.addVar(vtype="C", lb=0, ub=p['p_max'] if p.get('available', True) else 0, name=f"P_bak_{g}_{t}") for g, p in backup_units.items() for t in range(horizon) }
     P_hydro = { (g, t): model.addVar(vtype="C", lb=0, ub=p['p_max'] if p.get('available', True) else 0, name=f"P_hydro_{g}_{t}") for g, p in hydro_units.items() for t in range(horizon) }
@@ -351,6 +367,7 @@ def solve_dynamic_recovery_model(
         s_var = S[s_name]
         model.addCons(is_energized_by[u] - is_energized_by[v] <= M * (1 - S[s_name]))
         model.addCons(is_energized_by[u] - is_energized_by[v] >= - M * (1 - S[s_name]))
+
     # d) 供区线路流量约束：线路相关开关在非目标供区中的流量为0
     for line_name, line_params in zone_lines.items():
         target_zone = line_params['zone']
@@ -368,7 +385,8 @@ def solve_dynamic_recovery_model(
         # 找到与这些breaker共享节点的其他开关
         breaker_nodes = set()
         for breaker_name in [local_breaker, remote_breaker]:
-            breaker_nodes.update(switches[breaker_name]['nodes'])
+            if breaker_name in switches:
+                breaker_nodes.update(switches[breaker_name]['nodes'])
         
         # 查找与breaker共享节点的其他开关
         for switch_name, switch_data in switches.items():
@@ -378,7 +396,6 @@ def solve_dynamic_recovery_model(
         
         # 为线路相关开关在非目标供区中的流量设置为0
         for switch_name in line_related_switches:
-            print(switch_name)
             u, v = switches[switch_name]['nodes']
             for z_name in zones:
                 if z_name != target_zone:
@@ -406,8 +423,10 @@ def solve_dynamic_recovery_model(
                     model.chgVarUb(f[v, u, z_name], 0)
 
     # f) 供区容量约束
-    safety_region = {(name,t): model.addVar(vtype="C", lb=0, ub=zones[name]['capacity'], name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
-    min_safety_region = model.addVar(vtype="C", lb=0, ub=1, name="min_safety_region")
+    safety_region = {(name,t): model.addVar(vtype="C",lb=-10000, ub=zones[name]['capacity'], name=f"safety_region_{name}_{t}") for name in zones for t in range(horizon)}
+    min_safety_region = model.addVar(vtype="C", lb=-10, ub=1, name="min_safety_region")
+    min_safety_region_penalty = model.addVar(vtype="C", lb=0, ub=10, name="min_safety_region_penalty")
+    model.addCons(min_safety_region_penalty >= - min_safety_region)
     # b) 系统功率平衡约束,供区充裕度约束
     for t in range(horizon):
         for z_name, z_params in zones.items():
@@ -489,7 +508,7 @@ def solve_dynamic_recovery_model(
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) <= 1)
                 model.addCons(quicksum(S[sw_name] for sw_name in connected_switches_on_v) >= breaker_final_state)
     # i) 不破坏网架，结束时的开关闭合数大于等于初始状态，并赋予超出值3.0的奖励系数
-    rho = model.addVar(vtype="C", name="rho",lb=-1,ub=10) # 超出值
+    rho = model.addVar(vtype="C", name="rho",lb=-10,ub=10) # 超出值
     model.addCons(quicksum(S[name] for name in switches) - rho >= sum(initial_sw_states.values()))
     # 3.5. 可用性约束
     # =================================================================================
@@ -524,9 +543,6 @@ def solve_dynamic_recovery_model(
                quicksum(p['cost'] * P_hydro[g, t] for g,p in hydro_units.items() for t in range(horizon)) + \
                quicksum(p['startup_cost'] * v_bak_startup[g, t] for g, p in backup_units.items() for t in range(horizon)) + \
                quicksum(transformers[t_name]['load'][t] * y[t_name, z_name] * transformers[t_name]['sensitivity'][z_name] * transformers[t_name]['cost'][z_name] for t_name in transformers for z_name in zones)
-    load_shedding_cost = quicksum(p['cost'] * P_shed[il, t] for il, p in interruptible_loads.items() for t in range(horizon))
-    #潜在的失负荷
-    load_shedding_cost += quicksum(SOC_penalty[es] * 100 for es in storage_units)
     # 变电站操作成本
     substation_operation_cost = quicksum(substation_indicator[sub_name] * sub_params['operation_cost'] for sub_name, sub_params in substations.items())
     # substation_operation_cost = 0
@@ -544,17 +560,23 @@ def solve_dynamic_recovery_model(
     elif objective == ObjectiveType.MIN_COST:
         # 最小化发电成本
         obj_expr += op_cost
+    #可中断负荷
+    load_shedding_cost = quicksum(p['cost'] * P_shed[il, t] for il, p in interruptible_loads.items() for t in range(horizon))
+    #SOC降低潜在的失负荷
+    load_shedding_cost += quicksum(SOC_penalty[es] * 100 for es in storage_units)
     obj_expr += load_shedding_cost
+    #破坏了网架
     obj_expr += - 3.0 * rho
+    # 拉限电惩罚
+    shedding_price = 2 * max([p['cost'] for p in interruptible_loads.values()])
+    obj_expr += shedding_price * min_safety_region_penalty * max(z_params['capacity'] for z_params in zones.values())
     model.setObjective(obj_expr, "minimize")
     # =================================================================================
     # 5. 求解与结果封装 (更新返回的字典)
     # =================================================================================
-
+    model.hideOutput()
     model.optimize()
-    # model.solveConcurrent()
-
-    
+    print("求解状态：",model.getStatus()) 
     if model.getStatus() == "optimal":
         final_switch_states = {name: round(model.getVal(var)) for name, var in S.items()}
         switch_operations = []
@@ -629,11 +651,12 @@ def solve_dynamic_recovery_model(
                     "substation_name": sub_name,
                     "st_id": sub_params['st_id'],
                     "operation_cost": sub_params['operation_cost'],
-                    "switches_operated": operated_switches
+                    # "switches_operated": operated_switches
                 })
                 total_substation_cost += sub_params['operation_cost']
         line_operations = set()
         for operation in switch_operations:
+            print(operation)
             for line_params in zone_lines.values():
                 if operation['switch_name'] in line_params['breakers'].values():
                     line_operations.add(line_params["line_id"])
@@ -644,8 +667,13 @@ def solve_dynamic_recovery_model(
         for _, trans_param in transformers.items():
             if max(abs(x) for x in trans_param["load"]) > 0:
                 load_nodes.add(trans_param['conn_node'])
-        print(switch_operations)
-        tickets = generate_tickets(switch_operations, switches, source_node, load_nodes, substations)
+        tickets = generate_tickets(switch_operations, switches, source_node, load_nodes, substations, pre_operations)
+        # 可中断负荷计划
+        interruptible_load_plan = {}
+        for il in interruptible_loads:
+            interruptible_load_plan[il] = {}
+            for t in range(horizon):
+                interruptible_load_plan[il][t] = round(model.getVal(P_shed[il, t]), 2)
         result = {
             "status": "Optimal Solution Found",
             "objective_value": round(model.getObjVal(), 4),
@@ -667,11 +695,13 @@ def solve_dynamic_recovery_model(
                 },
                 "备用机组开机计划": backup_unit_commitment,
                 "机组出力计划": final_dispatch_plan,
-                "开关操作": switch_operations,
+                "可中断负荷计划": interruptible_load_plan,
+                # "开关操作": switch_operations,
                 "待操作变电站": substation_operations,
                 "待操作线路": line_operations,
                 "变压器所属供区": final_transformer_assignment,
                 "供区供电裕度": final_zone_status,
+                "方式调整": opt_desc,
                 "操作票": tickets,
             }
         }
@@ -682,20 +712,31 @@ def solve_dynamic_recovery_model(
 
 if __name__ == "__main__":
     # Load the JSON data (in this case, we'll use the provided dictionary)
-    # with open("example/export.json", "r", encoding='utf-8') as f:
-    #     json_data = json.load(f)
     from main import get_optimization_boundary
-    json_data = get_optimization_boundary(device_name="双龙变1号主变",device_type="主变",load_enlarge_factor=1)
-    with open("example/export.json", "w", encoding='utf-8') as f:
-        json.dump(json_data, f, ensure_ascii=False, indent=4)
-    input = OptimizationInput(**json_data)
-    params = input.model_dump()
-    result = solve_dynamic_recovery_model(**params)
-    with open("example/tmp.json", "w", encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=4)
-    from utils import save_tickets_to_excel
-    save_tickets_to_excel({
-        "tickets": result['results']['操作票'],
-        "description": "故障恢复操作票"
-    })
-    print(result)
+    area_json = json.load(open("result/area_statistics.json", "r", encoding='utf-8'))
+    # 测试报告
+    test_report = {}
+    for area_name, area_data in area_json.items():
+        if area_name != "夏金供区":
+            continue
+        try:
+            json_data = get_optimization_boundary(device_name=area_data["主变"][0]["name"],device_type="主变",load_enlarge_factor=1)
+            with open(f"example/test/{area_name}.json", "w", encoding='utf-8') as f:
+                json.dump(json_data, f, ensure_ascii=False, indent=4)
+            input = OptimizationInput(**json_data)
+            params = input.model_dump()
+            result = solve_dynamic_recovery_model(**params)
+            print(result["results"]["可中断负荷计划"])
+            from utils import save_tickets_to_excel
+            save_tickets_to_excel({
+                "tickets": result['results']['操作票'],
+                "description": "故障恢复操作票"
+            })
+            test_report[area_name] = "成功"
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            test_report[area_name] = f"失败：{e}"
+    # 打印测试报告
+    with open("test_report.json", "w", encoding='utf-8') as f:
+        json.dump(test_report, f, ensure_ascii=False, indent=4)

@@ -1,0 +1,952 @@
+{
+    "horizon": 4,
+    "zones": {
+        "姚江供区": {
+            "capacity": 3600.0,
+            "fixed_load": [
+                2520.0,
+                2520.0,
+                2520.0,
+                2520.0
+            ]
+        },
+        "钱湖+春晓供区": {
+            "capacity": 3000.0,
+            "fixed_load": [
+                3211.6954,
+                3211.6954,
+                3211.6954,
+                3211.6954
+            ]
+        }
+    },
+    "substations": {
+        "新乐变": {
+            "name": "新乐变",
+            "nodes": [
+                "0112330200166010050030",
+                "乐福23K7线",
+                "0112330200166010050020",
+                "0112330200166010050040",
+                "0112330200166010050044",
+                "0112330200156810050134",
+                "0112330000035110050047",
+                "0112330200002010050030",
+                "展乐23H7线",
+                "0112330200166010050027",
+                "0112330200002010050031",
+                "0112330200162810050018",
+                "0112330200166010050031",
+                "0112330200166010050023",
+                "展新23H6线",
+                "0112330200166010050026",
+                "0112330200166010050022",
+                "0112330200166010050043",
+                "0112330200002010050033",
+                "0112330200162810050017",
+                "0112330200166010050039",
+                "0112330200166010050021",
+                "乐明23K8线",
+                "0112330000035110050052",
+                "0112330200166010050032",
+                "湖乐44F4线",
+                "0112330200166010050038",
+                "0112330200156810050135",
+                "0112330200002010050032",
+                "0112330200166010050033",
+                "0112330200166010050029",
+                "0112330200162810050019",
+                "0112330200166010050018",
+                "0112330200166010050036",
+                "0112330200166010050046",
+                "0112330200162810050020",
+                "0112330200166010050035",
+                "湾乐2306线",
+                "0112330200156810050137",
+                "0112330000035110050053",
+                "0112330200166010050028",
+                "0112330200166010050016",
+                "0112330200156810050138",
+                "0112330200166010050014",
+                "湖新44F3线",
+                "0112330200166010050025",
+                "0112330200166010050019",
+                "湾新2305线",
+                "0112330200166010050034",
+                "新乐变220kV副母Ⅱ段母线",
+                "0112330200166010050017",
+                "新乐变220kV正母线",
+                "新乐变220kV副母Ⅰ段母线",
+                "0112330200166010050037",
+                "0112330000035110050046",
+                "0112330200166010050012",
+                "0112330200166010050024",
+                "0112330200166010050045"
+            ],
+            "transformers": {
+                "新乐变#1主变-高": {
+                    "conn_node": "0112330200166010050012",
+                    "load": [
+                        143.9279,
+                        143.9279,
+                        143.9279,
+                        143.9279
+                    ],
+                    "sensitivity": {
+                        "姚江供区": 1,
+                        "钱湖+春晓供区": 1
+                    },
+                    "cost": {
+                        "姚江供区": 100,
+                        "钱湖+春晓供区": 100
+                    },
+                    "allocate": null
+                },
+                "新乐变#2主变-高": {
+                    "conn_node": "0112330200166010050014",
+                    "load": [
+                        144.3767,
+                        144.3767,
+                        144.3767,
+                        144.3767
+                    ],
+                    "sensitivity": {
+                        "姚江供区": 1,
+                        "钱湖+春晓供区": 1
+                    },
+                    "cost": {
+                        "姚江供区": 100,
+                        "钱湖+春晓供区": 100
+                    },
+                    "allocate": null
+                }
+            },
+            "switches": {
+                "新乐变展新23H6开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050019",
+                        "0112330200166010050020"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变展乐23H7开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050021",
+                        "0112330200166010050022"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变湖乐44F4开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050023",
+                        "0112330200166010050024"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变湖新44F3开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050025",
+                        "0112330200166010050026"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变乐福23K7开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050027",
+                        "0112330200166010050028"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变湾乐2306开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050029",
+                        "0112330200166010050030"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变乐明23K8开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050031",
+                        "0112330200166010050032"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变湾新2305开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050033",
+                        "0112330200166010050034"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变1号主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050035",
+                        "0112330200166010050036"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变2号主变220kV开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050037",
+                        "0112330200166010050038"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变220kV副母分段开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050039",
+                        "0112330200166010050040"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 1
+                },
+                "新乐变220kV1号母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050043",
+                        "0112330200166010050044"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "新乐变220kV2号母联开关": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050045",
+                        "0112330200166010050046"
+                    ],
+                    "switch_type": "breaker",
+                    "cost": 3
+                },
+                "新乐变展新23H6线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "展新23H6线",
+                        "0112330200166010050020"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变展新23H6正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200166010050019",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变展新23H6副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅰ段母线",
+                        "0112330200166010050019"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变展乐23H7线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "展乐23H7线",
+                        "0112330200166010050022"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变展乐23H7正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050021",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变展乐23H7副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "新乐变220kV副母Ⅰ段母线",
+                        "0112330200166010050021"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖乐44F4线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湖乐44F4线",
+                        "0112330200166010050024"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖乐44F4正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050023"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖乐44F4副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050023",
+                        "新乐变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖新44F3线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湖新44F3线",
+                        "0112330200166010050026"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖新44F3正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050025"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湖新44F3副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200166010050025",
+                        "新乐变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐福23K7线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "乐福23K7线",
+                        "0112330200166010050028"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐福23K7正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050027"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐福23K7副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200166010050027",
+                        "新乐变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾乐2306线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湾乐2306线",
+                        "0112330200166010050030"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾乐2306正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200166010050029",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾乐2306副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅱ段母线",
+                        "0112330200166010050029"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐明23K8线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "乐明23K8线",
+                        "0112330200166010050032"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐明23K8正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050031"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变乐明23K8副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050031",
+                        "新乐变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾新2305线路闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湾新2305线",
+                        "0112330200166010050034"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾新2305正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050033",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变湾新2305副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "新乐变220kV副母Ⅱ段母线",
+                        "0112330200166010050033"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV1号母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050043",
+                        "新乐变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV1号母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050044",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV2号母联开关副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050045",
+                        "新乐变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV2号母联开关正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050046",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变1号主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050035"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变1号主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200166010050035",
+                        "新乐变220kV副母Ⅰ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变1号主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050036",
+                        "0112330200166010050012"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变2号主变220kV正母闸刀": {
+                    "available": true,
+                    "initial_state": 0,
+                    "nodes": [
+                        "新乐变220kV正母线",
+                        "0112330200166010050037"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变2号主变220kV副母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050037",
+                        "新乐变220kV副母Ⅱ段母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变2号主变220kV主变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050038",
+                        "0112330200166010050014"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV副母分段Ⅰ母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅰ段母线",
+                        "0112330200166010050039"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV副母分段Ⅱ母闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅱ段母线",
+                        "0112330200166010050040"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV正母压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200166010050016",
+                        "新乐变220kV正母线"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV副母Ⅰ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅰ段母线",
+                        "0112330200166010050017"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "新乐变220kV副母Ⅱ段压变闸刀": {
+                    "available": true,
+                    "initial_state": 1,
+                    "nodes": [
+                        "新乐变220kV副母Ⅱ段母线",
+                        "0112330200166010050018"
+                    ],
+                    "switch_type": "switch",
+                    "cost": 10
+                },
+                "湾塘变湾乐2306线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湾乐2306线",
+                        "0112330200002010050032"
+                    ],
+                    "switch_type": "switch"
+                },
+                "湾塘变湾乐2306开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200002010050032",
+                        "0112330200002010050033"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "湾塘变湾新2305线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湾新2305线",
+                        "0112330200002010050030"
+                    ],
+                    "switch_type": "switch"
+                },
+                "湾塘变湾新2305开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 0,
+                    "nodes": [
+                        "0112330200002010050030",
+                        "0112330200002010050031"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "东展变展新23H6线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "展新23H6线",
+                        "0112330200156810050138"
+                    ],
+                    "switch_type": "switch"
+                },
+                "东展变展新23H6开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200156810050137",
+                        "0112330200156810050138"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "东展变展乐23H7线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "展乐23H7线",
+                        "0112330200156810050135"
+                    ],
+                    "switch_type": "switch"
+                },
+                "东展变展乐23H7开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200156810050134",
+                        "0112330200156810050135"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "钱湖变电所湖乐44F4线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湖乐44F4线",
+                        "0112330000035110050052"
+                    ],
+                    "switch_type": "switch"
+                },
+                "钱湖变电所湖乐44F4开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000035110050052",
+                        "0112330000035110050053"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "钱湖变电所湖新44F3线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "湖新44F3线",
+                        "0112330000035110050046"
+                    ],
+                    "switch_type": "switch"
+                },
+                "钱湖变电所湖新44F3开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330000035110050046",
+                        "0112330000035110050047"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "福明变乐福23K7线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "乐福23K7线",
+                        "0112330200162810050020"
+                    ],
+                    "switch_type": "switch"
+                },
+                "福明变乐福23K7开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200162810050019",
+                        "0112330200162810050020"
+                    ],
+                    "switch_type": "breaker"
+                },
+                "福明变乐明23K8线路闸刀": {
+                    "available": true,
+                    "cost": 10,
+                    "initial_state": 1,
+                    "nodes": [
+                        "乐明23K8线",
+                        "0112330200162810050018"
+                    ],
+                    "switch_type": "switch"
+                },
+                "福明变乐明23K8开关": {
+                    "available": true,
+                    "cost": 1,
+                    "initial_state": 1,
+                    "nodes": [
+                        "0112330200162810050017",
+                        "0112330200162810050018"
+                    ],
+                    "switch_type": "breaker"
+                }
+            },
+            "zone_lines": {
+                "湾乐2306线": {
+                    "available": true,
+                    "conn_node": "0112330200002010050033",
+                    "zone": "姚江供区",
+                    "to_st_name": "湾塘变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变湾乐2306开关",
+                        "remote": "湾塘变湾乐2306开关"
+                    },
+                    "local_bus_name": "0112330200166010050004",
+                    "remote_bus_name": "0112330200002010050006",
+                    "line_id": "120133020000001602"
+                },
+                "湾新2305线": {
+                    "available": true,
+                    "conn_node": "0112330200002010050031",
+                    "zone": "姚江供区",
+                    "to_st_name": "湾塘变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变湾新2305开关",
+                        "remote": "湾塘变湾新2305开关"
+                    },
+                    "local_bus_name": "0112330200166010050005",
+                    "remote_bus_name": "0112330200002010050007",
+                    "line_id": "120133020000001603"
+                },
+                "展新23H6线": {
+                    "available": true,
+                    "conn_node": "0112330200156810050137",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "东展变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变展新23H6开关",
+                        "remote": "东展变展新23H6开关"
+                    },
+                    "local_bus_name": "0112330200166010050006",
+                    "remote_bus_name": "0112330200156810050136",
+                    "line_id": "120133020000001632"
+                },
+                "展乐23H7线": {
+                    "available": true,
+                    "conn_node": "0112330200156810050134",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "东展变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变展乐23H7开关",
+                        "remote": "东展变展乐23H7开关"
+                    },
+                    "local_bus_name": "0112330200166010050007",
+                    "remote_bus_name": "0112330200156810050133",
+                    "line_id": "120133020000001633"
+                },
+                "湖乐44F4线": {
+                    "available": true,
+                    "conn_node": "0112330000035110050053",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "钱湖变电所",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变湖乐44F4开关",
+                        "remote": "钱湖变电所湖乐44F4开关"
+                    },
+                    "local_bus_name": "0112330200166010050008",
+                    "remote_bus_name": "0112330000035110050010",
+                    "line_id": "120133020000001634"
+                },
+                "湖新44F3线": {
+                    "available": true,
+                    "conn_node": "0112330000035110050047",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "钱湖变电所",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变湖新44F3开关",
+                        "remote": "钱湖变电所湖新44F3开关"
+                    },
+                    "local_bus_name": "0112330200166010050009",
+                    "remote_bus_name": "0112330000035110050011",
+                    "line_id": "120133020000001635"
+                },
+                "乐福23K7线": {
+                    "available": true,
+                    "conn_node": "0112330200162810050019",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "福明变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变乐福23K7开关",
+                        "remote": "福明变乐福23K7开关"
+                    },
+                    "local_bus_name": "0112330200166010050010",
+                    "remote_bus_name": "0112330200162810050005",
+                    "line_id": "120133020000001636"
+                },
+                "乐明23K8线": {
+                    "available": true,
+                    "conn_node": "0112330200162810050017",
+                    "zone": "钱湖+春晓供区",
+                    "to_st_name": "福明变",
+                    "owner": "宁波",
+                    "breakers": {
+                        "local": "新乐变乐明23K8开关",
+                        "remote": "福明变乐明23K8开关"
+                    },
+                    "local_bus_name": "0112330200166010050011",
+                    "remote_bus_name": "0112330200162810050006",
+                    "line_id": "120133020000001639"
+                }
+            },
+            "operation_cost": 3.0,
+            "available": true,
+            "st_id": "01123302001660"
+        }
+    },
+    "objective": "minimize_switch_operation",
+    "load_enlarge_factor": 1,
+    "operating_units": {
+        "北仑港电厂1号机组": {
+            "zone": "钱湖+春晓供区",
+            "id": 110133000000000001,
+            "cost": 500,
+            "name": "北仑港电厂1号机组",
+            "p_max": 630.0,
+            "p_min": 240.0,
+            "p_current": 550.773,
+            "sensitivity": 1,
+            "st_id": "01113300000001"
+        }
+    },
+    "backup_units": {},
+    "hydro_units": {},
+    "storage_units": {},
+    "interruptible_loads": {
+        "可中断负荷": {
+            "zone": "钱湖+春晓供区",
+            "shed_max": 10000,
+            "cost": 1000,
+            "sensitivity": 1
+        }
+    },
+    "operation_adjustment": {}
+}

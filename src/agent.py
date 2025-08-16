@@ -345,7 +345,7 @@ Guidelines:
 OPTIMIZATION REPORT TEMPLATE 
 -----
 #### **一、 处置要点**
-一句话总结，需要加哪些机组出力、需要增开哪些燃气、水电，需要进行哪些变电站的倒排操作，是否需要启用可中断负荷。
+一句话总结，需要进行什么方式调整，加哪些机组出力、需要增开哪些燃气、水电，需要进行哪些变电站的倒排操作，是否需要启用可中断负荷。
 #### **二、 核心优化结果**
 
 | 指标 | 结果 |
@@ -396,38 +396,39 @@ OPTIMIZATION REPORT TEMPLATE
 
 """
     
-    try:
-        # 从环境变量获取Redis配置
-        redis_host = os.getenv('REDIS_HOST', 'localhost')
-        redis_port = int(os.getenv('REDIS_PORT', 6379))
-        redis_db = int(os.getenv('REDIS_DB', 0))
-        redis_password = os.getenv('REDIS_PASSWORD', None)
+    # try:
+    #     # 从环境变量获取Redis配置
+    #     redis_host = os.getenv('REDIS_HOST', 'localhost')
+    #     redis_port = int(os.getenv('REDIS_PORT', 6379))
+    #     redis_db = int(os.getenv('REDIS_DB', 0))
+    #     redis_password = os.getenv('REDIS_PASSWORD', None)
         
-        # 连接Redis
-        r = redis.Redis(
-            host=redis_host,
-            port=redis_port,
-            db=redis_db,
-            password=redis_password,
-            decode_responses=True,
-            socket_timeout=5,
-            socket_connect_timeout=5
-        )
+    #     # 连接Redis
+    #     r = redis.Redis(
+    #         host=redis_host,
+    #         port=redis_port,
+    #         db=redis_db,
+    #         password=redis_password,
+    #         decode_responses=True,
+    #         socket_timeout=5,
+    #         socket_connect_timeout=5
+    #     )
         
-        # 获取system_prompt
-        prompt_key = os.getenv('REDIS_SYSTEM_PROMPT_KEY', 'fault_agent_prompt')
-        redis_prompt = r.get(prompt_key)
+    #     # 获取system_prompt
+    #     prompt_key = os.getenv('REDIS_SYSTEM_PROMPT_KEY', 'fault_agent_prompt')
+    #     redis_prompt = r.get(prompt_key)
         
-        if redis_prompt:
-            print(f"Successfully loaded system prompt from Redis key: {prompt_key}")
-            return redis_prompt
-        else:
-            print(f"No system prompt found in Redis key: {prompt_key}, using default")
-            return default_prompt
+    #     if redis_prompt:
+    #         print(f"Successfully loaded system prompt from Redis key: {prompt_key}")
+    #         return redis_prompt
+    #     else:
+    #         print(f"No system prompt found in Redis key: {prompt_key}, using default")
+    #         return default_prompt
             
-    except Exception as e:
-        print(f"Failed to get system prompt from Redis: {e}, using default")
-        return default_prompt
+    # except Exception as e:
+    #     print(f"Failed to get system prompt from Redis: {e}, using default")
+    #     return default_prompt
+    return default_prompt
 
 # 获取system_prompt
 system_prompt = get_system_prompt_from_redis()
